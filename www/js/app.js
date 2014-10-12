@@ -50,6 +50,26 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       }
     })
 
+    .state('app.reader', {
+      url: "/reader",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/reader.html",
+          controller: 'PlaylistsCtrl'
+        }
+      }
+    })
+
+    .state('app.discussion', {
+      url: "/discussion",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/discussion.html",
+          controller: 'PlaylistsCtrl'
+        }
+      }
+    })
+
     .state('app.explore', {
       url: "/explore",
       views: {
