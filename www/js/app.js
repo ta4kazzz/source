@@ -57,6 +57,49 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       }
     })
 
+    // Source specific menus
+    .state('app.home', {
+      url: "/home",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/home.html",
+          controller: 'PlaylistsCtrl'
+        }
+      }
+    })
+
+    .state('app.explore', {
+      url: "/explore",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/explore.html",
+          controller: 'PlaylistsCtrl'
+        }
+      }
+    })
+
+    .state('app.notifications', {
+      url: "/notifications",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/notifications.html",
+          controller: 'PlaylistsCtrl'
+        }
+      }
+    })
+
+    .state('app.profile', {
+      url: "/profile",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/profile.html",
+          controller: 'PlaylistsCtrl'
+        }
+      }
+    })
+
+
+
     .state('app.single', {
       url: "/playlists/:playlistId",
       views: {
