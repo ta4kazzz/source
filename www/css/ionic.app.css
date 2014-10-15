@@ -7809,3 +7809,6 @@ body, .ionic-body, h1, h2, h3 {
     color: #fff; }
   .bar.bar-stable .button {
     color: #fff; }
+
+.source-menu {
+  background-color: #4A4A4A; }

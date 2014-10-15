@@ -22,7 +22,7 @@ body, .ionic-body, h1, h2, h3 {
 }
 
 
-//titlebar
+// Titlebar
 .bar.bar-stable {
 	background-color: $src-grey;
 	.title {
@@ -31,4 +31,10 @@ body, .ionic-body, h1, h2, h3 {
 	.button {
 		color: #fff;
 	}
+}
+
+// Menu
+.source-menu {
+	background-color: $src-grey;
+
 }

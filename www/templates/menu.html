@@ -7,17 +7,19 @@
     <ion-nav-view name="menuContent" animation="slide-left-right"></ion-nav-view>
   </ion-pane>
 
-  <ion-side-menu width="150" side="left">
+  <ion-side-menu width="75" side="left" class="source-menu">
 
 
     <ion-content>
       <ion-list>
-        <ion-item nav-clear menu-close ng-click="login()">Login</ion-item>
-        <ion-item nav-clear menu-close href="#/app/home">Home</ion-item>
-        <ion-item nav-clear menu-close href="#/app/explore">Explore</ion-item>
-        <ion-item nav-clear menu-close href="#/app/notifications">Notifications</ion-item>
-        <ion-item nav-clear menu-close href="#/app/profile">Profile</ion-item>
-        <ion-item nav-clear menu-close href="#/app/settings">Settings</ion-item>
+        <ion-item menu-close ng-click="login()">Login</ion-item>
+
+        <a href="#/app/home"><img menu-close src="img/home.svg"></a>
+        <a href="#/app/explore"><img menu-close src="img/explore.svg"></a>
+        <a href="#/app/notifications"><img menu-close src="img/notify.svg"></a>
+        <a href="#/app/profile"><img menu-close src="img/profile.svg"></a>
+
+        <ion-item menu-close href="#/app/settings">Settings</ion-item>
       </ion-list>
     </ion-content>
 
