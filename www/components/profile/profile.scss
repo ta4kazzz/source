@@ -1,0 +1,14 @@
+// Profile
+
+.profile {
+  .profile-container {
+    max-width: 640px;
+    .profile-banner {
+      width: 640px;
+      height: 447px;
+      background: linear-gradient(rgba(75, 75, 75, 0.45),rgba(75, 75, 75, 0.45)),
+      url('../img/profile.png');
+
+    }
+  }
+}

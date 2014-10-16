@@ -1,88 +1,37 @@
 
 
 
+
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 // Include all of Ionic
-@import "www/lib/ionic/scss/ionic";
+@import "www/scss/_variables";
+
+// Variables
+@import "scss/_variables";
+
+// Import Components
+@import "www/components/menu/menu";
+@import "www/components/discussion/discussion";
+@import "www/components/explore/explore";
+@import "www/components/home/home";
+@import "www/components/login/login";
+@import "www/components/notifications/notifications";
+@import "www/components/profile/profile";
+@import "www/components/reader/reader";
+@import "www/components/search/search";
+@import "www/components/settings/settings";
 
 // Import Source Sans Pro (will want to make this permanent later on)
 @import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400);
 
-//Source Variables
-$src-grey:					#4A4A4A;
-$src-white:					#FFFFFF;
 
-$home-padding:			0.75em;
+
+
 
 // Global Elements
 body, .ionic-body, h1, h2, h3 {
 	// still wonder why this doesn't just override
 	font-family: 'Source Sans Pro', sans-serif;
-}
-
-
-// Titlebar
-.bar.bar-stable {
-	background-color: $src-grey;
-	.title {
-		color: #fff;
-	}
-	.button {
-		color: #fff;
-	}
-}
-
-// Menu
-.source-menu {
-	background-color: $src-grey;
-	.menu-container {
-		margin-top: 1em;
-	}
-	.menu-icon {
-		text-align: center;
-	}
-	img {
-		padding: 1em;
-	}
-}
-
-.source-post {
-	max-width: 640px;
-	img {
-		width: 100%;
-
-	}
-	.source-post-details {
-		margin: 0 $home-padding 0 $home-padding;
-	}
-}
-
-
-
-// Reader
-
-.reader {
-	.reader-content {
-		max-width: 640px;
-		img {
-			width: 100%;
-		}
-	}
-}
-
-// Profile
-
-.profile {
-	.profile-container {
-		max-width: 640px;
-		.profile-banner {
-		  width: 640px;
-			height: 447px;
-			background: linear-gradient(rgba(75, 75, 75, 0.45),rgba(75, 75, 75, 0.45)),
-    	url('../img/profile.png');
-
-		}
-	}
 }

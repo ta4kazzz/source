@@ -1,0 +1,25 @@
+// Menu
+.source-menu {
+  background-color: $src-grey;
+  .menu-container {
+    margin-top: 1em;
+  }
+  .menu-icon {
+    text-align: center;
+  }
+  img {
+    padding: 1em;
+  }
+}
+
+
+// Titlebar
+.bar.bar-stable {
+  background-color: $src-grey;
+  .title {
+    color: #fff;
+  }
+  .button {
+    color: #fff;
+  }
+}

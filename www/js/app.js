@@ -26,7 +26,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     .state('app', {
       url: "/app",
       abstract: true,
-      templateUrl: "templates/menu.html",
+      templateUrl: "components/menu/menu.html",
       controller: 'AppCtrl'
     })
 
@@ -34,7 +34,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       url: "/search",
       views: {
         'menuContent' :{
-          templateUrl: "templates/search.html"
+          templateUrl: "components/search/search.html"
         }
       }
     })
@@ -44,7 +44,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       url: "/home",
       views: {
         'menuContent' :{
-          templateUrl: "templates/home.html",
+          templateUrl: "components/home/home.html",
           controller: 'PlaylistsCtrl'
         }
       }
@@ -54,7 +54,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       url: "/reader",
       views: {
         'menuContent' :{
-          templateUrl: "templates/reader.html",
+          templateUrl: "components/reader/reader.html",
           controller: 'PlaylistsCtrl'
         }
       }
@@ -64,7 +64,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       url: "/discussion",
       views: {
         'menuContent' :{
-          templateUrl: "templates/discussion.html",
+          templateUrl: "components/discussion/discussion.html",
           controller: 'PlaylistsCtrl'
         }
       }
@@ -74,7 +74,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       url: "/explore",
       views: {
         'menuContent' :{
-          templateUrl: "templates/explore.html",
+          templateUrl: "components/explore/explore.html",
           controller: 'PlaylistsCtrl'
         }
       }
@@ -84,7 +84,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       url: "/notifications",
       views: {
         'menuContent' :{
-          templateUrl: "templates/notifications.html",
+          templateUrl: "components/notifications/notifications.html",
           controller: 'PlaylistsCtrl'
         }
       }
@@ -94,7 +94,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       url: "/profile",
       views: {
         'menuContent' :{
-          templateUrl: "templates/profile.html",
+          templateUrl: "components/profile/profile.html",
           controller: 'PlaylistsCtrl'
         }
       }
@@ -104,7 +104,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       url: "/settings",
       views: {
         'menuContent' :{
-          templateUrl: "templates/settings.html",
+          templateUrl: "components/settings/settings.html",
           controller: 'PlaylistsCtrl'
         }
       }
@@ -113,4 +113,3 @@ angular.module('starter', ['ionic', 'starter.controllers'])
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/home');
 });
-
