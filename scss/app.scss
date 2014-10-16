@@ -1,0 +1,8 @@
+// Import Source Sans Pro (will want to make this permanent later on)
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400);
+
+// Global Elements
+body, .ionic-body, h1, h2, h3 {
+  // still wonder why this doesn't just override
+  font-family: 'Source Sans Pro', sans-serif;
+}

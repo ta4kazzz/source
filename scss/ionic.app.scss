@@ -1,15 +1,17 @@
-
-
-
-
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 
+
+
 // Include all of Ionic
-@import "www/scss/_variables";
+@import "www/lib/ionic/scss/ionic";
 
 // Variables
 @import "scss/_variables";
+
+// Import App Styles
+@import "scss/app";
+
 
 // Import Components
 @import "www/components/menu/menu";
@@ -23,15 +25,5 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 @import "www/components/search/search";
 @import "www/components/settings/settings";
 
-// Import Source Sans Pro (will want to make this permanent later on)
-@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400);
-
-
-
-
-
-// Global Elements
-body, .ionic-body, h1, h2, h3 {
-	// still wonder why this doesn't just override
-	font-family: 'Source Sans Pro', sans-serif;
-}
+// Import Shame
+@import "scss/_shame";

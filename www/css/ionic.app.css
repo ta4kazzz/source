@@ -7800,6 +7800,9 @@ $ios-transition-box-shadow-end: -200px 0px 200px rgba(0,0,0,0.15), -5px 0px 5px 
   -webkit-transition: none !important;
   transition: none !important; }
 
+body, .ionic-body, h1, h2, h3 {
+  font-family: 'Source Sans Pro', sans-serif; }
+
 .source-menu {
   background-color: #4A4A4A; }
   .source-menu .menu-container {
@@ -7816,11 +7819,11 @@ $ios-transition-box-shadow-end: -200px 0px 200px rgba(0,0,0,0.15), -5px 0px 5px 
   .bar.bar-stable .button {
     color: #fff; }
 
-.source-post {
+.home .source-post {
   max-width: 640px; }
-  .source-post img {
+  .home .source-post img {
     width: 100%; }
-  .source-post .source-post-details {
+  .home .source-post .source-post-details {
     margin: 0 0.75em 0 0.75em; }
 
 .profile .profile-container {
@@ -7834,6 +7837,3 @@ $ios-transition-box-shadow-end: -200px 0px 200px rgba(0,0,0,0.15), -5px 0px 5px 
   max-width: 640px; }
   .reader .reader-content img {
     width: 100%; }
-
-body, .ionic-body, h1, h2, h3 {
-  font-family: 'Source Sans Pro', sans-serif; }
