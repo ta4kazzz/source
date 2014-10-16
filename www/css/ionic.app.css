@@ -7819,7 +7819,21 @@ body, .ionic-body, h1, h2, h3 {
   .source-menu img {
     padding: 1em; }
 
-.source-post img {
-  width: 100%; }
-.source-post .source-post-details {
-  margin: 0 0.75em 0 0.75em; }
+.source-post {
+  max-width: 640px; }
+  .source-post img {
+    width: 100%; }
+  .source-post .source-post-details {
+    margin: 0 0.75em 0 0.75em; }
+
+.reader .reader-content {
+  max-width: 640px; }
+  .reader .reader-content img {
+    width: 100%; }
+
+.profile .profile-container {
+  max-width: 640px; }
+  .profile .profile-container .profile-banner {
+    width: 640px;
+    height: 447px;
+    background: linear-gradient(rgba(75, 75, 75, 0.45), rgba(75, 75, 75, 0.45)), url('../img/profile.png'); }

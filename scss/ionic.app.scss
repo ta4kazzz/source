@@ -49,10 +49,40 @@ body, .ionic-body, h1, h2, h3 {
 }
 
 .source-post {
+	max-width: 640px;
 	img {
 		width: 100%;
+
 	}
 	.source-post-details {
 		margin: 0 $home-padding 0 $home-padding;
+	}
+}
+
+
+
+// Reader
+
+.reader {
+	.reader-content {
+		max-width: 640px;
+		img {
+			width: 100%;
+		}
+	}
+}
+
+// Profile
+
+.profile {
+	.profile-container {
+		max-width: 640px;
+		.profile-banner {
+		  width: 640px;
+			height: 447px;
+			background: linear-gradient(rgba(75, 75, 75, 0.45),rgba(75, 75, 75, 0.45)),
+    	url('../img/profile.png');
+
+		}
 	}
 }

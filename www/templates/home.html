@@ -1,9 +1,16 @@
 <ion-view title="Home">
   <ion-nav-buttons side="left">
     <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+
+    <ion-nav-buttons side="right">
+      <button  ng-click="doSomething()">Add New</button>
+    </ion-nav-buttons>
+
   </ion-nav-buttons>
   <ion-content class="has-header">
     <ion-list>
+
+
 
       <div class="source-post">
         <img src="img/testimage.jpg">
@@ -12,6 +19,27 @@
           <p>Pat Riley</p>
           <a href="#">www.source.com</a>
           <p>I think that while this city has some cool qualities, the level that is required these days is just amazing.</p>
+        </div>
+      </div>
+
+
+      <div class="source-post">
+        <img src="img/testimage2.jpg">
+        <div class="source-post-details">
+          <h2><a href="#/app/reader">Can you see the Forrest for the Trees</a></h2>
+          <p>Daniel Boone</p>
+          <a href="#">www.nature-images.com</a>
+          <p>I recall stomping through woods that looked just like this, Things sure have come a long way since then.</p>
+        </div>
+      </div>
+
+      <div class="source-post">
+        <img src="img/testimage3.jpg">
+        <div class="source-post-details">
+          <h2><a href="#/app/reader">The long road ahead</a></h2>
+          <p>Pat Riley</p>
+          <a href="#">www.medium.com</a>
+          <p>A few reflections on what it means to design a web application and travel the world at the same time</p>
         </div>
       </div>
 
