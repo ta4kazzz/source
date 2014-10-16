@@ -7812,3 +7812,9 @@ body, .ionic-body, h1, h2, h3 {
 
 .source-menu {
   background-color: #4A4A4A; }
+  .source-menu .menu-container {
+    margin-top: 1em; }
+  .source-menu .menu-icon {
+    text-align: center; }
+  .source-menu img {
+    padding: 1em; }

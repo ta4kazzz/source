@@ -36,5 +36,13 @@ body, .ionic-body, h1, h2, h3 {
 // Menu
 .source-menu {
 	background-color: $src-grey;
-
+	.menu-container {
+		margin-top: 1em;
+	}
+	.menu-icon {
+		text-align: center;
+	}
+	img {
+		padding: 1em;
+	}
 }
