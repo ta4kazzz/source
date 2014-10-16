@@ -7818,3 +7818,8 @@ body, .ionic-body, h1, h2, h3 {
     text-align: center; }
   .source-menu img {
     padding: 1em; }
+
+.source-post img {
+  width: 100%; }
+.source-post .source-post-details {
+  margin: 0 0.75em 0 0.75em; }
