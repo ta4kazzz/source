@@ -1,14 +1,23 @@
 // Home
 
 .home {
-  .source-post {
-    max-width: 640px;
-    img {
-      width: 100%;
 
+  .post {
+    max-width: 640px;
+
+    .post--thumb {
+      width: 100%;
     }
-    .source-post-details {
+    .post__overview {
       margin: 0 $home-padding 0 $home-padding;
     }
+    .post__overview--title {
+      a {text-decoration: none; color: $src-grey;}
+    }
+    .post__overview--user {}
+    .post__overview--url {}
+    .post__overview--summary{}
+
+
   }
 }

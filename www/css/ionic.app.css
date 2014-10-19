@@ -7819,12 +7819,15 @@ body, .ionic-body, h1, h2, h3 {
   .bar.bar-stable .button {
     color: #fff; }
 
-.home .source-post {
+.home .post {
   max-width: 640px; }
-  .home .source-post img {
+  .home .post .post--thumb {
     width: 100%; }
-  .home .source-post .source-post-details {
+  .home .post .post__overview {
     margin: 0 0.75em 0 0.75em; }
+  .home .post .post__overview--title a {
+    text-decoration: none;
+    color: #4A4A4A; }
 
 .profile .profile-container {
   max-width: 640px; }
@@ -7833,7 +7836,26 @@ body, .ionic-body, h1, h2, h3 {
     height: 447px;
     background: linear-gradient(rgba(75, 75, 75, 0.45), rgba(75, 75, 75, 0.45)), url('../img/profile.png'); }
 
-.reader .reader-content {
+.reader .container {
   max-width: 640px; }
-  .reader .reader-content img {
-    width: 100%; }
+.reader .reader--thumb {
+  width: 100%; }
+.reader .reader--title {
+  margin: 0.75em 0.5em 1em 0.5em; }
+.reader .reader--content {
+  font-size: 1.3em;
+  margin: 0 0.5em 0 0.5em; }
+  .reader .reader--content p {
+    -webkit-font-smoothing: antialiased;
+    color: rgba(0, 0, 0, 0.8);
+    display: block;
+    font-family: freight-text-pro, Georgia, Cambria, 'Times New Roman', Times, serif;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: normal;
+    height: 476px;
+    letter-spacing: 0.16px;
+    line-height: 28px;
+    margin-bottom: 30px;
+    visibility: visible;
+    word-wrap: break-word; }

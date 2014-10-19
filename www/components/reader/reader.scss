@@ -1,10 +1,33 @@
 // Reader
 
 .reader {
-  .reader-content {
+  .container {
     max-width: 640px;
-    img {
-      width: 100%;
+  }
+  .reader--thumb {
+    width: 100%;
+  }
+  .reader--title {
+    margin: .75em 0.5em 1em 0.5em;
+  }
+
+  .reader--content{
+    font-size: 1.3em;
+    margin: 0 .5em 0 .5em;
+    p {
+      -webkit-font-smoothing: antialiased;
+      color: rgba(0, 0, 0, 0.8);
+      display: block;
+      font-family: freight-text-pro, Georgia, Cambria, 'Times New Roman', Times, serif;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: normal;
+      height: 476px;
+      letter-spacing: 0.159999996423721px;
+      line-height: 28px;
+      margin-bottom: 30px;
+      visibility: visible;
+      word-wrap: break-word;
     }
   }
 }
