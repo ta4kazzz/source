@@ -37,6 +37,12 @@ gulp
 ```
 This will watch the sass files for any changes
 
+## Building the iOS version
+```
+ionic build ios
+ionic emulate ios
+```
+
 
 
 

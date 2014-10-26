@@ -6,3 +6,16 @@ body, .ionic-body, h1, h2, h3 {
   // still wonder why this doesn't just override
   font-family: 'Source Sans Pro', sans-serif;
 }
+
+
+// Buttons
+.source-clear {
+	background-color: transparent;
+	color: #fff;
+	border: 1px #fff solid;
+	border-radius: 4px;
+	&:hover {
+		color: #fff;
+		background-color: rgba(255, 255, 255, 0.21);
+	}
+}
