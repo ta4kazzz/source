@@ -7831,10 +7831,17 @@ body, .ionic-body, h1, h2, h3 {
 
 .profile .profile-container {
   max-width: 640px; }
+  .profile .profile-container img {
+    position: absolute;
+    z-index: -1; }
   .profile .profile-container .profile-banner {
-    width: 640px;
-    height: 447px;
-    background: linear-gradient(rgba(75, 75, 75, 0.45), rgba(75, 75, 75, 0.45)), url('../img/profile.png'); }
+    text-align: center;
+    padding-top: 84px;
+    padding-bottom: 232px; }
+    .profile .profile-container .profile-banner h2 {
+      color: #fff; }
+    .profile .profile-container .profile-banner h3 {
+      color: #fff; }
 
 .reader .container {
   max-width: 640px; }

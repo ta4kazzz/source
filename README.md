@@ -1,6 +1,6 @@
-Ionic App Base
+Source
 =====================
-
+Source is run on the Ionic Framework. 
 
 
 ## Setting up the Prokect
@@ -33,7 +33,7 @@ $ ionic serve
 
 For Live reload
 ```
-gulp watch
+gulp
 ```
 This will watch the sass files for any changes
 

@@ -3,12 +3,20 @@
 .profile {
   .profile-container {
     max-width: 640px;
+    img {
+		position: absolute;
+		z-index: -1;
+    }
     .profile-banner {
-      width: 640px;
-      height: 447px;
-      background: linear-gradient(rgba(75, 75, 75, 0.45),rgba(75, 75, 75, 0.45)),
-      url('../img/profile.png');
-
+    	text-align: center;
+		padding-top: 84px;
+	padding-bottom: 232px;
+		h2 {
+			color: #fff;
+		}
+		h3 {
+			color: #fff;
+		}
     }
   }
 }
