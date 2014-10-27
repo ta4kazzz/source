@@ -7812,6 +7812,13 @@ body, .ionic-body, h1, h2, h3 {
     color: #fff;
     background-color: rgba(255, 255, 255, 0.21); }
 
+.source-menu-icon {
+  -webkit-transform: rotate(270deg);
+  -moz-transform: rotate(270deg);
+  -ms-transform: rotate(270deg);
+  -o-transform: rotate(270deg);
+  transform: rotate(270deg); }
+
 .source-menu {
   background-color: #4A4A4A; }
   .source-menu .menu-container {
