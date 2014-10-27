@@ -1,15 +1,17 @@
 // Home
 
 .home {
-
-  .post {
+  .home-container {
     max-width: 640px;
 
+  }
+  .post {
+  
     .post--thumb {
       width: 100%;
     }
     .post__overview {
-      margin: 0 $home-padding 0 $home-padding;
+      margin: 0 0.75em 0 0.75em;
     }
     .post__overview--title {
       a {text-decoration: none; color: $src-grey;}
@@ -18,6 +20,20 @@
     .post__overview--url {}
     .post__overview--summary{}
 
+  }
+}
+
+@media (min-width: 640px) {
+  .home {
+    .home-container {
+      margin-right: auto;
+      margin-left: auto;
+    }
+    .post {
+      .post__overview {
+        margin: 0 0 0 0;
+      }
+    }
 
   }
 }

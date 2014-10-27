@@ -7828,15 +7828,22 @@ body, .ionic-body, h1, h2, h3 {
   .bar.bar-stable .button {
     color: #fff; }
 
-.home .post {
+.home .home-container {
   max-width: 640px; }
-  .home .post .post--thumb {
-    width: 100%; }
+.home .post .post--thumb {
+  width: 100%; }
+.home .post .post__overview {
+  margin: 0 0.75em 0 0.75em; }
+.home .post .post__overview--title a {
+  text-decoration: none;
+  color: #4A4A4A; }
+
+@media (min-width: 640px) {
+  .home .home-container {
+    margin-right: auto;
+    margin-left: auto; }
   .home .post .post__overview {
-    margin: 0 0.75em 0 0.75em; }
-  .home .post .post__overview--title a {
-    text-decoration: none;
-    color: #4A4A4A; }
+    margin: 0 0 0 0; } }
 
 .profile {
   background-color: #f2f2f2; }
@@ -7891,9 +7898,14 @@ body, .ionic-body, h1, h2, h3 {
     font-size: 20px;
     font-style: normal;
     font-weight: normal;
-    height: 476px;
     letter-spacing: 0.16px;
     line-height: 28px;
     margin-bottom: 30px;
     visibility: visible;
     word-wrap: break-word; }
+
+@media (min-width: 700px) {
+  .reader .container {
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto; } }
