@@ -27,6 +27,7 @@
       margin-bottom: 30px;
       visibility: visible;
       word-wrap: break-word;
+      line-height: 1.6em;
     }
   }
 }
@@ -37,7 +38,27 @@
       max-width: 700px;
       margin-left: auto;
       margin-right: auto;
+      .reader--content {
+        margin: 0;
+      }
+      .reader--title {
+        margin: 0;
+        margin: 2em 0 0.5em 0;
+        font-weight: 600;
+        font-size: 3em;
+        opacity: 0.8;
+      }
+      .reader--thumb {
+        margin-bottom: 1em;
+      }
     }
+
+  }
+}
+
+@media (min-width: 1000px) {
+  .reader {
+
 
   }
 }
