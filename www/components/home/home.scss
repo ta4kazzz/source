@@ -16,9 +16,26 @@
     .post__overview--title {
       a {text-decoration: none; color: $src-grey;}
     }
-    .post__overview--user {}
-    .post__overview--url {}
-    .post__overview--summary{}
+    .post__overview--user {
+      img {
+        width: 30px;
+      }
+      .post__overview--sourcetag {
+        font-size: 1.5em;
+      }
+    }
+    .post__overview--url {
+      text-decoration: none;
+    }
+    .post__overview--summary{
+      font-family: SourceSansPro-Light;
+      font-size: 19px;
+      color: #373636;
+      line-height: 29px;
+      margin-top: 10px;
+
+    }
+
 
   }
 }

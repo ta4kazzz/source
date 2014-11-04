@@ -4,8 +4,12 @@
   .menu-container {
     margin-top: 1em;
   }
+  .menu--profile {
+    img {width: 100%;}
+  }
   .menu-icon {
     text-align: center;
+    img {border-bottom: 2px solid #535353;}
   }
   img {
     padding: 1em;

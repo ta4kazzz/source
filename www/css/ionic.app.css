@@ -7823,8 +7823,12 @@ body, .ionic-body, h1, h2, h3 {
   background-color: #4A4A4A; }
   .source-menu .menu-container {
     margin-top: 1em; }
+  .source-menu .menu--profile img {
+    width: 100%; }
   .source-menu .menu-icon {
     text-align: center; }
+    .source-menu .menu-icon img {
+      border-bottom: 2px solid #535353; }
   .source-menu img {
     padding: 1em; }
 
@@ -7844,6 +7848,18 @@ body, .ionic-body, h1, h2, h3 {
 .home .post .post__overview--title a {
   text-decoration: none;
   color: #4A4A4A; }
+.home .post .post__overview--user img {
+  width: 30px; }
+.home .post .post__overview--user .post__overview--sourcetag {
+  font-size: 1.5em; }
+.home .post .post__overview--url {
+  text-decoration: none; }
+.home .post .post__overview--summary {
+  font-family: SourceSansPro-Light;
+  font-size: 19px;
+  color: #373636;
+  line-height: 29px;
+  margin-top: 10px; }
 
 @media (min-width: 640px) {
   .home .home-container {
@@ -7854,39 +7870,24 @@ body, .ionic-body, h1, h2, h3 {
 
 .profile {
   background-color: #f2f2f2; }
-  .profile .profile-canopy {
-    position: fixed;
-    background: linear-gradient(rgba(75, 75, 75, 0.45), rgba(75, 75, 75, 0.45));
-    background-image: url('../img/profile.png');
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+  .profile .profile-canopy .profile-canopy--image img {
     width: 100%;
-    height: 400px;
-    background-size: contain; }
-    .profile .profile-canopy .profile-banner {
-      text-align: center;
-      position: fixed;
-      top: 0;
-      right: 0;
-      left: 0;
-      padding-top: 3em;
-      padding-bottom: 7em; }
-      .profile .profile-canopy .profile-banner h2 {
-        color: #fff; }
-      .profile .profile-canopy .profile-banner h3 {
-        color: #fff; }
+    position: absolute;
+    max-height: 600px; }
+  .profile .profile-canopy .profile-canopy--banner {
+    text-align: center;
+    position: relative;
+    padding: 5em 0 2em 0; }
+    .profile .profile-canopy .profile-canopy--banner h2, .profile .profile-canopy .profile-canopy--banner h3 {
+      color: #fff; }
   .profile .profile-container {
-    max-width: 640px;
-    padding-top: 235px; }
+    display: block;
+    max-width: 640px; }
 
 @media (min-width: 640px) {
-  .profile-canopy {
-    margin-right: auto;
-    margin-left: auto; }
   .profile-container {
     margin-right: auto;
-    margin-left: auto;
-    padding-top: 20%; } }
+    margin-left: auto; } }
 
 .reader .container {
   max-width: 640px; }
