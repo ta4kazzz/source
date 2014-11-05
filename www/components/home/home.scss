@@ -11,10 +11,11 @@
       width: 100%;
     }
     .post__overview {
-      margin: 0 0.75em 0 0.75em;
+      margin: 0 1em 0 1em;
     }
     .post__overview--title {
       a {text-decoration: none; color: $src-grey;}
+      margin-top: 10px;
     }
     .post__overview--user {
       img {
@@ -22,10 +23,15 @@
       }
       .post__overview--sourcetag {
         font-size: 1.5em;
+        padding-left: 0.25em;
+        display: inline-block;
+
       }
     }
     .post__overview--url {
       text-decoration: none;
+      color: #5572B3;
+      font-size: 1.2em;
     }
     .post__overview--summary{
       font-family: SourceSansPro-Light;
@@ -33,6 +39,7 @@
       color: #373636;
       line-height: 29px;
       margin-top: 10px;
+      margin-bottom: 20px;
 
     }
 
