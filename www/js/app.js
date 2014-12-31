@@ -30,14 +30,6 @@ angular.module('source', ['ionic', 'source.controllers'])
       controller: 'AppCtrl'
     })
 
-    .state('app.search', {
-      url: "/search",
-      views: {
-        'menuContent' :{
-          templateUrl: "components/search/search.html"
-        }
-      }
-    })
 
     // Source specific menus
     .state('app.home', {
@@ -45,7 +37,7 @@ angular.module('source', ['ionic', 'source.controllers'])
       views: {
         'menuContent' :{
           templateUrl: "components/home/home.html",
-          controller: 'PlaylistsCtrl'
+          controller: 'homeController'
         }
       }
     })
