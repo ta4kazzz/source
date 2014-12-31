@@ -47,7 +47,7 @@ angular.module('source', ['ionic', 'source.controllers'])
       views: {
         'menuContent' :{
           templateUrl: "components/reader/reader.html",
-          controller: 'PlaylistsCtrl'
+          controller: 'readerController'
         }
       }
     })
@@ -57,7 +57,7 @@ angular.module('source', ['ionic', 'source.controllers'])
       views: {
         'menuContent' :{
           templateUrl: "components/discussion/discussion.html",
-          controller: 'PlaylistsCtrl'
+          controller: 'discussionController'
         }
       }
     })
@@ -67,7 +67,7 @@ angular.module('source', ['ionic', 'source.controllers'])
       views: {
         'menuContent' :{
           templateUrl: "components/explore/explore.html",
-          controller: 'PlaylistsCtrl'
+          controller: 'exploreController'
         }
       }
     })
@@ -77,7 +77,7 @@ angular.module('source', ['ionic', 'source.controllers'])
       views: {
         'menuContent' :{
           templateUrl: "components/notifications/notifications.html",
-          controller: 'PlaylistsCtrl'
+          controller: 'notificationsController'
         }
       }
     })
@@ -87,7 +87,7 @@ angular.module('source', ['ionic', 'source.controllers'])
       views: {
         'menuContent' :{
           templateUrl: "components/profile/profile.html",
-          controller: 'PlaylistsCtrl'
+          controller: 'profileController'
         }
       }
     })
@@ -97,7 +97,7 @@ angular.module('source', ['ionic', 'source.controllers'])
       views: {
         'menuContent' :{
           templateUrl: "components/settings/settings.html",
-          controller: 'PlaylistsCtrl'
+          controller: 'settingsController'
         }
       }
     })
