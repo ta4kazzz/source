@@ -25,5 +25,10 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 @import "www/components/search/search";
 @import "www/components/settings/settings";
 
+@import "www/components/followers/followers";
+@import "www/components/following/following";
+@import "www/components/user/user";
+@import "www/components/signup/signup";
+
 // Import Shame
 @import "scss/_shame";

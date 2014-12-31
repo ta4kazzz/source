@@ -42,16 +42,8 @@ angular.module('source', ['ionic', 'source.controllers'])
       }
     })
 
-    .state('app.reader', {
-      url: "/reader",
-      views: {
-        'menuContent' :{
-          templateUrl: "components/reader/reader.html",
-          controller: 'readerController'
-        }
-      }
-    })
 
+    // Components
     .state('app.discussion', {
       url: "/discussion",
       views: {
@@ -68,6 +60,26 @@ angular.module('source', ['ionic', 'source.controllers'])
         'menuContent' :{
           templateUrl: "components/explore/explore.html",
           controller: 'exploreController'
+        }
+      }
+    })
+
+    .state('app.followers', {
+      url: "/followers",
+      views: {
+        'menuContent' :{
+          templateUrl: "components/followers/followers.html",
+          controller: 'followersController'
+        }
+      }
+    })
+
+    .state('app.following', {
+      url: "/following",
+      views: {
+        'menuContent' :{
+          templateUrl: "components/following/following.html",
+          controller: 'followingController'
         }
       }
     })
@@ -92,12 +104,43 @@ angular.module('source', ['ionic', 'source.controllers'])
       }
     })
 
+    .state('app.reader', {
+      url: "/reader",
+      views: {
+        'menuContent' :{
+          templateUrl: "components/reader/reader.html",
+          controller: 'readerController'
+        }
+      }
+    })
+
+
     .state('app.settings', {
       url: "/settings",
       views: {
         'menuContent' :{
           templateUrl: "components/settings/settings.html",
           controller: 'settingsController'
+        }
+      }
+    })
+
+    .state('app.signup', {
+      url: "/signup",
+      views: {
+        'menuContent' :{
+          templateUrl: "components/signup/signup.html",
+          controller: 'signupController'
+        }
+      }
+    })
+
+    .state('app.user', {
+      url: "/user",
+      views: {
+        'menuContent' :{
+          templateUrl: "components/user/user.html",
+          controller: 'userController'
         }
       }
     })
