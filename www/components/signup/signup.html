@@ -3,6 +3,26 @@
     <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
   </ion-nav-buttons>
   <ion-content class="has-header">
-    <h1>Signup</h1>
+
+    <div class="list">
+    <!-- Email -->
+    <label class="item item-input">
+      <span class="input-label">Email</span>
+      <input type="text" ng-model="user.email">
+    </label>
+    <!-- Password -->
+    <label class="item item-input">
+      <span class="input-label">Password</span>
+      <input type="password" ng-model="user.password">
+    </label>
+    <!-- signup button -->
+    <label class="item item-input">
+      <button class="button button-block button-positive" ng-click="createUser()">
+        Sign Up
+      </button>
+    </label>
+
+  </div>
+
   </ion-content>
 </ion-view>

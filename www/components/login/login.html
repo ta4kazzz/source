@@ -1,26 +1,29 @@
-<div class="modal">
-  <ion-header-bar>
-    <h1 class="title">Login</h1>
-    <div class="buttons">
-      <button class="button button-clear" ng-click="closeLogin()">Close</button>
-    </div>
-  </ion-header-bar>
-  <ion-content>
-    <form ng-submit="doLogin()">
-      <div class="list">
-        <label class="item item-input">
-          <span class="input-label">Username</span>
-          <input type="text" ng-model="loginData.username">
-        </label>
-        <label class="item item-input">
-          <span class="input-label">Password</span>
-          <input type="password" ng-model="loginData.password">
-        </label>
-        <label class="item">
-          <button class="button button-block button-positive" type="submit">Log in</button>
-        </label>
-      </div>
-    </form>
-  </ion-content>
-</div>
+<ion-view title="Login" class="login">
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+  <ion-content class="has-header">
 
+      <div class="list" ng-show="showLoginForm">
+
+      <label class="item item-input">
+        <span class="input-label">Email</span><input type="text" ng-model="em"/>
+      </label>
+
+      <label class="item item-input">
+        <span class="input-label">Password</span><input type="password" ng-model="pwd"/>
+      </label>
+
+      <button class="button button-block button-positive" ng-click="login(em, pwd)">Login</button>
+      </div>     
+
+    <div class="card" ng-hide="showLoginForm">      
+      <div class="item item-text-wrap">You are logged in as</div>                
+    </div>
+    <button class="button button-stable" ng-click="logout()" ng-hide="showLoginForm">Logout</button>
+    
+
+
+
+  </ion-content>
+</ion-view>
