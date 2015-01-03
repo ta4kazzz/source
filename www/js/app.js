@@ -44,6 +44,17 @@ angular.module('source', ['ionic', 'source.controllers'])
 
 
     // Components
+
+    .state('app.add', {
+      url: "/add",
+      views: {
+        'menuContent' :{
+          templateUrl: "components/add/add.html",
+          controller: 'addController'
+        }
+      }
+    })
+
     .state('app.discussion', {
       url: "/discussion",
       views: {

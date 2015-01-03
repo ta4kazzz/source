@@ -21,6 +21,7 @@
     <script src="js/controllers.js"></script>
 
     <!-- Component Controllers -->
+    <script src="components/add/add-controller.js"></script>
     <script src="components/discussion/discussion-controller.js"></script>
     <script src="components/explore/explore-controller.js"></script>
     <script src="components/followers/followers-controller.js"></script>
@@ -35,15 +36,22 @@
     <script src="components/signup/signup-controller.js"></script>
     <script src="components/user/user-controller.js"></script>
 
-
-
-
-
+    <!-- Firebase -->
+    <script src='https://cdn.firebase.com/js/client/2.0.4/firebase.js'></script>
 
 
   </head>
 
   <body ng-app="source">
+    <!-- This needs to be moved somewhere else -->
+    <script>
+      var myDataRef = new Firebase('https://sourceapp.firebaseIO.com/');
+    </script>
+
+
     <ion-nav-view></ion-nav-view>
   </body>
+
+
+
 </html>
