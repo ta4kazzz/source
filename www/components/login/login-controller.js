@@ -26,15 +26,14 @@ angular.module('source')
                 $scope.user = Auth.$getAuth();
                 $scope.showLoginForm = false;
                 $scope.$apply();
-                /*var r = $firebase(fireBaseData.refRoomMates()).$asArray();
-                r.$add(["k@gmail.com","r@gmail.com"]);*/
             } else {
                 console.log("Error authenticating user:", error);
             }
         });
     };
 
-    //Logout method
+    // Logout method
+    // Dont Repeat Yourself - this is also in app.js
     $scope.logout = function () {
         Auth.$unauth();
         $scope.showLoginForm = true;
