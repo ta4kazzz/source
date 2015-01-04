@@ -1,8 +1,8 @@
 <ion-view title="Login" class="login">
   <ion-nav-buttons side="left">
-    <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
+    
   </ion-nav-buttons>
-  <ion-content class="has-header">
+  <ion-content>
 
       <div class="list" ng-show="showLoginForm">
 
@@ -18,9 +18,9 @@
       </div>     
 
     <div class="card" ng-hide="showLoginForm">      
-      <div class="item item-text-wrap">You are logged in as {{user.password.email}}</div>                
+      <div class="item item-text-wrap">You are logged in as {{user.password.email}}</div>
     </div>
-
+    <a href="#/app/signup">Don't have an Account? Create a free one now</a>
 
   </ion-content>
 </ion-view>

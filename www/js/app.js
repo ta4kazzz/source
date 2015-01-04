@@ -24,13 +24,22 @@ angular.module('source', ['ionic', 'source.controllers', 'firebase'])
     var rootRef = new Firebase($rootScope.baseUrl);
 
 
+
+    // Logout Function
+    $rootScope.logout = function() {
+      rootRef.unauth();
+      $rootScope.showLoginForm = true;
+      $window.location.href = '#/app/login';
+    };
+
+
+
     // Login
     $rootScope.login = function(em, pwd) {
         rootRef.authWithPassword({
             email      : em,
             password   : pwd
         }, function(error, authData) {
-
             if (error) {
                 console.log("Login Failed", error);
             } else {
@@ -41,12 +50,26 @@ angular.module('source', ['ionic', 'source.controllers', 'firebase'])
     };
 
 
-    // Logout Function
-    $rootScope.logout = function() {
-      rootRef.unauth();
-      $rootScope.showLoginForm = true;
-      $window.location.href = '#/app/login';
+
+    // Create User
+    $rootScope.createUser = function(em, pwd) {
+      rootRef.createUser({
+        email     : em,
+        password  : pwd
+      }, function(error) {
+        if (error === null) {
+          console.log("User Created Successfully");
+          $window.location.href = '#/app/home';
+        } else {
+          console.log("Error Creating User", error);
+        }
+      });
     };
+
+
+
+
+
 
 
   });
