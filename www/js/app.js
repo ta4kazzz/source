@@ -25,9 +25,6 @@ angular.module('source', ['ionic', 'source.controllers', 'firebase'])
 
 
 
-
-
-
   });
 })
 
