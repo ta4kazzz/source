@@ -1,6 +1,6 @@
 angular.module('source')
 
-.controller('loginController', function($scope, $rootScope, $window) {
+.controller('loginController', function($scope, $rootScope) {
 
     // DRY > app.js
     var rootRef = new Firebase($rootScope.baseUrl);
@@ -12,31 +12,6 @@ angular.module('source')
     if (!$scope.user) {
      $scope.showLoginForm = true;
     }
-
-
-
-    // Login
-    $scope.login = function(em, pwd) {
-        rootRef.authWithPassword({
-            email      : em,
-            password   : pwd
-        }, function(error, authData) {
-
-            if (error) {
-                console.log("Login Failed", error);
-            } else {
-                console.log("Authentication is a go", authData);
-                $window.location.href = '#/app/home';
-            }
-        });
-    };
-
-
-    // Logout Function
-    $scope.logout = function() {
-      rootRef.unauth();
-      $scope.showLoginForm = true;
-    };
 
 
 

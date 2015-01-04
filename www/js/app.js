@@ -7,7 +7,7 @@
 angular.module('source', ['ionic', 'source.controllers', 'firebase'])
 
 //                            Added all these as scope variables? can be accessed anywhere
-.run(function($ionicPlatform, $rootScope) {
+.run(function($ionicPlatform, $rootScope, $window) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the 2 bar above the keyboard
     // for form inputs)
@@ -23,6 +23,30 @@ angular.module('source', ['ionic', 'source.controllers', 'firebase'])
     $rootScope.baseUrl = 'https://sourceapp.firebaseio.com/';
     var rootRef = new Firebase($rootScope.baseUrl);
 
+
+    // Login
+    $rootScope.login = function(em, pwd) {
+        rootRef.authWithPassword({
+            email      : em,
+            password   : pwd
+        }, function(error, authData) {
+
+            if (error) {
+                console.log("Login Failed", error);
+            } else {
+                console.log("Authentication is a go", authData);
+                $window.location.href = '#/app/home';
+            }
+        });
+    };
+
+
+    // Logout Function
+    $rootScope.logout = function() {
+      rootRef.unauth();
+      $rootScope.showLoginForm = true;
+      $window.location.href = '#/app/login';
+    };
 
 
   });

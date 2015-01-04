@@ -18,10 +18,9 @@
       </div>     
 
     <div class="card" ng-hide="showLoginForm">      
-      <div class="item item-text-wrap">You are logged in as</div>                
+      <div class="item item-text-wrap">You are logged in as {{user.password.email}}</div>                
     </div>
 
-    <a><ng-click="logout()">Logout</p></a>
 
   </ion-content>
 </ion-view>
