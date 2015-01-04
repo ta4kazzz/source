@@ -35,20 +35,45 @@ angular.module('source', ['ionic', 'source.controllers', 'firebase'])
 
 
     // Login
+    // $rootScope.login = function(em, pwd) {
+    //     rootRef.authWithPassword({
+    //         email      : em,
+    //         password   : pwd
+    //     }, function(error, authData) {
+    //         if (error) {
+    //             console.log("Login Failed", error);
+    //         } else {
+    //             console.log("Authentication is a go", authData);
+    //             $window.location.href = '#/app/home';
+    //         }
+    //     });
+    // };
+
     $rootScope.login = function(em, pwd) {
         rootRef.authWithPassword({
             email      : em,
             password   : pwd
         }, function(error, authData) {
-            if (error) {
-                console.log("Login Failed", error);
+            if (error) { 
+                switch (error.code) {
+                  case "INVALID_EMAIL":
+                      console.log("The email is invalid");
+                      break;
+                  case "INVALID_PASSWORD":
+                      console.log("The password is incorrect")
+                      break;
+                  case "INVALID_USER":
+                      console.log("The user account does not exist");
+                      break;
+                  default:
+                      console.log("General Error when logging in", error);
+                }
             } else {
-                console.log("Authentication is a go", authData);
-                $window.location.href = '#/app/home';
+              console.log("Authentication successfull, You're in!", authData);
+              $window.location.href = '#/app/home';
             }
         });
     };
-
 
 
     // Create User
