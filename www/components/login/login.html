@@ -4,23 +4,33 @@
   </ion-nav-buttons>
   <ion-content>
 
-      <div class="list" ng-show="showLoginForm">
+      <form name="loginForm" ng-show="showLoginForm">
 
-      <label class="item item-input">
-        <span class="input-label">Email</span><input type="text" ng-model="em"/>
-      </label>
+        <label class="item item-input">
+          <span class="input-label">Email</span><input type="text" ng-model="em" name="email" required  min="1"/>
+        </label>
 
-      <label class="item item-input">
-        <span class="input-label">Password</span><input type="password" ng-model="pwd"/>
-      </label>
+        <label class="item item-input">
+          <span class="input-label">Password</span><input type="password" ng-model="pwd" name="password" required />
+        </label>
 
-      <button class="button button-block button-positive" ng-click="login(em, pwd)">Login</button>
-      </div>     
+        <button class="button button-block button-positive" ng-click="login(em, pwd)">Login</button>
+      </form>     
 
-    <div class="card" ng-hide="showLoginForm">      
-      <div class="item item-text-wrap">You are logged in as {{user.password.email}}</div>
-    </div>
+      <!-- Logged in -->
+      <div class="card" ng-hide="showLoginForm">      
+        <div class="item item-text-wrap">You are logged in as {{user.password.email}}</div>
+      </div>
+
+
     <a href="#/app/signup">Go to Signup</a>
+    <p style="color: red">{{errorMessage}}</p>
+
+
+
+
+
+
 
 
   </ion-content>
