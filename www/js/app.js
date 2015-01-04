@@ -4,10 +4,10 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('source', ['ionic', 'source.controllers', 'source.services', 'firebase'])
+angular.module('source', ['ionic', 'source.controllers', 'firebase'])
 
 //                            Added all these as scope variables? can be accessed anywhere
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $rootScope) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the 2 bar above the keyboard
     // for form inputs)
@@ -18,6 +18,15 @@ angular.module('source', ['ionic', 'source.controllers', 'source.services', 'fir
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+
+    // Initial Variables
+    $rootScope.baseUrl = 'https://sourceapp.firebaseio.com/';
+    var rootRef = new Firebase($rootScope.baseUrl);
+
+
+
+
+
 
   });
 })

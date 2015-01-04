@@ -1,44 +1,42 @@
 angular.module('source')
 
-.controller('loginController', function($scope, Auth) {
+.controller('loginController', function($scope, $rootScope, $window) {
 
-	$scope.auth = Auth;
-	// This should return null if the user is not logged in
-	console.log(Auth.$getAuth());
+    // DRY > app.js
+    var rootRef = new Firebase($rootScope.baseUrl);
+
+    $scope.user = rootRef.getAuth();
+    // This should return null if the user is not logged in
+    console.log($scope.user)
+    // If the user is not logged in show the login form
+    if (!$scope.user) {
+     $scope.showLoginForm = true;
+    }
 
 
-	$scope.showLoginForm = false;
 
-	// $scope.user = fireBaseData.ref().getAuth();
-	$scope.user = Auth.$getAuth();
-	if (!$scope.user) {
-		$scope.showLoginForm = true;
-	}
-
-    //Login method
-    $scope.login = function (em, pwd) {
-        Auth.$authWithPassword({
-            email    : em,
-            password : pwd
+    // Login
+    $scope.login = function(em, pwd) {
+        rootRef.authWithPassword({
+            email      : em,
+            password   : pwd
         }, function(error, authData) {
-            if (error === null) {
-                console.log("User ID: " + authData.uid + ", Provider: " + authData.provider);
-                $scope.user = Auth.$getAuth();
-                $scope.showLoginForm = false;
-                $scope.$apply();
-                /*var r = $firebase(fireBaseData.refRoomMates()).$asArray();
-                r.$add(["k@gmail.com","r@gmail.com"]);*/
+            if (error) {
+                console.log("Login Failed", error);
             } else {
-                console.log("Error authenticating user:", error);
+                console.log("Authentication is a go", authData);
+                $window.location.href = '#/app/home';
             }
         });
     };
 
-    //Logout method
-    $scope.logout = function () {
-        Auth.$unauth();
-        $scope.showLoginForm = true;
+
+    // Logout Function
+    $scope.logout = function() {
+      rootRef.unauth();
+      $scope.showLoginForm = true;
     };
+
 
 
 });
