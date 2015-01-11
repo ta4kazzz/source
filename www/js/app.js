@@ -22,6 +22,10 @@ angular.module('source', ['ionic', 'source.controllers', 'firebase'])
     // Initial Variables
     $rootScope.baseUrl = 'https://sourceapp.firebaseio.com/';
     var rootRef = new Firebase($rootScope.baseUrl);
+    
+    
+
+
 
 
 
@@ -56,6 +60,7 @@ angular.module('source', ['ionic', 'source.controllers', 'firebase'])
 
 
 
+
   });
 })
 
@@ -71,6 +76,17 @@ angular.module('source', ['ionic', 'source.controllers', 'firebase'])
 
 
     // Source specific menus
+
+    .state('app.landing', {
+      url: "/landing",
+      views: {
+        'menuContent' :{
+          templateUrl: "components/landing/landing.html",
+        }
+      }
+    })
+
+
     .state('app.home', {
       url: "/home",
       views: {
@@ -89,6 +105,16 @@ angular.module('source', ['ionic', 'source.controllers', 'firebase'])
       views: {
         'menuContent' :{
           templateUrl: "components/add/add.html",
+          controller: 'addController'
+        }
+      }
+    })
+
+    .state('app.preview', {
+      url: "/preview",
+      views: {
+        'menuContent' :{
+          templateUrl: "components/preview/preview.html",
           controller: 'addController'
         }
       }
@@ -207,5 +233,5 @@ angular.module('source', ['ionic', 'source.controllers', 'firebase'])
     })
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/signup');
+  $urlRouterProvider.otherwise('/app/landing');
 });
