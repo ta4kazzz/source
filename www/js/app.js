@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('source', ['ionic', 'source.controllers', 'firebase'])
+angular.module('source', ['ionic', 'source.controllers'])
 
 //                            Added all these as scope variables? can be accessed anywhere
 .run(function($ionicPlatform, $rootScope, $window) {
@@ -18,48 +18,6 @@ angular.module('source', ['ionic', 'source.controllers', 'firebase'])
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
-
-    // Initial Variables
-    $rootScope.baseUrl = 'https://sourceapp.firebaseio.com/';
-    var rootRef = new Firebase($rootScope.baseUrl);
-    
-    
-
-
-
-
-
-    // Logout Function
-    // This goes in here because it is used in a couple different places
-    $rootScope.logout = function() {
-      rootRef.unauth();
-      $rootScope.showLoginForm = true;
-      $window.location.href = '#/app/login';
-    };
-
-
-
-
-    $rootScope.createUser = function(em, pwd) {
-      rootRef.createUser({
-        email     : em,
-        password  : pwd
-      }, function(error) {
-        if (error === null) {
-          console.log("User Created Successfully");
-          $window.location.href = '#/app/home';
-        } else {
-          console.log("Error Creating User", error);
-        }
-      });
-    };
-
-
-
-
-
-
-
 
   });
 })
