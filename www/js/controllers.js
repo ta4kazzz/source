@@ -1,6 +1,6 @@
 angular.module('source.controllers', [])
 
-.controller('AppCtrl', function($scope) {
+.controller('AppCtrl', function($scope, API) {
 
 
 

@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('source', ['ionic', 'source.controllers'])
+angular.module('source', ['ionic', 'source.controllers', 'source.services'])
 
 //                            Added all these as scope variables? can be accessed anywhere
 .run(function($ionicPlatform, $rootScope, $window) {

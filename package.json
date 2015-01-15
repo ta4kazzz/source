@@ -9,6 +9,7 @@
     "gulp-open": "^0.3.0",
     "gulp-rename": "^1.2.0",
     "gulp-sass": "^0.7.1",
+    "restify": "^2.8.4",
     "unfluff": "^0.10.0"
   },
   "devDependencies": {
