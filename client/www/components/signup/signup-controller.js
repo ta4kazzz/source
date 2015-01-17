@@ -5,15 +5,15 @@ angular.module('source')
 	$scope.user = {
         email: "",
         password: "",
-        name: ""
+        username: ""
     };
  
     $scope.createUser = function () {
     	var email = this.user.email;
         var password = this.user.password;
-        var uName = this.user.name;
+        var username = this.user.username;
 
-        if(!email || !password || !uName) {
+        if(!email || !password || !username) {
         	$rootScope.notify("Please enter valid data");
         	return false;
         }
@@ -23,9 +23,9 @@ angular.module('source')
         API.signup({
             email: email,
             password: password,
-            uName: uName
+            username: username
         }).success(function (data) {
-            $rootScope.setToken(email); // create a session kind of thing on the client side $rootScope.hide();
+            $rootScope.setToken(username);
             $window.location.href = ('#/app/home');
         }).error(function (error) {
             $rootScope.hide();

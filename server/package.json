@@ -17,7 +17,7 @@
     "passport-facebook": "~1.0.2",
     "passport-google-oauth": "~0.1.5",
     "passport-http": "^0.2.2",
-    "passport-local": "~0.1.6",
+    "passport-local": "^0.1.6",
     "passport-twitter": "~1.0.2",
     "restify": "^2.8.4"
   }

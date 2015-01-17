@@ -32,7 +32,6 @@ app.use(cors());
 app.set('view engine', 'ejs'); // set up ejs for templating
 
 
-
 // Passport
 app.use(passport.initialize());
 

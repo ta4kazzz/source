@@ -79,7 +79,7 @@ angular.module('source.services', [])
         },
         // Add new article here
         saveItem: function (article, email) {
-            return $http.post(base+'/api/articles', article, {
+            return $http.post(base+'/api/articles/', article, {
                 method: 'POST',
                 params: {
                     token: email
