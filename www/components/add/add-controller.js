@@ -1,7 +1,6 @@
 angular.module('source')
 
-.controller('addController', function($scope, $rootScope, $window, $firebase) {
-
+.controller('addController', function($scope, $rootScope, $window, API) {
 
 	 $scope.article = {
 	 	url: "",
@@ -12,24 +11,25 @@ angular.module('source')
 	 	var url = this.article.url;
 	 	var summary = this.article.summary;
 
-	 	// loading function goes here
 
 	 	var article = {
 	 		url: url,
 	 		summary: summary,
-	 		created: Date.now()
+	 		created: Date.now(),
+	 		user: $rootScope.getToken()
 	 	};
 
-	 	$scope.article = article;
-		var articleRef = new Firebase('https://sourceapp.firebaseio.com/articles');
-	    articleRef.push(article);
+	 	
+	 	API.saveItem(article, article.user)
+	 		.success(function (article, status, headers, config) {
+	 			console.log("Article added successfully");
+	 		})
+	 		.error(function (article, status, headers, config) {
+	 			console.log("Something went wrong")
+	 		});
+
+
 		$window.location.href = '#/app/preview';
-	 };
-
-
-	 $scope.postArticle = function() {
-
-	 	console.log($scope.article.url)
 	 };
 
 

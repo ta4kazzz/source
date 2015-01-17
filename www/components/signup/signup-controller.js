@@ -1,31 +1,50 @@
 angular.module('source')
 
 .controller('signupController', function($scope, $rootScope, API, $window) {
+	
 
 	$scope.user = {
-		email: "",
-		password: ""
-	};
+        email: "",
+        password: "",
+        name: ""
+    };
+ 
+    $scope.createUser = function () {
+    	var email = this.user.email;
+        var password = this.user.password;
+        var uName = this.user.name;
 
-	// We know this works
+        if(!email || !password || !uName) {
+        	$rootScope.notify("Please enter valid data");
+        	return false;
+        }
 
-	$rootScope.createUser = function () {
-		var email = this.user.email;
-		var password = this.user.password;
+        // $rootScope.show('Please wait.. Registering');
 
-				
-		API.signup({
-			email: email,
-			password: password
-		}).success(function (data) {
-			$rootScope.setToken(email);
-			console.log("You creted a User");
-			$window.location.href = ('#/app/home');
-		}).error(function (error) {
-			console.log("Something went wrong")
-		});
+        API.signup({
+            email: email,
+            password: password,
+            uName: uName
+        }).success(function (data) {
+            $rootScope.setToken(email); // create a session kind of thing on the client side $rootScope.hide();
+            $window.location.href = ('#/app/home');
+        }).error(function (error) {
+            $rootScope.hide();
+        	if(error.error && error.error.code == 11000)
+        	{
+        		$rootScope.notify("A user with this email already exists");
+        	}
+        	else
+        	{
+        		$rootScope.notify("Oops something went wrong, Please try again!");
+        	}
+            
+        });
+    }
 
-		console.log(email + password);
-	};
+
+
+
+
 
 });
