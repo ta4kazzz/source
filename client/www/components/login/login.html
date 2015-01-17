@@ -1,0 +1,43 @@
+<ion-view title="Login" class="login">
+  <ion-nav-buttons side="left">
+    
+  </ion-nav-buttons>
+  <ion-content>
+
+      <form name="loginForm" ng-show="showLoginForm">
+
+        <label class="item item-input">
+          <span class="input-label">Email</span><input type="text" ng-model="user.email" name="email" required/>
+        </label>
+
+        <label class="item item-input">
+          <span class="input-label">Password</span><input type="password" ng-model="user.password" name="password" required />
+        </label>
+
+        <button class="button button-block button-positive" ng-click="validateUser()">Login</button>
+      </form>     
+
+      <!-- Logged in -->
+      <div class="card" ng-hide="showLoginForm">      
+        <div class="item item-text-wrap">You are logged in as {{user.password.email}}</div>
+      </div>
+
+
+    <a href="#/app/signup">Go to Signup</a>
+    <p style="color: red">{{errorMessage}}</p>
+
+    <button class="button button-stable">
+      Sign in with facebook
+    </button>
+
+    <button class="button button-stable">
+      Sign in with twitter
+    </button>
+
+
+
+
+
+
+  </ion-content>
+</ion-view>

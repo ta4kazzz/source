@@ -1,0 +1,38 @@
+// Profile
+
+.profile {
+	background-color: #f2f2f2;
+	.profile-canopy {
+		.profile-canopy--image{
+			img {
+				width: 100%;
+				position: absolute;
+				
+			}
+		}
+		.profile-canopy--banner{
+			text-align: center;
+			position: relative;
+			padding: 5em 0 2em 0;
+			h2, h3 {
+				color: #fff;
+			}
+		}
+	}
+
+  .profile-container {
+  	display: block;
+    max-width: 640px;
+  }
+}
+
+
+@media (min-width: 640px) {
+	.profile-canopy {
+
+	}
+	.profile-container {
+		margin-right: auto;
+		margin-left: auto;
+	}
+}

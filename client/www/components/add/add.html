@@ -1,0 +1,29 @@
+<ion-view title="Add" class="user">
+
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+
+  <ion-content class="has-header">
+    <h1>Add New</h1>
+
+    <form name="addForm">
+
+  		<label class="item item-input">
+    	   <input type="text" ng-model="article.url" name="url" placeholder="url" required/>
+  		</label>
+  		<label class="item item-input">
+    		<input type="text" ng-model="article.summary" name="summary" placeholder="User Summary" required>
+  		</label>
+
+    <button class="button button-full button-calm" ng-click="addArticle()">Preview</button>
+
+	 </form>
+	
+
+
+
+
+
+  </ion-content>
+</ion-view>
