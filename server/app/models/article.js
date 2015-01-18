@@ -6,8 +6,9 @@ var Schema       = mongoose.Schema;
 // define the schema for our user model
 var ArticleSchema = new Schema({
     url: String,
-    summary: String,
-    created: String
+    summary: String
+    // , created: String
+    , userID: String
 });
 
 // create the model for users and expose it to our app

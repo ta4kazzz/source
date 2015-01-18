@@ -17,7 +17,6 @@ var configDB 		  = require('./config/database.js');
 var articleController = require('./app/controllers/article');
 var userController    = require('./app/controllers/user');
 var authController    = require('./app/controllers/auth');
-var clientController  = require('./app/controllers/client')
 
 // Database ====================================================================
 mongoose.connect(configDB.url);
@@ -38,13 +37,7 @@ app.use(passport.initialize());
 
 // API Endpoints ============================
 var router = express.Router();     // Get instance of express Router
-app.use('/api', router);
 
-
-// Create endpoint handlers for /client
-router.route('/clients')
-	.post(authController.isAuthenticated, clientController.postClients)
-	.get(authController.isAuthenticated, clientController.getClients);
 
 // Creates an enpoint handler for /articles
 router.route('/articles')
@@ -62,7 +55,7 @@ router.route('/users')
 	.post(userController.postUsers)
 	.get(authController.isAuthenticated, userController.getUser);
 
-
+app.use('/api', router);
 
 // launch ======================================================================
 app.listen(port);
