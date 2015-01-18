@@ -1,9 +1,9 @@
 // Load required packages
 var passport = require('passport');
-var BasicStrategy = require('passport-http').BasicStrategy;
+var LocalStrategy = require('passport-local').Strategy;
 var User = require('../models/user');
 
-passport.use(new BasicStrategy(
+passport.use(new LocalStrategy(
   function(username, password, callback) {
     User.findOne({ username: username }, function (err, user) {
       if (err) { return callback(err); }
@@ -25,4 +25,5 @@ passport.use(new BasicStrategy(
   }
 ));
 
-exports.isAuthenticated = passport.authenticate('basic', { session : false });
+
+exports.isAuthenticated = passport.authenticate('local', { session : false });
