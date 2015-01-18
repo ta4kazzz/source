@@ -5,6 +5,27 @@ angular.module('source.services', [])
     var base = "http://localhost:8080";
 
 
+
+    $rootScope.setUsername = function (username) {
+        return $window.localStorage.username = username;
+    };
+
+    $rootScope.setPassword = function (password) {
+        return $window.localStorage.password = password;
+    };
+
+    $rootScope.getUsername = function () {
+        return $window.localStorage.username;
+    };
+
+    $rootScope.getPassword = function () {
+        return $window.localStorage.password;
+    };
+
+
+
+
+
     $rootScope.show = function(text) {
     	$rootScope.loading = $ionicLoading.show({
     		content: text ? text : 'Loading',
@@ -80,10 +101,7 @@ angular.module('source.services', [])
         // Add new article here
         saveItem: function (article, email) {
             return $http.post(base+'/api/articles/', article, {
-                method: 'POST',
-                params: {
-                    token: email
-                }
+                method: 'POST'
             });
         },
         putItem: function (id, form, email) {

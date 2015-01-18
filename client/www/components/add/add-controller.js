@@ -16,7 +16,8 @@ angular.module('source')
 	 		url: url,
 	 		summary: summary,
 	 		created: Date.now(),
-	 		user: $rootScope.getToken()
+	 		username: $rootScope.getUsername(),
+	 		password: $rootScope.getPassword()
 	 	};
 
 	 	

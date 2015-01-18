@@ -25,7 +25,8 @@ angular.module('source')
             password: password,
             username: username
         }).success(function (data) {
-            $rootScope.setToken(username);
+            $rootScope.setUsername(username);
+            $rootScope.setPassword(password);
             $window.location.href = ('#/app/home');
         }).error(function (error) {
             $rootScope.hide();
