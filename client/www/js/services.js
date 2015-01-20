@@ -1,34 +1,34 @@
 angular.module('source.services', [])
 
-.factory('API', function ($rootScope, $http, $window, $ionicLoading) {
+.factory('API', function ($rootScope, $http, $window, $ionicLoading, auth, store) {
 
     var base = "http://localhost:8080";
 
 
 
-    $rootScope.setUsername = function (username) {
-        return $window.localStorage.username = username;
-    };
+    // $rootScope.setUsername = function (username) {
+    //     return $window.localStorage.username = username;
+    // };
 
-    $rootScope.setPassword = function (password) {
-        return $window.localStorage.password = password;
-    };
+    // $rootScope.setPassword = function (password) {
+    //     return $window.localStorage.password = password;
+    // };
 
-    $rootScope.getUsername = function () {
-        return $window.localStorage.username;
-    };
+    // $rootScope.getUsername = function () {
+    //     return $window.localStorage.username;
+    // };
 
-    $rootScope.getPassword = function () {
-        return $window.localStorage.password;
-    };
+    // $rootScope.getPassword = function () {
+    //     return $window.localStorage.password;
+    // };
 
 
-    $rootScope.logout = function () {
-        // $rootScope.setToken("");
-        $rootScope.setPassword("");
-        $rootScope.setUsername("");
-        $window.location.href = '#/app/login';
-    };
+    $rootScope.logout = function() {
+      auth.signout();
+      store.remove('profile');
+      store.remove('token');
+      $window.location.href = '#/app/landing';
+    }
 
     // $rootScope.setToken = function (token) {
     //     return $window.localStorage.token = token;
@@ -38,9 +38,9 @@ angular.module('source.services', [])
     //     return $window.localStorage.token;
     // }
 
-    $rootScope.isSessionActive = function () {
-        return $window.localStorage.token ? true : false;
-    }
+    // $rootScope.isSessionActive = function () {
+    //     return $window.localStorage.token ? true : false;
+    // }
 
 
     return {

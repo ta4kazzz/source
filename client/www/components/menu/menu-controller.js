@@ -1,5 +1,5 @@
 angular.module('source')
 
-.controller('menuController', function($scope, $rootScope) {
-
+.controller('menuController', function($scope, $rootScope, auth) {
+	$scope.auth = auth;
 });

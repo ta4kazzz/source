@@ -5,7 +5,11 @@
     margin-top: 1em;
   }
   .menu--profile {
-    img {width: 100%;}
+    img {
+      border-radius: 6em;
+      width: 100%;
+    }
+
   }
   .menu-icon {
     text-align: center;

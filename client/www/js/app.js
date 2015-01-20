@@ -4,10 +4,30 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('source', ['ionic', 'source.controllers', 'source.services'])
+angular.module('source', ['ionic', 'source.controllers', 'source.services', 'auth0', 'angular-storage','angular-jwt'])
+
+
 
 //                            Added all these as scope variables? can be accessed anywhere
-.run(function($ionicPlatform, $rootScope, $window) {
+.run(function($ionicPlatform, $rootScope, $window, auth, $location, store, jwtHelper) {
+  // This hooks all auth events to check everything as soon as the app starts
+  auth.hookEvents();
+
+  // This events gets triggered on refresh or URL change
+  $rootScope.$on('$locationChangeStart', function() {
+    if (!auth.isAuthenticated) {
+      var token = store.get('token');
+      if (token) {
+        if (!jwtHelper.isTokenExpired(token)) {
+          auth.authenticate(store.get('profile'), token);
+        } else {
+          // Either show Login page or use the refresh token to get a new idToken
+          $location.path('#/app/landing');
+        }
+      }
+    }
+  });
+
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the 2 bar above the keyboard
     // for form inputs)
@@ -22,8 +42,10 @@ angular.module('source', ['ionic', 'source.controllers', 'source.services'])
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider, authProvider, $httpProvider, jwtInterceptorProvider) {
   $stateProvider
+
+
 
     .state('app', {
       url: "/app",
@@ -40,6 +62,7 @@ angular.module('source', ['ionic', 'source.controllers', 'source.services'])
       views: {
         'menuContent' :{
           templateUrl: "components/landing/landing.html",
+          controller: 'loginController'
         }
       }
     })
@@ -50,11 +73,20 @@ angular.module('source', ['ionic', 'source.controllers', 'source.services'])
       views: {
         'menuContent' :{
           templateUrl: "components/home/home.html",
-          controller: 'homeController'
+          controller: 'homeController',
         }
       }
     })
 
+    .state('app.login', {
+      url: "/login",
+      views: {
+        'menuContent' :{
+          templateUrl: "components/login/login.html",
+          controller: 'loginController'
+        }
+      }
+    })
 
     // Components
 
@@ -119,15 +151,6 @@ angular.module('source', ['ionic', 'source.controllers', 'source.services'])
     })
 
 
-    .state('app.login', {
-      url: "/login",
-      views: {
-        'menuContent' :{
-          templateUrl: "components/login/login.html",
-          controller: 'loginController'
-        }
-      }
-    })
 
     .state('app.notifications', {
       url: "/notifications",
@@ -189,6 +212,12 @@ angular.module('source', ['ionic', 'source.controllers', 'source.services'])
         }
       }
     })
+
+    authProvider.init({
+      domain: 'source.auth0.com',
+      clientID: '5md4FZ4xtmmiMyUfiiIfccAGTXdSR8cJ',
+      loginState: 'login'
+    });
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/landing');

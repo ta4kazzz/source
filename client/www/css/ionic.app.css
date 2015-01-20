@@ -7824,6 +7824,7 @@ body, .ionic-body, h1, h2, h3, h4, h5, h6 {
   .source-menu .menu-container {
     margin-top: 1em; }
   .source-menu .menu--profile img {
+    border-radius: 6em;
     width: 100%; }
   .source-menu .menu-icon {
     text-align: center; }
