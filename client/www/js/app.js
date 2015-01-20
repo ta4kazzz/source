@@ -43,10 +43,12 @@ angular.module('source', ['ionic', 'source.controllers', 'source.services', 'aut
 })
 
 .config(function($stateProvider, $urlRouterProvider, authProvider, $httpProvider, jwtInterceptorProvider) {
+  
+  // if none of the above states are matched, use this as the fallback
+  $urlRouterProvider.otherwise('/app/landing');
+
+
   $stateProvider
-
-
-
     .state('app', {
       url: "/app",
       abstract: true,
@@ -70,23 +72,25 @@ angular.module('source', ['ionic', 'source.controllers', 'source.services', 'aut
 
     .state('app.home', {
       url: "/home",
+      abstract: true,
       views: {
         'menuContent' :{
           templateUrl: "components/home/home.html",
           controller: 'homeController',
+          data: {
+            requiresLogin: true
+          }
         }
       }
     })
 
-    .state('app.login', {
-      url: "/login",
-      views: {
-        'menuContent' :{
-          templateUrl: "components/login/login.html",
-          controller: 'loginController'
-        }
-      }
+    // auth0 login
+    .state('login', {
+      url: '/login',
+      templateUrl: "components/login/login.html",
+      controller: "loginController",
     })
+
 
     // Components
 
@@ -216,9 +220,9 @@ angular.module('source', ['ionic', 'source.controllers', 'source.services', 'aut
     authProvider.init({
       domain: 'source.auth0.com',
       clientID: '5md4FZ4xtmmiMyUfiiIfccAGTXdSR8cJ',
+      callbackURL: location.href,
       loginState: 'login'
     });
 
-  // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/landing');
+
 });
