@@ -8,6 +8,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
 var cors      	 = require('cors');
+ var jwt = require('express-jwt');
 
 // Load Config & Controllers
 var app       	 = express();
@@ -16,10 +17,15 @@ var port      	 = process.env.PORT || 8080;
 var configDB 		  = require('./config/database.js');
 var articleController = require('./app/controllers/article');
 var userController    = require('./app/controllers/user');
-var authController    = require('./app/controllers/auth');
+
 
 // Database ====================================================================
 mongoose.connect(configDB.url);
+
+var jwtCheck = jwt({
+    secret: new Buffer('e6xsoEi8W66dPHwBRkLwWyWy3J-Nq0GnzOZ2WsQMhouv5fJDlf6MH6izwhdim0gX', 'base64'),
+    audience: '5md4FZ4xtmmiMyUfiiIfccAGTXdSR8cJ'
+  });
 
 
 // Express Config ==============================================================
@@ -31,9 +37,6 @@ app.use(cors());
 app.set('view engine', 'ejs'); // set up ejs for templating
 
 
-// Passport
-app.use(passport.initialize());
-
 
 // API Endpoints ============================
 var router = express.Router();     // Get instance of express Router
@@ -41,19 +44,19 @@ var router = express.Router();     // Get instance of express Router
 
 // Creates an enpoint handler for /articles
 router.route('/articles')
-	.post(authController.isAuthenticated, articleController.postArticles)
-	.get(authController.isAuthenticated, articleController.getArticles);
+	.post(articleController.postArticles)
+	.get(articleController.getArticles);
 
 // Creates an endpoint handler for /articles:article_id
 router.route('/articles/:article_id')
-	.get(authController.isAuthenticated, articleController.getArticle)
-	.put(authController.isAuthenticated, articleController.putArticle)
-	.delete(authController.isAuthenticated, articleController.deleteArticle);
+	.get(articleController.getArticle)
+	.put(articleController.putArticle)
+	.delete(articleController.deleteArticle);
 
 // Creates endpoint handlers for /users
 router.route('/users')
 	.post(userController.postUsers)
-	.get(authController.isAuthenticated, userController.getUser);
+	.get(userController.getUser);
 
 app.use('/api', router);
 

@@ -15,9 +15,7 @@ angular.module('source')
 	 	var article = {
 	 		url: url,
 	 		summary: summary,
-	 		created: Date.now(),
-	 		username: $rootScope.getUsername(),
-	 		password: $rootScope.getPassword()
+	 		created: Date.now()
 	 	};
 
 	 	
