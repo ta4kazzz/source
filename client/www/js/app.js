@@ -6,27 +6,8 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('source', ['ionic', 'source.controllers', 'source.services', 'auth0', 'angular-storage','angular-jwt'])
 
-
-
-//                            Added all these as scope variables? can be accessed anywhere
-.run(function($ionicPlatform, $rootScope, $window, auth, $location, store, jwtHelper) {
+.run(function($ionicPlatform) {
   // This hooks all auth events to check everything as soon as the app starts
-  auth.hookEvents();
-
-  // This events gets triggered on refresh or URL change
-  $rootScope.$on('$locationChangeStart', function() {
-    if (!auth.isAuthenticated) {
-      var token = store.get('token');
-      if (token) {
-        if (!jwtHelper.isTokenExpired(token)) {
-          auth.authenticate(store.get('profile'), token);
-        } else {
-          // Either show Login page or use the refresh token to get a new idToken
-          $location.path('#/app/landing');
-        }
-      }
-    }
-  });
 
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the 2 bar above the keyboard
@@ -38,26 +19,40 @@ angular.module('source', ['ionic', 'source.controllers', 'source.services', 'aut
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
-
   });
 })
 
 .config(function($stateProvider, $urlRouterProvider, authProvider, $httpProvider, jwtInterceptorProvider) {
-  
-  // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/landing');
-
 
   $stateProvider
+
+    // auth0 login
+    .state('login', {
+      url: '/login',
+      templateUrl: "components/login/login.html",
+      controller: "loginController",
+    })
+
     .state('app', {
       url: "/app",
       abstract: true,
       templateUrl: "components/menu/menu.html",
-      controller: 'AppCtrl'
+      controller: 'AppCtrl',
+      data: {
+        requiresLogin: true
+      }
     })
 
-
-    // Source specific menus
+    .state('app.home', {
+      url: "/home",
+      // abstract: true,
+      views: {
+        'menuContent' :{
+          templateUrl: "components/home/home.html",
+          controller: 'homeController',
+        }
+      }
+    })
 
     .state('app.landing', {
       url: "/landing",
@@ -68,31 +63,6 @@ angular.module('source', ['ionic', 'source.controllers', 'source.services', 'aut
         }
       }
     })
-
-
-    .state('app.home', {
-      url: "/home",
-      abstract: true,
-      views: {
-        'menuContent' :{
-          templateUrl: "components/home/home.html",
-          controller: 'homeController',
-          data: {
-            requiresLogin: true
-          }
-        }
-      }
-    })
-
-    // auth0 login
-    .state('login', {
-      url: '/login',
-      templateUrl: "components/login/login.html",
-      controller: "loginController",
-    })
-
-
-    // Components
 
     .state('app.add', {
       url: "/add",
@@ -153,8 +123,6 @@ angular.module('source', ['ionic', 'source.controllers', 'source.services', 'aut
         }
       }
     })
-
-
 
     .state('app.notifications', {
       url: "/notifications",
@@ -220,9 +188,42 @@ angular.module('source', ['ionic', 'source.controllers', 'source.services', 'aut
     authProvider.init({
       domain: 'source.auth0.com',
       clientID: '5md4FZ4xtmmiMyUfiiIfccAGTXdSR8cJ',
-      callbackURL: location.href,
       loginState: 'login'
     });
 
+    $urlRouterProvider.otherwise('/app/landing');
 
-});
+    jwtInterceptorProvider.tokenGetter = function(store, jwtHelper, auth) {
+      var idToken = store.get('token');
+      var refreshToken = store.get('refreshToken');
+
+      if (!idToken || !refreshToken) {
+        return null;
+      }
+      if (jwtHelper.isTokenExpired(idToken)) {
+        return auth.refreshIdToken(refreshToken).then(function(idToken) {
+          store.set('token', idToken);
+          return idToken;
+        });
+      } else {
+        return idToken;
+      }
+    }
+
+    $httpProvider.interceptors.push('jwtInterceptor');
+
+  })
+
+  .run(function($rootScope, auth, store) {
+    $rootScope.$on('$locationChangeStart', function() {
+      if (!auth.isAuthenticated) {
+        var token = store.get('token');
+        if (token) {
+          auth.authenticate(store.get('profile'), token);
+        }
+      }
+    });
+  });
+
+
+

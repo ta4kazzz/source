@@ -1,32 +1,23 @@
 angular.module('source')
 
-.controller('loginController', function($scope, store, $rootScope, API, $window, auth) {
+.controller('loginController', function($scope, auth, $state, store) {
 
 
 
-    $scope.login = function() {
-        auth.signin({
-          authParams: {
-            scope: 'openid offline_access',
-            device: 'Mobile device'
-          }
-        }, function(profile, token, accessToken, state, refreshToken) {
-          // Success callback
-          store.set('profile', profile);
-          store.set('token', token);
-          store.set('refreshToken', refreshToken);
-          $window.location.href = ('#/app/home');
-        }, function() {
-          // Error callback
-        });
-      }
+  auth.signin({
+    closable: false,
+    // This asks for the refresh token, So that the user never has to log in again
+    authParams: {
+      scope: 'openid offline_access'
+    }
+  }, function(profile, idToken, accessToken, state, refreshToken) {
+    store.set('profile', profile);
+    store.set('token', idToken);
+    store.set('refreshToken', refreshToken);
+    $state.go('app.home');
+  }, function(error) {
+    console.log("There was an error logging in", error);
+  });
 
 
-
-
-
-    $scope.showLoginForm = true;
-
-
-
-});
+})
