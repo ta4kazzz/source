@@ -24,31 +24,34 @@ exports.postArticles = function(req, res) {
     // Gets the raw html from the domain name and execites the parseMyhtml function
     request(domain, function (error, response, body) {
         if (!error) {
-            parseMyAwesomeHtml(body);
+            parseHtml(body);
         } else {
             console.log(error);
         }
     });
 
-    var parseMyAwesomeHtml = function(html) {
+    var parseHtml = function(html) {
         // console.log(html);
         data = unfluff.lazy(html, 'en');
-        console.log(data.title());
-        console.log(data.text());
-        console.log(data.image());
-        // How Do I get this into Mongo
+        // console.log(data.title());
+        var title = data.title();
+        var content = data.text();
+
+
+        article.title = title;
+        article.content  = content;
+
+        // save the bear and check for errors
+        article.save(function(err) {
+            if (err)
+                res.send(err);
+            res.json({ message: 'Article created!' });
+        });
     };
 
-
-
-
-	// save the bear and check for errors
-    article.save(function(err) {
-        if (err)
-            res.send(err);
-        res.json({ message: 'Article created!' });
-    });
 };
+
+
 
 // Create endpoint /api/articles for GET
 exports.getArticles = function(req, res) {

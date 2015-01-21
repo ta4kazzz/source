@@ -9,7 +9,8 @@ var ArticleSchema = new Schema({
     summary: String,
     created: String,
     userID: String,
-    title: String
+    title: String,
+    content: String
 });
 
 // create the model for users and expose it to our app
