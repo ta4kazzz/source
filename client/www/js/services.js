@@ -58,16 +58,14 @@ angular.module('source.services', [])
                 }
             });
         },
-        getOne: function (id, email) {
-            return $http.get(base+'/api/v1/bucketList/data/item/' + id, {
+        // This get's one article
+        getArticle: function (id) {
+            return $http.get(base+'/api/articles/' + id, {
                 method: 'GET',
-                params: {
-                    token: email
-                }
             });
         },
         // Add new article here
-        saveItem: function (article, email) {
+        saveItem: function (article) {
             return $http.post(base+'/api/articles/', article, {
                 method: 'POST'
             });

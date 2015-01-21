@@ -47,7 +47,7 @@ var router = express.Router();     // Get instance of express Router
 // Creates an enpoint handler for /articles
 router.route('/articles', jwtCheck)
 	.post(articleController.postArticles)
-	.get(articleController.getArticles);
+
 
 // Creates an endpoint handler for /articles:article_id
 router.route('/articles/:article_id')

@@ -57,12 +57,14 @@ exports.postArticles = function(req, res) {
 
 // Create endpooint /api/articles/:articles_id for GET
 exports.getArticle = function(req, res) {
-	Article.find ({ userId: req.user._id, _id: req.params.article_id }, function(err, article) {
+    Article.findById(req.params.article_id, function(err, article) {
         if (err)
             res.send(err);
-        res.json(article);
+        res.json(article)
     });
 };
+
+
 
 // Create endpoint /api/articles for GET
 exports.getArticles = function(req, res) {
