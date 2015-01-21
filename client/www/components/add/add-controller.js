@@ -1,6 +1,6 @@
 angular.module('source')
 
-.controller('addController', function($scope, $rootScope, $window, API) {
+.controller('addController', function($scope, $rootScope, $window, API, auth) {
 
 	 $scope.article = {
 	 	url: "",
@@ -10,13 +10,14 @@ angular.module('source')
 	 $scope.addArticle = function() {
 	 	var url = this.article.url;
 	 	var summary = this.article.summary;
+	 	var userID = auth.profile.user_id;
 
 
 	 	var article = {
 	 		url: url,
 	 		summary: summary,
 	 		created: Date.now(),
-	 		userID: '1224'
+	 		userID: userID
 	 	};
 
 	 	

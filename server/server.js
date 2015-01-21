@@ -8,7 +8,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
 var cors      	 = require('cors');
- var jwt = require('express-jwt');
+var jwt = require('express-jwt');
+
 
 // Load Config & Controllers
 var app       	 = express();
