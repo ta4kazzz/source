@@ -36,10 +36,13 @@ exports.postArticles = function(req, res) {
         // console.log(data.title());
         var title = data.title();
         var content = data.text();
-
+        var imageUrl = data.image();
 
         article.title = title;
         article.content  = content;
+        article.imageUrl = imageUrl;
+        article.public = false;
+
 
         // save the bear and check for errors
         article.save(function(err) {
@@ -52,6 +55,14 @@ exports.postArticles = function(req, res) {
 };
 
 
+// Create endpooint /api/articles/:articles_id for GET
+exports.getArticle = function(req, res) {
+	Article.find ({ userId: req.user._id, _id: req.params.article_id }, function(err, article) {
+        if (err)
+            res.send(err);
+        res.json(article);
+    });
+};
 
 // Create endpoint /api/articles for GET
 exports.getArticles = function(req, res) {
@@ -63,14 +74,6 @@ exports.getArticles = function(req, res) {
 };
 
 
-// Create endpooint /api/articles/:articles_id for GET
-exports.getArticle = function(req, res) {
-	Article.find ({ userId: req.user._id, _id: req.params.article_id }, function(err, article) {
-        if (err)
-            res.send(err);
-        res.json(article);
-    });
-};
 
 
 // Create endoiunt for /api/articles/:article_id for PUT
