@@ -8,7 +8,8 @@ var ArticleSchema = new Schema({
     url: String,
     summary: String,
     created: String,
-    userID: String
+    userID: String,
+    title: String
 });
 
 // create the model for users and expose it to our app

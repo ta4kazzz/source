@@ -1,5 +1,8 @@
 // Load Models ==================================================
 var Article		 = require('../models/article.js');
+var unfluff      = require('unfluff');
+var cheerio      = require('cheerio');
+var request      = require('request');
 
 // Create endpoint /api/articles for POSTS
 exports.postArticles = function(req, res) {
@@ -11,6 +14,33 @@ exports.postArticles = function(req, res) {
     article.summary = req.body.summary;
     article.created = req.body.created;
     article.userID = req.body.userID;
+
+    // article.title = 'test';
+
+    // URL to html
+    var domain = article.url;
+
+
+    // Gets the raw html from the domain name and execites the parseMyhtml function
+    request(domain, function (error, response, body) {
+        if (!error) {
+            parseMyAwesomeHtml(body);
+        } else {
+            console.log(error);
+        }
+    });
+
+    var parseMyAwesomeHtml = function(html) {
+        // console.log(html);
+        data = unfluff.lazy(html, 'en');
+        console.log(data.title());
+        console.log(data.text());
+        console.log(data.image());
+        // How Do I get this into Mongo
+    };
+
+
+
 
 	// save the bear and check for errors
     article.save(function(err) {
