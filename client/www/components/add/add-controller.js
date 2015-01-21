@@ -15,7 +15,8 @@ angular.module('source')
 	 	var article = {
 	 		url: url,
 	 		summary: summary,
-	 		created: Date.now()
+	 		created: Date.now(),
+	 		userID: '1224'
 	 	};
 
 	 	
