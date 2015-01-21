@@ -4,8 +4,8 @@
   <description>
         An Ionic Framework and Cordova project.
     </description>
-  <author email="patriley.source@gmail.com" href="http://ionicframework.com/">
-      Ionic Framework Team
+  <author email="patriley.source@gmail.com" href="http://source.op/">
+      Pat Riley
     </author>
   <content src="index.html"/>
   <access origin="*"/>
