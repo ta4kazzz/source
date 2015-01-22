@@ -144,8 +144,9 @@ angular.module('source', ['ionic', 'source.controllers', 'source.services', 'aut
       }
     })
 
+    // Added Article ID to reader
     .state('app.reader', {
-      url: "/reader",
+      url: "/reader/:articleID",
       views: {
         'menuContent' :{
           templateUrl: "components/reader/reader.html",

@@ -13,20 +13,20 @@
     <ion-list ng-init="getFeed()">
       <ion-item ng-repeat="articles in articles">
         
-
         <div class="card">
           <div class="item item-divider">
             <h2>{{articles.title}}</h2>
             <p>{{articles.created}}</p>
+            <p>{{articles._id}}</p>
           </div>
 
           <div class="item item-text-wrap">
-            <img src="{{articles.imageUrl}}" style="width:100%">
+            <a href="#/app/reader/{{articles._id}}">
+              <img src="{{articles.imageUrl}}" style="width:100%">
+            </a>
             <p>{{articles.summary}}</p>
           </div>
         </div>
-
-
 
       </ion-item>
     </ion-list>
