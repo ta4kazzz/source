@@ -26,31 +26,35 @@ angular.module('source')
 	 	API.saveItem(article, article.user)
 	 		.success(function (article, status, headers, config) {
 	 			console.log("Article added successfully");
-	 		})
-	 		.error(function (article, status, headers, config) {
-	 			console.log("Something went wrong")
-	 		});
 
+	 			// we have the id here and we want to pass it into this function
+				// $scope.getPreview(article._id);
 
-		$state.go('app.preview');
-
-	 };
-
-	 $scope.getArticle = function() {
-	 	// code goes here that gets the article information 
-	 	// and displays it before turning the public switch on
-	 	var id = '54bf29011f5b74629bafce83';
-
-	 	API.getArticle(id)
+	 		API.getArticle(article._id)
 	 		.success(function (article, status, headers, config) {
 	 			$scope.articleTitle = article.title;
 	 			$scope.articleTime = article.created;
 	 			$scope.articleImageUrl = article.imageUrl;
 	 			$scope.articleSummary = article.summary;
+	 			$state.go('app.preview');
+	 	
 	 		})
 	 		.error(function (article, status, headers, config) {
 	 			console.log("Something went wrong")
 	 		});
+
+
+
+	 		})
+	 		.error(function (article, status, headers, config) {
+	 			console.log("Something went wrong")
+	 		});
+	 };
+
+
+	 $scope.getPreview = function(id) {
+	 	// var id = '54c05d41b62b2de2d328ebc2';
+
 	 };
 
 

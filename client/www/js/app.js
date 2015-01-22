@@ -75,7 +75,7 @@ angular.module('source', ['ionic', 'source.controllers', 'source.services', 'aut
     })
 
     .state('app.preview', {
-      url: "/preview",
+      url: "/preview/:articleID",
       views: {
         'menuContent' :{
           templateUrl: "components/preview/preview.html",

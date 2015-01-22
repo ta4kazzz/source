@@ -48,7 +48,8 @@ exports.postArticles = function(req, res) {
         article.save(function(err) {
             if (err)
                 res.send(err);
-            res.json({ message: 'Article created!' });
+            res.json({ message: 'Article created!',
+                       _id: article._id});
         });
     };
 
