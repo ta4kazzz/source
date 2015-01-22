@@ -68,7 +68,7 @@ exports.getArticle = function(req, res) {
 
 // Create endpoint /api/articles for GET
 exports.getArticles = function(req, res) {
-    Article.find({ userId: req.user._id }, function(err, articles) {
+    Article.find(function(err, articles) {
         if (err)
             res.send(err);
         res.json(articles);

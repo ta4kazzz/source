@@ -50,12 +50,9 @@ angular.module('source.services', [])
         signup: function (form) {
             return $http.post(base+'/api/users', form);
         },
-        getAll: function (email) {
-            return $http.get(base+'/api/v1/bucketList/data/list', {
+        getAll: function () {
+            return $http.get(base+'/api/articles', {
                 method: 'GET',
-                params: {
-                    token: email
-                }
             });
         },
         // This get's one article

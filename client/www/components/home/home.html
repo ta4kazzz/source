@@ -9,9 +9,27 @@
 
   </ion-nav-buttons>
   <ion-content class="has-header">
-		<h3>{{auth.profile.user_id}}</h3>
-		<h3>{{auth.profile.email}}</h3>
-		<h3>{{auth.profile.nickname}}</h3>
-		<h3>{{auth.profile.picture}}</h3>
+
+    <ion-list ng-init="getFeed()">
+      <ion-item ng-repeat="articles in articles">
+        
+
+        <div class="card">
+          <div class="item item-divider">
+            <h2>{{articles.title}}</h2>
+            <p>{{articles.created}}</p>
+          </div>
+
+          <div class="item item-text-wrap">
+            <img src="{{articles.imageUrl}}" style="width:100%">
+            <p>{{articles.summary}}</p>
+          </div>
+        </div>
+
+
+
+      </ion-item>
+    </ion-list>
+
   </ion-content>
 </ion-view>
