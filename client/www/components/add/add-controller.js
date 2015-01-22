@@ -36,7 +36,6 @@ angular.module('source')
 	 			$scope.articleTime = article.created;
 	 			$scope.articleImageUrl = article.imageUrl;
 	 			$scope.articleSummary = article.summary;
-	 			$state.go('app.preview');
 	 	
 	 		})
 	 		.error(function (article, status, headers, config) {
@@ -52,13 +51,9 @@ angular.module('source')
 	 };
 
 
-	 $scope.getPreview = function(id) {
-	 	// var id = '54c05d41b62b2de2d328ebc2';
 
+	 $scope.publishArticle = function() {
+	 	
 	 };
-
-
-
-
 
 });
