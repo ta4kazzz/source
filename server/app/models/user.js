@@ -6,15 +6,9 @@ var Schema   = mongoose.Schema;
 
 // define the schema for our user model
 var UserSchema = new Schema({
-      username: {
-        type:  String,
-        unique: true,
-        required: true
-      },
-      password: {
-        type: String,
-        required: true
-      }
+      username: String,
+      authenticationID: String
+
 });
 
 // METHODS ======================
@@ -36,15 +30,6 @@ UserSchema.pre('save', function(callback) {
     });
   });
 });
-
-
-UserSchema.methods.verifyPassword = function(password, cb) {
-  bcrypt.compare(password, this.password, function(err, isMatch) {
-    if (err) return cb(err);
-    cb(null, isMatch);
-  });
-};
-
 
 // create the model for users and expose it to our app
 module.exports = mongoose.model('User', UserSchema);
