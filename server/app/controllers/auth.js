@@ -5,7 +5,7 @@ var Auth = require('../models/auth');
 // Create endpoint /api/users for POST
 exports.postAuth = function(req, res) {
 	var auth = new Auth({
-		userID: req.body.userID,
+		username: req.body.username,
 		email: req.body.email,
 	});
 

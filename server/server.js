@@ -21,6 +21,8 @@ var articleController = require('./app/controllers/article');
 var userController    = require('./app/controllers/user');
 var authController    = require('./app/controllers/auth');
 
+
+
 // Database ====================================================================
 mongoose.connect(configDB.url);
 
@@ -37,6 +39,39 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
 app.set('view engine', 'ejs'); // set up ejs for templating
+
+
+
+// AUTHENTICATION==========================================
+
+var Auth0 = require('auth0');
+var extend = require('xtend');
+
+
+var api = new Auth0({
+  domain:       'source.auth0.com',
+  clientID:     '5md4FZ4xtmmiMyUfiiIfccAGTXdSR8cJ',
+  clientSecret: 'e6xsoEi8W66dPHwBRkLwWyWy3J-Nq0GnzOZ2WsQMhouv5fJDlf6MH6izwhdim0gX'
+});
+
+var CONNECTION = 'Username-Password-Authentication';
+
+app.use('/custom-signup', function (req, res) {
+  var data = extend(req.body, {connection: CONNECTION, email_verified: false});
+
+  api.createUser(data, function (err) {
+    if (err) {
+      console.log('Error creating user: ' + err);
+      res.send(500, err);
+      return;
+    }
+
+    res.send(200);
+    return;
+  });
+});
+
+
 
 
 

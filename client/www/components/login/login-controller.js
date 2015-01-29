@@ -26,10 +26,7 @@ angular.module('source')
     auth.signin({
       connection: 'Username-Password-Authentication',
       username:   user.email,
-      password:   user.password,
-      authParams: {
-        scope: 'openid name email'
-      }
+      password:   user.password
     }, onLoginSuccess, onLoginFailed);
   };
 
@@ -75,15 +72,14 @@ angular.module('source')
 
 
     // SERVICE CALL TO API GOES HERE
-  
-
 
     $http({
       method: 'POST', 
-      url: 'http://localhost:8080/api/auth',
+      url: 'http://localhost:8080/custom-signup',
       data: {
         email:    signup.email,
-        userId:   signup.username
+        username:   signup.username,
+        password:   signup.password
       }
     })
 
@@ -95,13 +91,27 @@ angular.module('source')
           connection: 'Username-Password-Authentication',
           username:   signup.email,
           password:   signup.password
-        }, onLoginSuccess, onLoginFailed);
+        }, onSignupSuccess, onSignupFailed);
       }
     })
     .error(function (data, status, headers, config) {
-      alert('Error creating account for user ' + $scope.signup.user + ': '  + data);
+      alert('Error creating account for user ' + signup.user + ': '  + data);
     });
   };
+
+    function onSignupSuccess(profile, token) {
+    // $scope.loading = false;
+    $state.go('app.home');
+    console.log("hooray!");
+    store.set('profile', profile);
+    store.set('token', token);
+  }
+
+  function onSignupFailed() {
+    // $scope.loading = false;
+    console.log("your signup failed bro");
+    alert('Login failed');
+  }
 
 
 
