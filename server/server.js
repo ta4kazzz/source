@@ -19,7 +19,7 @@ var port      	 = process.env.PORT || 8080;
 var configDB 		  = require('./config/database.js');
 var articleController = require('./app/controllers/article');
 var userController    = require('./app/controllers/user');
-
+var authController    = require('./app/controllers/auth');
 
 // Database ====================================================================
 mongoose.connect(configDB.url);
@@ -43,6 +43,9 @@ app.set('view engine', 'ejs'); // set up ejs for templating
 // API Endpoints ============================
 var router = express.Router();     // Get instance of express Router
 
+
+router.route('/auth')
+	.post(authController.postAuth)
 
 // Creates an enpoint handler for /articles
 router.route('/articles')

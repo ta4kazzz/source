@@ -15,9 +15,12 @@ angular.module('source')
     store.set('token', idToken);
     store.set('refreshToken', refreshToken);
     $state.go('app.home');
-    // Make sure that we have access to userID
+    // Stuff to send to auth schema
     console.log(auth.profile.user_id);
-    
+    // Stuff to send to user schema
+    console.log(auth.profile.email);
+    console.log(auth.profile.nickname);
+    console.log(auth.profile.picture);
 
   }, function(error) {
     console.log("There was an error logging in", error);
