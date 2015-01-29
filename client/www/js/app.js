@@ -42,9 +42,6 @@ angular.module('source', ['ionic', 'source.controllers', 'source.services', 'aut
       abstract: true,
       templateUrl: "components/menu/menu.html",
       controller: 'AppCtrl',
-      // data: {
-      //   requiresLogin: true
-      // }
     })
 
     .state('app.home', {

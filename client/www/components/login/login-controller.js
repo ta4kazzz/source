@@ -49,7 +49,6 @@ angular.module('source')
 
 
 
-
   // SIGNUP
   $scope.doSignup = function () {
 
@@ -65,19 +64,14 @@ angular.module('source')
       username: username
     };
 
-    console.log(signup.email);
-    console.log(signup.password);
-    console.log(signup.username);
 
-
-
-    // SERVICE CALL TO API GOES HERE
-
+    // I still dont know what this is exactly
+  
     $http({
       method: 'POST', 
       url: 'http://localhost:8080/custom-signup',
       data: {
-        email:    signup.email,
+        email:      signup.email,
         username:   signup.username,
         password:   signup.password
       }
@@ -86,6 +80,9 @@ angular.module('source')
 
     .success(function (data, status, headers, config) {
       if (status === 200) {
+        createUser(signup);
+
+
         auth.signin({
           // Make sure that connection matches your server-side connection id
           connection: 'Username-Password-Authentication',
@@ -99,12 +96,13 @@ angular.module('source')
     });
   };
 
-    function onSignupSuccess(profile, token) {
+  function onSignupSuccess(profile, token, data) {
     // $scope.loading = false;
-    $state.go('app.home');
     console.log("hooray!");
     store.set('profile', profile);
     store.set('token', token);
+    console.log(data);
+    $state.go('app.home');
   }
 
   function onSignupFailed() {
@@ -113,37 +111,17 @@ angular.module('source')
     alert('Login failed');
   }
 
+  function createUser(signup) {
+    API.signup(signup)
+      .success(function (article, status, headers, config) {
+        console.log("user created sucessfully")
+      })
+      .error(function (article, status, headers, config) {
+        console.log("Something went wrong when posting user to database")
+      });
 
+  }
 
-
-
-
-
-
-
-  // auth.signin({
-  //   closable: false,
-  //   // This asks for the refresh token, So that the user never has to log in again
-  //   authParams: {
-  //     scope: 'openid offline_access'
-  //   }
-  // }, function(profile, idToken, accessToken, state, refreshToken) {
-  //   store.set('profile', profile);
-  //   store.set('token', idToken);
-  //   store.set('refreshToken', refreshToken);
-  //   $state.go('app.home');
-  //   // Stuff to send to auth schema
-
-
-  //   // console.log(auth.profile.user_id);
-  //   // // Stuff to send to user schema
-  //   // console.log(auth.profile.email);
-  //   // console.log(auth.profile.nickname);
-  //   // console.log(auth.profile.picture);
-
-  // }, function(error) {
-  //   console.log("There was an error logging in", error);
-  // });
 
 
 

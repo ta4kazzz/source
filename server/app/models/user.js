@@ -7,6 +7,7 @@ var Schema   = mongoose.Schema;
 // define the schema for our user model
 var UserSchema = new Schema({
       username: String,
+      email: String,
       authenticationID: String
 
 });

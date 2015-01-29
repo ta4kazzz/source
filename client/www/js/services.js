@@ -47,9 +47,14 @@ angular.module('source.services', [])
         login: function (form) {
             return $http.post(base+'/api/auth/login', form);
         },
-        signup: function (form) {
-            return $http.post(base+'/api/users', form);
+
+
+        signup: function (signup) {
+            return $http.post(base+'/api/users', signup);
         },
+
+
+
         getAll: function () {
             return $http.get(base+'/api/articles', {
                 method: 'GET',
