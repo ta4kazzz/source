@@ -55,6 +55,13 @@ angular.module('source.services', [])
                 method: 'GET',
             });
         },
+        // Post AUTHENTICATION
+        setAuth: function (auth) {
+            return $http.get(base+'/api/articles/', auth, {
+                method: 'POST',
+            });
+        },
+
         // This get's one article
         getArticle: function (id) {
             return $http.get(base+'/api/articles/' + id, {

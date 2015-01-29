@@ -17,7 +17,7 @@ angular.module('source')
                     $scope.articles.push(data[i]);
                 }
             };
-            console.log($scope.articles);
+            // console.log($scope.articles);
 
 	  	}).error(function (data, status, headers, config) {
            

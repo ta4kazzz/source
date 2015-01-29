@@ -26,11 +26,15 @@ angular.module('source', ['ionic', 'source.controllers', 'source.services', 'aut
 
   $stateProvider
 
-    // auth0 login
-    .state('login', {
-      url: '/login',
-      templateUrl: "components/login/login.html",
-      controller: "loginController",
+    // Login
+    .state('app.login', {
+      url: "/login",
+      views: {
+        'menuContent' :{
+          templateUrl: "components/login/login.html",
+          controller: 'loginController'
+        }
+      }
     })
 
     .state('app', {
@@ -38,9 +42,9 @@ angular.module('source', ['ionic', 'source.controllers', 'source.services', 'aut
       abstract: true,
       templateUrl: "components/menu/menu.html",
       controller: 'AppCtrl',
-      data: {
-        requiresLogin: true
-      }
+      // data: {
+      //   requiresLogin: true
+      // }
     })
 
     .state('app.home', {
@@ -171,7 +175,7 @@ angular.module('source', ['ionic', 'source.controllers', 'source.services', 'aut
       views: {
         'menuContent' :{
           templateUrl: "components/signup/signup.html",
-          controller: 'signupController'
+          controller: 'loginController'
         }
       }
     })
@@ -189,7 +193,7 @@ angular.module('source', ['ionic', 'source.controllers', 'source.services', 'aut
     authProvider.init({
       domain: 'source.auth0.com',
       clientID: '5md4FZ4xtmmiMyUfiiIfccAGTXdSR8cJ',
-      loginState: 'login'
+      callbackURL: location.href,
     });
 
     $urlRouterProvider.otherwise('/app/landing');

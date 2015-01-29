@@ -1,6 +1,36 @@
-  <ion-view title="'Login'">
+  <ion-view title="Login">
     <ion-content>
-      <!-- The content of the page -->
+      
+    <div class="list">
 
+    <!-- Email -->
+    <label class="item item-input">
+      <span class="input-label">Email</span><input type="text" ng-model="user.email">
+    </label>
+
+    <!-- Password -->
+    <label class="item item-input">
+      <span class="input-label">Password</span><input type="password" ng-model="user.password">
+    </label>
+
+    <!-- signup button -->
+    <label class="item item-input">
+      <button ng-click="doLogin()" class="button button-block button-positive">
+        Login
+      </button>
+    </label>
+
+
+    <button class="button button-stable">
+      Sign in with facebook
+    </button>
+
+    <button class="button button-stable">
+      Sign in with twitter
+    </button>
+
+    <a href="#/app/signup">Signup</a>
+
+  </div>
     </ion-content>
   </ion-view>

@@ -9,13 +9,10 @@ exports.postAuth = function(req, res) {
 		email: req.body.email,
 	});
 
-	user.save(function(err) {
+	auth.save(function(err) {
 		if (err)
 			res.send(err);
 
 		res.json({ message: 'Authentication info has been saved' });
 	});
 };
-
-
-

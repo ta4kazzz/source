@@ -6,22 +6,22 @@
 
     <!-- Email -->
     <label class="item item-input">
-      <span class="input-label">Email</span><input type="text" ng-model="user.email">
+      <span class="input-label">Email</span><input type="text" ng-model="signup.email">
     </label>
 
     <!-- Password -->
     <label class="item item-input">
-      <span class="input-label">Password</span><input type="password" ng-model="user.password">
+      <span class="input-label">Password</span><input type="password" ng-model="signup.password">
     </label>
 
     <!-- Username -->
     <label class="item item-input">
-      <span class="input-label">Username</span><input type="text" ng-model="user.username">
+      <span class="input-label">Username</span><input type="text" ng-model="signup.username">
     </label>
 
     <!-- signup button -->
     <label class="item item-input">
-      <button class="button button-block button-positive" ng-click="createUser()">
+      <button ng-click="doSignup()"class="button button-block button-positive">
         Sign Up
       </button>
     </label>
