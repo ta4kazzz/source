@@ -66,7 +66,7 @@ exports.getArticle = function(req, res) {
 };
 
 
-
+// GET ALL THE ARTICLES FOR THE HOME PAGE
 // Create endpoint /api/articles for GET
 exports.getArticles = function(req, res) {
     Article.find(function(err, articles) {
@@ -79,20 +79,24 @@ exports.getArticles = function(req, res) {
 
 
 
-// Create endoiunt for /api/articles/:article_id for PUT
+// Create endpoint /api/article/:article_id for PUT
 exports.putArticle = function(req, res) {
-	// use our bear model to find the bear we want
-    Article.update({ userID: req.user._id, _id: req.params.article_id }, function(err, article) {
-        if (err)
-            res.send(err);
-        article.url = req.body.url;  // update the bears info
-        // save the bear
-        article.save(function(err) {
-            if (err)
-                res.send(err);
-            res.json({ message: 'Article updated!' });
-        });
+  // Use the Beer model to find a specific beer
+  Article.findById(req.params.article_id, function(err, article) {
+    if (err)
+      res.send(err);
+
+    // Update the existing beer quantity
+    article.public = true;
+
+    // Save the beer and check for errors
+    article.save(function(err) {
+      if (err)
+        res.send(err);
+
+      res.json(article);
     });
+  });
 };
 
 

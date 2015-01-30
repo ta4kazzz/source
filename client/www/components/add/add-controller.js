@@ -11,6 +11,7 @@ angular.module('source')
 	};
 
 	// Add Article ==============================================
+	// This function takes the form data, posts an article and then retreives the full article content
 	$scope.addArticle = function() {
 		var url 		= $scope.article.url;
 	 	var summary 	= $scope.article.summary;
@@ -36,6 +37,8 @@ angular.module('source')
 		 			$scope.articleTime = article.created;
 		 			$scope.articleImageUrl = article.imageUrl;
 		 			$scope.articleSummary = article.summary;
+		 			$scope.articleID = article._id;
+		 			console.log($scope.articleID);
 			 		})
 			 		.error(function (article, status, headers, config) {
 			 			console.log("Error when retreiving full article")
@@ -47,10 +50,25 @@ angular.module('source')
 	 		});
 	 };
 
+	 // Publish Article
+	 // This needs to set the public = YES and post the article in the users article array
+	 var articleId = $scope.articleID;
 
-
-	 $scope.publishArticle = function() {
-	 	
+	 $scope.publishArticle = function(articleId) {
+	 	// Set public to yes
+	 	var id = $scope.articleID
+ 		API.publishArticle(id)
+ 		.success(function (articleId, status, headers, config) {
+ 				console.log("Article Successfully published")
+ 				$state.go('app.home');
+	 		})
+	 		.error(function (article, status, headers, config) {
+	 			console.log("Error when retreiving full article")
+	 		});
 	 };
+
+
+
+
 
 });
