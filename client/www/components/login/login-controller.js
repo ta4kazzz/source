@@ -57,8 +57,6 @@ angular.module('source')
         console.log(user._id);
         var userID = user._id;
         store.set('SourceUserID', userID);
-        // 3) store that UsersID as a variable in local
-
       })
       .error(function (user, status, headers, config) {
         console.log("woops")

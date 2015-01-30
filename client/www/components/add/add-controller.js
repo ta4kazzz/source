@@ -13,7 +13,7 @@ angular.module('source')
 	 	var url = this.article.url;
 	 	var summary = this.article.summary;
 	 	// How do I get a mongo userID inserted here?
-	 	var userID = auth.profile.user_id;
+	 	var userID =window.localStorage.SourceUserID;
 
 
 	 	var article = {
