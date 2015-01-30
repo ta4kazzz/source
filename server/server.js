@@ -81,7 +81,7 @@ var router = express.Router();     // Get instance of express Router
 
 
 router.route('/auth')
-	.get(authController.getAuth)
+	.post(authController.postAuth)
 
 // Creates an enpoint handler for /articles
 router.route('/articles')

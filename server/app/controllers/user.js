@@ -7,7 +7,7 @@ exports.postUsers = function(req, res) {
 	var user = new User({
 		username: req.body.username,
 		email: req.body.email,
-		authenticationID: req.body.authenticationID,
+		authID: req.body.authID,
 	});
 
 	user.save(function(err) {

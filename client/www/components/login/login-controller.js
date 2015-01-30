@@ -51,15 +51,7 @@ angular.module('source')
     // 1) take auth profile id
     console.log(profile.user_id);
     // 2) search Mongo for a user with that ID
-    $http({
-      method: 'GET', 
-      url: 'http://localhost:8080/auth',
-      data: {
-        email:      newUser.email,
-        username:   newUser.username,
-        password:   newUser.password
-      }
-    })
+
     // 3) store that UsersID as a variable in local
 
   };
@@ -91,10 +83,10 @@ angular.module('source')
     })
 
 
-    .success(function (data, status, headers, config) {
+    .success(function (data, status, headers, config, profile) {
       if (status === 200) {
         // This Calls the function that adds it to the DB
-        createUser(newUser);
+        // need to add profile.user_id to newUser
         // Normal signin function
         auth.signin({
           connection: 'Username-Password-Authentication',
@@ -114,6 +106,7 @@ angular.module('source')
     store.set('profile', profile);
     store.set('token', token);
     $state.go('app.home');
+    createUser(profile);
   }
 
   function onSignupFailed() {
@@ -122,8 +115,22 @@ angular.module('source')
   }
 
   // This adds a user to the database
-  function createUser(signup) {
-    API.signup(signup)
+  function createUser(profile) {
+    var email       = $scope.signupForm.email
+    var password    = $scope.signupForm.password
+    var username    = $scope.signupForm.username
+    var authID      = profile.user_id;
+
+    console.log(authID)
+
+    var newUser = {
+      email: email,
+      username: username,
+      authID: authID
+    };
+
+
+    API.createUser(newUser)
       .success(function (article, status, headers, config) {
         console.log("user created sucessfully")
       })

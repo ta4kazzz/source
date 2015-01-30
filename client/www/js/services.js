@@ -49,8 +49,8 @@ angular.module('source.services', [])
         },
 
 
-        signup: function (signup) {
-            return $http.post(base+'/api/users', signup);
+        createUser: function (newUser) {
+            return $http.post(base+'/api/users', newUser);
         },
 
 
