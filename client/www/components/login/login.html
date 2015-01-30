@@ -5,17 +5,17 @@
 
     <!-- Email -->
     <label class="item item-input">
-      <span class="input-label">Email</span><input type="text" ng-model="user.email">
+      <span class="input-label">Email</span><input type="text" ng-model="loginForm.email">
     </label>
 
     <!-- Password -->
     <label class="item item-input">
-      <span class="input-label">Password</span><input type="password" ng-model="user.password">
+      <span class="input-label">Password</span><input type="password" ng-model="loginForm.password">
     </label>
 
     <!-- signup button -->
     <label class="item item-input">
-      <button ng-click="doLogin()" class="button button-block button-positive">
+      <button ng-click="login()" class="button button-block button-positive">
         Login
       </button>
     </label>

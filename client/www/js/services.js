@@ -3,7 +3,7 @@ angular.module('source.services', [])
 .factory('API', function ($rootScope, $http, $window, $ionicLoading, auth, store) {
 
     var base = "http://localhost:8080";
-
+    // Somewher in here we need to define a $scope.loading
 
 
     // $rootScope.setUsername = function (username) {

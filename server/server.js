@@ -46,9 +46,12 @@ app.set('view engine', 'ejs'); // set up ejs for templating
 
 var Auth0 = require('auth0');
 var extend = require('xtend');
+// xtend is a basic utility library which allows you to extend an object by appending 
+// all of the properties from each object in a list. When there are identical properties
+// the right-most property takes precedence.
 
 
-var api = new Auth0({
+var authAPI = new Auth0({
   domain:       'source.auth0.com',
   clientID:     '5md4FZ4xtmmiMyUfiiIfccAGTXdSR8cJ',
   clientSecret: 'e6xsoEi8W66dPHwBRkLwWyWy3J-Nq0GnzOZ2WsQMhouv5fJDlf6MH6izwhdim0gX'
@@ -56,10 +59,10 @@ var api = new Auth0({
 
 var CONNECTION = 'Username-Password-Authentication';
 
-app.use('/custom-signup', function (req, res) {
+app.use('/signup', function (req, res) {
   var data = extend(req.body, {connection: CONNECTION, email_verified: false});
 
-  api.createUser(data, function (err) {
+  authAPI.createUser(data, function (err) {
     if (err) {
       console.log('Error creating user: ' + err);
       res.send(500, err);
@@ -73,14 +76,12 @@ app.use('/custom-signup', function (req, res) {
 
 
 
-
-
 // API Endpoints ============================
 var router = express.Router();     // Get instance of express Router
 
 
 router.route('/auth')
-	.post(authController.postAuth)
+	.get(authController.getAuth)
 
 // Creates an enpoint handler for /articles
 router.route('/articles')
