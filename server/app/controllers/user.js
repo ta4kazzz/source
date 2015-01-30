@@ -40,11 +40,17 @@ exports.getUserAuth = function(req, res) {
 
 // Adds the article to the users article list
 exports.postArticle = function(req, res) {
+	// INCOMING
+	// userID
+	// articleID
+	// article
+	User.findById(req.body.userId, function (err, User) {
+	  if (err) return next(err);
 
-	// incoming articleID * username
-	
+	  //adding data to schema here, like: lm.name = req.body.name;
+	  console.log("WE are getting there" + articleID);
 
-
-
+	  user.save(console.log);
+	});
 
 };

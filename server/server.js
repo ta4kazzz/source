@@ -99,7 +99,8 @@ router.route('/articles/:article_id')
 router.route('/users')
 	.post(userController.postUsers)
 	.get(userController.getUser);
-// Createst endpoint handler for /users:articleID
+
+// add article to user
 router.route('/:userID/:articleID')
   .post(userController.postArticle);
 

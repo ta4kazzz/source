@@ -78,20 +78,18 @@ exports.getArticles = function(req, res) {
 
 
 
-
+// PUBLUSH ARTILCLES
 // Create endpoint /api/article/:article_id for PUT
 exports.putArticle = function(req, res) {
   // Use the Beer model to find a specific beer
+
+
   Article.findById(req.params.article_id, function(err, article) {
     if (err)
       res.send(err);
 
-    // Update the existing beer quantity
     article.public = true;
-    // Add article to users array
-    
 
-    // Save the beer and check for errors
     article.save(function(err) {
       if (err)
         res.send(err);

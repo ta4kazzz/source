@@ -6,12 +6,10 @@ var Schema   = mongoose.Schema;
 
 // define the schema for our user model
 var UserSchema = new Schema({
-      username: String,
-      email: String,
-      authID: String,
-      articles: [ ]
-
-
+      username:   String,
+      email:      String,
+      authID:     String,
+      articles: [mongoose.Types.ObjectId],
 });
 
 // METHODS ======================

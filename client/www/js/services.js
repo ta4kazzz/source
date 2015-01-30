@@ -74,9 +74,15 @@ angular.module('source.services', [])
             });
         },
 
-        publishArticle: function (id) {
+        publishArticle: function (article, id) {
             return $http.put(base+'/api/articles/' + id, {
                 method: 'PUT',
+            });
+        },
+
+        addArticle2User: function () {
+            return $http.post(base+'/api/' + id, {
+                method: 'POST',
             });
         },
 

@@ -56,18 +56,27 @@ angular.module('source')
 
 	 $scope.publishArticle = function(articleId) {
 	 	// Set public to yes
-	 	var id = $scope.article._id;
+	 	// var id = $scope.article._id;
+	 	var userID      = window.localStorage.SourceUserID;
+	 	var articleID 	= $scope.article._id
+	 	var article 	= $scope.article;
 
- 		API.publishArticle(id)
- 			.success(function (articleId, status, headers, config) {
+ 		API.publishArticle(userID, articleID, article)
+ 			.success(function (article, status, headers, config) {
  				console.log("Article Successfully published")
+
+
  				$state.go('app.home');
+
+
+ 				
 	 		})
 	 		.error(function (article, status, headers, config) {
 	 			console.log("Error when retreiving full article")
 	 		});
 
-	 // Add article to specific user
+
+
 
 
 
