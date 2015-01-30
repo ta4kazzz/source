@@ -100,6 +100,11 @@ router.route('/users')
 	.post(userController.postUsers)
 	.get(userController.getUser);
 
+// Creates an endpoint handler for /user/:authID
+router.route('/users/:authID')
+  .get(userController.getUserAuth);
+
+
 app.use('/api', router);
 
 // launch ======================================================================

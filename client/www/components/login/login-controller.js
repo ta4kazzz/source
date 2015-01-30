@@ -48,11 +48,24 @@ angular.module('source')
   // the goal of this function is to set the mongoID in the localstorage
   // It takes profile as a parameter
   function setCurrentUser(profile) {
-    // 1) take auth profile id
-    console.log(profile.user_id);
-    // 2) search Mongo for a user with that ID
 
-    // 3) store that UsersID as a variable in local
+    var authID = profile.user_id;
+
+    API.getUserIdwithAuth(authID)
+      .success(function (user, status, headers, config) {
+        console.log("finnaly!")
+        console.log(user._id);
+        var userID = user._id;
+        store.set('SourceUserID', userID);
+        // 3) store that UsersID as a variable in local
+
+      })
+      .error(function (user, status, headers, config) {
+        console.log("woops")
+    });
+
+
+  
 
   };
 
@@ -85,9 +98,6 @@ angular.module('source')
 
     .success(function (data, status, headers, config, profile) {
       if (status === 200) {
-        // This Calls the function that adds it to the DB
-        // need to add profile.user_id to newUser
-        // Normal signin function
         auth.signin({
           connection: 'Username-Password-Authentication',
           username:   newUser.email,
@@ -117,18 +127,14 @@ angular.module('source')
   // This adds a user to the database
   function createUser(profile) {
     var email       = $scope.signupForm.email
-    var password    = $scope.signupForm.password
     var username    = $scope.signupForm.username
     var authID      = profile.user_id;
-
-    console.log(authID)
 
     var newUser = {
       email: email,
       username: username,
       authID: authID
     };
-
 
     API.createUser(newUser)
       .success(function (article, status, headers, config) {
@@ -138,7 +144,7 @@ angular.module('source')
         console.log("Something went wrong when posting user to database")
       });
 
-  }
+  };
 
 
 

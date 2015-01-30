@@ -28,5 +28,14 @@ exports.getUser = function(req, res) {
 	});
 };
 
+exports.getUserAuth = function(req, res) {
+	User.findOne({
+		authID: req.params.authID
+	}, function(err, users) {
+		if (err)
+			res.send(err);
+		res.json(users);
+	});
+};
 
 // Need to add the rest of the functions here

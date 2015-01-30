@@ -53,7 +53,20 @@ angular.module('source.services', [])
             return $http.post(base+'/api/users', newUser);
         },
 
+        // GET USER WITH AUTH_ID
+        getUserIdwithAuth: function (authID) {
+            return $http.get(base+'/api/users/' + authID, {
+                method: 'GET',
+            });
+        },
 
+
+        // This get's one article
+        getArticle: function (id) {
+            return $http.get(base+'/api/articles/' + id, {
+                method: 'GET',
+            });
+        },
 
         getAll: function () {
             return $http.get(base+'/api/articles', {
@@ -67,12 +80,6 @@ angular.module('source.services', [])
             });
         },
 
-        // This get's one article
-        getArticle: function (id) {
-            return $http.get(base+'/api/articles/' + id, {
-                method: 'GET',
-            });
-        },
         // Add new article here
         saveItem: function (article) {
             return $http.post(base+'/api/articles/', article, {
