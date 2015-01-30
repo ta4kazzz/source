@@ -8,7 +8,9 @@ var Schema   = mongoose.Schema;
 var UserSchema = new Schema({
       username: String,
       email: String,
-      authID: String
+      authID: String,
+      articles: [ ]
+
 
 });
 

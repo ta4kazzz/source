@@ -80,6 +80,7 @@ angular.module('source.services', [])
             });
         },
 
+
         //  Home  =================================================
         getAll: function () {
             return $http.get(base+'/api/articles', {

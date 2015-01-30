@@ -88,6 +88,8 @@ exports.putArticle = function(req, res) {
 
     // Update the existing beer quantity
     article.public = true;
+    // Add article to users array
+    
 
     // Save the beer and check for errors
     article.save(function(err) {

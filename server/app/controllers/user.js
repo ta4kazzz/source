@@ -38,4 +38,13 @@ exports.getUserAuth = function(req, res) {
 	});
 };
 
-// Need to add the rest of the functions here
+// Adds the article to the users article list
+exports.postArticle = function(req, res) {
+
+	// incoming articleID * username
+	
+
+
+
+
+};
