@@ -7841,7 +7841,7 @@ body, .ionic-body, h1, h2, h3, h4, h5, h6 {
     color: #fff; }
 
 .home .home-container {
-  max-width: 1200px; }
+  max-width: 800px; }
 .home .post {
   padding: 0; }
   .home .post .post--thumb {
@@ -7890,8 +7890,6 @@ body, .ionic-body, h1, h2, h3, h4, h5, h6 {
     text-align: center;
     position: relative;
     padding: 5em 0 2em 0; }
-    .profile .profile-canopy .profile-canopy--banner h2, .profile .profile-canopy .profile-canopy--banner h3 {
-      color: #fff; }
   .profile .profile-container {
     display: block;
     max-width: 640px; }

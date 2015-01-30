@@ -53,8 +53,6 @@ angular.module('source')
 
     API.getUserIdwithAuth(authID)
       .success(function (user, status, headers, config) {
-        console.log("finnaly!")
-        console.log(user._id);
         var userID = user._id;
         store.set('SourceUserID', userID);
       })

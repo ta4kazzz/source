@@ -44,6 +44,7 @@ angular.module('source.services', [])
 
 
     return {
+        //  Login  =================================================
         login: function (form) {
             return $http.post(base+'/api/auth/login', form);
         },
@@ -53,55 +54,34 @@ angular.module('source.services', [])
             return $http.post(base+'/api/users', newUser);
         },
 
-        // GET USER WITH AUTH_ID
+
         getUserIdwithAuth: function (authID) {
             return $http.get(base+'/api/users/' + authID, {
                 method: 'GET',
             });
         },
 
+        //  Add New  =================================================
+        addArticle: function (article) {
+            return $http.post(base+'/api/articles/', article, {
+                method: 'POST'
+            });
+        },
 
-        // This get's one article
-        getArticle: function (id) {
+        getPreview: function (id) {
             return $http.get(base+'/api/articles/' + id, {
                 method: 'GET',
             });
         },
 
+        //  Home  =================================================
         getAll: function () {
             return $http.get(base+'/api/articles', {
                 method: 'GET',
             });
         },
-        // Post AUTHENTICATION
-        setAuth: function (auth) {
-            return $http.get(base+'/api/articles/', auth, {
-                method: 'POST',
-            });
-        },
 
-        // Add new article here
-        saveItem: function (article) {
-            return $http.post(base+'/api/articles/', article, {
-                method: 'POST'
-            });
-        },
-        putItem: function (id, form, email) {
-            return $http.put(base+'/api/v1/bucketList/data/item/' + id, form, {
-                method: 'PUT',
-                params: {
-                    token: email
-                }
-            });
-        },
-        deleteItem: function (id, email) {
-            return $http.delete(base+'/api/v1/bucketList/data/item/' + id, {
-                method: 'DELETE',
-                params: {
-                    token: email
-                }
-            });
-        }
+
     }
 
 

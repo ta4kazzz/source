@@ -1,21 +1,22 @@
 angular.module('source')
 
 .controller('addController', function($scope, $rootScope, $window, API, $state, auth) {
+	// Allows us to post gravatar in preview
+	$rootScope.auth = auth;
 
-	 $rootScope.auth = auth;
+	// SETUP
+	$scope.article = {
+		url: "",
+		summary: ""
+	};
 
-	 $scope.article = {
-	 	url: "",
-	 	summary: ""
-	 };
+	// Add Article ==============================================
+	$scope.addArticle = function() {
+		var url 		= $scope.article.url;
+	 	var summary 	= $scope.article.summary;
+	 	var userID 		= window.localStorage.SourceUserID;
 
-	 $scope.addArticle = function() {
-	 	var url = this.article.url;
-	 	var summary = this.article.summary;
-	 	// How do I get a mongo userID inserted here?
-	 	var userID =window.localStorage.SourceUserID;
-
-
+	 	// Construct Article Object
 	 	var article = {
 	 		url: url,
 	 		summary: summary,
@@ -23,31 +24,26 @@ angular.module('source')
 	 		userID: userID
 	 	};
 
-	 	
-	 	API.saveItem(article, article.user)
+	 	// API that posts the articles
+	 	API.addArticle(article)
 	 		.success(function (article, status, headers, config) {
-	 			console.log("Article added successfully");
+	 			console.log("Article packet successfuly sent");
 
-	 			// we have the id here and we want to pass it into this function
-				// $scope.getPreview(article._id);
-
-	 		API.getArticle(article._id)
-	 		.success(function (article, status, headers, config) {
-	 			$scope.articleTitle = article.title;
-	 			$scope.articleTime = article.created;
-	 			$scope.articleImageUrl = article.imageUrl;
-	 			$scope.articleSummary = article.summary;
-	 	
-	 		})
-	 		.error(function (article, status, headers, config) {
-	 			console.log("Something went wrong")
-	 		});
-
-
+	 			// API that gets the full Article
+		 		API.getPreview(article._id)
+		 		.success(function (article, status, headers, config) {
+		 			$scope.articleTitle = article.title;
+		 			$scope.articleTime = article.created;
+		 			$scope.articleImageUrl = article.imageUrl;
+		 			$scope.articleSummary = article.summary;
+			 		})
+			 		.error(function (article, status, headers, config) {
+			 			console.log("Error when retreiving full article")
+			 		});
 
 	 		})
 	 		.error(function (article, status, headers, config) {
-	 			console.log("Something went wrong")
+	 			console.log("Error when posting the article packet")
 	 		});
 	 };
 

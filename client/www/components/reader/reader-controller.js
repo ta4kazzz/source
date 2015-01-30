@@ -10,7 +10,7 @@ angular.module('source')
 		var id = $stateParams.articleID
 
 
-	 	API.getArticle(id)
+	 	API.getPreview(id)
 	 		.success(function (article, status, headers, config) {
 	 			$scope.articleTitle = article.title;
 	 			$scope.articleTime = article.created;
