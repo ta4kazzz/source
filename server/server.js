@@ -19,7 +19,6 @@ var port      	 = process.env.PORT || 8080;
 var configDB 		  = require('./config/database.js');
 var articleController = require('./app/controllers/article');
 var userController    = require('./app/controllers/user');
-var authController    = require('./app/controllers/auth');
 
 
 
@@ -79,39 +78,31 @@ app.use('/signup', function (req, res) {
 // API Endpoints ============================
 var router = express.Router();     // Get instance of express Router
 
-
-router.route('/auth')
-	.post(authController.postAuth)
-
-// Creates an enpoint handler for /articles
-router.route('/articles')
-	.post(articleController.postArticles)
-	.get(articleController.getArticles)
-
-router.route('/articles/":userID')
-  .get(articleController.getProfileFeed)
-
-
-
-// Creates an endpoint handler for /articles:article_id
-router.route('/articles/:article_id')
-	.get(articleController.getArticle)
-	.put(articleController.putArticle)
-	.delete(articleController.deleteArticle);
-
-// Creates endpoint handlers for /users
+// /users    
 router.route('/users')
 	.post(userController.postUsers)
 	.get(userController.getUser);
+
+//    /articles
+router.route('/articles')
+  .post(articleController.postArticles)
+  .get(articleController.getArticles)
+
+//    /articles:article_id
+router.route('/articles/:article_id')
+  .get(articleController.getArticle)
+  .put(articleController.putArticle)
+  .delete(articleController.deleteArticle);
+  
+// Creates an endpoint handler for /user/:authID
+router.route('/users/:authID')
+  .get(userController.getUserAuth);
+
 
 // add article to user
 // router.route('/:userID/:articleID')
 //   .post(userController.postArticle);
 
-
-// Creates an endpoint handler for /user/:authID
-router.route('/users/:authID')
-  .get(userController.getUserAuth);
 
 
 app.use('/api', router);
