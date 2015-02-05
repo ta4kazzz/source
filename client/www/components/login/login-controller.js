@@ -36,6 +36,7 @@ angular.module('source')
     // Store these things in local storage
     store.set('profile', profile);
     store.set('token', token);
+    // Add USER ID HERE
     setCurrentUser(profile);
     $state.go('app.home');
   }

@@ -5,7 +5,6 @@ angular.module('source')
 
 	 $scope.getFeed = function() {
 
-	  // $scope.data = myService.getData($routeParams.dataID);
 
 
 	  $scope.data = API.getAll()
@@ -13,14 +12,13 @@ angular.module('source')
 			 $scope.articles = [];
 
              for (var i = 0; i < data.length; i++) {
-                if (data[i].public == false) {
+                if (data[i].public == true) {
                     $scope.articles.push(data[i]);
                 }
             };
-            // console.log($scope.articles);
+
 
 	  	}).error(function (data, status, headers, config) {
-           
             console.log('someting wwetn wrong')
         });
 
