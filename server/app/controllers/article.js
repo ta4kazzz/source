@@ -77,6 +77,19 @@ exports.getArticles = function(req, res) {
 };
 
 
+exports.getProfileFeed = function(req, res) {
+    userID = req.body.userID;
+
+    console.log("testing 1, 2, 3");
+
+    Article.find(function(err, articles) {
+        if (err)
+            res.send(err);
+        res.json(articles);
+    });
+};
+
+
 
 // PUBLUSH ARTILCLES
 // Create endpoint /api/article/:article_id for PUT

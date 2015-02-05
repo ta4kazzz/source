@@ -88,6 +88,10 @@ router.route('/articles')
 	.post(articleController.postArticles)
 	.get(articleController.getArticles)
 
+router.route('/articles/":userID')
+  .get(articleController.getProfileFeed)
+
+
 
 // Creates an endpoint handler for /articles:article_id
 router.route('/articles/:article_id')
@@ -101,8 +105,8 @@ router.route('/users')
 	.get(userController.getUser);
 
 // add article to user
-router.route('/:userID/:articleID')
-  .post(userController.postArticle);
+// router.route('/:userID/:articleID')
+//   .post(userController.postArticle);
 
 
 // Creates an endpoint handler for /user/:authID
