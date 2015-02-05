@@ -78,30 +78,34 @@ app.use('/signup', function (req, res) {
 // API Endpoints ============================
 var router = express.Router();     // Get instance of express Router
 
-// /users    
+// ============== USERS ========================
+
+// Endpoints for /users
 router.route('/users')
 	.post(userController.postUsers)
-	.get(userController.getUser);
+	.get(userController.getUsers);
 
-//    /articles
+// Endpoints for /users/:username
+router.route('/users/:id')
+  .get(userController.getUser)
+
+// Endpoint for /users/:authID
+router.route('/users/auth/:authID')
+  .get(userController.getAuth);
+
+
+// ============== ARTICLES ========================
+
 router.route('/articles')
   .post(articleController.postArticles)
   .get(articleController.getArticles)
 
-//    /articles:article_id
+
 router.route('/articles/:article_id')
   .get(articleController.getArticle)
   .put(articleController.putArticle)
   .delete(articleController.deleteArticle);
   
-// Creates an endpoint handler for /user/:authID
-router.route('/users/:authID')
-  .get(userController.getUserAuth);
-
-
-// add article to user
-// router.route('/:userID/:articleID')
-//   .post(userController.postArticle);
 
 
 

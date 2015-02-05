@@ -4,7 +4,13 @@ var unfluff      = require('unfluff');
 var cheerio      = require('cheerio');
 var request      = require('request');
 
-// Create endpoint /api/articles for POSTS
+
+// ==================================
+//               /articles
+// ==================================
+
+
+// POSTS
 exports.postArticles = function(req, res) {
 	// Create new instance of the Article Model
 	var article = new Article();
@@ -55,19 +61,7 @@ exports.postArticles = function(req, res) {
 
 };
 
-
-// Create endpooint /api/articles/:articles_id for GET
-exports.getArticle = function(req, res) {
-    Article.findById(req.params.article_id, function(err, article) {
-        if (err)
-            res.send(err);
-        res.json(article)
-    });
-};
-
-
-// GET ALL THE ARTICLES FOR THE HOME PAGE
-// Create endpoint /api/articles for GET
+// GET
 exports.getArticles = function(req, res) {
     Article.find(function(err, articles) {
         if (err)
@@ -77,25 +71,22 @@ exports.getArticles = function(req, res) {
 };
 
 
-exports.getProfileFeed = function(req, res) {
-    userID = req.body.userID;
+// ==========================================
+//               /articles/:article_id
+// ==========================================
 
-    console.log("testing 1, 2, 3");
-
-    Article.find(function(err, articles) {
+// GET
+exports.getArticle = function(req, res) {
+    Article.findById(req.params.article_id, function(err, article) {
         if (err)
             res.send(err);
-        res.json(articles);
+        res.json(article)
     });
 };
 
 
-
-// PUBLUSH ARTILCLES
-// Create endpoint /api/article/:article_id for PUT
+// PUT
 exports.putArticle = function(req, res) {
-  // Use the Beer model to find a specific beer
-
 
   Article.findById(req.params.article_id, function(err, article) {
     if (err)
@@ -113,7 +104,7 @@ exports.putArticle = function(req, res) {
 };
 
 
-// Creates endpoint /api/articles/:article_id for DELETE
+// DELETE
 exports.deleteArticle = function(req, res) {
     Article.remove({
         userID: req.user._id,
@@ -125,13 +116,5 @@ exports.deleteArticle = function(req, res) {
         res.json({ message: 'Successfully deleted' });
     });
 };
-
-
-
-
-
-
-
-
-
+    
 

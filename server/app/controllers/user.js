@@ -1,8 +1,14 @@
 // Load the Required packages
-var User = require('../models/user');
+var User 		 = require('../models/user');
+var Article		 = require('../models/article.js');
+var mongoose 	 = require('mongoose');
 
 
-// Create endpoint /api/users for POST
+// ====================================================
+//               /users
+// ====================================================
+
+// POST 
 exports.postUsers = function(req, res) {
 	var user = new User({
 		username: req.body.username,
@@ -18,9 +24,8 @@ exports.postUsers = function(req, res) {
 	});
 };
 
-
-// Create endpoint /api/users for GET
-exports.getUser = function(req, res) {
+// GET
+exports.getUsers = function(req, res) {
 	User.find(function(err, users) {
 		if (err)
 			res.send(err);
@@ -28,29 +33,44 @@ exports.getUser = function(req, res) {
 	});
 };
 
-exports.getUserAuth = function(req, res) {
+// ====================================================
+//               /users/:userID
+// ====================================================
+
+exports.getUser = function(req, res) {
+	var id = req.params.id;
+
+	// var id = mongoose.Types.ObjectId(req.params.id);
+	console.log("hello" + id);
+	console.log(id);
+
+	User.findById(id, function(err, users) {
+		if (err)
+			res.send(err);
+		res.json(users);
+	});
+
+};
+
+
+// ====================================================
+//               /users/auth/:authID
+// ====================================================
+
+exports.getAuth = function(req, res) {
+
+	var id = req.params.authID;
+
 	User.findOne({
-		authID: req.params.authID
+		authID: id
 	}, function(err, users) {
 		if (err)
 			res.send(err);
 		res.json(users);
 	});
-};
-
-// Adds the article to the users article list
-exports.postArticle = function(req, res) {
-	// INCOMING
-	// userID
-	// articleID
-	// article
-	User.findById(req.body.userId, function (err, User) {
-	  if (err) return next(err);
-
-	  //adding data to schema here, like: lm.name = req.body.name;
-	  console.log("WE are getting there" + articleID);
-
-	  user.save(console.log);
-	});
 
 };
+
+
+
+

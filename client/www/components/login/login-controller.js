@@ -36,7 +36,6 @@ angular.module('source')
     // Store these things in local storage
     store.set('profile', profile);
     store.set('token', token);
-    // Add USER ID HERE
     setCurrentUser(profile);
     $state.go('app.home');
   }
@@ -52,17 +51,15 @@ angular.module('source')
 
     var authID = profile.user_id;
 
-    API.getUserIdwithAuth(authID)
+    API.getAuth(authID)
       .success(function (user, status, headers, config) {
-        var userID = user._id;
-        store.set('SourceUserID', userID);
+        console.log(user);
+        // need to store it as some
+        store.set('SourceID', user._id);
       })
       .error(function (user, status, headers, config) {
         console.log("woops")
-    });
-
-
-  
+      });
 
   };
 

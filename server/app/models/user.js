@@ -9,7 +9,7 @@ var UserSchema = new Schema({
       username:   String,
       email:      String,
       authID:     String,
-      articles: [mongoose.Types.ObjectId],
+      articles: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Article' }],
 });
 
 // METHODS ======================

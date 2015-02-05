@@ -27,6 +27,7 @@ angular.module('source.services', [])
       auth.signout();
       store.remove('profile');
       store.remove('token');
+      store.remove('SourceUserID');
       $window.location.href = '#/app/landing';
     }
 
@@ -44,24 +45,39 @@ angular.module('source.services', [])
 
 
     return {
-        //  Login  =================================================
-        login: function (form) {
-            return $http.post(base+'/api/auth/login', form);
-        },
 
+        //  =====================================================
+        //   USERS
+        //  =====================================================
 
         createUser: function (newUser) {
             return $http.post(base+'/api/users', newUser);
         },
 
-
-        getUserIdwithAuth: function (authID) {
-            return $http.get(base+'/api/users/' + authID, {
+        getAuth: function (authID) {
+            return $http.get(base+'/api/users/auth/' + authID, {
                 method: 'GET',
             });
         },
 
-        //  Add New  =================================================
+        getUser: function (id) {
+            return $http.get(base+'/api/users/' + id, {
+                method: 'GET',
+            });
+        },
+        
+
+
+        //  =====================================================
+        //   ARTICLES 
+        //  =====================================================
+
+        getAll: function () {
+            return $http.get(base+'/api/articles', {
+                method: 'GET',
+            });
+        },
+
         addArticle: function (article) {
             return $http.post(base+'/api/articles/', article, {
                 method: 'POST'
@@ -80,19 +96,6 @@ angular.module('source.services', [])
             });
         },
 
-        addArticle2User: function () {
-            return $http.post(base+'/api/' + id, {
-                method: 'POST',
-            });
-        },
-
-
-        //  Home  =================================================
-        getAll: function () {
-            return $http.get(base+'/api/articles', {
-                method: 'GET',
-            });
-        },
 
 
     }

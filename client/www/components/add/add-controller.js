@@ -15,8 +15,9 @@ angular.module('source')
 	$scope.addArticle = function() {
 		var url 		= $scope.article.url;
 	 	var summary 	= $scope.article.summary;
-	 	var userID 		= window.localStorage.SourceUserID;
+	 	var userID 		= window.localStorage.SourceProfile;
 
+	 	console.log(userID);
 	 	// Construct Article Object
 	 	var article = {
 	 		url: url,
