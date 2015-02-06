@@ -5,11 +5,27 @@ var bcrypt   = require('bcrypt-nodejs');
 var Schema   = mongoose.Schema;
 
 // define the schema for our user model
-var UserSchema = new Schema({
-      username:   String,
-      email:      String,
-      authID:     String,
-      articles: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Article' }],
+var userSchema = new Schema({
+  _id:  Number,
+  username: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+  full_name: String,
+  location: String,
+  email: String,
+  profile_picture: String,
+  banner_image: String,
+  tagline: String,
+  website: String,
+  counts: {
+    articles: Number,
+    follows: Number,
+    followed_by: Number
+  },
+  created_at: Date,
+  updated_at: Date,
+  articles : [{ type: Schema.Types.ObjectId, ref: 'article' }],
+  follows: [{ type: Schema.Types.ObjectId, ref: 'user' }],
+  followers: [{ type: Schema.Types.ObjectId, ref: 'user' }]
 });
 
 // METHODS ======================
@@ -33,4 +49,4 @@ UserSchema.pre('save', function(callback) {
 });
 
 // create the model for users and expose it to our app
-module.exports = mongoose.model('User', UserSchema);
+module.exports = mongoose.model('User', userSchema);
