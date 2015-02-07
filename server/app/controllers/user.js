@@ -40,6 +40,21 @@ exports.getUsers = function(req, res) {
 exports.getUser = function(req, res) {
 	var id = req.params.id;
 
+	User.findById(id, function(err, users) {
+		if (err)
+			res.send(err);
+		res.json(users);
+	});
+
+};
+
+
+// ====================================================
+//               /users/:userID/articles
+// ====================================================
+exports.getArticles = function(req, res) {
+	var userid = req.params._userID;
+
 	// var id = mongoose.Types.ObjectId(req.params.id);
 	console.log("hello" + id);
 	console.log(id);
@@ -51,6 +66,12 @@ exports.getUser = function(req, res) {
 	});
 
 };
+
+
+
+
+
+
 
 
 // ====================================================

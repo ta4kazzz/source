@@ -14,34 +14,35 @@ var mongoose     = require('mongoose');
 
 // POSTS
 exports.postArticles = function(req, res) {
-	// Create new instance of the Article Model
+    // New Article object
 	var article = new Article();
-	// Set the article properties that came from the POST data
-	article.url         = req.body.url;
+
+    article.url         = req.body.url;
     article.summary     = req.body.summary;
 
 
 
+    // convert userID string to ObjectID
+    var userID = mongoose.Types.ObjectId(req.body._userID);
+    var articleID = article._id;
 
-
-
-    var userID = mongoose.Types.ObjectId(req.body.userID);
+    // Saves to article
     article._userID = userID;
 
-    // Add this article id to this userID
-        // console.log("the article id is " + article._id);
-        // console.log("the userID is " + userID);
- 
 
-    // find by document id and update
+
+ 
     User.findByIdAndUpdate(
         userID,
-        {$push: {articles: article._id}},
+        {$push: {"articles": articleID}},
         {safe: true, upsert: true},
         function(err, model) {
             console.log(err);
         }
     );
+
+
+    
 
 
 
