@@ -93,6 +93,19 @@ exports.postFollows = function(req, res) {
         }
     );
 
+
+	// Need to implement the logic (if there is already a userID)
+    User.findByIdAndUpdate(
+        userID,
+        {$push: {"follows": myID}},
+        {safe: true, upsert: true},
+        function(err, user) {
+        	if (err)
+				res.send(err);
+			res.json(user);
+        }
+    );
+
 };
 
 exports.getFollows = function(req, res) {
