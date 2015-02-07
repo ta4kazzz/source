@@ -115,12 +115,6 @@ exports.getFollows = function(req, res) {
     	res.send(user.followers)
 	});
 
-	// User.findById(id, function(err, users) {
-	// 	if (err)
-	// 		res.send(err);
-	// 	res.json(users);
-	// });
-
 };
 
 
@@ -129,12 +123,42 @@ exports.getFollows = function(req, res) {
 // ====================================================
 
 exports.postFollowers = function(req, res) {
+	var myID = mongoose.Types.ObjectId(req.params.id);
+	var userID = mongoose.Types.ObjectId(req.body.userID);
+
+	// Need to implement the logic (if there is already a userID)
+    User.findByIdAndUpdate(
+        myID,
+        {$push: {"follows": userID}},
+        {safe: true, upsert: true},
+        function(err, user) {
+        	if (err)
+				res.send(err);
+			res.json(user);
+        }
+    );
+
+	// Need to implement the logic (if there is already a userID)
+    User.findByIdAndUpdate(
+        userID,
+        {$push: {"follows": myID}},
+        {safe: true, upsert: true},
+        function(err, user) {
+        	if (err)
+				res.send(err);
+			res.json(user);
+        }
+    );
 
 
 };
 
 exports.getFollowers = function(req, res) {
+	var id = mongoose.Types.ObjectId(req.params.id);
 
+	User.findById(id).populate('followers').exec(function(err, user) {
+    	res.send(user.followers)
+	});
 
 };
 
