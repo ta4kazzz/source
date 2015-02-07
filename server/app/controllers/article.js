@@ -16,27 +16,40 @@ var mongoose     = require('mongoose');
 exports.postArticles = function(req, res) {
 	// Create new instance of the Article Model
 	var article = new Article();
-
-
-
 	// Set the article properties that came from the POST data
 	article.url         = req.body.url;
     article.summary     = req.body.summary;
 
 
-    // URL to html
-    var domain = article.url;
 
-    var id = mongoose.Types.ObjectId(req.body.userID);
-    article._userID = id;
+
+
+
+    var userID = mongoose.Types.ObjectId(req.body.userID);
+    article._userID = userID;
 
     // Add this article id to this userID
-    console.log("the article id is " + article._id);
-    console.log("the userID is " + id);
+        // console.log("the article id is " + article._id);
+        // console.log("the userID is " + userID);
+ 
+
+    // find by document id and update
+    User.findByIdAndUpdate(
+        userID,
+        {$push: {articles: article._id}},
+        {safe: true, upsert: true},
+        function(err, model) {
+            console.log(err);
+        }
+    );
 
 
 
 
+
+
+    // URL to html
+    var domain = article.url;
 
     // Gets the raw html from the domain name and execites the parseMyhtml function
     request(domain, function (error, response, body) {
@@ -113,6 +126,8 @@ exports.putArticle = function(req, res) {
       res.json(article);
     });
   });
+
+
 };
 
 
