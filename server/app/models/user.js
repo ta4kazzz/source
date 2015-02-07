@@ -4,29 +4,36 @@ var mongoose = require('mongoose');
 var bcrypt   = require('bcrypt-nodejs');
 var Schema   = mongoose.Schema;
 
-// define the schema for our user model
+
 var UserSchema = new Schema({
-  _id:  Number,
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  full_name: String,
-  location: String,
-  email: String,
-  profile_picture: String,
-  banner_image: String,
-  tagline: String,
-  website: String,
-  counts: {
-    articles: Number,
-    follows: Number,
-    followed_by: Number
-  },
-  created_at: Date,
-  updated_at: Date,
-  articles : [{ type: Schema.Types.ObjectId, ref: 'article' }],
-  follows: [{ type: Schema.Types.ObjectId, ref: 'user' }],
-  followers: [{ type: Schema.Types.ObjectId, ref: 'user' }]
+  email: String
 });
+
+// define the schema for our user model
+// var UserSchema = new Schema({
+//   _id:  Number,
+//   username: { type: String, required: true, unique: true },
+//   password: { type: String, required: true },
+//   full_name: String,
+//   location: String,
+//   email: String,
+//   profile_picture: String,
+//   banner_image: String,
+//   tagline: String,
+//   website: String,
+//   counts: {
+//     articles: Number,
+//     follows: Number,
+//     followed_by: Number
+//   },
+//   created_at: Date,
+//   updated_at: Date,
+//   articles : [{ type: Schema.Types.ObjectId, ref: 'article' }],
+//   follows: [{ type: Schema.Types.ObjectId, ref: 'user' }],
+//   followers: [{ type: Schema.Types.ObjectId, ref: 'user' }]
+// });
 
 // METHODS ======================
 // Execute before each user.save() call

@@ -16,12 +16,10 @@ exports.postArticles = function(req, res) {
 	var article = new Article();
 
 	// Set the article properties that came from the POST data
-	article.url = req.body.url;
-    article.summary = req.body.summary;
+	article.url         = req.body.url;
+    article.summary     = req.body.summary;
+    article.userID      = req.body.userID;
     // article.created = req.body.created;
-    // article.userID = req.body.userID;
-
-    // article.title = 'test';
 
     // URL to html
     var domain = article.url;
@@ -54,12 +52,13 @@ exports.postArticles = function(req, res) {
         article.save(function(err) {
             if (err)
                 res.send(err);
-            res.json({ message: 'Article created!',
-                       _id: article._id});
+            res.json({ message: 'Article created!', data: article});
         });
     };
-
+    
 };
+
+
 
 // GET
 exports.getArticles = function(req, res) {

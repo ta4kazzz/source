@@ -8,17 +8,16 @@ var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
 var cors      	 = require('cors');
-
 var unfluff      = require('unfluff');
 
 // Load Config & Controllers
 var app       	 = express();
 var port      	 = process.env.PORT || 8080;
 
-var configDB 		      = require('./config/database.js');
+var configDB 		  = require('./config/database.js');
 var articleController = require('./app/controllers/article');
 var userController    = require('./app/controllers/user');
-
+var authController    = require('./app/controllers/auth');
 
 
 // Database ====================================================================
@@ -33,37 +32,37 @@ app.use(bodyParser.json());
 app.use(cors());
 app.set('view engine', 'ejs'); // set up ejs for templating
 
+/// Passport ========================
+app.use(passport.initialize());
 
 // API Endpoints ============================
 var router = express.Router();     // Get instance of express Router
 
-// ============== USERS ========================
-
-// Endpoints for /users
-router.route('/users')
-	.post(userController.postUsers)
-	.get(userController.getUsers);
-
-// Endpoints for /users/:username
-router.route('/users/:id')
-  .get(userController.getUser)
-
-// Endpoint for /users/:authID
-router.route('/users/auth/:authID')
-  .get(userController.getAuth);
-
-
 // ============== ARTICLES ========================
 
 router.route('/articles')
-  .post(articleController.postArticles)
-  .get(articleController.getArticles)
+  .get(authController.isAuthenticated, articleController.getArticles)
+  .post(authController.isAuthenticated, articleController.postArticles)
 
 
 router.route('/articles/:article_id')
   .get(articleController.getArticle)
   .put(articleController.putArticle)
   .delete(articleController.deleteArticle);
+  
+// ============== USERS ========================
+
+// Endpoints for /users
+router.route('/users')
+	.post(userController.postUsers)
+	.get(authController.isAuthenticated, userController.getUsers);
+
+// Endpoints for /users/:username
+router.route('/users/:id')
+  .get(userController.getUser)
+
+
+
   
 
 

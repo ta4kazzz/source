@@ -4,15 +4,16 @@ var mongoose 	 = require('mongoose');
 var Schema       = mongoose.Schema;
 
 var articleSchema = new Schema({
-  _id:  Number,
-  _userID: { type: Schema.Types.ObjectId, ref: 'user' },
+  // _id:  Number,
+  // _userID: { type: Schema.Types.ObjectId, ref: 'user' },
+  userID: String,
   url: String,
   summary: String,
-  created_at: Date,
+  // created_at: Date,
   title: String,
   content: String,
   image_url: String,
-  public: Boolean,
+  // public: Boolean,
 });
 
 // create the model for users and expose it to our app
