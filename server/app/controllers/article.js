@@ -1,5 +1,6 @@
 // Load Models ==================================================
 var Article		 = require('../models/article.js');
+var User         = require('../models/user.js');
 var unfluff      = require('unfluff');
 var cheerio      = require('cheerio');
 var request      = require('request');
@@ -16,18 +17,22 @@ exports.postArticles = function(req, res) {
 	// Create new instance of the Article Model
 	var article = new Article();
 
+
+
 	// Set the article properties that came from the POST data
 	article.url         = req.body.url;
     article.summary     = req.body.summary;
-    // article.created = req.body.created;
+
 
     // URL to html
     var domain = article.url;
 
-
-    var id = mongoose.Types.ObjectId(article.userID);
-
+    var id = mongoose.Types.ObjectId(req.body.userID);
     article._userID = id;
+
+    // Add this article id to this userID
+    console.log("the article id is " + article._id);
+    console.log("the userID is " + id);
 
 
 
