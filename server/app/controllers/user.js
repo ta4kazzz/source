@@ -13,7 +13,12 @@ exports.postUsers = function(req, res) {
 	var user = new User({
 		email: req.body.email,
 		username: req.body.username,
-		password: req.body.password
+		password: req.body.password,
+		counts: {
+			articles: 0,
+			follows: 0,
+			followed_by: 0
+		}
 	});
 
 	user.save(function(err) {

@@ -9,7 +9,14 @@ var UserSchema = new Schema({
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   email: String,
-  articles : [{ type: Schema.Types.ObjectId, ref: 'Article' }]
+  counts: {
+    articles: Number,
+    follows: Number,
+    followed_by: Number
+  },
+  articles : [{ type: Schema.Types.ObjectId, ref: 'Article' }],
+  follows: [{ type: Schema.Types.ObjectId, ref: 'user' }],
+  followers: [{ type: Schema.Types.ObjectId, ref: 'user' }]
 });
 
 // define the schema for our user model
