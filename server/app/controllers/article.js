@@ -3,6 +3,7 @@ var Article		 = require('../models/article.js');
 var unfluff      = require('unfluff');
 var cheerio      = require('cheerio');
 var request      = require('request');
+var mongoose     = require('mongoose');
 
 
 // ==================================
@@ -18,11 +19,18 @@ exports.postArticles = function(req, res) {
 	// Set the article properties that came from the POST data
 	article.url         = req.body.url;
     article.summary     = req.body.summary;
-    article.userID      = req.body.userID;
     // article.created = req.body.created;
 
     // URL to html
     var domain = article.url;
+
+
+    var id = mongoose.Types.ObjectId(article.userID);
+
+    article._userID = id;
+
+
+
 
 
     // Gets the raw html from the domain name and execites the parseMyhtml function

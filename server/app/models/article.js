@@ -5,8 +5,8 @@ var Schema       = mongoose.Schema;
 
 var articleSchema = new Schema({
   // _id:  Number,
-  // _userID: { type: Schema.Types.ObjectId, ref: 'user' },
-  userID: String,
+  _userID: { type: Schema.Types.ObjectId, ref: 'user' },
+  // userID: String,
   url: String,
   summary: String,
   // created_at: Date,

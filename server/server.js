@@ -59,14 +59,11 @@ router.route('/users')
 
 // Endpoints for /users/:username
 router.route('/users/:id')
-  .get(userController.getUser)
+  .get(userController.getUser);
 
 
 
-  
-
-
-
+ 
 app.use('/api', router);
 
 // launch ======================================================================
