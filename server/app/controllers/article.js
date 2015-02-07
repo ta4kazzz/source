@@ -55,7 +55,7 @@ exports.postArticles = function(req, res) {
             res.json({ message: 'Article created!', data: article});
         });
     };
-    
+
 };
 
 
@@ -104,16 +104,15 @@ exports.putArticle = function(req, res) {
 
 
 // DELETE
+// Create endpoint /api/article/:article_id for DELETE
 exports.deleteArticle = function(req, res) {
-    Article.remove({
-        userID: req.user._id,
-        _id: req.params.article_id
-    }, function(err, article) {
-        if (err)
-            res.send(err);
+  // Use the Beer model to find a specific beer and remove it
+  Article.remove({ userId: req.userID, _id: req.params.article_id }, function(err) {
+    if (err)
+      res.send(err);
 
-        res.json({ message: 'Successfully deleted' });
-    });
+    res.json({ message: 'Beer removed from the locker!' });
+  });
 };
     
 
