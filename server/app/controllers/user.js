@@ -76,12 +76,37 @@ exports.getArticles = function(req, res) {
 // ====================================================
 
 exports.postFollows = function(req, res) {
+	var myID = mongoose.Types.ObjectId(req.params.id);
+	var userID = mongoose.Types.ObjectId(req.body.userID);
+	// add kai's userID to pat's followers
 
+
+	// Need to implement the logic (if there is already a userID)
+    User.findByIdAndUpdate(
+        myID,
+        {$push: {"followers": userID}},
+        {safe: true, upsert: true},
+        function(err, user) {
+        	if (err)
+				res.send(err);
+			res.json(user);
+        }
+    );
 
 };
 
 exports.getFollows = function(req, res) {
+	var id = mongoose.Types.ObjectId(req.params.id);
 
+	User.findById(id).populate('followers').exec(function(err, user) {
+    	res.send(user.followers)
+	});
+
+	// User.findById(id, function(err, users) {
+	// 	if (err)
+	// 		res.send(err);
+	// 	res.json(users);
+	// });
 
 };
 

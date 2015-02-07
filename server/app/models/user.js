@@ -15,8 +15,8 @@ var UserSchema = new Schema({
     followed_by: Number
   },
   articles : [{ type: Schema.Types.ObjectId, ref: 'Article' }],
-  follows: [{ type: Schema.Types.ObjectId, ref: 'user' }],
-  followers: [{ type: Schema.Types.ObjectId, ref: 'user' }]
+  follows: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+  followers: [{ type: Schema.Types.ObjectId, ref: 'User' }]
 });
 
 // define the schema for our user model
