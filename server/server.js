@@ -65,6 +65,15 @@ router.route('/users/:id')
 router.route('/users/:id/articles')
   .get(userController.getArticles);
 
+// Endpoints for /users/:username/follows
+router.route('/users/:id/follows')
+	.post(userController.postFollows)
+  	.get(userController.getFollows);
+
+// Endpoints for /users/:username/followed-by
+router.route('/users/:id/followed-by')
+	.post(userController.postFollowers)
+  	.get(userController.getFollowers);
 
 
  

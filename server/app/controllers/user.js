@@ -54,6 +54,8 @@ exports.getUser = function(req, res) {
 };
 
 
+
+
 // ====================================================
 //               /users/:userID/articles
 // ====================================================
@@ -69,9 +71,34 @@ exports.getArticles = function(req, res) {
 };
 
 
+// ====================================================
+//               /users/:userID/follows
+// ====================================================
+
+exports.postFollows = function(req, res) {
 
 
+};
 
+exports.getFollows = function(req, res) {
+
+
+};
+
+
+// ====================================================
+//               /users/:userID/followed-by
+// ====================================================
+
+exports.postFollowers = function(req, res) {
+
+
+};
+
+exports.getFollowers = function(req, res) {
+
+
+};
 
 
 
