@@ -62,8 +62,8 @@ router.route('/users/:id')
   .get(userController.getUser);
 
 // Endpoints for /users/:username/articles
-// router.route('/users/:id/articles')
-//   .get(userController.getArticles);
+router.route('/users/:id/articles')
+  .get(userController.getArticles);
 
 
 

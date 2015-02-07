@@ -9,7 +9,7 @@ var UserSchema = new Schema({
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   email: String,
-  articles : [{ type: Schema.Types.ObjectId, ref: 'article' }]
+  articles : [{ type: Schema.Types.ObjectId, ref: 'Article' }]
 });
 
 // define the schema for our user model

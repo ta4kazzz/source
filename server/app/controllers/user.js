@@ -53,16 +53,12 @@ exports.getUser = function(req, res) {
 //               /users/:userID/articles
 // ====================================================
 exports.getArticles = function(req, res) {
-	var userid = req.params._userID;
 
-	// var id = mongoose.Types.ObjectId(req.params.id);
-	console.log("hello" + id);
-	console.log(id);
+	var userID = mongoose.Types.ObjectId(req.params.id);
+	console.log(userID);
 
-	User.findById(id, function(err, users) {
-		if (err)
-			res.send(err);
-		res.json(users);
+	User.findById(userID).populate('articles').exec(function(err, user) {
+    	res.send(user.articles)
 	});
 
 };
