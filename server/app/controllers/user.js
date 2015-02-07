@@ -11,9 +11,9 @@ var mongoose 	 = require('mongoose');
 // POST 
 exports.postUsers = function(req, res) {
 	var user = new User({
-		username: req.body.username,
 		email: req.body.email,
-		authID: req.body.authID,
+		username: req.body.username,
+		password: req.body.password
 	});
 
 	user.save(function(err) {

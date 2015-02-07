@@ -18,8 +18,8 @@ exports.postArticles = function(req, res) {
 	// Set the article properties that came from the POST data
 	article.url = req.body.url;
     article.summary = req.body.summary;
-    article.created = req.body.created;
-    article.userID = req.body.userID;
+    // article.created = req.body.created;
+    // article.userID = req.body.userID;
 
     // article.title = 'test';
 
