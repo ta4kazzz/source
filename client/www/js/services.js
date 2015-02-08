@@ -47,54 +47,69 @@ angular.module('source.services', [])
     return {
 
         //  =====================================================
+        //   ARTICLES 
+        //  =====================================================
+
+        getArticles: function () {
+            return $http.get(base+'/api/articles', {
+                method: 'GET',
+            });
+        },
+
+        postArticle: function (article) {
+            return $http.post(base+'/api/articles', {
+                method: 'POST',
+                params: {
+                    url:        article.url,
+                    summary:    article.summary,
+                    userID:     article.userID
+                }
+            });
+        },
+
+        getArticle: function (id) {
+            return $http.get(base+'/api/articles/', + id, {
+                method: 'GET',
+            });
+        },
+
+        deleteArticle: function (id) {
+            return $http.delete(base+'/api/articles', + id, {
+                method: 'DELETE',
+            });
+        },
+
+        putArticle: function (id) {
+            return $http.put(base+'/api/articles', + id, {
+                method: 'PUT',
+            });
+        },
+
+
+        //  =====================================================
         //   USERS
         //  =====================================================
 
-        createUser: function (newUser) {
-            return $http.post(base+'/api/users', newUser);
+        postUser: function (user) {
+            return $http.post(base+'/api/users', user, {
+                method: 'POST',
+            });
         },
 
-        getAuth: function (authID) {
-            return $http.get(base+'/api/users/auth/' + authID, {
+        getAuth: function (id) {
+            return $http.get(base+'/api/users/auth/' + id, {
                 method: 'GET',
             });
         },
 
         getUser: function (id) {
-            return $http.get(base+'/api/users/' + id, {
+            return $http.get(base+'/api/users/auth/' + id, {
                 method: 'GET',
             });
         },
         
 
 
-        //  =====================================================
-        //   ARTICLES 
-        //  =====================================================
-
-        getAll: function () {
-            return $http.get(base+'/api/articles', {
-                method: 'GET',
-            });
-        },
-
-        addArticle: function (article) {
-            return $http.post(base+'/api/articles/', article, {
-                method: 'POST'
-            });
-        },
-
-        getPreview: function (id) {
-            return $http.get(base+'/api/articles/' + id, {
-                method: 'GET',
-            });
-        },
-
-        publishArticle: function (article, id) {
-            return $http.put(base+'/api/articles/' + id, {
-                method: 'PUT',
-            });
-        },
 
 
 

@@ -49,9 +49,9 @@ angular.module('source')
   // It takes profile as a parameter
   function setCurrentUser(profile) {
 
-    var authID = profile.user_id;
+    var id = profile.user_id;
 
-    API.getAuth(authID)
+    API.getAuth(id)
       .success(function (user, status, headers, config) {
         console.log(user);
         // need to store it as some
@@ -124,13 +124,16 @@ angular.module('source')
     var username    = $scope.signupForm.username
     var authID      = profile.user_id;
 
-    var newUser = {
+    var user = {
       email: email,
       username: username,
       authID: authID
     };
 
-    API.createUser(newUser)
+    // We know this works
+    console.log(user);
+
+    API.postUser(user)
       .success(function (article, status, headers, config) {
         console.log("user created sucessfully")
       })

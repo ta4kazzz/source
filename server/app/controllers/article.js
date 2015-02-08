@@ -21,18 +21,14 @@ exports.postArticles = function(req, res) {
     article.url         = req.body.url;
     article.summary     = req.body.summary;
 
-
-
     // convert userID string to ObjectID
-    var userID = mongoose.Types.ObjectId(req.body._userID);
+    var userID = mongoose.Types.ObjectId(req.body.userID);
     var articleID = article._id;
 
     // Saves to article
     article._userID = userID;
 
 
-
- 
     User.findByIdAndUpdate(
         userID,
         {$push: {"articles": articleID}},
@@ -41,10 +37,6 @@ exports.postArticles = function(req, res) {
             console.log(err);
         }
     );
-
-
-    
-
 
     // URL to html
     var domain = article.url;

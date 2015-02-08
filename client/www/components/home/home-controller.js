@@ -5,13 +5,11 @@ angular.module('source')
 
 	 $scope.getFeed = function() {
 
-
-
-	  $scope.data = API.getAll()
+	 $scope.data = API.getArticles()
 	  	.success(function (data, status, headers, config) {
 			 $scope.articles = [];
 
-             for (var i = 0; i < data.length; i++) {
+            for (var i = 0; i < data.length; i++) {
                 if (data[i].public == true) {
                     $scope.articles.push(data[i]);
                 }
@@ -19,13 +17,8 @@ angular.module('source')
 
 
 	  	}).error(function (data, status, headers, config) {
-            console.log('someting wwetn wrong')
+            console.log('someting went wrong')
         });
-
-
-
-
-		 
 
 	 };
 

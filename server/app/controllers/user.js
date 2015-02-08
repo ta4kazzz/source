@@ -13,7 +13,8 @@ exports.postUsers = function(req, res) {
 	var user = new User({
 		email: req.body.email,
 		username: req.body.username,
-		password: req.body.password,
+		authID: req.body.authID,
+		// password: req.body.password,
 		counts: {
 			articles: 0,
 			follows: 0,
@@ -188,7 +189,7 @@ exports.getFeed = function(req, res) {
 
 exports.getAuth = function(req, res) {
 
-	var id = req.params.authID;
+	var id = req.params.id;
 
 	User.findOne({
 		authID: id

@@ -15,35 +15,37 @@ angular.module('source')
 	$scope.addArticle = function() {
 		var url 		= $scope.article.url;
 	 	var summary 	= $scope.article.summary;
-	 	var userID 		= window.localStorage.SourceProfile;
+	 	var userID 		= window.localStorage.SourceID;
 
-	 	console.log(userID);
 	 	// Construct Article Object
 	 	var article = {
 	 		url: url,
 	 		summary: summary,
-	 		created: Date.now(),
+	 		// created: Date.now(),
 	 		userID: userID
 	 	};
 
 	 	// API that posts the articles
-	 	API.addArticle(article)
+	 	API.postArticle(article)
 	 		.success(function (article, status, headers, config) {
 	 			console.log("Article packet successfuly sent");
 
-	 			// API that gets the full Article
-		 		API.getPreview(article._id)
-		 		.success(function (article, status, headers, config) {
-		 			$scope.article 			= article;
-		 			$scope.article.title 	= article.title;
-		 			$scope.article.time 	= article.created;
-		 			$scope.article.imageUrl = article.imageUrl;
-		 			$scope.article.summary 	= article.summary;
-		 			$scope.article._id 		= article._id;
-			 	})
-			 	.error(function (article, status, headers, config) {
-			 			console.log("Error when retreiving full article")
-			 	});
+	 			// id = article._id;
+
+	 			// // API that gets the full Article
+		 		// API.getArticle(articleID)
+		 		// .success(function (article, status, headers, config) {
+		 		// 	$scope.article 			= article;
+		 		// 	$scope.article.title 	= article.title;
+		 		// 	$scope.article.time 	= article.created;
+		 		// 	$scope.article.imageUrl = article.imageUrl;
+		 		// 	$scope.article.summary 	= article.summary;
+		 		// 	$scope.article._id 		= article._id;
+		 		// 	console.log("success!")
+			 	// })
+			 	// .error(function (article, status, headers, config) {
+			 	// 		console.log("Error when retreiving full article")
+			 	// });
 
 	 		})
 	 		.error(function (article, status, headers, config) {
