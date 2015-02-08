@@ -16,7 +16,6 @@ angular.module('source')
 		var url 		= $scope.article.url;
 	 	var summary 	= $scope.article.summary;
 	 	var userID 		= window.localStorage.SourceID;
-	 	console.log(userID);
 
 	 	// Construct Article Object
 	 	var article = {
@@ -30,29 +29,38 @@ angular.module('source')
 	 	API.postArticle(article)
 	 		.success(function (article, status, headers, config) {
 	 			console.log("Article packet successfuly sent");
+	 			var id =  article._id
+	 			$scope.getArticle(id);
 
-	 			// id = article._id;
-
-	 			// // API that gets the full Article
-		 		// API.getArticle(articleID)
-		 		// .success(function (article, status, headers, config) {
-		 		// 	$scope.article 			= article;
-		 		// 	$scope.article.title 	= article.title;
-		 		// 	$scope.article.time 	= article.created;
-		 		// 	$scope.article.imageUrl = article.imageUrl;
-		 		// 	$scope.article.summary 	= article.summary;
-		 		// 	$scope.article._id 		= article._id;
-		 		// 	console.log("success!")
-			 	// })
-			 	// .error(function (article, status, headers, config) {
-			 	// 		console.log("Error when retreiving full article")
-			 	// });
 
 	 		})
 	 		.error(function (article, status, headers, config) {
 	 			console.log("Error when posting the article packet")
 	 		});
 	 };
+
+
+
+	 $scope.getArticle = function(id) {
+
+ 			// API that gets the full Article
+	 		API.getArticle(id)
+	 		.success(function (article, status, headers, config) {
+	 			$scope.article 			= article;
+	 			$scope.article.title 	= article.title;
+	 			$scope.article.time 	= article.created;
+	 			$scope.article.imageUrl = article.imageUrl;
+	 			$scope.article.summary 	= article.summary;
+	 			$scope.article._id 		= article._id;
+	 			console.log("success!")
+		 	})
+		 	.error(function (article, status, headers, config) {
+		 			console.log("Error when retreiving full article")
+		 	});
+
+	 };
+
+
 
 	 // Publish Article
 	 // This needs to set the public = YES and post the article in the users article array

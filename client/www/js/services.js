@@ -63,7 +63,7 @@ angular.module('source.services', [])
         },
 
         getArticle: function (id) {
-            return $http.get(base+'/api/articles/', + id, {
+            return $http.get(base+'/api/articles/' + id, {
                 method: 'GET',
             });
         },

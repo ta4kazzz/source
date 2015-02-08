@@ -81,7 +81,7 @@ router.route('/articles')
   .post(articleController.postArticles)
 
 
-router.route('/articles/:article_id')
+router.route('/articles/:id')
   .get(articleController.getArticle)
   .put(articleController.putArticle)
   .delete(articleController.deleteArticle);

@@ -61,14 +61,14 @@ exports.postArticles = function(req, res) {
         article.title = title;
         article.content  = content;
         article.imageUrl = imageUrl;
-        article.public = false;
+        // article.public = false;
 
 
         // save the bear and check for errors
         article.save(function(err) {
             if (err)
                 res.send(err);
-            res.json({ message: 'Article created!', data: article});
+            res.json(article);
         });
     };
 
@@ -92,7 +92,8 @@ exports.getArticles = function(req, res) {
 
 // GET
 exports.getArticle = function(req, res) {
-    Article.findById(req.params.article_id, function(err, article) {
+
+    Article.findById(req.params.id, function(err, article) {
         if (err)
             res.send(err);
         res.json(article)
