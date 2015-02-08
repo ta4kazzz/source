@@ -21,7 +21,7 @@ angular.module('source')
 	 	var article = {
 	 		url: url,
 	 		summary: summary,
-	 		// created: Date.now(),
+	 		created: Date.now(),
 	 		userID: userID
 	 	};
 
@@ -31,8 +31,6 @@ angular.module('source')
 	 			console.log("Article packet successfuly sent");
 	 			var id =  article._id
 	 			$scope.getArticle(id);
-
-
 	 		})
 	 		.error(function (article, status, headers, config) {
 	 			console.log("Error when posting the article packet")
@@ -61,26 +59,17 @@ angular.module('source')
 	 };
 
 
-
 	 // Publish Article
-	 // This needs to set the public = YES and post the article in the users article array
+	 $scope.publishArticle = function(article) {
+
+		var id = $scope.article._id
 
 
-	 $scope.publishArticle = function(articleId) {
-	 	// Set public to yes
-	 	// var id = $scope.article._id;
-	 	var userID      = window.localStorage.SourceUserID;
-	 	var articleID 	= $scope.article._id
-	 	var article 	= $scope.article;
-
- 		API.publishArticle(userID, articleID, article)
+ 		API.publishArticle(id)
  			.success(function (article, status, headers, config) {
  				console.log("Article Successfully published")
 
-
  				$state.go('app.home');
-
-
  				
 	 		})
 	 		.error(function (article, status, headers, config) {

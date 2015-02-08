@@ -7,11 +7,11 @@ var articleSchema = new Schema({
   _userID: { type: Schema.Types.ObjectId, ref: 'user' },
   url: String,
   summary: String,
-  // created_at: Date,
+  created: String,
   title: String,
   content: String,
-  image_url: String,
-  // public: Boolean,
+  imageUrl: String,
+  public: Boolean,
   comments : [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
 });
 

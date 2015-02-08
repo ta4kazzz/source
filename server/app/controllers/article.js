@@ -20,6 +20,7 @@ exports.postArticles = function(req, res) {
 
     article.url         = req.body.url;
     article.summary     = req.body.summary;
+    article.created     = req.body.created;
 
     // convert userID string to ObjectID
     var userID = mongoose.Types.ObjectId(req.body.userID);
@@ -51,9 +52,8 @@ exports.postArticles = function(req, res) {
     });
 
     var parseHtml = function(html) {
-        // console.log(html);
+
         data = unfluff.lazy(html, 'en');
-        // console.log(data.title());
         var title = data.title();
         var content = data.text();
         var imageUrl = data.image();
@@ -61,7 +61,7 @@ exports.postArticles = function(req, res) {
         article.title = title;
         article.content  = content;
         article.imageUrl = imageUrl;
-        // article.public = false;
+        article.public = false;
 
 
         // save the bear and check for errors
@@ -104,7 +104,7 @@ exports.getArticle = function(req, res) {
 // PUT
 exports.putArticle = function(req, res) {
 
-  Article.findById(req.params.article_id, function(err, article) {
+  Article.findById(req.params.id, function(err, article) {
     if (err)
       res.send(err);
 
@@ -117,7 +117,6 @@ exports.putArticle = function(req, res) {
       res.json(article);
     });
   });
-
 
 };
 
