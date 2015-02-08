@@ -27,7 +27,7 @@ angular.module('source.services', [])
       auth.signout();
       store.remove('profile');
       store.remove('token');
-      store.remove('SourceUserID');
+      store.remove('SourceID');
       $window.location.href = '#/app/landing';
     }
 
@@ -57,13 +57,8 @@ angular.module('source.services', [])
         },
 
         postArticle: function (article) {
-            return $http.post(base+'/api/articles', {
+            return $http.post(base+'/api/articles', article, {
                 method: 'POST',
-                params: {
-                    url:        article.url,
-                    summary:    article.summary,
-                    userID:     article.userID
-                }
             });
         },
 

@@ -53,9 +53,9 @@ angular.module('source')
 
     API.getAuth(id)
       .success(function (user, status, headers, config) {
-        console.log(user);
-        // need to store it as some
-        store.set('SourceID', user._id);
+        // need to store it here without strings
+        window.localStorage['SourceID'] = user._id;
+        // store.set('SourceID', user._id);
       })
       .error(function (user, status, headers, config) {
         console.log("woops")
@@ -109,6 +109,7 @@ angular.module('source')
     console.log("Successfully logged in with your new credentials!");
     store.set('profile', profile);
     store.set('token', token);
+    setCurrentUser(profile);
     $state.go('app.home');
     createUser(profile);
   }
