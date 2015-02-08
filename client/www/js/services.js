@@ -98,11 +98,16 @@ angular.module('source.services', [])
         },
 
         getUser: function (id) {
-            return $http.get(base+'/api/users/auth/' + id, {
+            return $http.get(base+'/api/users/' + id, {
                 method: 'GET',
             });
         },
         
+        getUsersArticle: function (id) {
+            return $http.get(base+'/api/users/' + id +'/articles', {
+                method: 'GET',
+            });
+        },
 
 
 

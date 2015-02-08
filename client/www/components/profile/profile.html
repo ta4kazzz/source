@@ -14,20 +14,33 @@
         
         <div class="profile-canopy--banner">
             <img style ="width: 100px; border-radius: 5em;" src="{{auth.profile.picture}}">
-            <h2>{{auth.profile.nickname}}</h2>
-            
+            <h2>{{username}}</h2>
+            <p>Articles: {{ }}</p>
+            <p>Followers: {{followsNum}}</p>
+            <p>Following: {{followersNum}}</p>
         </div>
 
     </div>
 
-    <ion-list>
+
+
+    <ion-list ng-init="getProfileFeed()">
       <ion-item ng-repeat="articles in articles">
         <div class="card">
+          <div class="item item-divider">
+            <h2>{{articles.title}}</h2>
+            <p>{{articles.created}}</p>
+            <p>{{articles._id}}</p>
+          </div>
+          <div class="item item-text-wrap">
+            <a href="#/app/reader/{{articles._id}}">
+              <img src="{{articles.imageUrl}}" style="width:100%">
+            </a>
+            <p>{{articles.summary}}</p>
+          </div>
         </div>
-
       </ion-item>
     </ion-list>
-
 
     
 
@@ -36,3 +49,7 @@
 
   </ion-content>
 </ion-view>
+
+
+
+
