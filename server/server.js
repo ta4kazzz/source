@@ -18,6 +18,7 @@ var configDB 		  = require('./config/database.js');
 var articleController = require('./app/controllers/article');
 var userController    = require('./app/controllers/user');
 var authController    = require('./app/controllers/auth');
+var commentController = require('./app/controllers/comments');
 
 
 // Database ====================================================================
@@ -74,6 +75,18 @@ router.route('/users/:id/follows-by')
 router.route('/users/:id/follows')
 	.post(userController.postFollowers)
   	.get(userController.getFollowers);
+
+// Endpoints for /users/:username/followed-by
+router.route('/users/:id/feed')
+  	.get(userController.getFeed);
+
+// ============== COMMENTS ========================
+
+router.route('/articles/:id/comments')
+  .post(commentController.postComment)
+  // .get(articleController.getComments)
+
+
 
 
  

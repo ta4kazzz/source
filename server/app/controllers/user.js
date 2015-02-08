@@ -149,16 +149,34 @@ exports.postFollowers = function(req, res) {
 			res.json(user);
         }
     );
-
-
 };
 
 exports.getFollowers = function(req, res) {
 	var id = mongoose.Types.ObjectId(req.params.id);
 
-	User.findById(id).populate('followers').exec(function(err, user) {
-    	res.send(user.followers)
+	User.findById(id).populate('follows').exec(function(err, user) {
+    	res.send(user.follows)
 	});
+
+};
+
+// ====================================================
+//               /users/:userID/feed
+// ====================================================
+
+exports.getFeed = function(req, res) {
+	var id = mongoose.Types.ObjectId(req.params.id);
+
+
+	// GET HOME FEED
+	// 1 ) Search by id and get followers
+	// 2 ) Populate those users articles
+
+	
+	// Advanced Mongo Query Syntax
+	
+
+
 
 };
 

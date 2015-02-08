@@ -45,10 +45,6 @@ exports.postArticles = function(req, res) {
     
 
 
-
-
-
-
     // URL to html
     var domain = article.url;
 
