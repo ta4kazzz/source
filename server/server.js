@@ -84,7 +84,7 @@ router.route('/users/:id/feed')
 
 router.route('/articles/:id/comments')
   .post(commentController.postComment)
-  // .get(articleController.getComments)
+  .get(commentController.getComments);
 
 
 

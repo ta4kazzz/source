@@ -10,6 +10,7 @@ var mongoose 	 = require('mongoose');
 //               /articles/:articleID/comments
 // ====================================================
 
+// POST
 exports.postComment = function(req, res) {
 	// New comment object
 	var comment = new Comment();
@@ -44,17 +45,22 @@ exports.postComment = function(req, res) {
 };
 
 
+// GET
+exports.getComments = function(req, res) {
+	var articleID = req.params.id;
+
+	Article.findById(articleID).populate('comments').exec(function(err, user) {
+    	res.send(user.comments)
+	});
+
+};
 
 
 
 
 
-// exports.getComments = function(req, res) {
-// 	var articleID = req.params.id;
 
-// 	Comment.findById(id, function(err, users) {
-// 		if (err)
-// 			res.send(err);
-// 		res.json(users);
-// 	});
-// };
+
+
+
+

@@ -12,7 +12,7 @@ var articleSchema = new Schema({
   content: String,
   image_url: String,
   // public: Boolean,
-  comments : [{ type: Schema.Types.ObjectId, ref: 'Comments' }],
+  comments : [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
 });
 
 // create the model for users and expose it to our app
