@@ -17,27 +17,49 @@ angular.module('source')
 	 	var summary 	= $scope.article.summary;
 	 	var userID 		= window.localStorage.SourceID;
 
+	 	var id = userID;
 
-	 	// Construct Article Object
-	 	var article = {
-	 		url: url,
-	 		summary: summary,
-	 		created: Date.now(),
-	 		userID: userID
-	 	};
+	 	API.getUser(id)
+	 		.success(function (user, status, headers, config) {
+	 			console.log("You got the user");
+	 			console.log(user);
+	 			$scope.username = user.username;
+	 			$scope.gravatarURL = user.gravatarURL;
+	 			postUser();
 
-
-
-	 	// API that posts the articles
-	 	API.postArticle(article)
-	 		.success(function (article, status, headers, config) {
-	 			console.log("Article packet successfuly sent");
-	 			var id =  article._id
-	 			$scope.getArticle(id);
 	 		})
 	 		.error(function (article, status, headers, config) {
-	 			console.log("Error when posting the article packet")
+	 			console.log("error when getting the user")
 	 		});
+
+
+
+
+	 	function postUser() {
+		 	// Construct Article Object
+		 	var article = {
+		 		url: url,
+		 		summary: summary,
+		 		created: Date.now(),
+		 		userID: userID,
+		 		username: $scope.username,
+		 		gravatarURL: $scope.gravatarURL
+		 	};
+
+		 	console.log(article.gravatarURL);
+
+		 	// API that posts the articles
+		 	API.postArticle(article)
+		 		.success(function (article, status, headers, config) {
+		 			console.log("Article packet successfuly sent");
+		 			var id =  article._id
+		 			$scope.getArticle(id);
+		 		})
+		 		.error(function (article, status, headers, config) {
+		 			console.log("Error when posting the article packet")
+		 		});
+	 	}
+
 	 };
 
 

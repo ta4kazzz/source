@@ -178,7 +178,7 @@ angular.module('source', ['ionic', 'source.controllers', 'source.services', 'aut
     })
 
     .state('app.user', {
-      url: "/user",
+      url: "/user/:userID",
       views: {
         'menuContent' :{
           templateUrl: "components/user/user.html",

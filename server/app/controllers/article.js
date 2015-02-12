@@ -21,6 +21,8 @@ exports.postArticles = function(req, res) {
     article.url         = req.body.url;
     article.summary     = req.body.summary;
     article.created     = req.body.created;
+    article.gravatarURL = req.body.gravatarURL;
+    article.username    = req.body.username;
 
     // convert userID string to ObjectID
     var userID = mongoose.Types.ObjectId(req.body.userID);

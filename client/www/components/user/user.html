@@ -2,7 +2,48 @@
   <ion-nav-buttons side="left">
     <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
   </ion-nav-buttons>
-  <ion-content class="has-header">
-    <h1>User</h1>
+  <ion-content ng-init="getUser()" class="has-header">
+
+    <div class="profile-canopy">
+        <div class="profile-canopy--image">
+            
+        </div>
+        
+        <div class="profile-canopy--banner">
+            <img style ="width: 100px; border-radius: 5em;" src="{{auth.profile.picture}}">
+            <h2>{{username}}</h2>
+            <img src="{{gravatarURL}}" style="width: 50px; border-radius: 3em">
+            <p>Articles: {{ }}</p>
+            <p>Followers: {{followsNum}}</p>
+            <p>Following: {{followersNum}}</p>
+        </div>
+
+    </div>
+
+
+
+    <ion-list ng-init="getUserFeed()">
+      <ion-item ng-repeat="articles in articles">
+        <div class="card">
+          <div class="item item-divider">
+            <h2>{{articles.title}}</h2>
+            <p>{{articles.created}}</p>
+            <p>{{articles._id}}</p>
+          </div>
+          <div class="item item-text-wrap">
+            <a href="#/app/reader/{{articles._id}}">
+              <img src="{{articles.imageUrl}}" style="width:100%">
+            </a>
+            <p>{{articles.summary}}</p>
+          </div>
+        </div>
+      </ion-item>
+    </ion-list>
+
+    
+
+
+
+
   </ion-content>
 </ion-view>
