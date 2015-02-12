@@ -48,7 +48,7 @@ angular.module('source')
   // the goal of this function is to set the mongoID in the localstorage
   // It takes profile as a parameter
   function setCurrentUser(profile) {
-
+    console.log(profile);
     var id = profile.user_id;
 
     API.getAuth(id)
@@ -124,11 +124,14 @@ angular.module('source')
     var email       = $scope.signupForm.email
     var username    = $scope.signupForm.username
     var authID      = profile.user_id;
+    var gravatarURL = profile.picture;
+    console.log(gravatarURL);
 
     var user = {
       email: email,
       username: username,
-      authID: authID
+      authID: authID,
+      gravatarURL: gravatarURL
     };
 
     // We know this works

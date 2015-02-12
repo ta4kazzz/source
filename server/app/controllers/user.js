@@ -13,6 +13,7 @@ exports.postUsers = function(req, res) {
 	var user = new User({
 		email: req.body.email,
 		username: req.body.username,
+		gravatarURL: req.body.gravatarURL,
 		authID: req.body.authID,
 		// password: req.body.password,
 		counts: {

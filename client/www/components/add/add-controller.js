@@ -17,6 +17,7 @@ angular.module('source')
 	 	var summary 	= $scope.article.summary;
 	 	var userID 		= window.localStorage.SourceID;
 
+
 	 	// Construct Article Object
 	 	var article = {
 	 		url: url,
@@ -24,6 +25,8 @@ angular.module('source')
 	 		created: Date.now(),
 	 		userID: userID
 	 	};
+
+
 
 	 	// API that posts the articles
 	 	API.postArticle(article)
