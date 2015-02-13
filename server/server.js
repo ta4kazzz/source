@@ -106,13 +106,13 @@ router.route('/users/:id/articles')
   .get(userController.getArticles);
 
 // Endpoints for /users/:username/follows
-router.route('/users/:id/follows-by')
-	.post(userController.postFollows)
-  	.get(userController.getFollows);
-
-// Endpoints for /users/:username/followed-by
 router.route('/users/:id/follows')
-	.post(userController.postFollowers)
+	.post(userController.postFollows)
+  .get(userController.getFollows)
+  // .delete(userController.deleteFollows)
+
+// Endpoints for /users/:username/followers
+router.route('/users/:id/followers')
   	.get(userController.getFollowers);
 
 // Endpoints for /users/:username/followed-by

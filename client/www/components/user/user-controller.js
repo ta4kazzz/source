@@ -3,6 +3,44 @@ angular.module('source')
 .controller('userController', function($scope, $rootScope, API, $stateParams) {
 
 
+
+
+
+  $scope.followUser = function() {
+
+  // Tje ID is the person who is logged in and doing the adding action
+  var id = window.localStorage.SourceID;
+
+  // The user is who we want to "follow" - or add to pat's list
+
+  var user = {
+    _id: $stateParams.userID
+  };
+
+  console.log(id);
+  console.log(user)
+
+  API.followUser(id, user)
+    .success(function (user, status, headers, config) {
+        // turn the button to unfolow
+        console.log("sent")
+        console.log(user);
+      })
+    .error(function (user, status, headers, config) {
+        console.log("Something went wrong")
+      });
+
+
+  };
+
+
+
+
+
+
+
+
+
 	$scope.getUser = function() {
  	// code goes here that gets the user information 
 
@@ -41,9 +79,9 @@ angular.module('source')
    			console.log("Something went wrong")
    		});
 
-
-
   };
+
+
 
 
 

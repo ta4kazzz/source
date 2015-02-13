@@ -113,8 +113,8 @@ exports.postFollows = function(req, res) {
 exports.getFollows = function(req, res) {
 	var id = mongoose.Types.ObjectId(req.params.id);
 
-	User.findById(id).populate('followers').exec(function(err, user) {
-    	res.send(user.followers)
+	User.findById(id).populate('follows').exec(function(err, user) {
+    	res.send(user.follows)
 	});
 
 };
@@ -124,9 +124,12 @@ exports.getFollows = function(req, res) {
 //               /users/:userID/followed-by
 // ====================================================
 
-exports.postFollowers = function(req, res) {
+exports.postFollows = function(req, res) {
 	var myID = mongoose.Types.ObjectId(req.params.id);
-	var userID = mongoose.Types.ObjectId(req.body.userID);
+	var userID = mongoose.Types.ObjectId(req.body._id);
+	console.log("my ID " + myID);
+	console.log("kai ID" + userID);
+
 
 	// Need to implement the logic (if there is already a userID)
     User.findByIdAndUpdate(
@@ -153,6 +156,15 @@ exports.postFollowers = function(req, res) {
     );
 };
 
+exports.deleteFollowers = function(req, res) {
+	var myID = mongoose.Types.ObjectId(req.params.id);
+	var userID = mongoose.Types.ObjectId(req.body._id);
+
+	// find by id and delete the user from the follow list
+	
+};
+
+
 exports.getFollowers = function(req, res) {
 	var id = mongoose.Types.ObjectId(req.params.id);
 
@@ -161,6 +173,7 @@ exports.getFollowers = function(req, res) {
 	});
 
 };
+
 
 // ====================================================
 //               /users/:userID/feed

@@ -103,12 +103,29 @@ angular.module('source.services', [])
             });
         },
         
-        getUsersArticle: function (id) {
+        getUsersArticles: function (id) {
             return $http.get(base+'/api/users/' + id +'/articles', {
                 method: 'GET',
             });
         },
 
+        getFollows: function (id) {
+            return $http.get(base+'/api/users/' + id +'/follows', {
+                method: 'GET',
+            });
+        },
+
+        followUser: function (id, user) {
+            return $http.post(base+'/api/users/' + id + '/follows', user, {
+                method: 'POST',
+            });
+        },
+
+        getFollowers: function (id) {
+            return $http.get(base+'/api/users/' + id +'/followers', {
+                method: 'GET',
+            });
+        },
 
 
 

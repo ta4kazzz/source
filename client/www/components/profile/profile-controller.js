@@ -28,7 +28,7 @@ angular.module('source')
 
 	 var user_id 		= window.localStorage.SourceID;
 
-   	$scope.data = API.getUsersArticle(user_id)
+   	$scope.data = API.getUsersArticles(user_id)
    		.success(function (data, status, headers, config) {
         $scope.articles = [];
 
