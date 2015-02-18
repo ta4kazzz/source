@@ -109,12 +109,12 @@ router.route('/users/:id/articles')
 router.route('/users/:id/follows')
 	.post(userController.postFollows)
   .get(userController.getFollows)
-  // .delete(userController.deleteFollows)
+  .put(userController.deleteFollows)
 
 // Endpoints for /users/:username/followers
 router.route('/users/:id/followers')
   	.get(userController.getFollowers);
-
+// 
 // Endpoints for /users/:username/followed-by
 router.route('/users/:id/feed')
   	.get(userController.getFeed);

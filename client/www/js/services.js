@@ -121,6 +121,12 @@ angular.module('source.services', [])
             });
         },
 
+        unfollowUser: function (id, user) {
+            return $http.put(base+'/api/users/' + id + '/follows', user, {
+                method: 'PUT',
+            });
+        },
+
         getFollowers: function (id) {
             return $http.get(base+'/api/users/' + id +'/followers', {
                 method: 'GET',

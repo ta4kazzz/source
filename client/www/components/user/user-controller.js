@@ -2,17 +2,12 @@ angular.module('source')
 
 .controller('userController', function($scope, $rootScope, API, $stateParams) {
 
-
-
-
-
   $scope.followUser = function() {
 
-  // Tje ID is the person who is logged in and doing the adding action
+  // the ID is the person who is logged in and doing the adding action
   var id = window.localStorage.SourceID;
 
   // The user is who we want to "follow" - or add to pat's list
-
   var user = {
     _id: $stateParams.userID
   };
@@ -33,12 +28,29 @@ angular.module('source')
 
   };
 
+  $scope.unfollowUser = function() {
+
+  // the ID is the person who is logged in and doing the adding action
+  var id = window.localStorage.SourceID;
+
+  // The user is who we want to "follow" - or add to pat's list
+  var user = {
+    _id: $stateParams.userID
+  };
+
+  
+  API.unfollowUser(id, user)
+    .success(function (user, status, headers, config) {
+        // turn the button to unfolow
+        console.log("sent")
+        console.log(user);
+      })
+    .error(function (user, status, headers, config) {
+        console.log("Something went wrong")
+      });
 
 
-
-
-
-
+  };
 
 
 	$scope.getUser = function() {
@@ -61,10 +73,10 @@ angular.module('source')
 
   $scope.getUserFeed = function() {
 
-	 var user_id 		= $stateParams.userID;
+    var user_id = $stateParams.userID;
 
-   	$scope.data = API.getUsersArticle(user_id)
-   		.success(function (data, status, headers, config) {
+    $scope.data = API.getUsersArticles(user_id)
+      .success(function (data, status, headers, config) {
         $scope.articles = [];
 
         for (var i = 0; i < data.length; i++) {
@@ -74,14 +86,15 @@ angular.module('source')
         };
 
 
-   		})
-   		.error(function (article, status, headers, config) {
-   			console.log("Something went wrong")
-   		});
+      })
+      .error(function (article, status, headers, config) {
+        console.log("Something went wrong")
+      });
+
+
+
 
   };
-
-
 
 
 

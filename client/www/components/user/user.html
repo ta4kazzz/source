@@ -11,12 +11,13 @@
         
         <div class="profile-canopy--banner">
             <img style ="width: 100px; border-radius: 5em;" src="{{auth.profile.picture}}">
-            <h2>{{username}}</h2>
             <img src="{{gravatarURL}}" style="width: 50px; border-radius: 3em">
+            <h2>{{username}}</h2>
             <p>Articles: {{ }}</p>
             <p>Followers: {{followsNum}}</p>
             <p>Following: {{followersNum}}</p>
              <button class="button button-full" ng-click="followUser()">Follow</button>
+            <button class="button button-full" ng-click="unfollowUser()">Unfollow</button>
         </div>
 
     </div>

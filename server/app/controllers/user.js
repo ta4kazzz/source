@@ -77,16 +77,18 @@ exports.getArticles = function(req, res) {
 //               /users/:userID/follows
 // ====================================================
 
+
 exports.postFollows = function(req, res) {
 	var myID = mongoose.Types.ObjectId(req.params.id);
-	var userID = mongoose.Types.ObjectId(req.body.userID);
+	var userID = mongoose.Types.ObjectId(req.body._id);
 	// add kai's userID to pat's followers
-
+	console.log(myID);
+	console.log(userID);
 
 	// Need to implement the logic (if there is already a userID)
     User.findByIdAndUpdate(
         myID,
-        {$push: {"followers": userID}},
+        {$push: {"follows": userID}},
         {safe: true, upsert: true},
         function(err, user) {
         	if (err)
@@ -95,11 +97,9 @@ exports.postFollows = function(req, res) {
         }
     );
 
-
-	// Need to implement the logic (if there is already a userID)
     User.findByIdAndUpdate(
         userID,
-        {$push: {"follows": myID}},
+        {$push: {"followers": myID}},
         {safe: true, upsert: true},
         function(err, user) {
         	if (err)
@@ -119,57 +119,90 @@ exports.getFollows = function(req, res) {
 
 };
 
+exports.deleteFollows = function(req, res) {
+	var myID = mongoose.Types.ObjectId(req.params.id);
+	var userID = mongoose.Types.ObjectId(req.body._id);
+
+	console.log(myID);
+	console.log(userID);
+
+	    User.findByIdAndUpdate(
+	        myID,
+	        {$pull: {"follows": userID}},
+	        {safe: true, upsert: true},
+	        function(err, user) {
+	        	if (err)
+					res.send(err);
+				res.json(user);
+	        }
+	    );
+
+	    User.findByIdAndUpdate(
+	        userID,
+	        {$pull: {"followers": myID}},
+	        {safe: true, upsert: true},
+	        function(err, user) {
+	        	if (err)
+					res.send(err);
+				res.json(user);
+	        }
+	    );
+
+
+};
+
 
 // ====================================================
 //               /users/:userID/followed-by
 // ====================================================
 
-exports.postFollows = function(req, res) {
-	var myID = mongoose.Types.ObjectId(req.params.id);
-	var userID = mongoose.Types.ObjectId(req.body._id);
-	console.log("my ID " + myID);
-	console.log("kai ID" + userID);
+// exports.postFollows0 = function(req, res) {
+// 	var myID = mongoose.Types.ObjectId(req.params.id);
+// 	var userID = mongoose.Types.ObjectId(req.body._id);
+// 	console.log("my ID " + myID);
+// 	console.log("kai ID" + userID);
 
 
-	// Need to implement the logic (if there is already a userID)
-    User.findByIdAndUpdate(
-        myID,
-        {$push: {"follows": userID}},
-        {safe: true, upsert: true},
-        function(err, user) {
-        	if (err)
-				res.send(err);
-			res.json(user);
-        }
-    );
+// 	// Need to implement the logic (if there is already a userID)
+//     User.findByIdAndUpdate(
+//         myID,
+//         {$push: {"follows": userID}},
+//         {safe: true, upsert: true},
+//         function(err, user) {
+//         	if (err)
+// 				res.send(err);
+// 			res.json(user);
+//         }
+//     );
 
-	// Need to implement the logic (if there is already a userID)
-    User.findByIdAndUpdate(
-        userID,
-        {$push: {"follows": myID}},
-        {safe: true, upsert: true},
-        function(err, user) {
-        	if (err)
-				res.send(err);
-			res.json(user);
-        }
-    );
-};
+// 	// Need to implement the logic (if there is already a userID)
+//     User.findByIdAndUpdate(
+//         userID,
+//         {$push: {"follows": myID}},
+//         {safe: true, upsert: true},
+//         function(err, user) {
+//         	if (err)
+// 				res.send(err);
+// 			res.json(user);
+//         }
+//     );
+// };
 
-exports.deleteFollowers = function(req, res) {
-	var myID = mongoose.Types.ObjectId(req.params.id);
-	var userID = mongoose.Types.ObjectId(req.body._id);
+// exports.deleteFollowers = function(req, res) {
+// 	var myID = mongoose.Types.ObjectId(req.params.id);
+// 	var userID = mongoose.Types.ObjectId(req.body._id);
 
-	// find by id and delete the user from the follow list
+// 	// find by id and delete the user from the follow list
 	
-};
+// };
 
 
 exports.getFollowers = function(req, res) {
 	var id = mongoose.Types.ObjectId(req.params.id);
 
-	User.findById(id).populate('follows').exec(function(err, user) {
-    	res.send(user.follows)
+	console.log(id);
+	User.findById(id).populate('followers').exec(function(err, user) {
+    	res.send(user.followers)
 	});
 
 };

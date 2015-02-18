@@ -1,8 +1,6 @@
 angular.module('source')
 
-.controller('followingController', function($scope, $rootScope, auth, API) {
-
-
+.controller('user-following-controller', function($scope, $rootScope, auth, API) {
 
   $scope.getFollows = function() {
 

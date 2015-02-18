@@ -105,22 +105,43 @@ angular.module('source', ['ionic', 'source.controllers', 'source.services', 'aut
       }
     })
 
-    .state('app.followers', {
-      url: "/followers",
+    .state('app.profileFollowers', {
+      url: "/profile/followers",
       views: {
         'menuContent' :{
-          templateUrl: "components/followers/followers.html",
-          controller: 'followersController'
+          templateUrl: "components/profileFollowers/profileFollowers.html",
+          controller: 'profile-followers-controller'
         }
       }
     })
 
-    .state('app.following', {
-      url: "/following",
+    .state('app.profileFollowing', {
+      url: "/profile/following",
       views: {
         'menuContent' :{
-          templateUrl: "components/following/following.html",
-          controller: 'followingController'
+          templateUrl: "components/profileFollowing/profileFollowing.html",
+          controller: 'profile-following-controller'
+        }
+      }
+    })
+
+
+    .state('app.userfollowers', {
+      url: "/:userID/followers",
+      views: {
+        'menuContent' :{
+          templateUrl: "components/profileFollowers/profileFollowers.html",
+          controller: 'profile-followers-controller'
+        }
+      }
+    })
+
+    .state('app.userfollowing', {
+      url: "/:userID/following",
+      views: {
+        'menuContent' :{
+          templateUrl: "components/profileFollowing/profileFollowing.html",
+          controller: 'profile-following-controller'
         }
       }
     })
