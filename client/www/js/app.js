@@ -127,21 +127,21 @@ angular.module('source', ['ionic', 'source.controllers', 'source.services', 'aut
 
 
     .state('app.userfollowers', {
-      url: "/:userID/followers",
+      url: "/user/:userID/followers",
       views: {
         'menuContent' :{
-          templateUrl: "components/profileFollowers/profileFollowers.html",
-          controller: 'profile-followers-controller'
+          templateUrl: "components/userFollowers/userFollowers.html",
+          controller: 'user-followers-controller'
         }
       }
     })
 
     .state('app.userfollowing', {
-      url: "/:userID/following",
+      url: "/user/:userID/following",
       views: {
         'menuContent' :{
-          templateUrl: "components/profileFollowing/profileFollowing.html",
-          controller: 'profile-following-controller'
+          templateUrl: "components/userFollowing/userFollowing.html",
+          controller: 'user-following-controller'
         }
       }
     })

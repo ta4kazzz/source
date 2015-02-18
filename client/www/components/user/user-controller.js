@@ -2,6 +2,9 @@ angular.module('source')
 
 .controller('userController', function($scope, $rootScope, API, $stateParams) {
 
+  $scope.user_id = $stateParams.userID;
+
+  
   $scope.followUser = function() {
 
   // the ID is the person who is logged in and doing the adding action

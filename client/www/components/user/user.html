@@ -14,8 +14,8 @@
             <img src="{{gravatarURL}}" style="width: 50px; border-radius: 3em">
             <h2>{{username}}</h2>
             <p>Articles: {{ }}</p>
-            <p>Followers: {{followsNum}}</p>
-            <p>Following: {{followersNum}}</p>
+            <a href="#/app/user/{{user_id}}/followers"><p>Followers: {{followsNum}}</p></a>
+            <a href="#/app/user/{{user_id}}/following"><p>Following: {{followersNum}}</p></a>
              <button class="button button-full" ng-click="followUser()">Follow</button>
             <button class="button button-full" ng-click="unfollowUser()">Unfollow</button>
         </div>

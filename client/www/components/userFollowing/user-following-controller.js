@@ -1,10 +1,10 @@
 angular.module('source')
 
-.controller('user-following-controller', function($scope, $rootScope, auth, API) {
+.controller('user-following-controller', function($scope, $rootScope, auth, API,  $stateParams) {
 
   $scope.getFollows = function() {
 
-	 var id 		= window.localStorage.SourceID;
+	 var id 		= $stateParams.userID;
 
    	$scope.users = API.getFollows(id)
    		.success(function (data, status, headers, config) {
