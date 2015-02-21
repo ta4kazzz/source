@@ -2,8 +2,9 @@
 var User 		 = require('../models/user');
 var Article		 = require('../models/article.js');
 var Comment		 = require('../models/comments.js');
-
 var mongoose 	 = require('mongoose');
+var deepPopulate = require('mongoose-deep-populate');
+
 
 
 // ====================================================
@@ -33,7 +34,7 @@ exports.postComment = function(req, res) {
     );
 
     comment.userID = userID;
-    comment.comment = req.body.comment;
+    comment.text = req.body.text;
     comment.article = articleID;
 
 	comment.save(function(err) {
@@ -47,11 +48,19 @@ exports.postComment = function(req, res) {
 
 // GET
 exports.getComments = function(req, res) {
+
 	var articleID = req.params.id;
 
-	Article.findById(articleID).populate('comments').exec(function(err, user) {
-    	res.send(user.comments)
-	});
+
+	Article
+		.findById(articleID)
+		.select('-__v -_id -article')
+		.populate('comments', '-__v -_id -article')
+		.exec(function(err, Article) {
+	    	res.send(Article.comments)
+		});
+
+
 
 };
 

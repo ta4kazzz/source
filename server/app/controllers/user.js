@@ -27,15 +27,25 @@ exports.postUsers = function(req, res) {
 		if (err)
 			res.send(err);
 
-		res.json({ message: 'New User has been added!' });
+		res.json(
+			{ 
+				message: 'New User has been added!',
+				email: user.email,
+				username: user.username,
+				gravatarURL: user.gravatarURL
+			}
+		);
 	});
 };
 
 // GET
 exports.getUsers = function(req, res) {
-	User.find(function(err, users) {
-		if (err)
-			res.send(err);
+
+
+	User
+		.find(function(err, users) {
+			if (err)
+				res.send(err);
 		res.json(users);
 	});
 };
@@ -46,6 +56,7 @@ exports.getUsers = function(req, res) {
 
 exports.getUser = function(req, res) {
 	var id = req.params.id;
+
 
 	User.findById(id, function(err, users) {
 		if (err)
@@ -77,7 +88,7 @@ exports.getArticles = function(req, res) {
 //               /users/:userID/follows
 // ====================================================
 
-
+// POST
 exports.postFollows = function(req, res) {
 	var myID = mongoose.Types.ObjectId(req.params.id);
 	var userID = mongoose.Types.ObjectId(req.body._id);
@@ -110,91 +121,61 @@ exports.postFollows = function(req, res) {
 
 };
 
+
+
+// GET
 exports.getFollows = function(req, res) {
+
 	var id = mongoose.Types.ObjectId(req.params.id);
 
-	User.findById(id).populate('follows').exec(function(err, user) {
-    	res.send(user.follows)
-	});
+	User
+		.findById(id)
+		.select('-__v -authID -email -followers -counts -articles -email')
+		.populate('follows', '-__v -authID -followers -counts -articles -follows -email')
+		.exec(function(err, user) {
+			res.send(user.follows)
+		});
 
 };
 
+
+
+// DELETE
 exports.deleteFollows = function(req, res) {
+
 	var myID = mongoose.Types.ObjectId(req.params.id);
 	var userID = mongoose.Types.ObjectId(req.body._id);
 
-	console.log(myID);
-	console.log(userID);
+    User.findByIdAndUpdate(
+        myID,
+        {$pull: {"follows": userID}},
+        {safe: true, upsert: true},
+        function(err, user) {
+        	if (err)
+				res.send(err);
+			res.json(user);
+        }
+    );
 
-	    User.findByIdAndUpdate(
-	        myID,
-	        {$pull: {"follows": userID}},
-	        {safe: true, upsert: true},
-	        function(err, user) {
-	        	if (err)
-					res.send(err);
-				res.json(user);
-	        }
-	    );
-
-	    User.findByIdAndUpdate(
-	        userID,
-	        {$pull: {"followers": myID}},
-	        {safe: true, upsert: true},
-	        function(err, user) {
-	        	if (err)
-					res.send(err);
-				res.json(user);
-	        }
-	    );
+    User.findByIdAndUpdate(
+        userID,
+        {$pull: {"followers": myID}},
+        {safe: true, upsert: true},
+        function(err, user) {
+        	if (err)
+				res.send(err);
+			res.json(user);
+        }
+    );
 
 
 };
 
 
 // ====================================================
-//               /users/:userID/followed-by
+//               /users/:userID/followers
 // ====================================================
 
-// exports.postFollows0 = function(req, res) {
-// 	var myID = mongoose.Types.ObjectId(req.params.id);
-// 	var userID = mongoose.Types.ObjectId(req.body._id);
-// 	console.log("my ID " + myID);
-// 	console.log("kai ID" + userID);
-
-
-// 	// Need to implement the logic (if there is already a userID)
-//     User.findByIdAndUpdate(
-//         myID,
-//         {$push: {"follows": userID}},
-//         {safe: true, upsert: true},
-//         function(err, user) {
-//         	if (err)
-// 				res.send(err);
-// 			res.json(user);
-//         }
-//     );
-
-// 	// Need to implement the logic (if there is already a userID)
-//     User.findByIdAndUpdate(
-//         userID,
-//         {$push: {"follows": myID}},
-//         {safe: true, upsert: true},
-//         function(err, user) {
-//         	if (err)
-// 				res.send(err);
-// 			res.json(user);
-//         }
-//     );
-// };
-
-// exports.deleteFollowers = function(req, res) {
-// 	var myID = mongoose.Types.ObjectId(req.params.id);
-// 	var userID = mongoose.Types.ObjectId(req.body._id);
-
-// 	// find by id and delete the user from the follow list
-	
-// };
 
 
 exports.getFollowers = function(req, res) {
@@ -223,8 +204,6 @@ exports.getFeed = function(req, res) {
 	
 	// Advanced Mongo Query Syntax
 	
-
-
 
 };
 

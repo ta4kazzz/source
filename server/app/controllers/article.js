@@ -131,7 +131,7 @@ exports.deleteArticle = function(req, res) {
     if (err)
       res.send(err);
 
-    res.json({ message: 'Beer removed from the locker!' });
+    res.json({ message: 'Article successfully removed' });
   });
 };
     
