@@ -53,8 +53,8 @@ angular.module('source.services', [])
         getArticles: function () {
             return $http.get(base+'/api/articles', {
                 method: 'GET',
-            });
-        },
+           });
+        }, 
 
         postArticle: function (article) {
             return $http.post(base+'/api/articles', article, {
@@ -85,6 +85,12 @@ angular.module('source.services', [])
         //   USERS
         //  =====================================================
 
+        getUsers: function (id) {
+            return $http.get(base+'/api/users', {
+                method: 'GET',
+            });
+        },
+        
         postUser: function (user) {
             return $http.post(base+'/api/users', user, {
                 method: 'POST',
@@ -96,6 +102,7 @@ angular.module('source.services', [])
                 method: 'GET',
             });
         },
+
 
         getUser: function (id) {
             return $http.get(base+'/api/users/' + id, {
