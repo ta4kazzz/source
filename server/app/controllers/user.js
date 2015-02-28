@@ -209,11 +209,19 @@ exports.getUserFeed = function(req, res) {
 		.exec(function(err, user) {
 			
 			var data = user.follows;
-			console.log(data);
+			// console.log(data);
 			// now the list of userIDs is in an array called data
 			// we need to pass this into the other query
+			// search those susers "recent array", or just get their most recent 
 
+			Article
+				.where('_userID').in(data)
+				.exec(function(err, user) {
+					res.send(Article)
+			});
 	});
+
+
 
 };
 
