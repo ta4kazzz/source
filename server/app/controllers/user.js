@@ -195,14 +195,24 @@ exports.getFollowers = function(req, res) {
 //               /users/:id/feed
 // ====================================================
 
+	// .where('userID')
+	// .in(arrayOfFollowIDs)
+
 
 exports.getUserFeed = function(req, res) {
 
 	var userID = mongoose.Types.ObjectId(req.params.id);
 
 
-	User.findById(userID).populate('articles').exec(function(err, user) {
-    	res.send(user.articles)
+	User
+		.findById(userID)
+		.exec(function(err, user) {
+			
+			var data = user.follows;
+			console.log(data);
+			// now the list of userIDs is in an array called data
+			// we need to pass this into the other query
+
 	});
 
 };
