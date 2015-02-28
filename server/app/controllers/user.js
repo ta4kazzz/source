@@ -192,23 +192,20 @@ exports.getFollowers = function(req, res) {
 
 
 // ====================================================
-//               /users/:userID/feed
+//               /users/:id/feed
 // ====================================================
 
-exports.getFeed = function(req, res) {
-	var id = mongoose.Types.ObjectId(req.params.id);
+
+exports.getUserFeed = function(req, res) {
+
+	var userID = mongoose.Types.ObjectId(req.params.id);
 
 
-	// GET HOME FEED
-	// 1 ) Search by id and get followers
-	// 2 ) Populate those users articles
-
-	
-	// Advanced Mongo Query Syntax
-	
+	User.findById(userID).populate('articles').exec(function(err, user) {
+    	res.send(user.articles)
+	});
 
 };
-
 
 
 // ====================================================

@@ -93,9 +93,14 @@ router.route('/users')
 	.post(userController.postUsers)
 	.get(userController.getUsers);
 
-// Endpoints for /users/:username
+// Endpoints for /users/:id
 router.route('/users/:id')
   .get(userController.getUser);
+
+// Endpoints for /users/:id/feed
+router.route('/users/:id/feed')
+  .get(userController.getUserFeed);
+
 
 router.route('/users/auth/:id')
   .get(userController.getAuth);
@@ -116,8 +121,8 @@ router.route('/users/:id/followers')
   	.get(userController.getFollowers);
 // 
 // Endpoints for /users/:username/followed-by
-router.route('/users/:id/feed')
-  	.get(userController.getFeed);
+// router.route('/users/:id/feed')
+//   	.get(userController.getFeed);
 
 // ============== COMMENTS ========================
 

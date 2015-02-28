@@ -54,7 +54,7 @@ angular.module('source.services', [])
             return $http.get(base+'/api/articles', {
                 method: 'GET',
            });
-        }, 
+        },
 
         postArticle: function (article) {
             return $http.post(base+'/api/articles', article, {
@@ -91,11 +91,27 @@ angular.module('source.services', [])
             });
         },
         
+
+        getUser: function (id) {
+            return $http.get(base+'/api/users/' + id, {
+                method: 'GET',
+            });
+        },
+
+        getHomeFeed: function (id) {
+            return $http.get(base+'/api/users/' + id +'/feed', {
+                method: 'GET',
+           });
+        }, 
+
+
         postUser: function (user) {
             return $http.post(base+'/api/users', user, {
                 method: 'POST',
             });
         },
+
+
 
         getAuth: function (id) {
             return $http.get(base+'/api/users/auth/' + id, {
@@ -103,12 +119,6 @@ angular.module('source.services', [])
             });
         },
 
-
-        getUser: function (id) {
-            return $http.get(base+'/api/users/' + id, {
-                method: 'GET',
-            });
-        },
         
         getUsersArticles: function (id) {
             return $http.get(base+'/api/users/' + id +'/articles', {

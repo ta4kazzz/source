@@ -3,9 +3,12 @@ angular.module('source')
 .controller('homeController', function($rootScope, $scope, auth, API) {
 	 $rootScope.auth = auth;
 
-	 $scope.getFeed = function() {
+	 $scope.getHomeFeed = function() {
 
-	 $scope.data = API.getArticles()
+	 var id  = window.localStorage.SourceID;
+
+
+	 $scope.data = API.getHomeFeed(id)
 	  	.success(function (data, status, headers, config) {
 			 $scope.articles = [];
 
