@@ -56,11 +56,10 @@ exports.getComments = function(req, res) {
 		.findById(articleID)
 		.select('-__v -_id -article')
 		.populate('comments', '-__v -_id -article')
+		// then populate users
 		.exec(function(err, Article) {
 	    	res.send(Article.comments)
 		});
-
-
 
 };
 
