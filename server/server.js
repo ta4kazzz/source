@@ -10,24 +10,32 @@ var session      = require('express-session');
 var cors      	 = require('cors');
 var unfluff      = require('unfluff');
 var jwt          = require('express-jwt');
-// Load Config & Controllers
-var app       	 = express();
+
+// Node Environemtn Variables
+//==============================================================
+var app       	 = express()
 var port      	 = process.env.PORT || 8080;
 
-var configDB 		  = require('./config/database.js');
-var articleController = require('./app/controllers/article');
-var userController    = require('./app/controllers/user');
-var authController    = require('./app/controllers/auth');
-var commentController = require('./app/controllers/comments');
+// Database configuration
+//==============================================================
+var configDB 		 = require('./config/database.js');
 
-
-// Database ====================================================================
 mongoose.connect(configDB.url);
 
 var jwtCheck = jwt({
     secret: new Buffer('e6xsoEi8W66dPHwBRkLwWyWy3J-Nq0GnzOZ2WsQMhouv5fJDlf6MH6izwhdim0gX', 'base64'),
     audience: '5md4FZ4xtmmiMyUfiiIfccAGTXdSR8cJ'
   });
+
+
+// Controllers
+//==============================================================
+var articleController = require('./app/controllers/article');
+var userController    = require('./app/controllers/user');
+var authController    = require('./app/controllers/auth');
+var commentController = require('./app/controllers/comments');
+
+
 
 // Express Config ==============================================================
 app.use(morgan('dev')); // log every request to the console
@@ -37,15 +45,13 @@ app.use(bodyParser.json());
 app.use(cors());
 app.set('view engine', 'ejs'); // set up ejs for templating
 
-/// Authentication ========================
-// app.use(passport.initialize());
+/// Authentication ===========================================================
 
 var Auth0 = require('auth0');
 var extend = require('xtend');
 // xtend is a basic utility library which allows you to extend an object by appending 
 // all of the properties from each object in a list. When there are identical properties
 // the right-most property takes precedence.
-
 
 var authAPI = new Auth0({
   domain:       'source.auth0.com',
@@ -119,7 +125,7 @@ router.route('/users/:id/follows')
 // Endpoints for /users/:username/followers
 router.route('/users/:id/followers')
   	.get(userController.getFollowers);
-// 
+
 // Endpoints for /users/:username/followed-by
 // router.route('/users/:id/feed')
 //   	.get(userController.getFeed);
@@ -129,7 +135,6 @@ router.route('/users/:id/followers')
 router.route('/articles/:id/comments')
   .post(commentController.postComment)
   .get(commentController.getComments);
-
 
 
 

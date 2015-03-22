@@ -4,7 +4,6 @@ angular.module('source')
 
 
   // SETUP
-
    $scope.loginForm = {
       email: "",
       password: ""
@@ -21,13 +20,11 @@ angular.module('source')
   // LOGIN ============================================
 
   $scope.login = function() {
-
     auth.signin({
       connection: 'Username-Password-Authentication',
       username:   $scope.loginForm.email,
       password:   $scope.loginForm.password
     }, onLoginSuccess, onLoginFailed);
-
   };
 
 
@@ -48,7 +45,7 @@ angular.module('source')
   // the goal of this function is to set the mongoID in the localstorage
   // It takes profile as a parameter
   function setCurrentUser(profile) {
-    console.log(profile);
+
     var id = profile.user_id;
 
     API.getAuth(id)
@@ -146,8 +143,6 @@ angular.module('source')
       });
 
   };
-
-
 
 
 
