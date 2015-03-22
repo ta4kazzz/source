@@ -1,0 +1,10 @@
+{
+  "name": "sourceTabs",
+  "app_id": "a73ea148",
+  "proxies": [
+    {
+      "path": "/api",
+      "proxyUrl": "http://source.auth0.com/"
+    }
+  ]
+}
