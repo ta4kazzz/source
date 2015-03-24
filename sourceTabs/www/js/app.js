@@ -74,6 +74,16 @@ angular.module('starter', [
     }
   })
 
+
+  .state('tabs.home.add', {
+    url: '/add',
+    views: {
+      'home-tab': {
+        templateUrl: 'templates/add.html'
+      }
+    }
+  })
+
   .state('tabs.explore', {
     url: '/explore',
     views: {
@@ -97,10 +107,12 @@ angular.module('starter', [
     views: {
       'profile-tab': {
         templateUrl: 'templates/profile.html',
-        controller: 'DashCtrl'
+        controller: 'ProfileCtrl'
       }
     }
   })
+
+
 
 
 

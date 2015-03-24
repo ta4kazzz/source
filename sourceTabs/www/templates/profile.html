@@ -1,6 +1,24 @@
 <ion-view view-title="Profile">
+  <!-- Nav Bar -->
+  <ion-nav-bar class="bar-positive">
+    <ion-nav-back-button>
+  </ion-nav-back-button>
+  </ion-nav-bar>
 
-  <ion-content>
+
+
+
+  <ion-content ng-init="getProfile()">
+
+  <img style ="width: 100px; border-radius: 5em;" src="{{auth.profile.picture}}">
+  <h2>{{username}}</h2>
+  <p>Articles: {{ }}</p>
+  <a href="#/app/profile/followers"><p>Followers: {{followsNum}}</p><a>
+  <a href="#/app/profile/following"><p>Following: {{followersNum}}</p></a>
+
+
+
+
       <button class="button button-block button-warning" ng-click="logout()">
         Logout
       </button>
