@@ -35,7 +35,7 @@ angular.module('starter.controllers', [])
 //  ================================================================
 
 
-.controller('loginCtrl', function($scope, auth, $state, $location, $http, store, API) {
+.controller('loginCtrl', function($scope, auth, $state, $location, $http, API, store) {
 
    // SETUP
    $scope.loginForm = {
@@ -78,17 +78,17 @@ angular.module('starter.controllers', [])
   // It takes profile as a parameter
   function setCurrentUser(profile) {
 
-    // var id = profile.user_id;
+    var id = profile.user_id;
 
-    // API.getAuth(id)
-    //   .success(function (user, status, headers, config) {
-    //     // need to store it here without strings
-    //     window.localStorage['SourceID'] = user._id;
-    //     // store.set('SourceID', user._id);
-    //   })
-    //   .error(function (user, status, headers, config) {
-    //     console.log("woops")
-    //   });
+    API.getAuth(id)
+      .success(function (user, status, headers, config) {
+        // need to store it here without strings
+        window.localStorage['SourceID'] = user._id;
+        // store.set('SourceID', user._id);
+      })
+      .error(function (user, status, headers, config) {
+        console.log("woops")
+      });
 
   };
 

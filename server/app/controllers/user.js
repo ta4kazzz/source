@@ -233,12 +233,14 @@ exports.getUserFeed = function(req, res) {
 exports.getAuth = function(req, res) {
 
 	var id = req.params.id;
-
+	console.log(id);
+	
 	User.findOne({
 		authID: id
 	}, function(err, users) {
 		if (err)
 			res.send(err);
+			console.log("There was an error finding a user with that auth id")
 		res.json(users);
 	});
 
