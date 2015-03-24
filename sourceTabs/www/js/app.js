@@ -74,12 +74,12 @@ angular.module('starter', [
     }
   })
 
-
-  .state('tabs.home.add', {
+  .state('tabs.add', {
     url: '/add',
     views: {
       'home-tab': {
-        templateUrl: 'templates/add.html'
+        templateUrl: 'templates/add.html',
+        controller: 'addController'
       }
     }
   })
