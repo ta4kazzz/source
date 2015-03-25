@@ -57,7 +57,7 @@ angular.module('starter.controllers', [])
 
 
 
-.controller('addController', function($scope, $rootScope, $window, API, $state, auth) {
+.controller('addController', function($scope, $rootScope, $window, API, store, $state, auth) {
 
 
  
@@ -169,7 +169,7 @@ angular.module('starter.controllers', [])
     API.publishArticle(id)
       .success(function (article, status, headers, config) {
         console.log("Article Successfully published")
-
+        store.remove('ActiveArticle');
         $state.go('tabs.home');
         
       })
