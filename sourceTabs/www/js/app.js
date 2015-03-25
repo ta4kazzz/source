@@ -84,6 +84,16 @@ angular.module('starter', [
     }
   })
 
+  .state('tabs.preview', {
+    url: '/preview',
+    views: {
+      'home-tab': {
+        templateUrl: 'templates/preview.html',
+        controller: 'addController'
+      }
+    }
+  })
+
   .state('tabs.explore', {
     url: '/explore',
     views: {
