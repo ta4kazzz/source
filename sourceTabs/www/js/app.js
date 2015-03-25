@@ -83,7 +83,7 @@ angular.module('starter', [
 
 
   .state('preview', {
-      url: '/preview',
+      url: '/preview/:articleID',
       templateUrl: 'templates/preview.html',
       controller: 'addController'
   })

@@ -12,20 +12,18 @@
   
   <ion-content>
 
-	<div class="list list-inset">
-	  <label class="item item-input">
-	    <input type="text" placeholder="URL">
-	  </label>
-	  <label class="item item-input">
-	    <input type="text" placeholder="User Summary">
-	  </label>
-	</div>
+    	<div class="list list-inset">
+    	  <label class="item item-input">
+    	    <input type="text" ng-model="article.url" name="url" placeholder="url" required>
+    	  </label>
+    	  <label class="item item-input">
+    	    <input type="text" ng-model="article.summary" name="summary" placeholder="User Summary" required>
+    	  </label>
+    	</div>
 
-      <button class="button button-block button-warning" ui-sref="preview">
+      <button class="button button-block button-warning" ng-click="addArticle()">
         Preview
       </button>
-
-
 
 
   </ion-content>
