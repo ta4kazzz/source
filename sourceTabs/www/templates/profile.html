@@ -1,27 +1,34 @@
 <ion-view view-title="Profile">
   <!-- Nav Bar -->
   <ion-nav-bar class="bar-positive">
-    <ion-nav-back-button>
-  </ion-nav-back-button>
+      <ion-nav-buttons side="right">
+      <button class="button" ui-sref="tabs.settings">Settings</button>
+      </ion-nav-buttons>
   </ion-nav-bar>
 
 
 
 
   <ion-content ng-init="getProfile()">
+  <div style="
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1em;
+    max-width: 100px;
+    }">
+      <img style ="width: 100px; border-radius: 5em;" src="{{auth.profile.picture}}">
+  </div>
 
-  <img style ="width: 100px; border-radius: 5em;" src="{{auth.profile.picture}}">
-  <h2>{{username}}</h2>
-  <p>Articles: {{ }}</p>
-  <a href="#/app/profile/followers"><p>Followers: {{followsNum}}</p><a>
-  <a href="#/app/profile/following"><p>Following: {{followersNum}}</p></a>
+  <h2 style="text-align: center;">{{username}}</h2>
+
+<div class="row">
+  <div class="col">Articles: 0</div>
+  <div class="col"><a href="#/app/profile/followers"><p>Followers: <p>{{followsNum}}</p></p><a></div>
+  <div class="col"><a href="#/app/profile/following"><p>Following: <p>{{followersNum}}</p></p></a></div>
+</div>
 
 
 
-
-      <button class="button button-block button-warning" ng-click="logout()">
-        Logout
-      </button>
   </ion-content>
 
 

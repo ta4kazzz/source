@@ -4,14 +4,20 @@
   <ion-nav-bar class="bar-positive">
     <ion-nav-back-button>
   </ion-nav-back-button>
+
+    <div class="bar bar-subheader">
+
+      <div class="button-bar">
+        <a class="button" ng-click="data.filter='cat'">All</a>
+        <a class="button" ng-click="data.filter='dog'">Top</a>
+        <a class="button" ng-click="data.filter='bird'">Reccomended</a>
+      </div>      
+
+    </div>
+  
   </ion-nav-bar>
 
   <ion-content>
-	<div class="button-bar">
-	  <a class="button">All</a>
-	  <a class="button">Top</a>
-	  <a class="button">Reccomended</a>
-	</div>
 
   </ion-content>
 </ion-view>

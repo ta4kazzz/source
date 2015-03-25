@@ -122,6 +122,16 @@ angular.module('starter', [
     }
   })
 
+  .state('tabs.settings', {
+    url: '/profile/settings',
+    views: {
+      'profile-tab': {
+        templateUrl: 'templates/settings.html',
+        controller: 'DashCtrl'
+      }
+    }
+  })
+
 
 
 
