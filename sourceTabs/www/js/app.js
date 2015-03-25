@@ -74,25 +74,22 @@ angular.module('starter', [
     }
   })
 
-  .state('tabs.add', {
-    url: '/add',
-    views: {
-      'home-tab': {
-        templateUrl: 'templates/add.html',
-        controller: 'addController'
-      }
-    }
+
+  .state('add', {
+      url: '/add',
+      templateUrl: 'templates/add.html',
+      controller: 'addController'
   })
 
-  .state('tabs.preview', {
-    url: '/preview',
-    views: {
-      'home-tab': {
-        templateUrl: 'templates/preview.html',
-        controller: 'addController'
-      }
-    }
+
+  .state('preview', {
+      url: '/preview',
+      templateUrl: 'templates/preview.html',
+      controller: 'addController'
   })
+
+
+
 
   .state('tabs.explore', {
     url: '/explore',
