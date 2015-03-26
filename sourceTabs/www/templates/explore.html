@@ -8,16 +8,36 @@
     <div class="bar bar-subheader">
 
       <div class="button-bar">
-        <a class="button" ng-click="data.filter='cat'">All</a>
-        <a class="button" ng-click="data.filter='dog'">Top</a>
-        <a class="button" ng-click="data.filter='bird'">Reccomended</a>
+        <a class="button">All</a>
+        <a class="button">Users</a>
+        <!-- a class="button">Top</a> -->
       </div>      
 
     </div>
-  
+
+
   </ion-nav-bar>
 
   <ion-content>
+    <!-- Explore Feed -->
+
+
+      <div class="list" ng-init="getAllArticles()">
+
+        <a ng-repeat="articles in articles" 
+           href="#/app/reader/{{articles._id}}"
+           class="item item-thumbnail-left">
+
+          <img src="{{articles.imageUrl}}">
+          <h2>{{ articles.title }}</h2>
+          <h4>{{ articles.username }}</h4>
+          <img src="{{articles.gravatarURL}}" style="width: 20px; border-radius: 3em">
+        </a>
+
+      </div>
+
+
+
 
   </ion-content>
 </ion-view>

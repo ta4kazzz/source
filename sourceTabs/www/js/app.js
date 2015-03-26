@@ -69,7 +69,8 @@ angular.module('starter', [
     url: '/home',
     views: {
       'home-tab': {
-        templateUrl: 'templates/home.html'
+        templateUrl: 'templates/home.html',
+        controller: 'homeController'
       }
     }
   })
@@ -95,7 +96,8 @@ angular.module('starter', [
     url: '/explore',
     views: {
       'explore-tab': {
-        templateUrl: 'templates/explore.html'
+        templateUrl: 'templates/explore.html',
+        controller: 'exploreController'
       }
     }
   })

@@ -1,73 +1,37 @@
 <ion-view view-title="S O U R C E">
 
-
-
-
-
   <ion-nav-bar class="bar-positive">
    
   </ion-nav-bar>
 
 
 
+  <ion-content class="has-header">
+  <div class="home-container" style="xmax-width: 800px;">
+    <ion-list ng-init="getAllArticles()">
+      <ion-item ng-repeat="articles in articles">
+        <div class="card">
+          <div class="item item-divider">
+            <h2>{{articles.title}}</h2>
+            <p>Created: {{articles.created}}</p>
+  <!--           <p>ID: {{articles._id}}</p> -->
+            <img src="{{articles.gravatarURL}}" style="width: 50px; border-radius: 3em">
+            <a href="#/app/user/{{articles._userID}}"><p>Username: {{articles.username}}</p></a>
+          </div>
 
-
-
-  <ion-content class="padding">
-
-    <div class="list card">
-      <div class="item item-divider">Article Title</div>
-      <div class="item item-body">
-        <div>
-          This is the user summary
+          <div class="item item-text-wrap">
+            <a href="#/app/reader/{{articles._id}}">
+              <img src="{{articles.imageUrl}}" style="width:100%">
+            </a>
+            <p>{{articles.summary}}</p>
+          </div>
         </div>
-      </div>
+      </ion-item>
+    </ion-list>
     </div>
-
-    <div class="list card">
-      <div class="item item-divider">Article Title</div>
-      <div class="item item-body">
-        <div>
-          This is the user summary
-        </div>
-      </div>
-    </div>
-
-    <div class="list card">
-      <div class="item item-divider">Article Title</div>
-      <div class="item item-body">
-        <div>
-          This is the user summary
-        </div>
-      </div>
-    </div>
-
-    <div class="list card">
-      <div class="item item-divider">Article Title</div>
-      <div class="item item-body">
-        <div>
-          This is the user summary
-        </div>
-      </div>
-    </div>
-
-    <div class="list card">
-      <div class="item item-divider">Article Title</div>
-      <div class="item item-body">
-        <div>
-          This is the user summary
-        </div>
-      </div>
-    </div>
-
-    <div class="list card">
-      <div class="item item-divider">Article Title</div>
-      <div class="item item-body">
-        <div>
-          This is the user summary
-        </div>
-      </div>
-    </div>
-
   </ion-content>
+
+
+
+
 </ion-view>
