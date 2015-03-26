@@ -1,0 +1,55 @@
+<ion-view view-title="User">
+
+
+  <!-- Nav Bar -->
+ <!-- Nav Bar -->
+  <ion-nav-bar class="bar-positive">
+      <ion-nav-buttons side="left">
+      <button class="button" ui-sref="tabs.home">Close</button>
+      </ion-nav-buttons>
+  </ion-nav-bar>
+
+
+  <ion-content ng-init="getUser()">
+  <div style="
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1em;
+    max-width: 100px;
+    }">
+<!--       <img style ="width: 100px; border-radius: 5em;" src="{{auth.profile.picture}}"> -->
+<img src="{{gravatarURL}}" style="width: 100px; border-radius: 5em">
+  </div>
+
+  <h2 style="text-align: center;">{{username}}</h2>
+
+<div class="row">
+  <div class="col">Articles: 0</div>
+  <div class="col"><a href="#/app/profile/followers"><p>Followers: <p>{{followsNum}}</p></p><a></div>
+  <div class="col"><a href="#/app/profile/following"><p>Following: <p>{{followersNum}}</p></p></a></div>
+</div>
+
+
+
+
+          <div class="list" ng-init="getUserFeed()">
+
+        <a ng-repeat="articles in articles" 
+            href="#/reader/{{articles._id}}"
+           class="item item-thumbnail-left">
+
+          <img src="{{articles.imageUrl}}">
+          <h2>{{ articles.title }}</h2>
+          <h4>{{ articles.username }}</h4>
+          <img src="{{articles.gravatarURL}}" style="width: 20px; border-radius: 3em">
+        </a>
+
+      </div>
+
+
+
+
+  </ion-content>
+
+
+</ion-view>

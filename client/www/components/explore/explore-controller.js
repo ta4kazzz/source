@@ -4,9 +4,6 @@ angular.module('source')
 
 	 $rootScope.auth = auth;
 
-
-
-
 	 $scope.getAllArticles = function() {
 		 $scope.data = API.getArticles()
 		  	.success(function (data, status, headers, config) {

@@ -16,11 +16,12 @@
             <p>Created: {{articles.created}}</p>
   <!--           <p>ID: {{articles._id}}</p> -->
             <img src="{{articles.gravatarURL}}" style="width: 50px; border-radius: 3em">
-            <a href="#/app/user/{{articles._userID}}"><p>Username: {{articles.username}}</p></a>
+            <a href="#/user/{{articles._userID}}"><p>Username: {{articles.username}}</p></a>
           </div>
 
           <div class="item item-text-wrap">
-            <a href="#/app/reader/{{articles._id}}">
+            <a href="#/reader/{{articles._id}}
+            ">
               <img src="{{articles.imageUrl}}" style="width:100%">
             </a>
             <p>{{articles.summary}}</p>

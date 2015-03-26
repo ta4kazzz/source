@@ -82,6 +82,13 @@ angular.module('starter', [
       controller: 'addController'
   })
 
+    .state('reader', {
+      url: '/reader/:articleID',
+      templateUrl: 'templates/reader.html',
+      controller: 'readerController'
+  })
+
+
 
   .state('preview', {
       url: '/preview/:articleID',
@@ -119,6 +126,12 @@ angular.module('starter', [
         controller: 'ProfileCtrl'
       }
     }
+  })
+
+  .state('user', {
+    url: '/user/:userID',
+    templateUrl: 'templates/user.html',
+    controller: 'userController'   
   })
 
   .state('tabs.settings', {
