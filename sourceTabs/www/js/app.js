@@ -85,6 +85,27 @@ angular.module('starter', [
     }
   })
 
+  .state('tabs.userFollowers', {
+    url: "/user/:userID/followers",
+    views: {
+      'home-tab' :{
+        templateUrl: 'templates/user-followers.html',
+        controller: 'user-followers-controller'
+      }
+    }
+  })
+
+  .state('tabs.userFollowing', {
+    url: "/user/:userID/following",
+    views: {
+      'home-tab' :{
+        templateUrl: 'templates/user-following.html',
+        controller: 'user-following-controller'
+      }
+    }
+  })
+
+
   .state('tabs.profile', {
     url: '/profile',
     views: {
