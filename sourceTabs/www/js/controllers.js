@@ -19,6 +19,104 @@ angular.module('starter.controllers', [])
   }
 })
 
+.controller('profile-followers-controller', function($scope, API) {
+
+  $scope.getFollowers = function() {
+    
+   var id     = window.localStorage.SourceID;
+
+    $scope.users = API.getFollowers(id)
+      .success(function (data, status, headers, config) {
+        $scope.users = [];
+
+        for (var i = 0; i < data.length; i++) {
+          $scope.users.push(data[i]);
+        };
+
+
+      })
+      .error(function (users, status, headers, config) {
+        console.log("Something went wrong")
+      });
+
+  };
+
+})
+
+.controller('profile-following-controller', function($scope, $rootScope, auth, API) {
+
+  $scope.getFollows = function() {
+
+   var id     = window.localStorage.SourceID;
+
+    $scope.users = API.getFollows(id)
+      .success(function (data, status, headers, config) {
+        $scope.users = [];
+
+        for (var i = 0; i < data.length; i++) {
+          $scope.users.push(data[i]);
+        };
+
+
+      })
+      .error(function (users, status, headers, config) {
+        console.log("Something went wrong")
+      });
+
+  };
+
+})
+
+.controller('user-followers-controller', function($scope, $rootScope, auth, API,  $stateParams) {
+
+  $scope.getFollowers = function() {
+
+   var id     = $stateParams.userID;
+
+    $scope.users = API.getFollowers(id)
+      .success(function (data, status, headers, config) {
+        $scope.users = [];
+
+        for (var i = 0; i < data.length; i++) {
+          $scope.users.push(data[i]);
+        };
+
+
+      })
+      .error(function (users, status, headers, config) {
+        console.log("Something went wrong")
+      });
+
+  };
+
+
+})
+
+
+.controller('user-following-controller', function($scope, $rootScope, auth, API,  $stateParams) {
+
+$scope.getFollows = function() {
+
+   var id     = $stateParams.userID;
+
+    $scope.users = API.getFollows(id)
+      .success(function (data, status, headers, config) {
+        $scope.users = [];
+
+        for (var i = 0; i < data.length; i++) {
+          $scope.users.push(data[i]);
+        };
+
+
+      })
+      .error(function (users, status, headers, config) {
+        console.log("Something went wrong")
+      });
+
+  };
+
+})
+
 .controller('userController', function($scope, $rootScope, API, $stateParams) {
 
   $scope.user_id = $stateParams.userID;

@@ -85,6 +85,36 @@ angular.module('starter', [
     }
   })
 
+  .state('tabs.profile', {
+    url: '/profile',
+    views: {
+      'profile-tab': {
+        templateUrl: 'templates/profile.html',
+        controller: 'ProfileCtrl'
+      }
+    }
+  })
+
+  .state('tabs.profileFollowers', {
+    url: "/profile/followers",
+    views: {
+      'profile-tab' :{
+        templateUrl: 'templates/profile-followers.html',
+        controller: 'profile-followers-controller'
+      }
+    }
+  })
+
+  .state('tabs.profileFollowing', {
+    url: "/profile/following",
+    views: {
+      'profile-tab' :{
+        templateUrl: 'templates/profile-following.html',
+        controller: 'profile-following-controller'
+      }
+    }
+  })
+
 
   .state('add', {
       url: '/add',
@@ -128,15 +158,6 @@ angular.module('starter', [
     }
   })
   
-  .state('tabs.profile', {
-    url: '/profile',
-    views: {
-      'profile-tab': {
-        templateUrl: 'templates/profile.html',
-        controller: 'ProfileCtrl'
-      }
-    }
-  })
 
 
   .state('tabs.settings', {
@@ -148,6 +169,10 @@ angular.module('starter', [
       }
     }
   })
+
+
+
+
 
 
 

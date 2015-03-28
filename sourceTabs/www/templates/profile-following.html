@@ -1,13 +1,27 @@
 <ion-view view-title="Following">
   <!-- Nav Bar -->
   <ion-nav-bar class="bar-positive">
+
+  <ion-nav-back-button>
+  </ion-nav-back-button>
   </ion-nav-bar>
 
 
 
 
   <ion-content>
+  <ion-list ng-init="getFollows()">
+      <ion-item ng-repeat="users in users">
 
+  <a class="item item-thumbnail-left" href="#/tab/user/{{users._id}}">
+      <img src="{{users.gravatarURL}}">
+      <h2>{{users.username}}</h2>
+    </a>
+
+
+
+      </ion-item>
+    </ion-list>
 
 
 
