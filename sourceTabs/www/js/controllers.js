@@ -262,8 +262,23 @@ $scope.getFollows = function() {
 })
 
 
-.controller('homeController', function($rootScope, $scope, auth, API) {
+.controller('homeController', function($rootScope, $scope, auth, API, $timeout) {
    $rootScope.auth = auth;
+
+  $scope.doRefresh = function() {
+
+    $scope.getAllArticles();
+
+
+    console.log('Refreshing');
+
+    $timeout(function() {
+      $scope.$broadcast('scroll.refreshComplete');
+      $scope.$broadcast('scroll.refreshComplete');
+    }, 1250);
+  };
+
+
 
 
  $scope.getAllArticles = function() {
