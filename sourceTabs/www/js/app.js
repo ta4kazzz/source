@@ -75,6 +75,16 @@ angular.module('starter', [
     }
   })
 
+  .state('tabs.user', {
+    url: '/user/:userID',
+    views: {
+      'home-tab': {
+        templateUrl: 'templates/user.html',
+        controller: 'userController'
+      }
+    }
+  })
+
 
   .state('add', {
       url: '/add',
@@ -128,11 +138,6 @@ angular.module('starter', [
     }
   })
 
-  .state('user', {
-    url: '/user/:userID',
-    templateUrl: 'templates/user.html',
-    controller: 'userController'   
-  })
 
   .state('tabs.settings', {
     url: '/profile/settings',
