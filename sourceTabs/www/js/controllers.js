@@ -7,6 +7,7 @@ angular.module('starter.controllers', [])
     store.remove('token');
     store.remove('profile');
     store.remove('refreshToken');
+    store.remove('SourceID');
     $state.go('landing', {}, {reload: true});
   };
 
@@ -120,55 +121,48 @@ $scope.getFollows = function() {
 .controller('userController', function($scope, $rootScope, API, $stateParams) {
 
   $scope.user_id = $stateParams.userID;
-
   
   $scope.followUser = function() {
+    // the ID is the person who is logged in and doing the adding action
+    var id = window.localStorage.SourceID;
+    // The user is who we want to "follow" - or add to pat's list
+    var user = {
+      _id: $stateParams.userID
+    };
 
-  // the ID is the person who is logged in and doing the adding action
-  var id = window.localStorage.SourceID;
-
-  // The user is who we want to "follow" - or add to pat's list
-  var user = {
-    _id: $stateParams.userID
-  };
-
-  console.log(id);
-  console.log(user)
-
-  API.followUser(id, user)
-    .success(function (user, status, headers, config) {
-        // turn the button to unfolow
-        console.log("sent")
-        console.log(user);
-      })
-    .error(function (user, status, headers, config) {
-        console.log("Something went wrong")
-      });
-
+    API.followUser(id, user)
+      .success(function (user, status, headers, config) {
+          // turn the button to unfolow
+          console.log("sent")
+          console.log(user);
+        })
+      .error(function (user, status, headers, config) {
+          console.log("Something went wrong")
+        });
 
   };
+
+
 
   $scope.unfollowUser = function() {
 
-  // the ID is the person who is logged in and doing the adding action
-  var id = window.localStorage.SourceID;
+    // the ID is the person who is logged in and doing the adding action
+    var id = window.localStorage.SourceID;
 
-  // The user is who we want to "follow" - or add to pat's list
-  var user = {
-    _id: $stateParams.userID
-  };
-
-  
-  API.unfollowUser(id, user)
-    .success(function (user, status, headers, config) {
-        // turn the button to unfolow
-        console.log("sent")
-        console.log(user);
-      })
-    .error(function (user, status, headers, config) {
-        console.log("Something went wrong")
-      });
-
+    // The user is who we want to "follow" - or add to pat's list
+    var user = {
+      _id: $stateParams.userID
+    };
+    
+    API.unfollowUser(id, user)
+      .success(function (user, status, headers, config) {
+          // turn the button to unfolow
+          console.log("sent")
+          console.log(user);
+        })
+      .error(function (user, status, headers, config) {
+          console.log("Something went wrong")
+        });
 
   };
 
@@ -205,18 +199,12 @@ $scope.getFollows = function() {
             }
         };
 
-
       })
       .error(function (article, status, headers, config) {
         console.log("Something went wrong")
       });
 
-
-
-
   };
-
-
 
 
 })
@@ -502,10 +490,10 @@ $scope.getFollows = function() {
 
 
 .controller('ProfileCtrl', function($rootScope, $scope, auth, API) {
+
+
 $scope.auth = auth;
   
-
-
   $scope.getProfile = function() {
 
     var id  = window.localStorage.SourceID;
@@ -736,10 +724,6 @@ $scope.auth = auth;
   // });
 
   // doAuth();
-
-
-
-
 
 
 

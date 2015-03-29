@@ -43,8 +43,6 @@ exports.postUsers = function(req, res) {
 
 // GET
 exports.getUsers = function(req, res) {
-
-
 	User.find(function(err, users) {
 			if (err)
 				res.send(err);
