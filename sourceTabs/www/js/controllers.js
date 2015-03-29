@@ -120,6 +120,10 @@ $scope.getFollows = function() {
 
 
 
+// =================================================================
+//                           USER CONTROLLER 
+//  ================================================================
+
 
 .controller('userController', function($scope, $rootScope, API, $stateParams) {
 
@@ -198,9 +202,11 @@ $scope.getFollows = function() {
               $scope.users = API.getFollowers(id)
                 .success(function (data, status, headers, config) {
                   $scope.users = [];
-                  // console.log(data.length);
                   $scope.followerNumber = data.length;
-                  console.log($scope.followerNumber);
+
+                  // if our name is in the list, then turn that thing to true
+                  // turn that variable true/false
+
                 })
                 .error(function (users, status, headers, config) {
                   console.log("Something went wrong")
@@ -531,15 +537,17 @@ $scope.getFollows = function() {
 
 
 
-
-
-
-
-
 })
 
 
-.controller('ProfileCtrl', function($rootScope, $scope, auth, API) {
+
+
+// =================================================================
+//                           #PROFILE_CONTROLLER 
+//  ================================================================
+
+
+.controller('ProfileCtrl', function($rootScope, $scope, auth, API, $stateParams) {
 
 
 $scope.auth = auth;
@@ -552,13 +560,52 @@ $scope.auth = auth;
       .success(function (user, status, headers, config) {
         console.log("Your profile successfully retreived")
         $scope.username = user.username;
-        $scope.followsNum = user.counts.follows;
-        $scope.followersNum = user.counts.followed_by;
+        // $scope.followsNum = user.counts.follows;
+        // $scope.followersNum = user.counts.followed_by;
+      $scope.getFollowers();
+      $scope.getFollows();
+
       })
       .error(function (user, status, headers, config) {
         console.log("Your profile was not retreived")
 
       });
+
+
+            $scope.getFollowers = function() {
+             // var id     = $stateParams.userID;
+              $scope.users = API.getFollowers(id)
+                .success(function (data, status, headers, config) {
+                  $scope.users = [];
+                  $scope.profileFollowerNumber = data.length;
+
+                  // if our name is in the list, then turn that thing to true
+                  // turn that variable true/false
+
+                })
+                .error(function (users, status, headers, config) {
+                  console.log("Something went wrong")
+                });
+            };
+
+
+            $scope.getFollows = function() {
+                $scope.users = API.getFollows(id)
+                  .success(function (data, status, headers, config) {
+                    $scope.users = [];
+                    console.log(data.length);
+                    $scope.profileFollowingNumber = data.length;
+
+
+
+                  })
+                  .error(function (users, status, headers, config) {
+                    console.log("Something went wrong")
+                  });
+
+              };
+
+
 
   };
 
@@ -570,6 +617,9 @@ $scope.auth = auth;
     $scope.data = API.getUsersArticles(user_id)
       .success(function (data, status, headers, config) {
         $scope.articles = [];
+
+       $scope.profileArticleNumber = data.length;
+
 
         for (var i = 0; i < data.length; i++) {
             if (data[i].public == true) {
