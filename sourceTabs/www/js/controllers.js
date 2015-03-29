@@ -118,10 +118,17 @@ $scope.getFollows = function() {
 
 })
 
+
+
+
 .controller('userController', function($scope, $rootScope, API, $stateParams) {
 
+  // if the user follows this user then showme = true
+
   $scope.user_id = $stateParams.userID;
-  
+
+
+
   $scope.followUser = function() {
     // the ID is the person who is logged in and doing the adding action
     var id = window.localStorage.SourceID;
@@ -177,13 +184,53 @@ $scope.getFollows = function() {
     .success(function (user, status, headers, config) {
       $scope.username = user.username;
       $scope.gravatarURL = user.gravatarURL;
+      $scope.getFollowers();
+      $scope.getFollows();
     })
     .error(function (user, status, headers, config) {
       console.log("Something went wrong")
     });
 
 
+
+            $scope.getFollowers = function() {
+             // var id     = $stateParams.userID;
+              $scope.users = API.getFollowers(id)
+                .success(function (data, status, headers, config) {
+                  $scope.users = [];
+                  // console.log(data.length);
+                  $scope.followerNumber = data.length;
+                  console.log($scope.followerNumber);
+                })
+                .error(function (users, status, headers, config) {
+                  console.log("Something went wrong")
+                });
+            };
+
+
+
+
+            $scope.getFollows = function() {
+               var id     = $stateParams.userID;
+                $scope.users = API.getFollows(id)
+                  .success(function (data, status, headers, config) {
+                    $scope.users = [];
+
+                    console.log(data.length);
+                   $scope. followingNumber = data.length;
+
+
+
+                  })
+                  .error(function (users, status, headers, config) {
+                    console.log("Something went wrong")
+                  });
+
+              };
   };
+
+
+
 
   $scope.getUserFeed = function() {
 
@@ -192,6 +239,8 @@ $scope.getFollows = function() {
     $scope.data = API.getUsersArticles(user_id)
       .success(function (data, status, headers, config) {
         $scope.articles = [];
+
+        $scope.articleNumber = data.length;
 
         for (var i = 0; i < data.length; i++) {
             if (data[i].public == true) {
@@ -205,6 +254,7 @@ $scope.getFollows = function() {
       });
 
   };
+
 
 
 })
@@ -536,9 +586,6 @@ $scope.auth = auth;
 
 
   };
-
-
-  
 
 
 
