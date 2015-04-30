@@ -585,6 +585,12 @@ $scope.getFollows = function() {
 
 .controller('savedController', function($scope) {
 
+  $scope.getSaved = function() {
+
+
+
+  };
+
 
 })
 

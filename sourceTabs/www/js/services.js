@@ -156,6 +156,11 @@ angular.module('starter.services', [])
             });
         },
 
+        getFollowers: function (id) {
+            return $http.get(base+'/api/users/' + id +'/followers', {
+                method: 'GET',
+            });
+        },
 
 
 
