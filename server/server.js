@@ -118,6 +118,7 @@ router.route('/users/:id/articles')
 
 // Endpoints for /users/:id/saved
 router.route('/users/:id/saved')
+  .post(userController.saveForLater);
   .get(userController.getSaved);
 
 // Endpoints for /users/:username/follows

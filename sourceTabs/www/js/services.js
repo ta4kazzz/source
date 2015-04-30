@@ -50,7 +50,7 @@ angular.module('starter.services', [])
     return {
 
         //  =====================================================
-        //   ARTICLES 
+        //   ARTICLES
         //  =====================================================
 
         getArticles: function () {
@@ -93,7 +93,7 @@ angular.module('starter.services', [])
                 method: 'GET',
             });
         },
-        
+
 
         getUser: function (id) {
             return $http.get(base+'/api/users/' + id, {
@@ -105,8 +105,7 @@ angular.module('starter.services', [])
             return $http.get(base+'/api/users/' + id +'/feed', {
                 method: 'GET',
            });
-        }, 
-
+        },
 
         postUser: function (user) {
             return $http.post(base+'/api/users', user, {
@@ -114,15 +113,13 @@ angular.module('starter.services', [])
             });
         },
 
-
-
         getAuth: function (id) {
             return $http.get(base+'/api/users/auth/' + id, {
                 method: 'GET',
             });
         },
 
-        
+
         getUsersArticles: function (id) {
             return $http.get(base+'/api/users/' + id +'/articles', {
                 method: 'GET',
@@ -150,6 +147,12 @@ angular.module('starter.services', [])
         getFollowers: function (id) {
             return $http.get(base+'/api/users/' + id +'/followers', {
                 method: 'GET',
+            });
+        },
+
+        saveForLater: function (id, user) {
+            return $http.post(base+'/api/users/' + id + '/saved', user, {
+                method: 'POST',
             });
         },
 

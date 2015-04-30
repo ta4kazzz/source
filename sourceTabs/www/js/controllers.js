@@ -347,9 +347,18 @@ $scope.getFollows = function() {
 
 
   $scope.saveForLater = function(articleID) {
-    // {{articles._id}}
-    $scope.id = articleID;
-    console.log($scope.id);
+
+    var id      = articleID;
+    var user  = window.localStorage.SourceID;
+
+    API.saveForLater(id, user)
+      .success(function (article, status, headers, config) {
+        // make button reflect the change
+        console.log("Article successfully saved for later")
+      })
+      .error(function (article, status, headers, config) {
+        console.log("Error when saving the article for later")
+      });
 
   };
 
