@@ -49,7 +49,7 @@ app.set('view engine', 'ejs'); // set up ejs for templating
 
 var Auth0 = require('auth0');
 var extend = require('xtend');
-// xtend is a basic utility library which allows you to extend an object by appending 
+// xtend is a basic utility library which allows you to extend an object by appending
 // all of the properties from each object in a list. When there are identical properties
 // the right-most property takes precedence.
 
@@ -91,7 +91,7 @@ router.route('/articles/:id')
   .get(articleController.getArticle)
   .put(articleController.putArticle)
   .delete(articleController.deleteArticle);
-  
+
 // ============== USERS ========================
 
 // Endpoints for /users
@@ -116,6 +116,10 @@ router.route('/users/auth/:id')
 router.route('/users/:id/articles')
   .get(userController.getArticles);
 
+// Endpoints for /users/:id/saved
+router.route('/users/:id/saved')
+  .get(userController.getSaved);
+
 // Endpoints for /users/:username/follows
 router.route('/users/:id/follows')
 	.post(userController.postFollows)
@@ -138,7 +142,7 @@ router.route('/articles/:id/comments')
 
 
 
- 
+
 app.use('/api', router);
 
 // launch ======================================================================

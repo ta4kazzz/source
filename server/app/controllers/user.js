@@ -8,7 +8,7 @@ var mongoose 	 = require('mongoose');
 //               /users
 // ====================================================
 
-// POST 
+// POST
 exports.postUsers = function(req, res) {
 	var user = new User({
 		email: req.body.email,
@@ -28,7 +28,7 @@ exports.postUsers = function(req, res) {
 			res.send(err);
 
 		res.json(
-			{ 
+			{
 				message: 'New User has been added!',
 				email: user.email,
 				username: user.username,
@@ -72,7 +72,36 @@ exports.getUser = function(req, res) {
 // ====================================================
 //               /users/:userID/articles
 // ====================================================
+
+// GET
 exports.getArticles = function(req, res) {
+
+	var userID = mongoose.Types.ObjectId(req.params.id);
+	// console.log(userID);
+
+	User.findById(userID).populate('saved').exec(function(err, user) {
+    	res.send(user.articles)
+	});
+
+};
+
+
+// ====================================================
+//               /users/:userID/saved
+// ====================================================
+
+// POST
+exports.postUsers = function(req, res) {
+
+	var userID = mongoose.Types.ObjectId(req.params.id);
+
+
+
+};
+
+
+// GET
+exports.getSaved = function(req, res) {
 
 	var userID = mongoose.Types.ObjectId(req.params.id);
 	console.log(userID);
@@ -82,6 +111,8 @@ exports.getArticles = function(req, res) {
 	});
 
 };
+
+
 
 
 // ====================================================
@@ -205,12 +236,12 @@ exports.getUserFeed = function(req, res) {
 	User
 		.findById(userID)
 		.exec(function(err, user) {
-			
+
 			var data = user.follows;
 			// console.log(data);
 			// now the list of userIDs is in an array called data
 			// we need to pass this into the other query
-			// search those susers "recent array", or just get their most recent 
+			// search those susers "recent array", or just get their most recent
 
 			Article
 				.where('_userID').in(data)
@@ -232,7 +263,7 @@ exports.getAuth = function(req, res) {
 
 	var id = req.params.id;
 	console.log(id);
-	
+
 	User.findOne({
 		authID: id
 	}, function(err, users) {
@@ -243,7 +274,3 @@ exports.getAuth = function(req, res) {
 	});
 
 };
-
-
-
-

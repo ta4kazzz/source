@@ -1,3 +1,21 @@
+// =================================================================
+// TABLE OF CONTENTS
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//  ================================================================
+
+
+
+
+
 angular.module('starter.controllers', [])
 
 .controller('DashCtrl', function($scope, auth, store, $state) {
@@ -23,7 +41,7 @@ angular.module('starter.controllers', [])
 .controller('profile-followers-controller', function($scope, API) {
 
   $scope.getFollowers = function() {
-    
+
    var id     = window.localStorage.SourceID;
 
     $scope.users = API.getFollowers(id)
@@ -121,7 +139,7 @@ $scope.getFollows = function() {
 
 
 // =================================================================
-//                           USER CONTROLLER 
+//                           USER CONTROLLER
 //  ================================================================
 
 
@@ -164,7 +182,7 @@ $scope.getFollows = function() {
     var user = {
       _id: $stateParams.userID
     };
-    
+
     API.unfollowUser(id, user)
       .success(function (user, status, headers, config) {
           // turn the button to unfolow
@@ -179,7 +197,7 @@ $scope.getFollows = function() {
 
 
   $scope.getUser = function() {
-  // code goes here that gets the user information 
+  // code goes here that gets the user information
 
   var id = $stateParams.userID;
   console.log(id);
@@ -265,6 +283,9 @@ $scope.getFollows = function() {
 
 })
 
+// =================================================================
+//                           #EXPLORE CONTROLLER
+//  ================================================================
 
 .controller('exploreController', function($scope, API, auth, $rootScope) {
 
@@ -305,14 +326,16 @@ $scope.getFollows = function() {
 
 })
 
+// =================================================================
+//                           #HOME CONTROLLER
+//  ================================================================
 
-.controller('homeController', function($rootScope, $scope, auth, API, $timeout) {
+.controller('homeController', function($rootScope, $scope, auth, API, $timeout, $stateParams) {
    $rootScope.auth = auth;
 
   $scope.doRefresh = function() {
 
     $scope.getAllArticles();
-
 
     console.log('Refreshing');
 
@@ -323,20 +346,28 @@ $scope.getFollows = function() {
   };
 
 
+  $scope.saveForLater = function(articleID) {
+    // {{articles._id}}
+    $scope.id = articleID;
+    console.log($scope.id);
+
+  };
 
 
- $scope.getAllArticles = function() {
+  $scope.likeArticle = function() {
+
+  };
+
+
+  $scope.getAllArticles = function() {
      $scope.data = API.getArticles()
         .success(function (data, status, headers, config) {
          $scope.articles = [];
-
               for (var i = 0; i < data.length; i++) {
                   if (data[i].public == true) {
                       $scope.articles.push(data[i]);
                   }
               };
-
-
         }).error(function (data, status, headers, config) {
               console.log('someting went wrong')
           });
@@ -345,42 +376,34 @@ $scope.getFollows = function() {
 
 
    $scope.getHomeFeed = function() {
+     var id  = window.localStorage.SourceID;
 
-   var id  = window.localStorage.SourceID;
-
-
-   $scope.data = API.getHomeFeed(id)
-      .success(function (data, status, headers, config) {
-       $scope.articles = [];
-
-            for (var i = 0; i < data.length; i++) {
-                if (data[i].public == true) {
-                    $scope.articles.push(data[i]);
-                }
-            };
-
-
-      }).error(function (data, status, headers, config) {
-            console.log('someting went wrong')
-        });
-
+     $scope.data = API.getHomeFeed(id)
+        .success(function (data, status, headers, config) {
+         $scope.articles = [];
+              for (var i = 0; i < data.length; i++) {
+                  if (data[i].public == true) {
+                      $scope.articles.push(data[i]);
+                  }
+              };
+        }).error(function (data, status, headers, config) {
+              console.log('someting went wrong')
+          });
    };
 
 
 })
 
 
-
-.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-  $scope.chat = Chats.get($stateParams.chatId);
-})
-
+// =================================================================
+//                           #READER CONTROLLER
+//  ================================================================
 
 
 .controller('readerController', function($scope, $rootScope, API, $stateParams) {
 
   $scope.getContent = function() {
-  // code goes here that gets the article information 
+  // code goes here that gets the article information
   // and displays it before turning the public switch on
 
   var id = $stateParams.articleID;
@@ -406,13 +429,13 @@ $scope.getFollows = function() {
 })
 
 
-
-
+// =================================================================
+//                           #Add Controller
+//  ================================================================
 
 .controller('addController', function($scope, $rootScope, $window, API, store, $state, auth) {
 
 
- 
 // Allows us to post gravatar in preview
   $rootScope.auth = auth;
 
@@ -443,7 +466,6 @@ $scope.getFollows = function() {
       .error(function (article, status, headers, config) {
         console.log("error when getting the user")
       });
-
 
 
 
@@ -523,13 +545,11 @@ $scope.getFollows = function() {
         console.log("Article Successfully published")
         store.remove('ActiveArticle');
         $state.go('tabs.home');
-        
+
       })
       .error(function (article, status, headers, config) {
         console.log("Error when retreiving full article")
       });
-
-
 
 
 
@@ -543,7 +563,7 @@ $scope.getFollows = function() {
 
 
 // =================================================================
-//                           #PROFILE_CONTROLLER 
+//                           #PROFILE_CONTROLLER
 //  ================================================================
 
 
@@ -551,7 +571,7 @@ $scope.getFollows = function() {
 
 
 $scope.auth = auth;
-  
+
   $scope.getProfile = function() {
 
     var id  = window.localStorage.SourceID;
@@ -646,7 +666,7 @@ $scope.auth = auth;
 
 
 // =================================================================
-//                           LOGIN CONTROLLER 
+//                           LOGIN CONTROLLER
 //  ================================================================
 
 
@@ -728,7 +748,7 @@ $scope.auth = auth;
 
     // Creates a User in Auth0 Database
     $http({
-      method: 'POST', 
+      method: 'POST',
       url: 'http://source-application.herokuapp.com/signup',
       data: {
         email:      newUser.email,
@@ -825,4 +845,3 @@ $scope.auth = auth;
 
 
 });
-
