@@ -134,5 +134,3 @@ exports.deleteArticle = function(req, res) {
     res.json({ message: 'Article successfully removed' });
   });
 };
-    
-

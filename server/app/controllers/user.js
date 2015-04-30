@@ -76,14 +76,17 @@ exports.getUser = function(req, res) {
 // GET
 exports.getArticles = function(req, res) {
 
-	var userID = mongoose.Types.ObjectId(req.params.id);
-	// console.log(userID);
+	// var userID = mongoose.Types.ObjectId(req.params.id);
+	// // console.log(userID);
+	//
+	// User.findById(userID).populate('saved').exec(function(err, user) {
+  //   	res.send(user.articles)
+	// });
 
-	User.findById(userID).populate('saved').exec(function(err, user) {
-    	res.send(user.articles)
-	});
+	console.log("here");
 
 };
+
 
 
 // ====================================================

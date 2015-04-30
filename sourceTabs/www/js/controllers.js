@@ -348,11 +348,11 @@ $scope.getFollows = function() {
 
   $scope.saveForLater = function(articleID) {
 
-    var id      = articleID;
+    var id    = articleID;
     var user  = window.localStorage.SourceID;
 
-    API.saveForLater(id, user)
-      .success(function (article, status, headers, config) {
+    API.saveForLater(id)
+      .success(function (article, user, status, headers, config) {
         // make button reflect the change
         console.log("Article successfully saved for later")
       })
