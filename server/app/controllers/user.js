@@ -76,14 +76,13 @@ exports.getUser = function(req, res) {
 // GET
 exports.getArticles = function(req, res) {
 
-	// var userID = mongoose.Types.ObjectId(req.params.id);
-	// // console.log(userID);
-	//
-	// User.findById(userID).populate('saved').exec(function(err, user) {
-  //   	res.send(user.articles)
-	// });
+	var userID = mongoose.Types.ObjectId(req.params.id);
+	// console.log(userID);
 
-	console.log("here");
+	User.findById(userID).populate('saved').exec(function(err, user) {
+    	res.send(user.articles)
+	});
+
 
 };
 
@@ -96,9 +95,22 @@ exports.getArticles = function(req, res) {
 // POST
 exports.saveForLater = function(req, res) {
 
-	var userID = mongoose.Types.ObjectId(req.params.id);
+	var userID 		= mongoose.Types.ObjectId(req.body.userID);
+	var articleID = mongoose.Types.ObjectId(req.body.articleID);
 
-	console.log("It's working");
+
+	console.log("The user id is " + userID);
+	console.log("The article id is " + articleID);
+
+
+	User.findByIdAndUpdate(
+			userID,
+			{$push: {"articles": articleID}},
+			{safe: true, upsert: true},
+			function(err, model) {
+					console.log(err);
+			}
+	);
 
 
 };

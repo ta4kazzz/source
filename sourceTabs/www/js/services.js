@@ -150,8 +150,8 @@ angular.module('starter.services', [])
             });
         },
 
-        saveForLater: function (id, user) {
-            return $http.post(base+'/api/users/' + id + '/saved', user, {
+        saveForLater: function (savedArticle) {
+            return $http.post(base+'/api/users/' + savedArticle.userID + '/saved', savedArticle, {
                 method: 'POST',
             });
         },

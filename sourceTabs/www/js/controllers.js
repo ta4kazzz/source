@@ -348,10 +348,17 @@ $scope.getFollows = function() {
 
   $scope.saveForLater = function(articleID) {
 
-    var id    = articleID;
-    var user  = window.localStorage.SourceID;
+    var userID      = window.localStorage.SourceID;
+    var articleID    = articleID;
 
-    API.saveForLater(id)
+    var savedArticle = {
+      articleID: articleID,
+      userID: userID
+    };
+
+    console.log(savedArticle);
+
+    API.saveForLater(savedArticle)
       .success(function (article, user, status, headers, config) {
         // make button reflect the change
         console.log("Article successfully saved for later")
@@ -361,6 +368,7 @@ $scope.getFollows = function() {
       });
 
   };
+
 
 
   $scope.likeArticle = function() {
