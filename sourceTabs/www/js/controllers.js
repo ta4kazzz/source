@@ -583,9 +583,31 @@ $scope.getFollows = function() {
 //                           #SAVED_CONTROLLER
 //  ================================================================
 
-.controller('savedController', function($scope) {
+.controller('savedController', function($scope, API) {
 
   $scope.getSaved = function() {
+
+
+    var id   = window.localStorage.SourceID;
+
+
+     $scope.users = API.getSaved(id)
+       .success(function (data, status, headers, config) {
+         $scope.articles = [];
+
+         for (var i = 0; i < data.length; i++) {
+           $scope.articles.push(data[i]);
+         };
+
+         $scope.savedArticlesNumber = data.length;
+
+
+       })
+       .error(function (users, status, headers, config) {
+         console.log("Something went wrong")
+       });
+
+
 
 
 

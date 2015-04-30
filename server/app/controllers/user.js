@@ -119,11 +119,12 @@ exports.getSaved = function(req, res) {
 
 	var userID = mongoose.Types.ObjectId(req.params.id);
 
-	// console.log(userID);
-	//
-	// User.findById(userID).populate('articles').exec(function(err, user) {
-  //   	res.send(user.articles)
-	// });
+	console.log(userID);
+
+
+	User.findById(userID).populate('saved').exec(function(err, user) {
+    	res.send(user.saved)
+	});
 
 };
 

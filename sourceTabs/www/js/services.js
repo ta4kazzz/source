@@ -156,8 +156,8 @@ angular.module('starter.services', [])
             });
         },
 
-        getFollowers: function (id) {
-            return $http.get(base+'/api/users/' + id +'/followers', {
+        getSaved: function (id) {
+            return $http.get(base+'/api/users/' + id +'/saved', {
                 method: 'GET',
             });
         },
