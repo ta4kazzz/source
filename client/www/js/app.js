@@ -247,6 +247,3 @@ angular.module('source', ['ionic', 'source.controllers', 'source.services', 'aut
       }
     });
 });
-
-
-

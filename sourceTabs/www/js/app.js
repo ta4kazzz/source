@@ -6,8 +6,8 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', [
-  'ionic', 
-  'starter.controllers', 
+  'ionic',
+  'starter.controllers',
   'starter.services',
   'auth0',
   'angular-storage',
@@ -143,6 +143,12 @@ angular.module('starter', [
       controller: 'addController'
   })
 
+  .state('saved', {
+      url: '/saved',
+      templateUrl: 'templates/saved.html',
+      controller: 'savedController'
+  })
+
     .state('reader', {
       url: '/reader/:articleID',
       templateUrl: 'templates/reader.html',
@@ -178,7 +184,7 @@ angular.module('starter', [
       }
     }
   })
-  
+
 
 
   .state('tabs.settings', {
@@ -190,13 +196,6 @@ angular.module('starter', [
       }
     }
   })
-
-
-
-
-
-
-
 
 
   // if none of the above states are matched, use this as the fallback
