@@ -102,16 +102,14 @@ exports.saveForLater = function(req, res) {
 	console.log("The user id is " + userID);
 	console.log("The article id is " + articleID);
 
-
 	User.findByIdAndUpdate(
 			userID,
-			{$push: {"articles": articleID}},
+			{$push: {"saved": articleID}},
 			{safe: true, upsert: true},
 			function(err, model) {
 					console.log(err);
 			}
 	);
-
 
 };
 
