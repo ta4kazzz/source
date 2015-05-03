@@ -198,7 +198,17 @@ angular.module('starter', [
     views: {
       'profile-tab': {
         templateUrl: 'templates/settings.html',
-        controller: 'DashCtrl'
+        controller: 'settings-controller'
+      }
+    }
+  })
+
+  .state('tabs.edit-settings', {
+    url: '/profile/edit-settings',
+    views: {
+      'profile-tab': {
+        templateUrl: 'templates/edit-settings.html',
+        controller: 'settings-controller'
       }
     }
   })

@@ -93,11 +93,11 @@ exports.getUsers = function(req, res) {
 exports.getUser = function(req, res) {
 	var id = req.params.id;
 
-
 	User.findById(id, function(err, users) {
 		if (err)
 			res.send(err);
 		res.json(users);
+		console.log(users);
 	});
 
 };

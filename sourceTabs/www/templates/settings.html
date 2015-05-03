@@ -11,21 +11,21 @@
 
 
 
-  <ion-content>
+  <ion-content ng-init="getProfile()">
 
-  <div class="list">
-    <label class="item item-input">
-      <span class="input-label">Username</span>
-      <input type="text">
-    </label>
-    <label class="item item-input">
-      <span class="input-label">Email</span>
-      <input type="password">
-    </label>
-  </div>
 
-    <button class="button button-small">
-      Save
+    <h4>Welcome To Settings</h4>
+    <p>Username: {{username}}</p>
+    <p>Email: {{email}}</p>
+    <p>Description: {{}}</p>
+    <!-- <p>Avatar:</p>  <img style ="width: 100px; border-radius: 5em;" src="{{auth.profile.picture}}"> -->
+
+
+    <button class="button button-full button-dark">
+      Edit Profile
+    </button>
+    <button class="button button-full button-dark">
+      Change Password
     </button>
 
 </ion-view>

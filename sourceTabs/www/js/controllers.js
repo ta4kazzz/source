@@ -18,6 +18,39 @@
 
 angular.module('starter.controllers', [])
 
+
+.controller('settings-controller', function($scope, auth, store, $state, API) {
+
+  $scope.getProfile = function() {
+
+    var id  = window.localStorage.SourceID;
+
+    API.getUser(id)
+      .success(function (user, status, headers, config) {
+        console.log("Your profile successfully retreived")
+        $scope.username = user.username;
+        $scope.email = user.email;
+      })
+      .error(function (user, status, headers, config) {
+        console.log("Your profile was not retreived")
+
+      });
+  };
+
+
+
+})
+
+
+
+
+
+
+
+
+
+
+
 .controller('DashCtrl', function($scope, auth, store, $state) {
 
   $scope.logout = function() {
