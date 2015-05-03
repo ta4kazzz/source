@@ -526,10 +526,15 @@ $scope.getFollows = function() {
     var userID      = window.localStorage.SourceID;
 
     API.getHomeFeed(userID)
-      .success(function (article, user, status, headers, config) {
-        console.log("Home feed is here")
+      .success(function (data, user, status, headers, config) {
+               $scope.articles = [];
+                    for (var i = 0; i < data.length; i++) {
+                        if (data[i].public == true) {
+                            $scope.articles.push(data[i]);
+                        }
+                    };
       })
-      .error(function (article, status, headers, config) {
+      .error(function (data, status, headers, config) {
         console.log("Error when getting home feed")
       });
 

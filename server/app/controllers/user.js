@@ -27,9 +27,9 @@ exports.getHomeFeed = function(req, res) {
 						FollowIDs.push(user.follows[i]);
 		      };
 
-
 					Article
 						.where('_userID').in(FollowIDs)
+						.sort({created: 'desc'})
 						.exec(function(err, articles) {
 								res.send(articles)
 						});
