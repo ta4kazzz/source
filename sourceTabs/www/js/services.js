@@ -148,8 +148,8 @@ angular.module('starter.services', [])
         },
 
 
-        getUsersArticles: function (id) {
-            return $http.get(base+'/api/users/' + id +'/articles', {
+        getUsersArticles: function (userID) {
+            return $http.get(base+'/api/users/' + userID +'/articles', {
                 method: 'GET',
             });
         },

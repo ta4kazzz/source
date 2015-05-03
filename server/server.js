@@ -125,7 +125,7 @@ router.route('/users/auth/:id')
 
 // Endpoints for /users/:username/articles
 router.route('/users/:id/articles')
-  .get(userController.getArticles);
+  .get(userController.getUserArticles);
 
 // Endpoints for /users/:id/saved
 router.route('/users/:id/saved')

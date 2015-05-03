@@ -110,14 +110,15 @@ exports.getUser = function(req, res) {
 // ====================================================
 
 // GET
-exports.getArticles = function(req, res) {
+exports.getUserArticles = function(req, res) {
 
 	var userID = mongoose.Types.ObjectId(req.params.id);
-	// console.log(userID);
 
-	User.findById(userID).populate('saved').exec(function(err, user) {
+	User.findById(userID)
+		.populate('articles')
+		.exec(function(err, user) {
     	res.send(user.articles)
-	});
+		});
 
 
 };

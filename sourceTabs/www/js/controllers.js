@@ -856,9 +856,9 @@ $scope.auth = auth;
 
   $scope.getProfileFeed = function() {
 
-   var user_id    = window.localStorage.SourceID;
+   var userID    = window.localStorage.SourceID;
 
-    $scope.data = API.getUsersArticles(user_id)
+    $scope.data = API.getUsersArticles(userID)
       .success(function (data, status, headers, config) {
         $scope.articles = [];
 
