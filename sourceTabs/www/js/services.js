@@ -162,6 +162,11 @@ angular.module('starter.services', [])
             });
         },
 
+        deleteSaved: function (savedArticle) {
+            return $http.put(base+'/api/users/' + savedArticle.userID + '/saved', savedArticle, {
+                method: 'PUT',
+            });
+        },
 
 
     }

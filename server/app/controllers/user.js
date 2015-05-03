@@ -119,12 +119,34 @@ exports.getSaved = function(req, res) {
 
 	var userID = mongoose.Types.ObjectId(req.params.id);
 
-	console.log(userID);
-
-
 	User.findById(userID).populate('saved').exec(function(err, user) {
     	res.send(user.saved)
 	});
+
+};
+
+// DELETE
+exports.deleteSaved = function(req, res) {
+
+
+	var userID 		= mongoose.Types.ObjectId(req.body.userID);
+	var articleID = mongoose.Types.ObjectId(req.body.articleID);
+
+	console.log("The user id is " + userID);
+	console.log("The article id is " + articleID);
+
+
+	User.findByIdAndUpdate(
+			userID,
+			{$pull: {"saved": articleID}},
+			{safe: true, upsert: true},
+			function(err, user) {
+				if (err)
+			res.send(err);
+		res.json(user);
+			}
+	);
+
 
 };
 
@@ -214,7 +236,6 @@ exports.deleteFollows = function(req, res) {
 			res.json(user);
         }
     );
-
 
 };
 

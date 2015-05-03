@@ -14,15 +14,18 @@
 
     <div class="list">
 
-      <a ng-repeat="articles in articles"
-         href="#/reader/{{articles._id}}"
+    <div ng-repeat="articles in articles">
+      <a href="#/reader/{{articles._id}}"
          class="item item-thumbnail-left">
 
         <img src="{{articles.imageUrl}}">
         <h2>{{ articles.title }}</h2>
         <h4>{{ articles.username }}</h4>
         <img src="{{articles.gravatarURL}}" style="width: 20px; border-radius: 3em">
+
       </a>
+      <button class="button button-small button" ng-click="deleteSaved(articles._id)">remove</button>
+    </div>
 
     </div>
 

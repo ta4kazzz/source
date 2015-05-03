@@ -587,7 +587,6 @@ $scope.getFollows = function() {
 
   $scope.getSaved = function() {
 
-
     var id   = window.localStorage.SourceID;
 
 
@@ -607,9 +606,29 @@ $scope.getFollows = function() {
          console.log("Something went wrong")
        });
 
+  };
+
+  $scope.deleteSaved = function(articleID) {
 
 
+    var userID      = window.localStorage.SourceID;
+    var articleID    = articleID;
 
+    var savedArticle = {
+      articleID: articleID,
+      userID: userID
+    };
+
+    console.log(savedArticle);
+
+
+    API.deleteSaved(savedArticle)
+      .success(function (article, status, headers, config) {
+          console.log("article delete")
+        })
+      .error(function (article, status, headers, config) {
+          console.log("Something went wrong")
+        });
 
   };
 
