@@ -329,8 +329,11 @@ $scope.getFollows = function() {
 //  ================================================================
 
 .controller('exploreController', function($scope, API, auth, $rootScope) {
+      // Auth Init - Do I need this here?
+      $rootScope.auth = auth;
 
-  $scope.tab = 1;
+      // Tab Logic
+      $scope.tab = 1;
 
       $scope.setTab = function(newTab){
         $scope.tab = newTab;
@@ -340,13 +343,6 @@ $scope.getFollows = function() {
         return $scope.tab === tabNum;
       };
 
-
-
-
-
-
-
-   $rootScope.auth = auth;
 
    $scope.getAllArticles = function() {
      $scope.data = API.getArticles()
@@ -380,6 +376,38 @@ $scope.getFollows = function() {
               console.log('someting went wrong')
           });
    };
+
+
+   $scope.getTopLiked = function() {
+
+     console.log("Getting Top Liked Trigger")
+
+     $scope.data = API.getTopArticles()
+        .success(function (data, status, headers, config) {
+
+          $scope.topArticles = [];
+
+               for (var i = 0; i < data.length; i++) {
+                   if (data[i].public == true) {
+                       $scope.topArticles.push(data[i]);
+                   }
+               };
+
+
+
+
+
+          console.log("Got all the top articles")
+
+
+        }).error(function (data, status, headers, config) {
+              console.log('someting went wrong')
+          });
+
+
+   };
+
+
 
 })
 

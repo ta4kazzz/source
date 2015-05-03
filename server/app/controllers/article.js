@@ -89,6 +89,27 @@ exports.getArticles = function(req, res) {
 
 
 // ==========================================
+//               /articles/top
+// ==========================================
+
+// GET
+exports.getTopArticles = function(req, res) {
+
+		console.log("Getting Top Articles in Server");
+
+
+		Article
+			.find()
+			.sort({likes: 'desc'})
+			.exec(function(err, articles) {
+				res.send(articles)
+		});
+
+
+};
+
+
+// ==========================================
 //               /articles/:article_id
 // ==========================================
 

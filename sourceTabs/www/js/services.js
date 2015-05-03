@@ -101,6 +101,13 @@ angular.module('starter.services', [])
             });
         },
 
+        getTopArticles: function () {
+            return $http.get(base+'/api/articles/top', {
+                method: 'GET',
+           });
+        },
+
+
         //  =====================================================
         //   USERS
         //  =====================================================

@@ -85,6 +85,8 @@ router.route('/articles')
   .get(articleController.getArticles)
   .post(articleController.postArticles)
 
+router.route('/articles/top')
+  .get(articleController.getTopArticles);
 
 router.route('/articles/:id')
   .get(articleController.getArticle)
