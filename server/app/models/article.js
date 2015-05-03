@@ -15,6 +15,7 @@ var articleSchema = new Schema({
   content: String,
   imageUrl: String,
   public: Boolean,
+  likes: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   comments : [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
 });
 
