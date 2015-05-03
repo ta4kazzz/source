@@ -406,8 +406,6 @@ $scope.getFollows = function() {
 
    };
 
-
-
 })
 
 // =================================================================
@@ -508,37 +506,52 @@ $scope.getFollows = function() {
   };
 
 
-  $scope.getAllArticles = function() {
-     $scope.data = API.getArticles()
-        .success(function (data, status, headers, config) {
-         $scope.articles = [];
-              for (var i = 0; i < data.length; i++) {
-                  if (data[i].public == true) {
-                      $scope.articles.push(data[i]);
-                  }
-              };
-        }).error(function (data, status, headers, config) {
-              console.log('someting went wrong')
-          });
-   };
+  // $scope.getAllArticles = function() {
+  //    $scope.data = API.getArticles()
+  //       .success(function (data, status, headers, config) {
+  //        $scope.articles = [];
+  //             for (var i = 0; i < data.length; i++) {
+  //                 if (data[i].public == true) {
+  //                     $scope.articles.push(data[i]);
+  //                 }
+  //             };
+  //       }).error(function (data, status, headers, config) {
+  //             console.log('someting went wrong')
+  //         });
+  //  };
 
 
+  $scope.getHomeFeed = function() {
 
-   $scope.getHomeFeed = function() {
-     var id  = window.localStorage.SourceID;
+    var userID      = window.localStorage.SourceID;
 
-     $scope.data = API.getHomeFeed(id)
-        .success(function (data, status, headers, config) {
-         $scope.articles = [];
-              for (var i = 0; i < data.length; i++) {
-                  if (data[i].public == true) {
-                      $scope.articles.push(data[i]);
-                  }
-              };
-        }).error(function (data, status, headers, config) {
-              console.log('someting went wrong')
-          });
-   };
+    API.getHomeFeed(userID)
+      .success(function (article, user, status, headers, config) {
+        console.log("Home feed is here")
+      })
+      .error(function (article, status, headers, config) {
+        console.log("Error when getting home feed")
+      });
+
+
+  };
+
+
+  //  $scope.getHomeFeed = function() {
+  //    var id  = window.localStorage.SourceID;
+   //
+  //    $scope.data = API.getHomeFeed(id)
+  //       .success(function (data, status, headers, config) {
+  //        $scope.articles = [];
+  //             for (var i = 0; i < data.length; i++) {
+  //                 if (data[i].public == true) {
+  //                     $scope.articles.push(data[i]);
+  //                 }
+  //             };
+  //       }).error(function (data, status, headers, config) {
+  //             console.log('someting went wrong')
+  //         });
+  //  };
 
 
 })

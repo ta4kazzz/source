@@ -4,6 +4,33 @@ var Article		 = require('../models/article.js');
 var mongoose 	 = require('mongoose');
 
 
+
+
+
+
+// ====================================================
+//               /users/:id/homefeed
+// ====================================================
+
+// GET
+exports.getHomeFeed = function(req, res) {
+    // Article.find(function(err, articles) {
+    //     if (err)
+    //         res.send(err);
+    //     res.json(articles);
+    // });
+
+		// Article
+		// 	.find()
+		// 	.sort({created: 'desc'})
+		// 	.exec(function(err, articles) {
+		// 		res.send(articles)
+		// });
+
+};
+
+
+
 // ====================================================
 //               /users
 // ====================================================

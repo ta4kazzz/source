@@ -53,6 +53,8 @@ angular.module('starter.services', [])
         //   ARTICLES
         //  =====================================================
 
+
+
         getArticles: function () {
             return $http.get(base+'/api/articles', {
                 method: 'GET',
@@ -112,6 +114,13 @@ angular.module('starter.services', [])
         //   USERS
         //  =====================================================
 
+
+        getHomeFeed: function (userID) {
+            return $http.get(base+'/api/users/' + userID +'/homefeed', {
+                method: 'GET',
+           });
+        },
+
         getUsers: function (id) {
             return $http.get(base+'/api/users', {
                 method: 'GET',
@@ -125,11 +134,6 @@ angular.module('starter.services', [])
             });
         },
 
-        getHomeFeed: function (id) {
-            return $http.get(base+'/api/users/' + id +'/feed', {
-                method: 'GET',
-           });
-        },
 
         postUser: function (user) {
             return $http.post(base+'/api/users', user, {

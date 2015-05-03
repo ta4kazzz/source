@@ -100,6 +100,12 @@ router.route('/articles/:id')
 
 // ============== USERS ========================
 
+
+
+// Endpoints for /users/:username/followed-by
+router.route('/users/:id/homefeed')
+  .get(userController.getHomeFeed);
+
 // Endpoints for /users
 router.route('/users')
 	.post(userController.postUsers)
@@ -112,7 +118,6 @@ router.route('/users/:id')
 // Endpoints for /users/:id/feed
 router.route('/users/:id/feed')
   .get(userController.getUserFeed);
-
 
 router.route('/users/auth/:id')
   .get(userController.getAuth);
@@ -138,9 +143,6 @@ router.route('/users/:id/follows')
 router.route('/users/:id/followers')
   	.get(userController.getFollowers);
 
-// Endpoints for /users/:username/followed-by
-// router.route('/users/:id/feed')
-//   	.get(userController.getFeed);
 
 // ============== COMMENTS ========================
 
