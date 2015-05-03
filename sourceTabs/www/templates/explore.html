@@ -46,7 +46,7 @@
       <div ng-show="isSet(3)">
         <div class="list" ng-init="getTopLiked()" >
           <a ng-repeat="topArticles in topArticles"
-             href="#/reader/{{articles._id}}"
+             href="#/reader/{{topArticles._id}}"
              class="item item-thumbnail-left">
             <img src="{{topArticles.imageUrl}}">
             <h2>{{ topArticles.title }}</h2>
