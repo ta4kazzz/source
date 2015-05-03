@@ -176,7 +176,13 @@ exports.postLikes = function(req, res) {
 
 exports.getLikes = function(req, res) {
 
-	console.log("Getting Likes Now");
+	var articleID = mongoose.Types.ObjectId(req.params.id);
+
+	console.log(articleID);
+
+	Article.findById(articleID).populate('saved').exec(function(err, article) {
+			res.send(article)
+	});
 
 
 };

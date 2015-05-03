@@ -89,8 +89,8 @@ angular.module('starter.services', [])
             });
         },
 
-        getLikes: function (id) {
-            return $http.get(base+'/api/articles' + id + '/likes', {
+        getLikers: function (id) {
+            return $http.get(base+'/api/articles/' + id + '/likes', {
                 method: 'GET',
             });
         },

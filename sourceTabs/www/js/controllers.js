@@ -291,9 +291,26 @@ $scope.getFollows = function() {
 //                           #LIKERS CONTROLLER
 //  ================================================================
 
-.controller('likers-controller', function($scope, $rootScope, auth, API, $stateParams) {
+.controller('likers-controller', function($scope, API) {
 
 
+  $scope.getLiked = function() {
+
+    // this needs to be the article
+    var id   = window.localStorage.SourceID;
+
+     $scope.users = API.getLikers(id)
+       .success(function (data, status, headers, config) {
+         console.log("herro");
+
+
+
+       })
+       .error(function (users, status, headers, config) {
+         console.log("Something went wrong")
+       });
+
+  };
 
 })
 
