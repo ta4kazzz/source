@@ -136,7 +136,6 @@ angular.module('starter', [
     }
   })
 
-
   .state('add', {
       url: '/add',
       templateUrl: 'templates/add.html',
@@ -144,10 +143,11 @@ angular.module('starter', [
   })
 
   .state('likers', {
-      url: '/likers',
-      templateUrl: 'templates/likers.html',
-      controller: 'likers-controller'
+    url: '/articles/:articleID/likers',
+    templateUrl: 'templates/likers.html',
+    controller: 'likers-controller'
   })
+
 
   .state('saved', {
       url: '/saved',

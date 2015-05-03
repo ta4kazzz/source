@@ -180,9 +180,15 @@ exports.getLikes = function(req, res) {
 
 	console.log(articleID);
 
-	Article.findById(articleID).populate('saved').exec(function(err, article) {
-			res.send(article)
+	Article
+		.findById(articleID)
+		.select('-__v -_id -authID')
+		.populate('likes')
+		.exec(function(err, Article) {
+			res.send(Article.likes)
 	});
+
+
 
 
 };

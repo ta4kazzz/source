@@ -12,6 +12,22 @@
 
   <ion-content ng-init="getLiked()" class="has-header">
 
+    <div ng-repeat="users in users">
+      <a href="#/tab/user/{{users._id}}"
+         class="item item-thumbnail-left">
+
+        <img src="{{users.imageUrl}}">
+        <h2>{{ users.title }}</h2>
+        <h4>{{ users.username }}</h4>
+        <img src="{{articles.gravatarURL}}" style="width: 20px; border-radius: 3em">
+
+      </a>
+
+    </div>
+
+
+
+
   </ion-content>
 
 

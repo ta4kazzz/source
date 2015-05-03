@@ -291,18 +291,26 @@ $scope.getFollows = function() {
 //                           #LIKERS CONTROLLER
 //  ================================================================
 
-.controller('likers-controller', function($scope, API) {
+.controller('likers-controller', function($scope, API, $stateParams) {
 
 
   $scope.getLiked = function() {
 
     // this needs to be the article
-    var id   = window.localStorage.SourceID;
+    var id   = $stateParams.articleID;
 
      $scope.users = API.getLikers(id)
        .success(function (data, status, headers, config) {
-         console.log("herro");
 
+         console.log(data);
+
+         $scope.users = [];
+
+         for (var i = 0; i < data.length; i++) {
+           $scope.users.push(data[i]);
+         };
+
+         $scope.savedArticlesNumber = data.length;
 
 
        })
