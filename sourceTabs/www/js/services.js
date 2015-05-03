@@ -95,8 +95,8 @@ angular.module('starter.services', [])
             });
         },
 
-        putLikes: function (likedArticle) {
-            return $http.put(base+'/api/articles/' + savedArticle.userID + '/likes', likedArticle, {
+        putLikes: function (unlikedArticle) {
+            return $http.put(base+'/api/articles/' + unlikedArticle.userID + '/likes', unlikedArticle, {
                 method: 'PUT',
             });
         },

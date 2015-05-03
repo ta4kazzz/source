@@ -441,9 +441,33 @@ $scope.getFollows = function() {
   };
 
 
-  $scope.unlikeArticle = function() {
+  $scope.unlikeArticle = function(articleID) {
 
     console.log("Unlike Article Triggered");
+
+    var userID      = window.localStorage.SourceID;
+    var articleID   = articleID;
+
+    var unlikedArticle = {
+      articleID: articleID,
+      userID: userID
+    };
+
+    console.log(unlikedArticle);
+
+    API.putLikes(unlikedArticle)
+      .success(function (article, user, status, headers, config) {
+        // make button reflect the change
+        console.log("Article Successfully liked")
+      })
+      .error(function (article, status, headers, config) {
+        console.log("Error when liking the article")
+      });
+
+
+
+
+
 
   };
 

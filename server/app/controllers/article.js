@@ -199,6 +199,28 @@ exports.putLikes = function(req, res) {
 
 	console.log("Putting Likes Now");
 
+
+	var userID 		= mongoose.Types.ObjectId(req.body.userID);
+	var articleID = mongoose.Types.ObjectId(req.body.articleID);
+
+	console.log("The user id is " + userID);
+	console.log("The article id is " + articleID);
+
+
+	Article.findByIdAndUpdate(
+			articleID,
+			{$pull: {"likes": userID}},
+			{safe: true, upsert: true},
+			function(err, user) {
+				if (err)
+			res.send(err);
+		res.json(user);
+			}
+	);
+
+
+
+
 };
 
 

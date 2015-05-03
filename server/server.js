@@ -36,7 +36,6 @@ var authController    = require('./app/controllers/auth');
 var commentController = require('./app/controllers/comments');
 
 
-
 // Express Config ==============================================================
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)

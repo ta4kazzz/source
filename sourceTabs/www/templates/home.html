@@ -37,7 +37,7 @@
             <p>{{articles.summary}}</p>
             <button class="button icon-left ion-bookmark button-positive" ng-click="saveForLater(articles._id)">Save For Later</button>
             <button class="button icon-left ion-star button-positive" ng-click="likeArticle(articles._id)">Like</button>
-            <button class="button icon-left ion-star button-positive" ng-click="unlikeArticle()">Unlike</button>
+            <button class="button icon-left ion-star button-positive" ng-click="unlikeArticle(articles._id)">Unlike</button>
             <!-- <button class="button icon-left button-positive" ui-sref="likers">View All Likes</button> -->
             <a href="#/articles/{{articles._id}}/likers"><p>View All Likes</p></a>
           </div>
