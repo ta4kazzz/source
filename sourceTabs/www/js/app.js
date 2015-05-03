@@ -143,6 +143,12 @@ angular.module('starter', [
       controller: 'addController'
   })
 
+  .state('likers', {
+      url: '/likers',
+      templateUrl: 'templates/likers.html',
+      controller: 'likers-controller'
+  })
+
   .state('saved', {
       url: '/saved',
       templateUrl: 'templates/saved.html',

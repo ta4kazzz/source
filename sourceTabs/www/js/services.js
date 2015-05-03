@@ -83,6 +83,29 @@ angular.module('starter.services', [])
             });
         },
 
+        likeArticle: function (likedArticle) {
+            return $http.post(base+'/api/articles' + savedArticle.userID + '/liked', likedArticle, {
+                method: 'POST',
+            });
+        },
+
+        likeArticle: function (likedArticle) {
+            return $http.post(base+'/api/articles' + savedArticle.userID + '/liked', likedArticle, {
+                method: 'POST',
+            });
+        },
+
+        getLikes: function (id) {
+            return $http.get(base+'/api/articles' + id + '/liked', {
+                method: 'GET',
+            });
+        },
+
+        putLikes: function (likedArticle) {
+            return $http.put(base+'/api/articles' + savedArticle.userID + '/liked', likedArticle, {
+                method: 'PUT',
+            });
+        },
 
         //  =====================================================
         //   USERS

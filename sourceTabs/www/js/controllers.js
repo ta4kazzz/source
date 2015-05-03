@@ -285,6 +285,20 @@ $scope.getFollows = function() {
 
 })
 
+
+
+// =================================================================
+//                           #LIKERS CONTROLLER
+//  ================================================================
+
+.controller('likers-controller', function($scope, $rootScope, auth, API, $stateParams) {
+
+
+
+})
+
+
+
 // =================================================================
 //                           #EXPLORE CONTROLLER
 //  ================================================================
@@ -374,6 +388,10 @@ $scope.getFollows = function() {
 
 
   $scope.likeArticle = function() {
+
+    console.log("Like article triggered");
+
+
 
   };
 
