@@ -134,3 +134,56 @@ exports.deleteArticle = function(req, res) {
     res.json({ message: 'Article successfully removed' });
   });
 };
+
+
+// ================================================
+//               /articles/:article_id/likes
+// ===============================================
+
+
+
+// POST LIKES
+
+exports.postLikes = function(req, res) {
+
+	console.log("Posting Likes Now");
+
+};
+
+
+
+// GET LIKES
+
+exports.getLikes = function(req, res) {
+
+	console.log("Getting Likes Now");
+
+
+};
+
+// PUT LIKES
+
+exports.putLikes = function(req, res) {
+
+	console.log("Putting Likes Now");
+
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// to keep space at the bottom

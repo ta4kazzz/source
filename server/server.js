@@ -92,6 +92,11 @@ router.route('/articles/:id')
   .put(articleController.putArticle)
   .delete(articleController.deleteArticle);
 
+  router.route('/articles/:id/likes')
+  .post(articleController.postLikes)
+  .get(articleController.getLikes)
+  .put(articleController.putLikes);
+
 // ============== USERS ========================
 
 // Endpoints for /users
