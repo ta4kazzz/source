@@ -148,6 +148,26 @@ exports.postLikes = function(req, res) {
 
 	console.log("Posting Likes Now");
 
+	var userID 		= mongoose.Types.ObjectId(req.body.userID);
+	var articleID = mongoose.Types.ObjectId(req.body.articleID);
+
+
+	console.log("The user id is " + userID);
+	console.log("The article id is " + articleID);
+
+	Article.findByIdAndUpdate(
+			articleID,
+			{$push: {"likes": userID}},
+			{safe: true, upsert: true},
+			function(err, model) {
+					console.log(err);
+			}
+	);
+
+
+
+
+
 };
 
 

@@ -84,25 +84,19 @@ angular.module('starter.services', [])
         },
 
         likeArticle: function (likedArticle) {
-            return $http.post(base+'/api/articles' + savedArticle.userID + '/liked', likedArticle, {
-                method: 'POST',
-            });
-        },
-
-        likeArticle: function (likedArticle) {
-            return $http.post(base+'/api/articles' + savedArticle.userID + '/liked', likedArticle, {
+            return $http.post(base+'/api/articles/' + likedArticle.userID + '/likes', likedArticle, {
                 method: 'POST',
             });
         },
 
         getLikes: function (id) {
-            return $http.get(base+'/api/articles' + id + '/liked', {
+            return $http.get(base+'/api/articles' + id + '/likes', {
                 method: 'GET',
             });
         },
 
         putLikes: function (likedArticle) {
-            return $http.put(base+'/api/articles' + savedArticle.userID + '/liked', likedArticle, {
+            return $http.put(base+'/api/articles/' + savedArticle.userID + '/likes', likedArticle, {
                 method: 'PUT',
             });
         },
