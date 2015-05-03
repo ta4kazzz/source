@@ -80,11 +80,18 @@ exports.postArticles = function(req, res) {
 
 // GET
 exports.getArticles = function(req, res) {
-    Article.find(function(err, articles) {
-        if (err)
-            res.send(err);
-        res.json(articles);
-    });
+    // Article.find(function(err, articles) {
+    //     if (err)
+    //         res.send(err);
+    //     res.json(articles);
+    // });
+
+		Article
+			.find()
+			.sort({created: 'desc'})
+			.exec(function(err, articles) {
+				res.send(articles)
+		});
 };
 
 
@@ -96,7 +103,6 @@ exports.getArticles = function(req, res) {
 exports.getTopArticles = function(req, res) {
 
 		console.log("Getting Top Articles in Server");
-
 
 		Article
 			.find()

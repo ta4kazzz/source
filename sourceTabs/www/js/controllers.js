@@ -355,7 +355,6 @@ $scope.getFollows = function() {
                   }
               };
 
-
         }).error(function (data, status, headers, config) {
               console.log('someting went wrong')
           });
@@ -419,8 +418,6 @@ $scope.getFollows = function() {
    $rootScope.auth = auth;
 
   $scope.doRefresh = function() {
-
-    $scope.getAllArticles();
 
     console.log('Refreshing');
 
@@ -507,11 +504,6 @@ $scope.getFollows = function() {
       .error(function (article, status, headers, config) {
         console.log("Error when liking the article")
       });
-
-
-
-
-
 
   };
 
