@@ -14,18 +14,27 @@ var mongoose 	 = require('mongoose');
 
 // GET
 exports.getHomeFeed = function(req, res) {
-    // Article.find(function(err, articles) {
-    //     if (err)
-    //         res.send(err);
-    //     res.json(articles);
-    // });
 
-		// Article
-		// 	.find()
-		// 	.sort({created: 'desc'})
-		// 	.exec(function(err, articles) {
-		// 		res.send(articles)
-		// });
+	var userID = mongoose.Types.ObjectId(req.params.id);
+
+
+	User
+		.findById(userID).exec(function(err, user) {
+
+					// Store user.follows in followIDlist
+					FollowIDs = [];
+		      for (var i = 0; i < user.follows.length; i++) {
+						FollowIDs.push(user.follows[i]);
+		      };
+
+
+					Article
+						.where('_userID').in(FollowIDs)
+						.exec(function(err, articles) {
+								res.send(articles)
+						});
+
+		});
 
 };
 

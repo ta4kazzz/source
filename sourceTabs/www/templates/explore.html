@@ -32,7 +32,8 @@
       <div ng-show="isSet(2)">
         <div class="list" style="xmax-width: 800px;" ng-init="getAllUsers()">
           <a ng-repeat="users in users"
-             href="#/app/user/{{users._id}}"
+
+             href="#/tab/user/{{users._id}}"
              class="item item-thumbnail-left">
             <img src="{{users.gravatarURL}}">
             <h2>{{ users.username }}</h2>
