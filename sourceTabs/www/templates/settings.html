@@ -4,8 +4,10 @@
       <ion-nav-buttons side="right">
       <button class="button" ng-click="logout()">Log Out</button>
       </ion-nav-buttons>
-  <ion-nav-back-button>
-  </ion-nav-back-button>
+      <ion-nav-buttons side="left">
+      <button class="button" ui-sref="tabs.profile">Back</button>
+      </ion-nav-buttons>
+
   </ion-nav-bar>
 
 
@@ -17,7 +19,7 @@
     <h4>Welcome To Settings</h4>
     <p>Username: {{username}}</p>
     <p>Email: {{email}}</p>
-    <p>Description: {{}}</p>
+    <p>Description: {{description}}</p>
     <!-- <p>Avatar:</p>  <img style ="width: 100px; border-radius: 5em;" src="{{auth.profile.picture}}"> -->
 
 

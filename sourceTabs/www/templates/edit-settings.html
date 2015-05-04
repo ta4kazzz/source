@@ -14,16 +14,17 @@
   <div class="list">
     <label class="item item-input">
       <span class="input-label">Username</span>
-      <input type="text" value="{{username}}" ng-model="editProfileForm.username">
+      <input type="text"  ng-model="editProfileForm.username">
     </label>
     <label class="item item-input">
       <span class="input-label">Email</span>
-      <input type="text" value="{{email}}" ng-model="editProfileForm.email">
+      <input type="text" ng-model="editProfileForm.email">
     </label>
-    <label class="item item-input">
-      <span class="input-label" value="{{description}}" ng-model="editProfileForm.description">Description</span>
-      <input type="text">
-    </label>
+  </label>
+  <label class="item item-input">
+    <span class="input-label">Description</span>
+    <input type="text" ng-model="editProfileForm.description">
+  </label>
   </div>
 
   <button class="button button-full button-balanced" ng-click="editUser()">

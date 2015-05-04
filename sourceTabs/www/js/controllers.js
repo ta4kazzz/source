@@ -36,20 +36,19 @@ angular.module('starter.controllers', [])
 
     var email       = $scope.editProfileForm.email
     var username    = $scope.editProfileForm.username
-
+    var description  = $scope.editProfileForm.description
 
     var user = {
       email: email,
       username: username,
-      userID: userID
+      userID: userID,
+      description: description
     };
 
 
 
     API.putUser(user)
       .success(function (user, status, headers, config) {
-
-
         $state.go('tabs.settings');
       })
       .error(function (user, status, headers, config) {
@@ -69,12 +68,17 @@ angular.module('starter.controllers', [])
     API.getUser(id)
       .success(function (user, status, headers, config) {
         console.log("Your profile successfully retreived")
+
         $scope.username = user.username;
         $scope.email = user.email;
+        $scope.description = user.description;
+        console.log(user.description);
+        console.log($scope.description);
 
         // Adds them to the edit profile form
         $scope.editProfileForm.username = user.username;
         $scope.editProfileForm.email = user.email;
+        $scope.editProfileForm.description = user.description;
 
 
       })
@@ -884,10 +888,11 @@ $scope.auth = auth;
       .success(function (user, status, headers, config) {
         console.log("Your profile successfully retreived")
         $scope.username = user.username;
+        $scope.description = user.description;
         // $scope.followsNum = user.counts.follows;
         // $scope.followersNum = user.counts.followed_by;
-      $scope.getFollowers();
-      $scope.getFollows();
+        $scope.getFollowers();
+        $scope.getFollows();
 
       })
       .error(function (user, status, headers, config) {

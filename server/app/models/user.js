@@ -11,6 +11,7 @@ var UserSchema = new Schema({
   // password: { type: String, required: true },
   email: String,
   gravatarURL: String,
+  description: String,
   authID: String,
   counts: {
     articles: Number,

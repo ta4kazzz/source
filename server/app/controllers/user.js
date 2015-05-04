@@ -49,9 +49,9 @@ exports.postUsers = function(req, res) {
 	var user = new User({
 		email: req.body.email,
 		username: req.body.username,
+		description: '',
 		gravatarURL: req.body.gravatarURL,
 		authID: req.body.authID,
-		// password: req.body.password,
 		counts: {
 			articles: 0,
 			follows: 0,
@@ -93,7 +93,7 @@ exports.putUser = function(req, res) {
 	var userID = req.body.userID;
 	var username = req.body.username;
 	var email = req.body.email;
-
+	var description = req.body.description;
 
 	User.findById(userID, function(err, user) {
     if (err)
@@ -101,6 +101,8 @@ exports.putUser = function(req, res) {
 
     user.username = username;
 		user.email = email;
+		user.description = description;
+
 
     user.save(function(err) {
       if (err)
