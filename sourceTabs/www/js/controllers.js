@@ -535,16 +535,21 @@ $scope.getFollows = function() {
 
 
 
-  $scope.likeArticle = function(articleID) {
+  $scope.likeArticle = function(article) {
 
-    console.log("Like article triggered");
+    console.log("Like article triggered" + article);
 
-    var userID      = window.localStorage.SourceID;
-    var articleID   = articleID;
+    var userID        = window.localStorage.SourceID;
+    var articleID     = article._id;
+    var articleOwner = article._userID;
+
+    console.log("Article Owner is " + articleOwner);
 
     var likedArticle = {
       articleID: articleID,
-      userID: userID
+      userID: userID,
+      created:  Date.now(),
+      articleOwner: articleOwner
     };
 
     console.log(likedArticle);

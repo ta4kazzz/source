@@ -178,8 +178,9 @@ exports.postLikes = function(req, res) {
 
 	var userID 		= mongoose.Types.ObjectId(req.body.userID);
 	var articleID = mongoose.Types.ObjectId(req.body.articleID);
-	//
-	// console.log("The user id is " + userID);
+	var articleOwner = mongoose.Types.ObjectId(req.body.articleOwner);
+
+	// console.log("The articleOwner id is " + articleOwner);
 	// console.log("The article id is " + articleID);
 
 	Article.findByIdAndUpdate(
@@ -196,14 +197,48 @@ exports.postLikes = function(req, res) {
 // 2) find user that posted the article
 // 3) post new notification object to that user
 
+
 	Article
 		.findById(articleID).exec(function(err, article) {
 
 
 			var user = article._userID;
 
-
 			var notification = new Notification({
+					articleOwner: articleOwner,
+					created: req.body.created,
+					associated_article: articleID,
+					// read: False,
+					type: "liked_post"
+			});
+
+			// console.log(notification);
+
+			User
+			.findByIdAndUpdate(
+	        notification.articleOwner,
+	        {$push: {"notifications": notification}},
+	        {safe: true, upsert: true},
+	        function(err, user) {
+	        	if (err)
+					res.send(err);
+				res.json(notification);
+	        }
+	    );
+
+
+			notification.save(function(err) {
+				if (err)
+					res.send(err);
+
+				res.json(
+					{
+						message: 'New Notication Has been added',
+						// email: user.email,
+						// username: user.username,
+						// gravatarURL: user.gravatarURL
+					}
+				);
 			});
 
 
