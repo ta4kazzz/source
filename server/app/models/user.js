@@ -21,7 +21,8 @@ var UserSchema = new Schema({
   articles : [{ type: Schema.Types.ObjectId, ref: 'Article' }],
   saved : [{ type: Schema.Types.ObjectId, ref: 'Article' }],
   follows: [{ type: Schema.Types.ObjectId, ref: 'User' }],
-  followers: [{ type: Schema.Types.ObjectId, ref: 'User' }]
+  followers: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+  notifications : [{ type: Schema.Types.ObjectId, ref: 'Notification' }]
 });
 
 

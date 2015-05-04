@@ -34,6 +34,7 @@ var articleController = require('./app/controllers/article');
 var userController    = require('./app/controllers/user');
 var authController    = require('./app/controllers/auth');
 var commentController = require('./app/controllers/comments');
+var notificationController = require('./app/controllers/notification');
 
 
 // Express Config ==============================================================
@@ -143,6 +144,12 @@ router.route('/users/:id/follows')
 // Endpoints for /users/:username/followers
 router.route('/users/:id/followers')
   	.get(userController.getFollowers);
+
+
+// ============== NOTIFICATIONS ========================
+router.route('/users/:id/notifications')
+  	.get(notificationController.getNotifications);
+
 
 
 // ============== COMMENTS ========================

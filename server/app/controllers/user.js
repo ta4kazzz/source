@@ -4,10 +4,6 @@ var Article		 = require('../models/article.js');
 var mongoose 	 = require('mongoose');
 
 
-
-
-
-
 // ====================================================
 //               /users/:id/homefeed
 // ====================================================
