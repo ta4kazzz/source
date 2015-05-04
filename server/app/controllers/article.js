@@ -178,7 +178,6 @@ exports.postLikes = function(req, res) {
 	var userID 		= mongoose.Types.ObjectId(req.body.userID);
 	var articleID = mongoose.Types.ObjectId(req.body.articleID);
 
-
 	console.log("The user id is " + userID);
 	console.log("The article id is " + articleID);
 
@@ -191,8 +190,10 @@ exports.postLikes = function(req, res) {
 			}
 	);
 
-
-
+// NOTIFCIATION NOTES
+// 1) find article
+// 2) find user that posted the article
+// 3) post new notification object to that user
 
 
 };
@@ -244,8 +245,6 @@ exports.putLikes = function(req, res) {
 		res.json(user);
 			}
 	);
-
-
 
 
 };

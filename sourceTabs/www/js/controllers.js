@@ -21,6 +21,47 @@ angular.module('starter.controllers', [])
 
 .controller('settings-controller', function($scope, auth, store, $state, API) {
 
+
+  $scope.editProfileForm = {
+     email: "",
+     username: "",
+     description: ""
+  };
+
+
+  $scope.editUser = function() {
+
+    // ID of the person using
+    var userID  = window.localStorage.SourceID;
+
+    var email       = $scope.editProfileForm.email
+    var username    = $scope.editProfileForm.username
+
+
+    var user = {
+      email: email,
+      username: username,
+      userID: userID
+    };
+
+
+
+    API.putUser(user)
+      .success(function (user, status, headers, config) {
+
+
+        $state.go('tabs.settings');
+      })
+      .error(function (user, status, headers, config) {
+        console.log("Your profile was not retreived")
+
+      });
+
+
+  };
+
+
+
   $scope.getProfile = function() {
 
     var id  = window.localStorage.SourceID;
@@ -30,6 +71,12 @@ angular.module('starter.controllers', [])
         console.log("Your profile successfully retreived")
         $scope.username = user.username;
         $scope.email = user.email;
+
+        // Adds them to the edit profile form
+        $scope.editProfileForm.username = user.username;
+        $scope.editProfileForm.email = user.email;
+
+
       })
       .error(function (user, status, headers, config) {
         console.log("Your profile was not retreived")

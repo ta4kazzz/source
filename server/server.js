@@ -113,7 +113,8 @@ router.route('/users')
 
 // Endpoints for /users/:id
 router.route('/users/:id')
-  .get(userController.getUser);
+  .get(userController.getUser)
+  .put(userController.putUser);
 
 // Endpoints for /users/:id/feed
 router.route('/users/:id/feed')

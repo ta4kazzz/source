@@ -86,6 +86,36 @@ exports.getUsers = function(req, res) {
 	});
 };
 
+
+// PUT
+exports.putUser = function(req, res) {
+
+	var userID = req.body.userID;
+	var username = req.body.username;
+	var email = req.body.email;
+
+
+	User.findById(userID, function(err, user) {
+    if (err)
+      res.send(err);
+
+    user.username = username;
+		user.email = email;
+
+    user.save(function(err) {
+      if (err)
+        res.send(err);
+
+      res.json(user);
+    });
+  });
+
+
+
+
+
+};
+
 // ====================================================
 //               /users/:userID
 // ====================================================

@@ -134,12 +134,19 @@ angular.module('starter.services', [])
             });
         },
 
+        putUser: function (user) {
+            return $http.put(base+'/api/users/' + user.userID, user, {
+                method: 'PUT',
+            });
+        },
+
 
         postUser: function (user) {
             return $http.post(base+'/api/users', user, {
                 method: 'POST',
             });
         },
+
 
         getAuth: function (id) {
             return $http.get(base+'/api/users/auth/' + id, {
