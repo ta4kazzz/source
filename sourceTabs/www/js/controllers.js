@@ -19,6 +19,40 @@
 angular.module('starter.controllers', [])
 
 
+
+
+.controller('notifications-controller', function($scope, auth, store, $state, API) {
+
+  $scope.getNotifications = function() {
+
+   var userID     = window.localStorage.SourceID;
+
+    $scope.notifications = API.getNotifications(userID)
+      .success(function (data, status, headers, config) {
+        $scope.notifications = [];
+        console.log(data);
+        for (var i = 0; i < data.length; i++) {
+          $scope.notifications.push(data[i]);
+        };
+
+
+
+      })
+      .error(function (users, status, headers, config) {
+        console.log("notify me cause its broken")
+      });
+
+  };
+
+
+
+})
+
+
+
+
+
+
 .controller('settings-controller', function($scope, auth, store, $state, API) {
 
 

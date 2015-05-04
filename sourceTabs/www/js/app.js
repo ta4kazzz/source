@@ -186,7 +186,8 @@ angular.module('starter', [
     url: '/notifications',
     views: {
       'notifications-tab': {
-        templateUrl: 'templates/notifications.html'
+        templateUrl: 'templates/notifications.html',
+        controller: 'notifications-controller'
       }
     }
   })

@@ -12,5 +12,16 @@ var mongoose 	 = require('mongoose');
 exports.getNotifications = function(req, res) {
   console.log("Getting Notifications");
 
+  var userID = mongoose.Types.ObjectId(req.params.id);
+
+
+  User
+    .findById(userID)
+    .select('-__v')
+    .populate('notifications')
+    .exec(function(err, user) {
+			res.send(user.notifications)
+      console.log(user.notifications);
+		});
 
 };

@@ -6,11 +6,19 @@
   </ion-nav-back-button>
   </ion-nav-bar>
 
-  
+
   <ion-content>
 
-    <ion-list>
+    <ion-list ng-init="getNotifications()">
+        <ion-item ng-repeat="notifications in notifications">
 
-    </ion-list>
+          <a class="item item-thumbnail-left" href="#/reader/{{notifications.associated_article}}">
+
+              <h2>{{notifications.associated_article}}</h2>
+            </a>
+
+        </ion-item>
+      </ion-list>
+
   </ion-content>
 </ion-view>

@@ -203,6 +203,18 @@ angular.module('starter.services', [])
             });
         },
 
+        //  =====================================================
+        //   NOTIFICATIONS
+        //  =====================================================
+
+        getNotifications: function (userID) {
+            return $http.get(base+'/api/users/' + userID +'/notifications', {
+                method: 'GET',
+            });
+        },
+
+
+
 
     }
 
