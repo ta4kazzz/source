@@ -2,6 +2,7 @@
 // load the things we need
 var mongoose 	 = require('mongoose');
 var Schema       = mongoose.Schema;
+var deepPopulate = require('mongoose-deep-populate');
 
 
 var notificationSchema = new Schema({
@@ -14,4 +15,4 @@ var notificationSchema = new Schema({
 
 notificationSchema.plugin(deepPopulate);
 // create the model for users and expose it to our app
-module.exports = mongoose.model('Article', notificationSchema);
+module.exports = mongoose.model('Notification', notificationSchema);

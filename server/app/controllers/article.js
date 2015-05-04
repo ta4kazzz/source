@@ -1,6 +1,7 @@
 // Load Models ==================================================
 var Article		 = require('../models/article.js');
 var User         = require('../models/user.js');
+var Notification = require('../models/notification.js');
 var unfluff      = require('unfluff');
 var cheerio      = require('cheerio');
 var request      = require('request');
@@ -177,16 +178,16 @@ exports.postLikes = function(req, res) {
 
 	var userID 		= mongoose.Types.ObjectId(req.body.userID);
 	var articleID = mongoose.Types.ObjectId(req.body.articleID);
-
-	console.log("The user id is " + userID);
-	console.log("The article id is " + articleID);
+	//
+	// console.log("The user id is " + userID);
+	// console.log("The article id is " + articleID);
 
 	Article.findByIdAndUpdate(
 			articleID,
 			{$push: {"likes": userID}},
 			{safe: true, upsert: true},
 			function(err, model) {
-					console.log(err);
+					// console.log(err);
 			}
 	);
 
@@ -194,6 +195,19 @@ exports.postLikes = function(req, res) {
 // 1) find article
 // 2) find user that posted the article
 // 3) post new notification object to that user
+
+	Article
+		.findById(articleID).exec(function(err, article) {
+
+
+			var user = article._userID;
+
+
+			var notification = new Notification({
+			});
+
+
+		});
 
 
 };
