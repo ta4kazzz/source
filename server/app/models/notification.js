@@ -6,11 +6,13 @@ var deepPopulate = require('mongoose-deep-populate');
 
 
 var notificationSchema = new Schema({
+  doer_username: String,
+  type: String,
   articleOwner: { type: Schema.Types.ObjectId, ref: 'User' },
-  created: String,
   associated_article: { type: Schema.Types.ObjectId, ref: 'Article' },
-  read: Boolean,
-  type: String
+  imageUrl: String,
+  created: String,
+  read: Boolean
 });
 
 notificationSchema.plugin(deepPopulate);

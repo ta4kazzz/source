@@ -1,15 +1,5 @@
 // =================================================================
-// TABLE OF CONTENTS
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+//  CONTROLLERS
 //  ================================================================
 
 
@@ -35,8 +25,6 @@ angular.module('starter.controllers', [])
           $scope.notifications.push(data[i]);
         };
 
-
-
       })
       .error(function (users, status, headers, config) {
         console.log("notify me cause its broken")
@@ -47,9 +35,6 @@ angular.module('starter.controllers', [])
 
 
 })
-
-
-
 
 
 
@@ -400,7 +385,6 @@ $scope.getFollows = function() {
   };
 
 
-
 })
 
 
@@ -571,16 +555,18 @@ $scope.getFollows = function() {
 
   $scope.likeArticle = function(article) {
 
-    console.log("Like article triggered" + article);
+    // console.log("Like article triggered" + article);
 
-    var userID        = window.localStorage.SourceID;
-    var articleID     = article._id;
-    var articleOwner = article._userID;
+    var userID               = window.localStorage.SourceID;
+    var articleID            = article._id;
+    var articleOwner         = article._userID;
+    var articleImageUrl      = article.imageUrl;
 
-    console.log("Article Owner is " + articleOwner);
+    // console.log("Article Owner Username is " + articleOwnerUsername);
 
     var likedArticle = {
       articleID: articleID,
+      imageUrl: articleImageUrl,
       userID: userID,
       created:  Date.now(),
       articleOwner: articleOwner
@@ -596,8 +582,6 @@ $scope.getFollows = function() {
       .error(function (article, status, headers, config) {
         console.log("Error when liking the article")
       });
-
-
 
 
   };

@@ -1,5 +1,5 @@
 // Load Models ==================================================
-var Article		 = require('../models/article.js');
+var Article		 	 = require('../models/article.js');
 var User         = require('../models/user.js');
 var Notification = require('../models/notification.js');
 var unfluff      = require('unfluff');
@@ -176,9 +176,10 @@ exports.postLikes = function(req, res) {
 
 	console.log("Posting Likes Now");
 
-	var userID 		= mongoose.Types.ObjectId(req.body.userID);
-	var articleID = mongoose.Types.ObjectId(req.body.articleID);
-	var articleOwner = mongoose.Types.ObjectId(req.body.articleOwner);
+	var userID 								= mongoose.Types.ObjectId(req.body.userID);
+	var articleID 						= mongoose.Types.ObjectId(req.body.articleID);
+	var articleOwner 					= mongoose.Types.ObjectId(req.body.articleOwner);
+	var articleImageUrl 			= req.body.imageUrl;
 
 	// console.log("The articleOwner id is " + articleOwner);
 	// console.log("The article id is " + articleID);
@@ -191,58 +192,76 @@ exports.postLikes = function(req, res) {
 					// console.log(err);
 			}
 	);
-
-// NOTIFCIATION NOTES
-// 1) find article
-// 2) find user that posted the article
-// 3) post new notification object to that user
+	console.log("The user id is " + userID);
 
 
-	Article
-		.findById(articleID).exec(function(err, article) {
+	// Look up alice by ID and return
+	User.findById(userID, function(err, users) {
+		if (err)
+			res.send(err);
+		res.json(users);
+		var doer_username = users.username;
+		console.log(doer_username);
+		// function to send notification
+		postNotification(doer_username);
+	});
 
 
-			var user = article._userID;
+	// pass it the doer
+	function postNotification(doer_username) {
 
-			var notification = new Notification({
-					articleOwner: articleOwner,
-					created: req.body.created,
-					associated_article: articleID,
-					// read: False,
-					type: "liked_post"
-			});
+			Article
+				.findById(articleID).exec(function(err, article) {
 
-			// console.log(notification);
-
-			User
-			.findByIdAndUpdate(
-	        notification.articleOwner,
-	        {$push: {"notifications": notification}},
-	        {safe: true, upsert: true},
-	        function(err, user) {
-	        	if (err)
-					res.send(err);
-				res.json(notification);
-	        }
-	    );
+					var user = article._userID;
 
 
-			notification.save(function(err) {
-				if (err)
-					res.send(err);
-
-				res.json(
-					{
-						message: 'New Notication Has been added',
-						// email: user.email,
-						// username: user.username,
-						// gravatarURL: user.gravatarURL
-					}
-				);
-			});
+					// BUILD THE NOTIFICATION OBJECT
+					var notification = new Notification({
+							articleOwner: articleOwner,
+							created: req.body.created,
+							associated_article: articleID,
+							imageUrl: articleImageUrl,
+							doer_username: doer_username,
+							// read: False,
+							type: "liked your post"
+					});
 
 
-		});
+					// PUSH NOTIFICAITON TO THE USERS COLLECTION
+					User
+					.findByIdAndUpdate(
+			        notification.articleOwner,
+			        {$push: {"notifications": notification}},
+			        {safe: true, upsert: true},
+			        function(err, user) {
+			        	if (err)
+							res.send(err);
+								res.json(notification);
+			        }
+			    );
+
+
+					// SAVE NOTIFICATION OBJECT
+					notification.save(function(err) {
+						if (err)
+							res.send(err);
+						res.json(
+							{
+								message: 'New Notication Has been added',
+								// email: user.email,
+								// username: user.username,
+								// gravatarURL: user.gravatarURL
+							}
+						);
+					});
+
+				});
+
+  }
+
+
+
 
 
 };
