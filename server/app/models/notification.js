@@ -7,8 +7,10 @@ var deepPopulate = require('mongoose-deep-populate');
 
 var notificationSchema = new Schema({
   doer_username: String,
+  doer_id: { type: Schema.Types.ObjectId, ref: 'User' },
   type: String,
   articleOwner: { type: Schema.Types.ObjectId, ref: 'User' },
+  // articleOwnerID: { type: Schema.Types.ObjectId, ref: 'User' },
   associated_article: { type: Schema.Types.ObjectId, ref: 'Article' },
   imageUrl: String,
   created: String,

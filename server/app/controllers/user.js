@@ -1,6 +1,7 @@
 // Load the Required packages
 var User 		 = require('../models/user');
 var Article		 = require('../models/article.js');
+var Notification = require('../models/notification.js');
 var mongoose 	 = require('mongoose');
 
 
@@ -230,7 +231,7 @@ exports.postFollows = function(req, res) {
 	console.log(myID);
 	console.log(userID);
 
-	// Need to implement the logic (if there is already a userID)
+		// ADDS user to my follows List
     User.findByIdAndUpdate(
         myID,
         {$push: {"follows": userID}},
@@ -242,16 +243,81 @@ exports.postFollows = function(req, res) {
         }
     );
 
+		// ADDS alices name to bobs followers array
     User.findByIdAndUpdate(
         userID,
         {$push: {"followers": myID}},
         {safe: true, upsert: true},
         function(err, user) {
         	if (err)
-				res.send(err);
-			res.json(user);
+					res.send(err);
+					res.json(user);
         }
     );
+
+
+		// Look up alice by ID and return her info
+		User.findById(myID, function(err, users) {
+			if (err)
+				res.send(err);
+			res.json(users);
+			var doer_username = users.username;
+			console.log(doer_username);
+			// function to send notification
+			postNotification(doer_username);
+		});
+
+		// send notification to bob that alice is following him
+		// build notificaiton object
+		// post notification object to bobs notification array
+
+		// NEEDS
+		// alice username
+		// alice id
+
+
+		function postNotification(doer_username) {
+
+
+				// BUILD THE NOTIFICATION OBJECT
+				var notification = new Notification({
+						doer_id: myID,
+						doer_username: doer_username,
+						articleOwner: userID,
+						type: "is now following you"
+				});
+
+				// PUSH NOTIFICATION TO USERS COLLECTION
+				User
+				.findByIdAndUpdate(
+						notification.articleOwner,
+						{$push: {"notifications": notification}},
+						{safe: true, upsert: true},
+						function(err, user) {
+							if (err)
+						res.send(err);
+							res.json(notification);
+						}
+				);
+
+
+				// SAVE NOTIFICATION OBJECT
+				notification.save(function(err) {
+					if (err)
+						res.send(err);
+					res.json(
+						{
+							message: 'New Notication Has been added',
+
+						}
+					);
+				});
+
+		}
+
+
+
+
 
 };
 

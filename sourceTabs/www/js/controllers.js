@@ -251,9 +251,7 @@ $scope.getFollows = function() {
 .controller('userController', function($scope, $rootScope, API, $stateParams) {
 
   // if the user follows this user then showme = true
-
   $scope.user_id = $stateParams.userID;
-
 
 
   $scope.followUser = function() {
