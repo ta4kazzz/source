@@ -23,7 +23,8 @@
         <div class="card">
           <div class="item item-divider">
             <h2>{{articles.title}}</h2>
-            <p>Created: {{articles.created}}</p>
+            <!-- <p>Created: {{articles.created}}</p> -->
+            <p>{{ articles.created | date : 'short' : timezone}}</p>
             <!--<p>ID: {{articles._id}}</p> -->
             <img src="{{articles.gravatarURL}}" style="width: 50px; border-radius: 3em">
             <a href="#/tab/user/{{articles._userID}}"><p>Username: {{articles.username}}</p></a>
