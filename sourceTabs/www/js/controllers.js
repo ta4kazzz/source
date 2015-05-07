@@ -848,11 +848,19 @@ $scope.getFollows = function() {
 })
 
 
+
 // =================================================================
 //                           #SAVED_CONTROLLER
 //  ================================================================
 
 .controller('savedController', function($scope, API) {
+
+  // On before you ender the pag run this function
+  $scope.$on('$ionicView.beforeEnter', function(){
+    $scope.getSaved();
+  });
+
+
 
   $scope.getSaved = function() {
 
