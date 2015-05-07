@@ -22,9 +22,9 @@
 
   <h2 style="text-align: center;">{{username}}</h2>
 
-   <button class="button button-full" ng-hide="showme" ng-click="followUser(); showme=true">Follow</button>
-   <button class="button button-full" ng-show="showme" ng-click="unfollowUser(); showme=false">Unfollow</button>
-  
+   <button class="button button-full" ng-show="relationship == 'notFollowing'" ng-click="followUser()">Follow</button>
+   <button class="button button-full" ng-show="relationship == 'following'"    ng-click="unfollowUser()">Unfollow</button>
+
 
   <div class="row">
     <div class="col"><a href="#"><p>Articles: <p>{{articleNumber}}</p></p><a></div>
@@ -37,7 +37,7 @@
 
           <div class="list" ng-init="getUserFeed()">
 
-        <a ng-repeat="articles in articles" 
+        <a ng-repeat="articles in articles"
             href="#/reader/{{articles._id}}"
            class="item item-thumbnail-left">
 

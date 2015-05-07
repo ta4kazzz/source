@@ -231,6 +231,9 @@ exports.postFollows = function(req, res) {
 	console.log(myID);
 	console.log(userID);
 
+		// FEATURE TO ADD
+		// IF the user already exists, do not push them to the database
+
 		// ADDS user to my follows List
     User.findByIdAndUpdate(
         myID,
@@ -239,7 +242,8 @@ exports.postFollows = function(req, res) {
         function(err, user) {
         	if (err)
 				res.send(err);
-			res.json(user);
+				// comment this out because in this case we want to return bob instead
+			// res.json(user);
         }
     );
 

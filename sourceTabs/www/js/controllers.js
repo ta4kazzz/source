@@ -257,7 +257,7 @@ $scope.getFollows = function() {
   $scope.followUser = function() {
     // the ID is the person who is logged in and doing the adding action
     var id = window.localStorage.SourceID;
-    // The user is who we want to "follow" - or add to pat's list
+    // The user is who we want to "follow" - or add to alices's list
     var user = {
       _id: $stateParams.userID
     };
@@ -300,10 +300,32 @@ $scope.getFollows = function() {
 
 
   $scope.getUser = function() {
-  // code goes here that gets the user information
 
+
+  var myid = window.localStorage.SourceID;
   var id = $stateParams.userID;
-  console.log(id);
+
+  API.getUser(myid)
+    .success(function (user, status, headers, config) {
+
+        var myFollows = user.follows;
+        var result = myFollows.indexOf(id);
+
+        if (result >= 0) {
+          console.log("You are following this user");
+            $scope.relationship = 'following';
+        } else {
+          console.log("You are not following this user");
+          $scope.relationship = 'notFollowing';
+        }
+
+    })
+    .error(function (user, status, headers, config) {
+      console.log("Something went wrong")
+    });
+
+
+
 
   API.getUser(id)
     .success(function (user, status, headers, config) {
@@ -317,17 +339,15 @@ $scope.getFollows = function() {
     });
 
 
-
+            // GET FOLLOWERS
             $scope.getFollowers = function() {
              // var id     = $stateParams.userID;
               $scope.users = API.getFollowers(id)
                 .success(function (data, status, headers, config) {
                   $scope.users = [];
                   $scope.followerNumber = data.length;
-
                   // if our name is in the list, then turn that thing to true
                   // turn that variable true/false
-
                 })
                 .error(function (users, status, headers, config) {
                   console.log("Something went wrong")
@@ -336,18 +356,14 @@ $scope.getFollows = function() {
 
 
 
-
+            // GET FOLLOWS
             $scope.getFollows = function() {
                var id     = $stateParams.userID;
                 $scope.users = API.getFollows(id)
                   .success(function (data, status, headers, config) {
                     $scope.users = [];
-
                     console.log(data.length);
                    $scope. followingNumber = data.length;
-
-
-
                   })
                   .error(function (users, status, headers, config) {
                     console.log("Something went wrong")
