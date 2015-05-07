@@ -20,6 +20,7 @@ exports.postArticles = function(req, res) {
 	var article = new Article();
 
     article.url         = req.body.url;
+		article.shortUrl    = req.body.shortUrl;
     article.summary     = req.body.summary;
     article.created     = req.body.created;
     article.gravatarURL = req.body.gravatarURL;

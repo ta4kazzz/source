@@ -15,8 +15,9 @@ var articleSchema = new Schema({
   content: String,
   imageUrl: String,
   public: Boolean,
+  shortUrl: String,
   likes: [{ type: Schema.Types.ObjectId, ref: 'User' }],
-  comments : [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
+  comments : [{ type: Schema.Types.ObjectId, ref: 'Comment' }]
 });
 
 articleSchema.plugin(deepPopulate);

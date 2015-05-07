@@ -742,6 +742,12 @@ $scope.getFollows = function() {
 
     var id = userID;
 
+    // Convert long url into short url
+    var parser = document.createElement('a');
+    parser.href = url;
+    var shortUrl = parser.hostname;
+
+
     API.getUser(id)
       .success(function (user, status, headers, config) {
         console.log("You got the user");
@@ -765,7 +771,8 @@ $scope.getFollows = function() {
         created: Date.now(),
         userID: userID,
         username: $scope.username,
-        gravatarURL: $scope.gravatarURL
+        gravatarURL: $scope.gravatarURL,
+        shortUrl: shortUrl
       };
 
       console.log(article.gravatarURL);
