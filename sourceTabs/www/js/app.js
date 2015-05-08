@@ -120,6 +120,18 @@ angular.module('starter', [
   })
 
 
+  .state('tabs.likers', {
+      url: '/articles/:articleID/likers',
+      views: {
+        'home-tab' : {
+          templateUrl: 'templates/likers.html',
+          controller: 'likers-controller'
+        }
+      }
+  })
+
+
+
 
   // ============================================
   // #PROFILE TABS
@@ -245,12 +257,12 @@ angular.module('starter', [
   })
 
 
+
     .state('reader', {
       url: '/reader/:articleID',
       templateUrl: 'templates/reader.html',
       controller: 'readerController'
   })
-
 
   .state('preview', {
       url: '/preview/:articleID',
