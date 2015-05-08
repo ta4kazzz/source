@@ -18,7 +18,7 @@
       <div ng-show="isSet(1)">
         <div class="list" ng-init="getAllArticles()" >
           <a ng-repeat="articles in articles"
-             href="#/reader/{{articles._id}}"
+            ui-sref="tabs.readerExplore( { articleID: articles._id} )"
              class="item item-thumbnail-left">
             <img src="{{articles.imageUrl}}">
             <h2>{{ articles.title }}</h2>
@@ -32,8 +32,7 @@
       <div ng-show="isSet(2)">
         <div class="list" style="xmax-width: 800px;" ng-init="getAllUsers()">
           <a ng-repeat="users in users"
-
-             href="#/tab/user/{{users._id}}"
+            ui-sref="tabs.userExplore( { userID: users._id} )"
              class="item item-thumbnail-left">
             <img src="{{users.gravatarURL}}">
             <h2>{{ users.username }}</h2>

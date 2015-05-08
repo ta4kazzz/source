@@ -218,6 +218,26 @@ angular.module('starter', [
     }
   })
 
+  .state('tabs.readerExplore', {
+      url: '/reader/:articleID',
+      views: {
+        'explore-tab' : {
+          templateUrl: 'templates/reader.html',
+          controller: 'readerController'
+        }
+      }
+  })
+
+  .state('tabs.userExplore', {
+    url: '/user/:userID',
+    views: {
+      'explore-tab': {
+        templateUrl: 'templates/user.html',
+        controller: 'userController'
+      }
+    }
+  })
+
   // ============================================
   // #Notifications TABS
   // ============================================
