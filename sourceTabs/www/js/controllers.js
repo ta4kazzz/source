@@ -13,6 +13,11 @@ angular.module('starter.controllers', [])
 
 .controller('notifications-controller', function($scope, auth, store, $state, API) {
 
+  // On before you ender the pag run this function
+  $scope.$on('$ionicView.beforeEnter', function(){
+    $scope.getNotifications();
+  });
+
   $scope.getNotifications = function() {
 
    var userID     = window.localStorage.SourceID;
@@ -37,8 +42,19 @@ angular.module('starter.controllers', [])
 })
 
 
+// =================================================================
+//  #Settings
+//  ================================================================
+
 
 .controller('settings-controller', function($scope, auth, store, $state, API) {
+
+
+  // On before you ender the pag run this function
+  $scope.$on('$ionicView.beforeEnter', function(){
+    $scope.getProfile();
+  });
+
 
 
   $scope.editProfileForm = {
@@ -119,7 +135,9 @@ angular.module('starter.controllers', [])
 
 
 
-
+// =================================================================
+//  #Dash
+//  ================================================================
 
 .controller('DashCtrl', function($scope, auth, store, $state) {
 
@@ -134,6 +152,10 @@ angular.module('starter.controllers', [])
 
 })
 
+
+// =================================================================
+//  #chats
+//  ================================================================
 .controller('ChatsCtrl', function($scope, Chats) {
   $scope.chats = Chats.all();
   $scope.remove = function(chat) {
@@ -141,7 +163,15 @@ angular.module('starter.controllers', [])
   }
 })
 
+
+// =================================================================
+//  #Profile Followers Controller
+//  ================================================================
 .controller('profile-followers-controller', function($scope, API) {
+
+  $scope.$on('$ionicView.beforeEnter', function(){
+    $scope.getFollowers();
+  });
 
   $scope.getFollowers = function() {
 
@@ -165,7 +195,15 @@ angular.module('starter.controllers', [])
 
 })
 
+// =================================================================
+//  #Profile Following Controller
+//  ================================================================
+
 .controller('profile-following-controller', function($scope, $rootScope, auth, API) {
+
+  $scope.$on('$ionicView.beforeEnter', function(){
+    $scope.getFollows();
+  });
 
   $scope.getFollows = function() {
 
@@ -189,7 +227,18 @@ angular.module('starter.controllers', [])
 
 })
 
+
+// =================================================================
+//  #user-follower
+//  ================================================================
+
+
 .controller('user-followers-controller', function($scope, $rootScope, auth, API,  $stateParams) {
+
+  // On before you ender the pag run this function
+  $scope.$on('$ionicView.beforeEnter', function(){
+    $scope.getFollowers();
+  });
 
   $scope.getFollowers = function() {
 
@@ -216,6 +265,10 @@ angular.module('starter.controllers', [])
 
 
 .controller('user-following-controller', function($scope, $rootScope, auth, API,  $stateParams) {
+
+  $scope.$on('$ionicView.beforeEnter', function(){
+    $scope.getFollows();
+  });
 
 $scope.getFollows = function() {
 
@@ -249,6 +302,13 @@ $scope.getFollows = function() {
 
 
 .controller('userController', function($scope, $rootScope, API, $stateParams) {
+
+
+  $scope.$on('$ionicView.beforeEnter', function(){
+    $scope.getUser();
+    $scope.getUserFeed();
+  });
+
 
   // if the user follows this user then showme = true
   $scope.user_id = $stateParams.userID;
@@ -409,6 +469,11 @@ $scope.getFollows = function() {
 
 .controller('likers-controller', function($scope, API, $stateParams) {
 
+  // On before you ender the pag run this function
+  $scope.$on('$ionicView.beforeEnter', function(){
+    $scope.getLiked();
+  });
+
 
   $scope.getLiked = function() {
 
@@ -458,6 +523,14 @@ $scope.getFollows = function() {
       $scope.isSet = function(tabNum){
         return $scope.tab === tabNum;
       };
+
+
+      // On before you ender the pag run this function
+      $scope.$on('$ionicView.beforeEnter', function(){
+        $scope.getAllArticles();
+        $scope.getAllUsers();
+        $scope.getTopLiked();
+      });
 
 
    $scope.getAllArticles = function() {
@@ -510,8 +583,6 @@ $scope.getFollows = function() {
 
 
 
-
-
           console.log("Got all the top articles")
 
 
@@ -529,6 +600,15 @@ $scope.getFollows = function() {
 //  ================================================================
 
 .controller('homeController', function($rootScope, $scope, auth, API, $timeout, $stateParams) {
+
+
+  // On before you ender the pag run this function
+  $scope.$on('$ionicView.beforeEnter', function(){
+    $scope.getHomeFeed();
+  });
+
+
+
    $rootScope.auth = auth;
 
   $scope.doRefresh = function() {
@@ -627,19 +707,6 @@ $scope.getFollows = function() {
   };
 
 
-  // $scope.getAllArticles = function() {
-  //    $scope.data = API.getArticles()
-  //       .success(function (data, status, headers, config) {
-  //        $scope.articles = [];
-  //             for (var i = 0; i < data.length; i++) {
-  //                 if (data[i].public == true) {
-  //                     $scope.articles.push(data[i]);
-  //                 }
-  //             };
-  //       }).error(function (data, status, headers, config) {
-  //             console.log('someting went wrong')
-  //         });
-  //  };
 
 
   $scope.getHomeFeed = function() {
@@ -663,21 +730,6 @@ $scope.getFollows = function() {
   };
 
 
-  //  $scope.getHomeFeed = function() {
-  //    var id  = window.localStorage.SourceID;
-   //
-  //    $scope.data = API.getHomeFeed(id)
-  //       .success(function (data, status, headers, config) {
-  //        $scope.articles = [];
-  //             for (var i = 0; i < data.length; i++) {
-  //                 if (data[i].public == true) {
-  //                     $scope.articles.push(data[i]);
-  //                 }
-  //             };
-  //       }).error(function (data, status, headers, config) {
-  //             console.log('someting went wrong')
-  //         });
-  //  };
 
 
 })
@@ -689,6 +741,11 @@ $scope.getFollows = function() {
 
 
 .controller('readerController', function($scope, $rootScope, API, $stateParams) {
+
+
+    $scope.$on('$ionicView.beforeEnter', function(){
+      $scope.getContent();
+    });
 
   $scope.getContent = function() {
   // code goes here that gets the article information
@@ -930,7 +987,15 @@ $scope.getFollows = function() {
 .controller('ProfileCtrl', function($rootScope, $scope, auth, API, $stateParams) {
 
 
+
+    $scope.$on('$ionicView.beforeEnter', function(){
+      $scope.getProfile();
+      $scope.getProfileFeed();
+    });
+
+
 $scope.auth = auth;
+
 
   $scope.getProfile = function() {
 

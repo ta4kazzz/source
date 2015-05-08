@@ -11,17 +11,15 @@
 
   <ion-content>
 
-  <ion-list ng-init="getFollowers()">
-      <ion-item ng-repeat="users in users">
+    <ion-list ng-init="getFollowers()">
+        <ion-item ng-repeat="users in users">
 
-  <a class="item item-thumbnail-left" href="#/tab/user/{{users._id}}">
-      <img src="{{users.gravatarURL}}">
-      <h2>{{users.username}}</h2>
-    </a>
+        <a class="item item-thumbnail-left" href="#/tab/user/{{users._id}}">
+          <img src="{{users.gravatarURL}}">
+          <h2>{{users.username}}</h2>
+        </a>
 
-
-
-      </ion-item>
+        </ion-item>
     </ion-list>
 
 
