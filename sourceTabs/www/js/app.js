@@ -65,6 +65,10 @@ angular.module('starter', [
     }
   })
 
+  // ============================================
+  // #HOME TABS
+  // ============================================
+
   .state('tabs.home', {
     url: '/home',
     views: {
@@ -105,6 +109,34 @@ angular.module('starter', [
     }
   })
 
+  .state('tabs.readerHome', {
+      url: '/reader/:articleID',
+      views: {
+        'home-tab' : {
+          templateUrl: 'templates/reader.html',
+          controller: 'readerController'
+        }
+      }
+  })
+
+
+
+  // ============================================
+  // #PROFILE TABS
+  // ============================================
+
+
+
+  .state('tabs.readerProfile', {
+      url: '/reader/:articleID',
+      views: {
+        'profile-tab' : {
+          templateUrl: 'templates/reader.html',
+          controller: 'readerController'
+        }
+      }
+  })
+
 
   .state('tabs.profile', {
     url: '/profile',
@@ -136,64 +168,6 @@ angular.module('starter', [
     }
   })
 
-  .state('add', {
-      url: '/add',
-      templateUrl: 'templates/add.html',
-      controller: 'addController'
-  })
-
-  .state('likers', {
-    url: '/articles/:articleID/likers',
-    templateUrl: 'templates/likers.html',
-    controller: 'likers-controller'
-  })
-
-
-  .state('saved', {
-      url: '/saved',
-      templateUrl: 'templates/saved.html',
-      controller: 'savedController'
-  })
-
-    .state('reader', {
-      url: '/reader/:articleID',
-      templateUrl: 'templates/reader.html',
-      controller: 'readerController'
-  })
-
-
-
-  .state('preview', {
-      url: '/preview/:articleID',
-      templateUrl: 'templates/preview.html',
-      controller: 'addController'
-  })
-
-
-
-
-  .state('tabs.explore', {
-    url: '/explore',
-    views: {
-      'explore-tab': {
-        templateUrl: 'templates/explore.html',
-        controller: 'exploreController'
-      }
-    }
-  })
-
-  .state('tabs.notifications', {
-    url: '/notifications',
-    views: {
-      'notifications-tab': {
-        templateUrl: 'templates/notifications.html',
-        controller: 'notifications-controller'
-      }
-    }
-  })
-
-
-
   .state('tabs.settings', {
     url: '/profile/settings',
     views: {
@@ -213,6 +187,78 @@ angular.module('starter', [
       }
     }
   })
+
+
+
+
+  // ============================================
+  // #Explore TABS
+  // ============================================
+
+
+  .state('tabs.explore', {
+    url: '/explore',
+    views: {
+      'explore-tab': {
+        templateUrl: 'templates/explore.html',
+        controller: 'exploreController'
+      }
+    }
+  })
+
+  // ============================================
+  // #Notifications TABS
+  // ============================================
+
+
+  .state('tabs.notifications', {
+    url: '/notifications',
+    views: {
+      'notifications-tab': {
+        templateUrl: 'templates/notifications.html',
+        controller: 'notifications-controller'
+      }
+    }
+  })
+
+  // ============================================
+  // #Modals TABS
+  // ============================================
+
+  .state('add', {
+      url: '/add',
+      templateUrl: 'templates/add.html',
+      controller: 'addController'
+  })
+
+  .state('likers', {
+    url: '/articles/:articleID/likers',
+    templateUrl: 'templates/likers.html',
+    controller: 'likers-controller'
+  })
+
+
+  .state('saved', {
+      url: '/saved',
+      templateUrl: 'templates/saved.html',
+      controller: 'savedController'
+  })
+
+
+    .state('reader', {
+      url: '/reader/:articleID',
+      templateUrl: 'templates/reader.html',
+      controller: 'readerController'
+  })
+
+
+  .state('preview', {
+      url: '/preview/:articleID',
+      templateUrl: 'templates/preview.html',
+      controller: 'addController'
+  })
+
+
 
 
   // if none of the above states are matched, use this as the fallback
