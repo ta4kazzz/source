@@ -1,6 +1,6 @@
 <ion-view view-title="Explore">
 
-  <!-- Nav Bar -->
+  <!-- Nav Bar --> d
   <ion-nav-bar class="bar-positive">
     <div class="bar bar-subheader">
       <div class="button-bar">
@@ -46,7 +46,7 @@
       <div ng-show="isSet(3)">
         <div class="list" ng-init="getTopLiked()" >
           <a ng-repeat="topArticles in topArticles"
-             href="#/reader/{{topArticles._id}}"
+            ui-sref="tabs.readerExplore( { articleID: topArticles._id} )"
              class="item item-thumbnail-left">
             <img src="{{topArticles.imageUrl}}">
             <h2>{{ topArticles.title }}</h2>

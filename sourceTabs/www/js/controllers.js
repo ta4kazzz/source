@@ -9,7 +9,9 @@
 angular.module('starter.controllers', [])
 
 
-
+// =================================================================
+//  #Notification
+//  ================================================================
 
 .controller('notifications-controller', function($scope, auth, store, $state, API) {
 
@@ -243,6 +245,7 @@ angular.module('starter.controllers', [])
   $scope.getFollowers = function() {
 
    var id     = $stateParams.userID;
+   console.log("whats the " + id);
 
     $scope.users = API.getFollowers(id)
       .success(function (data, status, headers, config) {

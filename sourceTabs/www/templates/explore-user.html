@@ -1,0 +1,64 @@
+<ion-view view-title="User">
+
+
+  <!-- Nav Bar -->
+ <!-- Nav Bar -->
+  <ion-nav-bar class="bar-positive">
+  <ion-nav-back-button>
+  </ion-nav-back-button>
+  </ion-nav-bar>
+
+
+  <ion-content ng-init="getUser()">
+  <div style="
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1em;
+    max-width: 100px;
+    }">
+<!--       <img style ="width: 100px; border-radius: 5em;" src="{{auth.profile.picture}}"> -->
+<img src="{{gravatarURL}}" style="width: 100px; border-radius: 5em">
+  </div>
+
+  <h2 style="text-align: center;">{{username}}</h2>
+
+   <button class="button button-full" ng-show="relationship == 'notFollowing'" ng-click="followUser()">Follow</button>
+   <button class="button button-full" ng-show="relationship == 'following'"    ng-click="unfollowUser()">Unfollow</button>
+
+
+  <div class="row">
+    <div class="col"><a href="#"><p>Articles: <p>{{articleNumber}}</p></p><a></div>
+
+    <div class="col"><a ui-sref="tabs.userFollowersExplore( { userID: users_id} )"><p>Followers: <p>{{followerNumber}}</p></p><a></div>
+    <div class="col"><a ui-sref="tabs.userFollowingExplore( { userID: users_id} )"><p>Followers: <p>{{followerNumber}}</p></p><a></div>
+
+
+  </div>
+
+
+
+
+          <div class="list" ng-init="getUserFeed()">
+
+
+
+        <a
+            ng-repeat="articles in articles"
+            ui-sref="tabs.readerExplore( { articleID: articles._id} )"
+            class="item item-thumbnail-left">
+
+          <img src="{{articles.imageUrl}}">
+          <h2>{{ articles.title }}</h2>
+          <h4>{{ articles.username }}</h4>
+          <img src="{{articles.gravatarURL}}" style="width: 20px; border-radius: 3em">
+        </a>
+
+      </div>
+
+
+
+
+  </ion-content>
+
+
+</ion-view>

@@ -79,6 +79,18 @@ angular.module('starter', [
     }
   })
 
+
+  .state('tabs.likers', {
+      url: '/articles/:articleID/likers',
+      views: {
+        'home-tab' : {
+          templateUrl: 'templates/likers.html',
+          controller: 'likers-controller'
+        }
+      }
+  })
+
+
   .state('tabs.user', {
     url: '/user/:userID',
     views: {
@@ -120,18 +132,60 @@ angular.module('starter', [
   })
 
 
-  .state('tabs.likers', {
-      url: '/articles/:articleID/likers',
+  // ============================================
+  // #Explore TABS
+  // ============================================
+
+
+  .state('tabs.explore', {
+    url: '/explore',
+    views: {
+      'explore-tab': {
+        templateUrl: 'templates/explore.html',
+        controller: 'exploreController'
+      }
+    }
+  })
+
+  .state('tabs.userExplore', {
+    url: '/user/:userID',
+    views: {
+      'explore-tab': {
+        templateUrl: 'templates/explore-user.html',
+        controller: 'userController'
+      }
+    }
+  })
+
+  .state('tabs.userFollowersExplore', {
+    url: "/user/:userID/followers",
+    views: {
+      'explore-tab' :{
+        templateUrl: 'templates/explore-user-followers.html',
+        controller: 'user-followers-controller'
+      }
+    }
+  })
+
+  .state('tabs.userFollowingExplore', {
+    url: "/user/:userID/following",
+    views: {
+      'explore-tab' :{
+        templateUrl: 'templates/explore-user-following.html',
+        controller: 'user-following-controller'
+      }
+    }
+  })
+
+  .state('tabs.readerExplore', {
+      url: '/reader/:articleID',
       views: {
-        'home-tab' : {
-          templateUrl: 'templates/likers.html',
-          controller: 'likers-controller'
+        'explore-tab' : {
+          templateUrl: 'templates/reader.html',
+          controller: 'readerController'
         }
       }
   })
-
-
-
 
   // ============================================
   // #PROFILE TABS
@@ -204,41 +258,6 @@ angular.module('starter', [
 
 
   // ============================================
-  // #Explore TABS
-  // ============================================
-
-
-  .state('tabs.explore', {
-    url: '/explore',
-    views: {
-      'explore-tab': {
-        templateUrl: 'templates/explore.html',
-        controller: 'exploreController'
-      }
-    }
-  })
-
-  .state('tabs.readerExplore', {
-      url: '/reader/:articleID',
-      views: {
-        'explore-tab' : {
-          templateUrl: 'templates/reader.html',
-          controller: 'readerController'
-        }
-      }
-  })
-
-  .state('tabs.userExplore', {
-    url: '/user/:userID',
-    views: {
-      'explore-tab': {
-        templateUrl: 'templates/user.html',
-        controller: 'userController'
-      }
-    }
-  })
-
-  // ============================================
   // #Notifications TABS
   // ============================================
 
@@ -252,6 +271,9 @@ angular.module('starter', [
       }
     }
   })
+
+  
+
 
   // ============================================
   // #Modals TABS

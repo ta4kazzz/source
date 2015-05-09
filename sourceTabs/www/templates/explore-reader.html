@@ -1,0 +1,34 @@
+<ion-view view-title="reader">
+
+
+  <!-- Nav Bar -->
+  <!-- <ion-nav-bar class="bar-positive">
+      <ion-nav-buttons side="left">
+      <button class="button" ui-sref="tabs.home">Close</button>
+      </ion-nav-buttons>
+  </ion-nav-bar> -->
+
+  <ion-nav-bar class="bar-positive">
+    <ion-nav-back-button>
+    </ion-nav-back-button>
+  </ion-nav-bar>
+
+
+  <ion-content class="has-header" ng-init="getContent()">
+
+
+      <div class="container">
+        <h2 class="reader--title">{{articleTitle}}</h2>
+        <img class="reader--thumb" src="{{articleImageUrl}}">
+          <div class="reader--content">
+            <p>{{articleContent}}</p>
+          </div>
+      </div>
+
+
+
+  </ion-content>
+
+
+
+</ion-view>

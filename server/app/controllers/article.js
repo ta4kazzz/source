@@ -220,7 +220,7 @@ exports.postLikes = function(req, res) {
 					// BUILD THE NOTIFICATION OBJECT
 					var notification = new Notification({
 							articleOwner: articleOwner,
-							created: req.body.created,
+							created: Date.now(),
 							associated_article: articleID,
 							imageUrl: articleImageUrl,
 							doer_username: doer_username,
