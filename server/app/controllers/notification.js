@@ -19,7 +19,7 @@ exports.getNotifications = function(req, res) {
     .findById(userID)
     .select('-__v')
     .populate('notifications')
-    .sort({likes: 'desc'})
+    .sort({created: 'desc'})
     .exec(function(err, user) {
 			res.send(user.notifications)
       console.log(user.notifications);

@@ -288,7 +288,8 @@ exports.postFollows = function(req, res) {
 						doer_id: myID,
 						doer_username: doer_username,
 						articleOwner: userID,
-						type: "is now following you"
+						type: "is now following you",
+						created: Date.now()
 				});
 
 				// PUSH NOTIFICATION TO USERS COLLECTION

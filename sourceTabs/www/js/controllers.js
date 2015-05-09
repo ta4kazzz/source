@@ -28,6 +28,7 @@ angular.module('starter.controllers', [])
       .success(function (data, status, headers, config) {
         $scope.notifications = [];
         console.log(data);
+
         for (var i = 0; i < data.length; i++) {
           $scope.notifications.push(data[i]);
         };
