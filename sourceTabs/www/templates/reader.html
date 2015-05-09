@@ -11,17 +11,32 @@
   <ion-nav-bar class="bar-positive">
     <ion-nav-back-button>
     </ion-nav-back-button>
+
+    <ion-nav-buttons side="right">
+      <button class="button" ng-click="saveForLater(articles._id)">Saved for Later</button>
+      <button class="button" ng-click="likeArticle(article)">Like</button>
+    </ion-nav-buttons>
   </ion-nav-bar>
 
 
   <ion-content class="has-header" ng-init="getContent()">
 
 
+
+
       <div class="container">
         <h2 class="reader--title">{{articleTitle}}</h2>
+        <p>{{articleDate | date : 'short' : timezone}}</p>
+        <p>{{username}}</p>
+    
+
+        <br />
+
+
+
         <img class="reader--thumb" src="{{articleImageUrl}}">
           <div class="reader--content">
-            <p>{{articleContent}}</p>
+            <p style="white-space: pre;">{{articleContent}}</p>
           </div>
       </div>
 
