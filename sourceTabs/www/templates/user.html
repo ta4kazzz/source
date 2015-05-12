@@ -40,9 +40,9 @@
 
 
         <a
-            ng-repeat="articles in articles"
-            ui-sref="tabs.readerHome( { articleID: articles._id} )"
-            class="item item-thumbnail-left">
+          ng-repeat="articles in articles"
+          ui-sref="tabs.readerHome( { articleID: articles._id} )"
+          class="item item-thumbnail-left">
 
           <img src="{{articles.imageUrl}}">
           <h2>{{ articles.title }}</h2>

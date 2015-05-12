@@ -29,6 +29,7 @@ exports.getHomeFeed = function(req, res) {
 						.sort({created: 'desc'})
 						.exec(function(err, articles) {
 								res.send(articles)
+
 						});
 
 		});

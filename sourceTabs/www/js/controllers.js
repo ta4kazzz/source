@@ -720,11 +720,31 @@ $scope.getFollows = function() {
     API.getHomeFeed(userID)
       .success(function (data, user, status, headers, config) {
                $scope.articles = [];
-                    for (var i = 0; i < data.length; i++) {
-                        if (data[i].public == true) {
-                            $scope.articles.push(data[i]);
-                        }
-                    };
+
+
+
+                // this pushes the returned array to articles
+                for (var i = 0; i < data.length; i++) {
+                    // push data to article
+                    $scope.articles.push(data[i]);
+
+                    var articleLikers = data[i].likes;
+                    var results = articleLikers.indexOf(userID);
+
+
+                    if (results >= 0) {
+                      console.log("You like this article");
+                      // push liked=true to specific object in articles array
+                      console.log($scope.articles)
+
+                    } else {
+                      console.log("You do not like this article");
+
+                    }
+
+                };
+
+
       })
       .error(function (data, status, headers, config) {
         console.log("Error when getting home feed")
