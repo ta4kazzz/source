@@ -15,6 +15,7 @@
     <ion-nav-buttons side="right">
       <button class="button" ng-click="saveForLater(articles._id)">Saved for Later</button>
       <button class="button" ng-click="likeArticle(article)">Like</button>
+      <button class="button" ng-click="openWebView(article.url)">Web View</button>
     </ion-nav-buttons>
   </ion-nav-bar>
 
@@ -28,7 +29,7 @@
         <h2 class="reader--title">{{articleTitle}}</h2>
         <p>{{articleDate | date : 'short' : timezone}}</p>
         <p>{{username}}</p>
-
+        <p>{{article.url}}</p>
 
         <br />
 

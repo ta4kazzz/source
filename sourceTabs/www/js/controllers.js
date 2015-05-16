@@ -6,7 +6,10 @@
 
 
 
-angular.module('starter.controllers', [])
+angular.module('starter.controllers', [
+  'ionic',
+  'ngCordova'
+])
 
 
 // =================================================================
@@ -764,7 +767,7 @@ $scope.getFollows = function() {
 //  ================================================================
 
 
-.controller('readerController', function($scope, $rootScope, API, $stateParams) {
+.controller('readerController', function($scope, $rootScope, API, $stateParams, $cordovaInAppBrowser) {
 
 
     $scope.$on('$ionicView.beforeEnter', function(){
@@ -790,8 +793,6 @@ $scope.getFollows = function() {
       $scope.articleDate = article.created;
       $scope.username = article.username;
       $scope.usernameImage = article.gravatarURL;
-
-
     })
     .error(function (article, status, headers, config) {
       console.log("Something went wrong")
@@ -799,6 +800,8 @@ $scope.getFollows = function() {
 
 
   };
+
+
 
 
   $scope.saveForLater = function(articleID) {
@@ -826,7 +829,7 @@ $scope.getFollows = function() {
 
 
   $scope.likeArticle = function(article) {
-
+    console.log("like");
     // console.log("Like article triggered" + article);
 
     var userID               = window.localStorage.SourceID;
@@ -857,6 +860,19 @@ $scope.getFollows = function() {
 
 
   };
+
+  $scope.openWebView = function(url) {
+
+    $cordovaInAppBrowser
+       .open(url, '_blank')
+       .then(function(event) {
+         // success
+       }, function(event) {
+         // error
+      });
+
+
+  }
 
 
 
