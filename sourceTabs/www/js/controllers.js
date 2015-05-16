@@ -782,6 +782,7 @@ $scope.getFollows = function() {
 
   API.getArticle(id)
     .success(function (article, status, headers, config) {
+      console.log(article);
       $scope.article = article;
       $scope.articleUrl = article.url;
       $scope.articleID = article._id;

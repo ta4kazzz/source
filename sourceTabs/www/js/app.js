@@ -273,6 +273,47 @@ angular.module('starter', [
   })
 
 
+  .state('tabs.userNotificaitons', {
+    url: '/user/:userID',
+    views: {
+      'notifications-tab': {
+        templateUrl: 'templates/notifications-user.html',
+        controller: 'userController'
+      }
+    }
+  })
+
+  .state('tabs.userFollowersNotificaitons', {
+    url: "/user/:userID/followers",
+    views: {
+      'notifications-tab' :{
+        templateUrl: 'templates/notifications-user-followers.html',
+        controller: 'user-followers-controller'
+      }
+    }
+  })
+
+  .state('tabs.userFollowingNotificaitons', {
+    url: "/user/:userID/following",
+    views: {
+      'notifications-tab' :{
+        templateUrl: 'templates/notifications-user-following.html',
+        controller: 'user-following-controller'
+      }
+    }
+  })
+
+  .state('tabs.readerNotificaitons', {
+      url: '/reader/:articleID',
+      views: {
+        'notifications-tab' : {
+          templateUrl: 'templates/reader.html',
+          controller: 'readerController'
+        }
+      }
+  })
+
+
 
 
   // ============================================

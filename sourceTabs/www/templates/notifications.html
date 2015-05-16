@@ -14,16 +14,30 @@
 
 
     <ion-list ng-init="getNotifications()">
-        <ion-item ng-repeat="notifications in notifications">
+        <ion-item ng-repeat="notifications in notifications" class="list">
 
-            <a class="item item-thumbnail-left" href="#/reader/{{notifications.associated_article}}">
 
-              <p>{{notifications.doer_username}} {{notifications.type}} {{notifications.created}}</p>
-              <img src="{{notifications.imageUrl}}" style="width:200px; display: inline-block;">
-              <p>{{ notifications.created | date : 'short' : timezone}}</p>
-              <p ng-show="{{notifications.type}}=="liked your post"">LIKES</p>
 
-            </a>
+
+          <!-- display this if its a liked post -->
+            <div ng-show="{{notifications.type=='liked your post'}}">
+              <a ui-sref="tabs.readerNotificaitons( { articleID: notifications.associated_article} )" class="item item-thumbnail-left">
+                <img src="{{notifications.imageUrl}}">
+                <p>{{notifications.doer_username}} {{notifications.type}} {{notifications.created}}</p>
+                <p>{{ notifications.created | date : 'short' : timezone}}</p>
+              </a>
+            </div>
+
+            <!-- display this if its a user post -->
+            <div ng-show="{{notifications.type=='is now following you'}}">
+              <a ui-sref="tabs.userNotificaitons( { userID: notifications.doer_id} )" class="item item-thumbnail-left">
+                <img src="{{notifications.imageUrl}}">
+                <p>{{notifications.doer_username}} {{notifications.type}} {{notifications.created}}</p>
+                <p>{{ notifications.created | date : 'short' : timezone}}</p>
+              </a>
+            </div>
+
+
 
         </ion-item>
     </ion-list>
