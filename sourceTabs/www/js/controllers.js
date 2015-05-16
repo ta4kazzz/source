@@ -893,7 +893,7 @@ $scope.getFollows = function() {
     parser.href = url;
     var shortUrl = parser.hostname;
 
-
+    // Gets User info so we can attach that to article
     API.getUser(id)
       .success(function (user, status, headers, config) {
         console.log("You got the user");
@@ -921,7 +921,6 @@ $scope.getFollows = function() {
         shortUrl: shortUrl
       };
 
-      console.log(article.gravatarURL);
 
       // API that posts the articles
       API.postArticle(article)
@@ -930,8 +929,8 @@ $scope.getFollows = function() {
           var id =  article._id
           $scope.getArticle(id);
           window.localStorage['ActiveArticle'] = id;
-
-          $state.go('preview');
+          $scope.getPreview()
+          // $state.go('preview');
         })
         .error(function (article, status, headers, config) {
           console.log("Error when posting the article packet")

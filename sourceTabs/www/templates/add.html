@@ -3,28 +3,50 @@
   <!-- Nav Bar -->
   <ion-nav-bar class="bar-positive">
       <ion-nav-buttons side="left">
-      <button class="button" ui-sref="tabs.home">Close</button>
+      <button class="button" ui-sref="tabs.home" ng-click="article.url = null; article.summary = null">Close</button>
       </ion-nav-buttons>
   </ion-nav-bar>
 
 
 
-  
+
   <ion-content>
+
+
+
+    <div class="list" ng-init="getPreview()">
+
+
+      <div class="list" ng-init="getAllArticles()" >
+        <a class="item item-thumbnail-left">
+          <img src="{{article.imageUrl}}">
+          <h2>{{ article.title }}</h2>
+          <h4>{{ article.username }}</h4>
+          <img src="{{article.gravatarURL}}" style="width: 20px; border-radius: 3em">
+        </a>
+      </div>
+
+    </div>
+
+
+
+
+
+
+
 
     	<div class="list list-inset">
     	  <label class="item item-input">
-    	    <input type="text" ng-model="article.url" name="url" placeholder="url" required>
+    	    <input type="text" ng-model="article.url" name="url" placeholder="url" ng-change="addArticle()" required>
     	  </label>
     	  <label class="item item-input">
     	    <input type="text" ng-model="article.summary" name="summary" placeholder="User Summary" required>
     	  </label>
     	</div>
 
-      <button class="button button-block button-warning" ng-click="addArticle()">
-        Preview
+      <button class="button button-block button-warning" ng-click="publishArticle(); article.url = null; article.summary = null ">
+        Post Article
       </button>
-
 
   </ion-content>
 </ion-view>
