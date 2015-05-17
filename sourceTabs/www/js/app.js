@@ -28,8 +28,7 @@ angular.module('starter', [
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider, authProvider,
-  jwtInterceptorProvider, $httpProvider) {
+.config(function($stateProvider, $urlRouterProvider, authProvider, jwtInterceptorProvider, $httpProvider, $sceProvider) {
 
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
@@ -365,6 +364,7 @@ angular.module('starter', [
     clientID: AUTH0_CLIENT_ID,
     loginState: 'login'
   });
+
 
 
 

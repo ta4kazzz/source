@@ -8,7 +8,7 @@
 
 angular.module('starter.controllers', [
   'ionic',
-  'ngCordova'
+  'ngCordova',
 ])
 
 
@@ -863,13 +863,13 @@ $scope.getFollows = function() {
   };
 
   $scope.openWebView = function(url) {
-
+    console.log("test");
     $cordovaInAppBrowser
-       .open(url, '_blank')
+       .open(url, '_system')
        .then(function(event) {
-         // success
+         console.log("yay");
        }, function(event) {
-         // error
+         console.log("nay");
       });
 
 
