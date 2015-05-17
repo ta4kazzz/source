@@ -2,9 +2,9 @@
 
   <!-- Nav Bar -->
   <ion-nav-bar class="bar-positive">
-      <ion-nav-buttons side="left">
+    <ion-nav-buttons side="left">
       <button class="button" ui-sref="tabs.home" ng-click="article.url = null; article.summary = null">Close</button>
-      </ion-nav-buttons>
+    </ion-nav-buttons>
   </ion-nav-bar>
 
 
@@ -14,10 +14,8 @@
 
 
 
-    <div class="list" ng-init="getPreview()">
-
-
-      <div class="list" ng-init="getAllArticles()" >
+    <div class="list">
+      <div>
         <a class="item item-thumbnail-left">
           <img src="{{article.imageUrl}}">
           <h2>{{ article.title }}</h2>
@@ -25,28 +23,25 @@
           <img src="{{article.gravatarURL}}" style="width: 20px; border-radius: 3em">
         </a>
       </div>
-
     </div>
 
 
+    <div class="list list-inset">
+      <label class="item item-input">
+        <input type="text" ng-model="article.url" name="url" placeholder="url" required>
+      </label>
+      <label class="item item-input">
+        <input type="text" ng-model="article.summary" name="summary" placeholder="User Summary" required>
+      </label>
+    </div>
 
+    <button class="button button-block button-warning" ng-click="addArticle()" ng-show="!showPublish">
+      Preview Article
+    </button>
 
-
-
-
-
-    	<div class="list list-inset">
-    	  <label class="item item-input">
-    	    <input type="text" ng-model="article.url" name="url" placeholder="url" ng-change="addArticle()" required>
-    	  </label>
-    	  <label class="item item-input">
-    	    <input type="text" ng-model="article.summary" name="summary" placeholder="User Summary" required>
-    	  </label>
-    	</div>
-
-      <button class="button button-block button-warning" ng-click="publishArticle(); article.url = null; article.summary = null ">
-        Post Article
-      </button>
+    <button class="button button-block button-warning" ng-click="publishArticle()"ng-show="showPublish">
+      Post Article
+    </button>
 
   </ion-content>
 </ion-view>

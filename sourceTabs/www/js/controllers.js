@@ -679,6 +679,7 @@ $scope.getFollows = function() {
       .success(function (article, user, status, headers, config) {
         // make button reflect the change
         console.log("Article Successfully liked")
+        // $scope.alreadyLiked = true;
       })
       .error(function (article, status, headers, config) {
         console.log("Error when liking the article")
@@ -948,6 +949,7 @@ $scope.getFollows = function() {
           window.localStorage['ActiveArticle'] = id;
           $scope.getPreview()
           // $state.go('preview');
+          $scope.showPublish = true;
         })
         .error(function (article, status, headers, config) {
           console.log("Error when posting the article packet")
