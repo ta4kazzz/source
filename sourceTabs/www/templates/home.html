@@ -1,10 +1,11 @@
 
-<ion-view>
+<ion-view class="home">
 
   <!-- Nav Bar -->
   <ion-nav-bar class="bar-positive">
       <ion-nav-buttons side="right">
-      <button class="button" ui-sref="saved">Saved For Later</button>
+        <!-- <button class="button" ui-sref="saved">Saved For Later</button> -->
+        <i ui-sref="saved" class="icon ion-bookmark placeholder-icon"></i>
       </ion-nav-buttons>
   </ion-nav-bar>
 
@@ -13,50 +14,37 @@
   <ion-content class="has-header">
 
   <ion-refresher
-    pulling-text="Pull to refresh..."
+    pulling-text="Refreshing . . ."
     on-refresh="doRefresh()">
   </ion-refresher>
 
-  <div class="home-container" style="xmax-width: 800px;">
-    <ion-list ng-init="getHomeFeed()">
-      <ion-item ng-repeat="articles in articles">
-        <div class="card">
-          <div class="item item-divider">
-            <h2>{{articles.title}}</h2>
-            <!-- <p>Created: {{articles.created}}</p> -->
-            <p>{{ articles.created | date : 'short' : timezone}}</p>
-            <!--<p>ID: {{articles._id}}</p> -->
-            <img src="{{articles.gravatarURL}}" style="width: 50px; border-radius: 3em">
-            <a href="#/tab/user/{{articles._userID}}"><p>Username: {{articles.username}}</p></a>
-            <!-- <p>{{articles.url}}</p> -->
-            <p>{{articles.shortUrl}}</p>
-          </div>
 
-          <div class="item item-text-wrap">
+  <ion-list ng-init="getHomeFeed()">
+    <ion-item ng-repeat="articles in articles">
+      <div class="home-article-card">
 
-            <!-- <a ui-sref="reader( { articleID: articles._id} )"> -->
-            <a ui-sref="tabs.readerHome( { articleID: articles._id} )">
-            <!-- <a href="#/reader/{{articles._id}}"> -->
-              <img src="{{articles.imageUrl}}" style="width:100%">
-            </a>
+          <h2>{{articles.title}}</h2>
+          <p>{{ articles.created | date : 'short' : timezone}}</p>
+          <img src="{{articles.gravatarURL}}" style="width: 50px; border-radius: 3em">
+          <a href="#/tab/user/{{articles._userID}}"><p>Username: {{articles.username}}</p></a>
+          <p>{{articles.shortUrl}}</p>
+          <a ui-sref="tabs.readerHome( { articleID: articles._id} )">
+            <img src="{{articles.imageUrl}}" style="width:100%">
+          </a>
+          <p>{{articles.summary}}</p>
+          <button class="button icon-left ion-bookmark button-positive" ng-click="saveForLater(articles._id)">Save For Later</button>
+          <button class="button icon-left ion-star button-positive" ng-click="likeArticle(articles); alreadyLiked==true">Like</button>
+          <a ui-sref="tabs.likers( { articleID: articles._id} )"><p>View All Likes</p></a>
+
+      </div>
 
 
+    </ion-item>
+  </ion-list>
 
-            <p>{{articles.summary}}</p>
-            <button class="button icon-left ion-bookmark button-positive" ng-click="saveForLater(articles._id)">Save For Later</button>
-            <button class="button icon-left ion-star button-positive" ng-click="likeArticle(articles); alreadyLiked==true">Like</button>
-            <!-- <button class="button icon-left ion-star button-positive" ng-click="unlikeArticle(articles._id)" ng-show="alreadyLiked">Unlike</button> -->
-            <!-- <button class="button icon-left button-positive" ui-sref="likers">View All Likes</button> -->
-            <a ui-sref="tabs.likers( { articleID: articles._id} )">
-        <p>View All Likes</p></a>
-          </div>
-        </div>
-      </ion-item>
-    </ion-list>
-    </div>
+
+
+
+
   </ion-content>
-
-
-
-
 </ion-view>
