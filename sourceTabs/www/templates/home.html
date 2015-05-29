@@ -2,62 +2,46 @@
 <ion-view class="home">
 
   <!-- Nav Bar -->
-  <ion-nav-bar class="bar-positive">
-      <ion-nav-buttons side="right">
-        <!-- <button class="button" ui-sref="saved">Saved For Later</button> -->
-        <i ui-sref="saved" class="icon ion-bookmark placeholder-icon"></i>
-      </ion-nav-buttons>
-  </ion-nav-bar>
+  <ion-header-bar class="bar">
+    <h1 class="title">S O U R C E</h1>
+     <div class="buttons">
+       <i ui-sref="saved" class="icon ion-bookmark placeholder-icon"></i>
+     </div>
+  </ion-header-bar>
 
 
 
   <ion-content class="has-header" header-shrink scroll-event-interval="5">
 
-  <ion-refresher
-    pulling-text="Refreshing . . ."
-    on-refresh="doRefresh()">
-  </ion-refresher>
-  <ng-init="getHomeFeed()">
+    <!-- Refresher -->
+    <ion-refresher
+      pulling-text="Refreshing . . ."
+      on-refresh="doRefresh()">
+    </ion-refresher>
+    <ng-init="getHomeFeed()">
 
 
-  <div class="list article-card" ng-repeat="articles in articles" >
+    <div class="list article-card" ng-repeat="articles in articles" >
+              <a href="#/tab/user/{{articles._userID}}">
 
-          <div class="sticky-header">
-            <div class="item item-avatar sticky-header" >
-              <img src="{{articles.gravatarURL}}">
+                <div class="item item-avatar" >
+                  <img src="{{articles.gravatarURL}}">
+                    <h5><p>{{articles.username}}</p></h5>
+                    <p>{{ articles.created | date : 'short' : timezone}}</p>
+                </div>
 
-                <h2><a href="#/tab/user/{{articles._userID}}"><p>{{articles.username}}</p></a></h2>
-                <p>{{ articles.created | date : 'short' : timezone}}</p>
+              </a>
+
+            <img class="full-image" src="{{articles.imageUrl}}">
+
+            <div class="article-card-inside">
+                <h2 class="article-title">{{articles.title}}</h2>
+                <p>{{articles.shortUrl}}</p>
+                <p class="article-summary">{{articles.summary}}</p>
             </div>
-          </div>
 
-          <div class="item item-body">
-              <img class="full-image" src="{{articles.imageUrl}}">
-              <h2>{{articles.title}}</h2>
-              <p>{{articles.shortUrl}}</p>
-              <p>{{articles.summary}}</p>
-              <p>
-                  <a href="#" class="subdued">1 Like</a>
-                  <a href="#" class="subdued">5 Comments</a>
-              </p>
-          </div>
 
-          <div class="item tabs tabs-secondary tabs-icon-left">
-              <a class="tab-item" href="#">
-                  <i class="icon ion-thumbsup"></i>
-                  Like
-              </a>
-              <a class="tab-item" href="#">
-                  <i class="icon ion-chatbox"></i>
-                  Comment
-              </a>
-              <a class="tab-item" href="#">
-                  <i class="icon ion-share"></i>
-                  Share
-              </a>
-          </div>
-
-  </div>
+    </div>
 
 
 

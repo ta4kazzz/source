@@ -24,7 +24,11 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 // =================================================================
 //  # SOURCe
 //  ================================================================
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700|Source+Serif+Pro);
 
+h1, h2, h3, h4, h5, h6, p {
+  font-family: 'Source Sans Pro', sans-serif;
+}
 
 // Transparent scroll bar
 .sticky-header {
@@ -32,4 +36,35 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 }
 .scroll-content {
   overflow: visible !important;
+}
+
+.bar.bar-positive {
+  border-color: #0c63ee;
+  background-color: #387ef5;
+  color: #fff;
+}
+
+.article-card {
+  padding: 0;
+  border-bottom: 1px #D3D3D3 solid;
+}
+
+.article-card-inside {
+  padding: 0px 15px;
+}
+
+.article-title {
+  font-size: 26px;
+  color: #4A4A4A;
+  line-height: 40px;
+  font-weight: 600;
+
+}
+
+
+.article-summary {
+  font-weight: 100;
+  font-size: 20px;
+  color: #4A4A4A;
+  line-height: 30px;
 }
