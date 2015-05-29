@@ -9,8 +9,6 @@
 angular.module('starter.controllers', [
   'ionic',
   'ngCordova',
-  'ion-affix',
-  'ionic.ion.headerShrink'
 ])
 
 
