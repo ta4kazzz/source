@@ -18,7 +18,10 @@ This is a fresh ionic project that I will be migrating all of my existing code l
 - be able to edit all user info
 
 ## Explore
-- be able to search users / articles 
+- be able to search users / articles
 
 ## Notifications
 - new follows
+```
+ion-affix data-affix-within-parent-with-class="article-card"
+```

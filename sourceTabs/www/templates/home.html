@@ -11,7 +11,7 @@
 
 
 
-  <ion-content class="has-header" scroll-event-interval="5">
+  <ion-content class="has-header" header-shrink scroll-event-interval="5">
 
   <ion-refresher
     pulling-text="Refreshing . . ."
@@ -22,7 +22,7 @@
 
   <div class="list article-card" ng-repeat="articles in articles" >
 
-          <div class="sticky-header" ion-affix data-affix-within-parent-with-class="article-card">
+          <div class="sticky-header">
             <div class="item item-avatar sticky-header" >
               <img src="{{articles.gravatarURL}}">
 
