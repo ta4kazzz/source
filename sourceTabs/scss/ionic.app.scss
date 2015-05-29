@@ -27,19 +27,9 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 
 // Transparent scroll bar
-.bar.bar-positive {
+.sticky-header {
   background-color: rgba(255,255,255,.66) !important; /* or transparent, or background:none */
 }
 .scroll-content {
   overflow: visible !important;
-}
-
-
-// =================================================================
-//  # HOME
-//  ================================================================
-
-.home {
-  .card
-
 }

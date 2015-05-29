@@ -11,15 +11,61 @@
 
 
 
-  <ion-content class="has-header">
+  <ion-content class="has-header" scroll-event-interval="5">
 
   <ion-refresher
     pulling-text="Refreshing . . ."
     on-refresh="doRefresh()">
   </ion-refresher>
+  <ng-init="getHomeFeed()">
 
 
-  <ion-list ng-init="getHomeFeed()">
+  <div class="list article-card" ng-repeat="articles in articles" >
+
+          <div class="sticky-header" ion-affix data-affix-within-parent-with-class="article-card">
+            <div class="item item-avatar sticky-header" >
+              <img src="{{articles.gravatarURL}}">
+
+                <h2><a href="#/tab/user/{{articles._userID}}"><p>{{articles.username}}</p></a></h2>
+                <p>{{ articles.created | date : 'short' : timezone}}</p>
+            </div>
+          </div>
+
+          <div class="item item-body">
+              <img class="full-image" src="{{articles.imageUrl}}">
+              <h2>{{articles.title}}</h2>
+              <p>{{articles.shortUrl}}</p>
+              <p>{{articles.summary}}</p>
+              <p>
+                  <a href="#" class="subdued">1 Like</a>
+                  <a href="#" class="subdued">5 Comments</a>
+              </p>
+          </div>
+
+          <div class="item tabs tabs-secondary tabs-icon-left">
+              <a class="tab-item" href="#">
+                  <i class="icon ion-thumbsup"></i>
+                  Like
+              </a>
+              <a class="tab-item" href="#">
+                  <i class="icon ion-chatbox"></i>
+                  Comment
+              </a>
+              <a class="tab-item" href="#">
+                  <i class="icon ion-share"></i>
+                  Share
+              </a>
+          </div>
+
+  </div>
+
+
+
+
+
+
+
+  <!-- <ion-list ng-init="getHomeFeed()">
     <ion-item ng-repeat="articles in articles">
       <div class="home-article-card">
 
@@ -38,9 +84,8 @@
 
       </div>
 
-
     </ion-item>
-  </ion-list>
+  </ion-list> -->
 
 
 
