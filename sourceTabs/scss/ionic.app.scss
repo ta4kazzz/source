@@ -30,6 +30,28 @@ h1, h2, h3, h4, h5, h6, p {
   font-family: 'Source Sans Pro', sans-serif;
 }
 
+// =================================================================
+//  # UTILITIES
+//  ================================================================
+
+.padding-left-none {
+  padding-left:0;
+}
+
+.profile-face {
+  width: 3em;
+  border-radius: 4em;
+}
+
+.float-left {
+  float: left;
+}
+
+.float-right {
+  float: right;
+}
+
+
 // Transparent scroll bar
 .sticky-header {
   background-color: rgba(255,255,255,.66) !important; /* or transparent, or background:none */
@@ -46,12 +68,19 @@ h1, h2, h3, h4, h5, h6, p {
 
 .article-card {
   padding: 0;
-  border-bottom: 1px #D3D3D3 solid;
+  .article-card-inside {
+    padding: 0px 15px;
+  }
+  .username {
+    margin: .5em 0px;
+    font-size: 1em;
+  }
+  .date {
+    margin: .5em 0px;
+    font-size: 1em;
+  }
 }
 
-.article-card-inside {
-  padding: 0px 15px;
-}
 
 .article-title {
   font-size: 26px;

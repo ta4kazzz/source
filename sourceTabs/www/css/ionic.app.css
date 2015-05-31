@@ -7605,6 +7605,19 @@ a.button {
 h1, h2, h3, h4, h5, h6, p {
   font-family: 'Source Sans Pro', sans-serif; }
 
+.padding-left-none {
+  padding-left: 0; }
+
+.profile-face {
+  width: 3em;
+  border-radius: 4em; }
+
+.float-left {
+  float: left; }
+
+.float-right {
+  float: right; }
+
 .sticky-header {
   background-color: rgba(255, 255, 255, 0.66) !important;
   /* or transparent, or background:none */ }
@@ -7618,11 +7631,15 @@ h1, h2, h3, h4, h5, h6, p {
   color: #fff; }
 
 .article-card {
-  padding: 0;
-  border-bottom: 1px #D3D3D3 solid; }
-
-.article-card-inside {
-  padding: 0px 15px; }
+  padding: 0; }
+  .article-card .article-card-inside {
+    padding: 0px 15px; }
+  .article-card .username {
+    margin: 0.5em 0px;
+    font-size: 1em; }
+  .article-card .date {
+    margin: 0.5em 0px;
+    font-size: 1em; }
 
 .article-title {
   font-size: 26px;
