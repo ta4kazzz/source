@@ -1,7 +1,33 @@
 <ion-view view-title="Explore">
 
-  <!-- Nav Bar --> 
-  <ion-nav-bar class="bar">
+  <!-- Nav Bar -->
+
+
+
+    <ion-nav-bar class="bar">
+
+      <div class="tabs-striped tabs-top tabs-background">
+          <div class="tabs">
+            <a class="tab-item active" href="#" ng-click="setTab(1)">
+              Recent
+            </a>
+            <a class="tab-item" href="#" ng-click="setTab(2)">
+              Users
+            </a>
+            <a class="tab-item" href="#" ng-click="setTab(3)">
+              Top
+            </a>
+          </div>
+        </div>
+
+    </ion-nav-bar>
+
+
+
+
+
+
+  <!-- <ion-nav-bar class="bar">
     <div class="bar bar-subheader">
       <div class="button-bar">
         <a ng-class="{ active: isSet(1) }" class="button" ng-click="setTab(1)">Recent</a>
@@ -9,14 +35,14 @@
         <a ng-class="{ active: isSet(3) }" class="button" ng-click="setTab(3)">Top</a>
       </div>
     </div>
-  </ion-nav-bar>
+  </ion-nav-bar> -->
 
 
   <ion-content>
 
       <!-- ALL -->
       <div ng-show="isSet(1)">
-        <div class="list" ng-init="getAllArticles()" >
+        <div class="list" style="margin-top: 48px;" ng-init="getAllArticles()" >
           <a ng-repeat="articles in articles"
             ui-sref="tabs.readerExplore( { articleID: articles._id} )"
              class="item item-thumbnail-left">
@@ -30,21 +56,31 @@
 
       <!-- USERS -->
       <div ng-show="isSet(2)">
-        <div class="list" style="xmax-width: 800px;" ng-init="getAllUsers()">
-          <a ng-repeat="users in users"
+        <div class="list" style="margin-top: 48px;" ng-init="getAllUsers()">
+          <!-- <a ng-repeat="users in users"
             ui-sref="tabs.userExplore( { userID: users._id} )"
              class="item item-thumbnail-left">
             <img src="{{users.gravatarURL}}">
             <h2>{{ users.username }}</h2>
             <h4>{{ users.email }}</h4>
             <img src="{{articles.gravatarURL}}" style="width: 20px; border-radius: 3em">
+          </a> -->
+
+          <a ng-repeat="users in users"  ui-sref="tabs.userExplore( { userID: users._id} )">
+              <div class="item item-avatar" >
+                <img src="{{users.gravatarURL}}">
+                  <div class="float-left username">{{users.username}}</div>
+              </div>
           </a>
+
+
+
         </div>
       </div>
 
       <!-- TOP -->
       <div ng-show="isSet(3)">
-        <div class="list" ng-init="getTopLiked()" >
+        <div class="list"  style="margin-top: 48px;" ng-init="getTopLiked()" >
           <a ng-repeat="topArticles in topArticles"
             ui-sref="tabs.readerExplore( { articleID: topArticles._id} )"
              class="item item-thumbnail-left">
