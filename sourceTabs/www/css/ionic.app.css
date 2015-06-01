@@ -7625,6 +7625,9 @@ h1, h2, h3, h4, h5, h6, p, body, * {
 .float-right {
   float: right; }
 
+.no-text-wrap {
+  white-space: normal; }
+
 .tab-item .icon {
   margin: 6px auto; }
 
@@ -7645,6 +7648,12 @@ h1, h2, h3, h4, h5, h6, p, body, * {
   border-width: 0px 0px 4px 0px !important;
   border-style: solid;
   border-color: #64E387; }
+
+.item-thumbnail-left > img:first-child {
+  max-width: 126px; }
+
+.item-thumbnail-left {
+  padding-left: 154px; }
 
 .sticky-header {
   background-color: rgba(255, 255, 255, 0.66) !important;

@@ -47,9 +47,8 @@
             ui-sref="tabs.readerExplore( { articleID: articles._id} )"
              class="item item-thumbnail-left">
             <img src="{{articles.imageUrl}}">
-            <h2>{{ articles.title }}</h2>
-            <h4>{{ articles.username }}</h4>
-            <img src="{{articles.gravatarURL}}" style="width: 20px; border-radius: 3em">
+            <h2 class="no-text-wrap">{{ articles.title }}</h2>
+            <p>{{ articles.shortUrl }}</p>
           </a>
         </div>
       </div>

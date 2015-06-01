@@ -68,7 +68,9 @@ background-image: linear-gradient(45deg, #4BCEB1 0%, #62EA70 100%);
   float: right;
 }
 
-
+.no-text-wrap {
+  white-space: normal;
+}
 // =================================================================
 //  # Tab Bar
 //  ================================================================
@@ -100,6 +102,19 @@ border-style: solid;
 border-color: #64E387;
 }
 
+
+
+// =================================================================
+//  # Article Thumb
+//  ================================================================
+
+.item-thumbnail-left > img:first-child {
+  max-width: 126px;
+}
+
+.item-thumbnail-left {
+  padding-left: 154px;
+}
 
 // Transparent scroll bar
 .sticky-header {
