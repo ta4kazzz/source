@@ -73,8 +73,11 @@
              class="item item-thumbnail-left">
             <img src="{{topArticles.imageUrl}}">
             <h2>{{ topArticles.title }}</h2>
-            <h4>{{ topArticles.username }}</h4>
-            <h4>Likes: {{ topArticles.likes.length }}</h4>
+            <h2>{{ topArticles.shortURL }}</h2>
+            <div class="float-right">
+              <i ui-sref="saved" class="icon ion-ios-heart-outline inline-block"></i>
+              <h4 class="inline-block">{{ topArticles.likes.length }}</h4>
+            </div>
           </a>
         </div>
       </div>

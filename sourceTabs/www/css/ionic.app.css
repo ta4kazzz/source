@@ -7625,8 +7625,21 @@ h1, h2, h3, h4, h5, h6, p, body, * {
 .float-right {
   float: right; }
 
+.inline-block {
+  display: inline-block; }
+
 .no-text-wrap {
   white-space: normal; }
+
+.menu-icon-left {
+  font-size: 2.5em;
+  padding-left: 10px; }
+
+.menu-icon-right {
+  font-size: 2em;
+  padding-right: 14px;
+  padding-top: 3px;
+  color: #737373; }
 
 .tab-item .icon {
   margin: 6px auto; }
@@ -7654,6 +7667,9 @@ h1, h2, h3, h4, h5, h6, p, body, * {
 
 .item-thumbnail-left {
   padding-left: 154px; }
+
+.item h2 {
+  white-space: normal; }
 
 .sticky-header {
   background-color: rgba(255, 255, 255, 0.66) !important;

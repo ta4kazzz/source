@@ -1026,6 +1026,8 @@ $scope.getFollows = function() {
 
 .controller('savedController', function($scope, API) {
 
+
+  
   // On before you ender the pag run this function
   $scope.$on('$ionicView.beforeEnter', function(){
     $scope.getSaved();

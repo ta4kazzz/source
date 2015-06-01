@@ -1,33 +1,46 @@
 <ion-view view-title="Saved ({{savedArticlesNumber}})">
 
   <!-- Nav Bar -->
-  <ion-nav-bar class="bar-positive">
+  <ion-nav-bar class="bar">
       <ion-nav-buttons side="left">
-      <button class="button" ui-sref="tabs.home">Close</button>
+      <!-- <button class="button" ui-sref="tabs.home">Close</button> -->
+      <i ui-sref="tabs.home" ng-click="article.url = null; article.summary = null" class="icon ion-ios-close-empty menu-icon-left"></i>
       </ion-nav-buttons>
   </ion-nav-bar>
 
 
 
 
+
+
   <ion-content ng-init="getSaved()">
 
-    <div class="list">
 
+    <ion-list show-delete="shouldShowDelete">
+      <ion-item href="#/reader/{{articles._id}}" ng-repeat="articles in articles" class="item-thumbnail-left">
+        <img src="{{articles.imageUrl}}">
+        <h2>{{ articles.title }}</h2>
+        <h4>{{ articles.shortUrl }}</h4>
+        <ion-option-button class="button-info assertive"
+          ng-click="deleteSaved(articles._id)">
+          Remove
+        </ion-option-button>
+      </ion-item>
+    </ion-list>
+
+
+    <!-- <div class="list">
     <div ng-repeat="articles in articles">
       <a href="#/reader/{{articles._id}}"
          class="item item-thumbnail-left">
-
         <img src="{{articles.imageUrl}}">
         <h2>{{ articles.title }}</h2>
         <h4>{{ articles.username }}</h4>
         <img src="{{articles.gravatarURL}}" style="width: 20px; border-radius: 3em">
-
       </a>
       <button class="button button-small button" ng-click="deleteSaved(articles._id)">remove</button>
     </div>
-
-    </div>
+    </div> -->
 
   </ion-content>
 </ion-view>

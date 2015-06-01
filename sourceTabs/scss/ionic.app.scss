@@ -68,8 +68,24 @@ background-image: linear-gradient(45deg, #4BCEB1 0%, #62EA70 100%);
   float: right;
 }
 
+.inline-block {
+  display: inline-block;
+}
+
 .no-text-wrap {
   white-space: normal;
+}
+
+.menu-icon-left {
+  font-size: 2.5em;
+  padding-left: 10px;
+}
+
+.menu-icon-right {
+  font-size: 2em;
+    padding-right: 14px;
+    padding-top: 3px;
+    color: #737373;
 }
 // =================================================================
 //  # Tab Bar
@@ -97,9 +113,9 @@ background-image: linear-gradient(45deg, #4BCEB1 0%, #62EA70 100%);
 // explore tab bar
 .tabs-top.tabs-striped .tab-item.active {
   margin-top: 1px;
-border-width: 0px 0px 4px 0px !important;
-border-style: solid;
-border-color: #64E387;
+  border-width: 0px 0px 4px 0px !important;
+  border-style: solid;
+  border-color: #64E387;
 }
 
 
@@ -115,6 +131,13 @@ border-color: #64E387;
 .item-thumbnail-left {
   padding-left: 154px;
 }
+
+
+.item h2 {
+  white-space: normal;
+}
+
+
 
 // Transparent scroll bar
 .sticky-header {

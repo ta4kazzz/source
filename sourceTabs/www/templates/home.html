@@ -5,7 +5,7 @@
   <ion-header-bar class="bar">
     <h1 class="title">S O U R C E</h1>
      <div class="buttons">
-       <i ui-sref="saved" class="icon ion-bookmark placeholder-icon"></i>
+       <i ui-sref="saved" class="icon ion-bookmark menu-icon-right"></i>
      </div>
   </ion-header-bar>
 
@@ -46,7 +46,7 @@
           <p>{{articles.shortUrl}}</p>
           <p class="article-summary">{{articles.summary}}</p>
 
-          <button class="button icon-left ion-ios-heart-outline button-clear padding-left-none">23 Likes</button>
+          <button class="button icon-left ion-ios-heart-outline button-clear padding-left-none">Like</button>
           <button class="button icon-left ion-ios-star-outline button-clear" ng-click="saveForLater(articles._id)" ng-click="likeArticle(articles); alreadyLiked==true">Save For Later</button>
 
       </div>
