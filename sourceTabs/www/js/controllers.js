@@ -768,12 +768,33 @@ $scope.getFollows = function() {
 //  ================================================================
 
 
-.controller('readerController', function($scope, $rootScope, API, $stateParams, $cordovaInAppBrowser) {
+.controller('readerController', function($scope, $rootScope, API, $stateParams, $cordovaInAppBrowser, $ionicPopover) {
+
+
+
+
+
 
 
     $scope.$on('$ionicView.beforeEnter', function(){
       $scope.getContent();
     });
+
+
+    $ionicPopover.fromTemplateUrl('templates/popover.html', {
+      scope: $scope,
+    }).then(function(popover) {
+      $scope.popover = popover;
+    });
+
+    $scope.demo = 'ios';
+    $scope.setPlatform = function(p) {
+      document.body.classList.remove('platform-ios');
+      document.body.classList.remove('platform-android');
+      document.body.classList.add('platform-' + p);
+      $scope.demo = p;
+    }
+
 
   $scope.getContent = function() {
   // code goes here that gets the article information
@@ -1027,7 +1048,7 @@ $scope.getFollows = function() {
 .controller('savedController', function($scope, API) {
 
 
-  
+
   // On before you ender the pag run this function
   $scope.$on('$ionicView.beforeEnter', function(){
     $scope.getSaved();
