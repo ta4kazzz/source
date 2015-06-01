@@ -7605,6 +7605,13 @@ a.button {
 h1, h2, h3, h4, h5, h6, p {
   font-family: 'Source Sans Pro', sans-serif; }
 
+.source-green {
+  opacity: 0.95;
+  background-image: linear-gradient(45deg, #4BCEB1 0%, #62EA70 100%); }
+
+.white {
+  color: #fff; }
+
 .padding-left-none {
   padding-left: 0; }
 
@@ -7617,6 +7624,21 @@ h1, h2, h3, h4, h5, h6, p {
 
 .float-right {
   float: right; }
+
+.tab-item .icon {
+  margin: 6px auto; }
+
+.add-button {
+  background-color: #000; }
+
+.active-tab {
+  background-color: #f2f2f2; }
+
+.tab-item .icon {
+  margin: 0px auto;
+  padding: 7px 0;
+  height: 100%;
+  color: #898989; }
 
 .sticky-header {
   background-color: rgba(255, 255, 255, 0.66) !important;
