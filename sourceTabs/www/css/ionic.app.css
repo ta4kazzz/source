@@ -7615,6 +7615,40 @@ h1, h2, h3, h4, h5, h6, body {
 .padding-left-none {
   padding-left: 0; }
 
+.profile--banner {
+  background-color: #4B4B4B;
+  color: #fff; }
+  .profile--banner .username {
+    font-size: 1.5em;
+    color: #FFFFFF;
+    line-height: 39px;
+    margin: 10px 0;
+    font-weight: 700; }
+  .profile--banner .description {
+    margin: 5px 0;
+    font-weight: 100;
+    font-size: 1.2em; }
+  .profile--banner .profile-column {
+    text-align: center; }
+    .profile--banner .profile-column a:link {
+      text-decoration: none; }
+    .profile--banner .profile-column .profile--number {
+      text-decoration: none;
+      color: #fff;
+      /* List Items 2: */
+      font-family: RobotoCondensed-Light;
+      font-size: 30px;
+      color: #5FDE94;
+      line-height: 39px; }
+    .profile--banner .profile-column .profile-label {
+      opacity: 0.54;
+      font-family: SourceSansPro-Regular;
+      font-size: 12px;
+      color: #FFFFFF;
+      letter-spacing: 1.35px;
+      line-height: 20px;
+      text-transform: uppercase; }
+
 .profile-face {
   width: 3em;
   border-radius: 4em; }
