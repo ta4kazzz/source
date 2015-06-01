@@ -26,8 +26,8 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 //  ================================================================
 // @import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700|Source+Serif+Pro);
 //
-h1, h2, h3, h4, h5, h6, p {
-  font-family: 'Source Sans Pro', sans-serif;
+h1, h2, h3, h4, h5, h6, p, body, *{
+  font-family: 'Source Sans Pro', sans-serif !important;
 }
 
 
@@ -92,9 +92,13 @@ background-image: linear-gradient(45deg, #4BCEB1 0%, #62EA70 100%);
   color: #898989;
 }
 
-
-
-
+// explore tab bar
+.tabs-top.tabs-striped .tab-item.active {
+  margin-top: 1px;
+border-width: 0px 0px 4px 0px !important;
+border-style: solid;
+border-color: #64E387;
+}
 
 
 // Transparent scroll bar

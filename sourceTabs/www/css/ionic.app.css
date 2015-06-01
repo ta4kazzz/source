@@ -7602,8 +7602,8 @@ a.button {
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
 
-h1, h2, h3, h4, h5, h6, p {
-  font-family: 'Source Sans Pro', sans-serif; }
+h1, h2, h3, h4, h5, h6, p, body, * {
+  font-family: 'Source Sans Pro', sans-serif !important; }
 
 .source-green {
   opacity: 0.95;
@@ -7639,6 +7639,12 @@ h1, h2, h3, h4, h5, h6, p {
   padding: 7px 0;
   height: 100%;
   color: #898989; }
+
+.tabs-top.tabs-striped .tab-item.active {
+  margin-top: 1px;
+  border-width: 0px 0px 4px 0px !important;
+  border-style: solid;
+  border-color: #64E387; }
 
 .sticky-header {
   background-color: rgba(255, 255, 255, 0.66) !important;
