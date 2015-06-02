@@ -7699,6 +7699,11 @@ h1, h2, h3, h4, h5, h6, body {
   border-style: solid;
   border-color: #64E387; }
 
+.settings {
+  color: #fff; }
+  .settings .settings-bg {
+    background-image: linear-gradient(45deg, #6D6D6D 0%, #4A4A4A 100%); }
+
 .reader--container {
   margin: 0px 20px; }
 
