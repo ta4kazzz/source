@@ -30,6 +30,33 @@ h1, h2, h3, h4, h5, h6, body {
   font-family: 'Source Sans Pro', sans-serif !important;
 }
 
+// =================================================================
+//  # LOGIN
+//  ================================================================
+
+.login {
+  background-image: linear-gradient(45deg, #4BCEB1 0%, #62EA70 100%);
+
+  .headline {
+    text-align: center;
+    color: #fff!important;
+    letter-spacing: 10px;
+    margin: 1.5em;
+  }
+
+
+  .button-outline.button-outline {
+    border-color: #FFFFFF;
+    background: transparent;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    border-radius: 2em;
+    padding: 5px;
+  }
+}
+
+
 
 
 // =================================================================
@@ -42,7 +69,7 @@ background-image: linear-gradient(45deg, #4BCEB1 0%, #62EA70 100%);
 }
 
 .white {
-  color: #fff;
+  color: #fff!important;
 }
 
 
@@ -53,6 +80,27 @@ background-image: linear-gradient(45deg, #4BCEB1 0%, #62EA70 100%);
 
 .padding-left-none {
   padding-left:0;
+}
+
+.text-decoration-none {
+  text-decoration: none;
+}
+
+
+.source-outline-button {
+  color: #fff;
+}
+
+// =================================================================
+//  # NOTIFICATIONS
+//  ================================================================
+
+.liked-post {
+  color: #fff;
+}
+
+.liked-post::before {
+  color: #fff;
 }
 
 

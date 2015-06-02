@@ -1,51 +1,39 @@
-<ion-view view-title="Notifications">
+<ion-view view-title="Notifications" class="notifications">
 
   <!-- Nav Bar -->
-  <ion-nav-bar class="bar-positive">
+  <ion-nav-bar class="bar">
     <ion-nav-back-button>
-  </ion-nav-back-button>
+    </ion-nav-back-button>
   </ion-nav-bar>
 
 
   <ion-content>
 
 
-
-
-
     <ion-list ng-init="getNotifications()">
-        <ion-item ng-repeat="notifications in notifications" class="list">
+        <ion-item ng-repeat="notifications in notifications">
 
-
-
-
-          <!-- display this if its a liked post -->
+            <!-- display this if its a liked post -->
             <div ng-show="{{notifications.type=='liked your post'}}">
-              <a ui-sref="tabs.readerNotificaitons( { articleID: notifications.associated_article} )" class="item item-thumbnail-left">
+              <a ui-sref="tabs.readerNotificaitons( { articleID: notifications.associated_article} )" class="item-thumbnail-right text-decoration-none">
                 <img src="{{notifications.imageUrl}}">
-                <p>{{notifications.doer_username}} {{notifications.type}} {{notifications.created}}</p>
-                <p>{{ notifications.created | date : 'short' : timezone}}</p>
+                <div class="liked-post">
+                  <p>{{notifications.doer_username}} {{notifications.type}}</p>
+                  <p>{{ notifications.created | date : 'short' : timezone}}</p>
+                </div>
               </a>
             </div>
 
             <!-- display this if its a user post -->
             <div ng-show="{{notifications.type=='is now following you'}}">
-              <a ui-sref="tabs.userNotificaitons( { userID: notifications.doer_id} )" class="item item-thumbnail-left">
-                <img src="{{notifications.imageUrl}}">
-                <p>{{notifications.doer_username}} {{notifications.type}} {{notifications.created}}</p>
+              <a ui-sref="tabs.userNotificaitons( { userID: notifications.doer_id} )" class="item-thumbnail-right text-decoration-none">
+                <p>{{notifications.doer_username}} {{notifications.type}}</p>
                 <p>{{ notifications.created | date : 'short' : timezone}}</p>
               </a>
             </div>
 
-
-
         </ion-item>
     </ion-list>
-
-
-
-
-
 
 
   </ion-content>

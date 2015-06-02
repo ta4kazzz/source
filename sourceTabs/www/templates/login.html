@@ -1,36 +1,35 @@
-<ion-view view-title="Login">
-  <!-- Nav Bar -->
-  <ion-nav-bar class="bar-positive">
-    <ion-nav-back-button>
-  </ion-nav-back-button>
-  </ion-nav-bar>
-
-        <ion-content>
-          <div class="list">
-
-              <!-- Email -->
-              <label class="item item-input">
-                <span class="input-label">Email</span><input type="text" ng-model="loginForm.email">
-              </label>
-
-              <!-- Password -->
-              <label class="item item-input">
-                <span class="input-label">Password</span><input type="password" ng-model="loginForm.password">
-              </label>
+<ion-view view-title="Login" class="login">
 
 
+  <ion-content>
 
-          </div>
-          <div class="padding">
-            <button class="button button-block button-balanced" ng-click="login()">
-              Login
-            </button>
-            <p class="text-center">
-              <a href="#/signup">Sign Up</a>
-            </p>
-          </div>
-        </ion-content>
-      </ion-view>
+    <div class="list">
+
+      <h2 class="headline">SOURCE</h2>
+
+      <!-- Email -->
+      <label class="item item-input" style="background-color: rgba(255, 255, 255, 0.25); border-color: #60DA6B; padding: 1em;">
+        <span class="input-label" style="color: #fff; font-weight: 600;">Email</span><input type="text" ng-model="loginForm.email">
+      </label>
+
+      <!-- Password -->
+      <label class="item item-input" style="background-color: rgba(255, 255, 255, 0.25); border-color: #60DA6B; padding: 1em;">
+        <span class="input-label" style="color: #fff; font-weight: 600;">Password</span><input type="password" ng-model="loginForm.password">
+      </label>
+
+    </div>
 
 
 
+    <div class="padding">
+      <button class="button button-block button-outline" style="margin-bottom: 1.5em;" ng-click="login()">
+        Login
+      </button>
+      <p class="text-center">
+        <a href="#/signup" class="text-decoration-none white" style="font-size:1.4em;">Sign Up</a>
+      </p>
+    </div>
+
+
+    </ion-content>
+</ion-view>

@@ -90,7 +90,7 @@ angular.module('starter.controllers', [
 
     API.putUser(user)
       .success(function (user, status, headers, config) {
-        $state.go('tabs.settings');
+        $state.go('tabs.profile');
       })
       .error(function (user, status, headers, config) {
         console.log("Your profile was not retreived")

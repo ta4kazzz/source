@@ -3,7 +3,7 @@
   <!-- Nav Bar -->
   <ion-nav-bar class="bar-dark">
       <ion-nav-buttons side="right">
-        <button class="button" ng-click="logout()">Log Out</button>
+        <button class="button button-clear" ng-click="logout()">Log Out</button>
       </ion-nav-buttons>
       <ion-nav-back-button>
       </ion-nav-back-button>
@@ -13,9 +13,6 @@
 
 
   <ion-content class="settings-bg" ng-init="getProfile()">
-
-
-
 
       <div class="list" style="margin-top:2.75em; margin-bottom: 2.75em;">
         <label style="background-color: #4A4A4A;   border-color: #818181;" class="item item-input">
@@ -36,14 +33,6 @@
       <button class="button button-full button-dark" ng-click="editUser()">
         Save
       </button>
-
-
-    <!-- <h4>Welcome To Settings</h4>
-    <p>Username: {{username}}</p>
-    <p>Email: {{email}}</p>
-    <p>Description: {{description}}</p> -->
-
-
 
   </ion-content>
 
