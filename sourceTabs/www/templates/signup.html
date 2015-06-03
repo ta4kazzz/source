@@ -1,40 +1,35 @@
-<ion-view view-title="Signup">
-  <!-- Nav Bar -->
-  <ion-nav-bar class="bar-positive">
-    <ion-nav-back-button>
-  </ion-nav-back-button>
-  </ion-nav-bar>
-
-
+<ion-view view-title="Signup" class="login">
 
         <ion-content>
           <div class="list">
 
+            <h3 class="headline">SIGN UP</h3>
 
-          <!-- Email -->
-          <label class="item item-input">
-            <span class="input-label">Email</span><input type="text" ng-model="signupForm.email">
-          </label>
+            <!-- Email -->
+            <label class="item item-input" style="background-color: rgba(255, 255, 255, 0.25); border-color: #60DA6B; padding: 0.5em 1em;">
+              <span class="input-label" style="color: #fff; font-weight: 600;">Email</span><input type="text" ng-model="signupForm.email">
+            </label>
 
-          <!-- Password -->
-          <label class="item item-input">
-            <span class="input-label">Password</span><input type="password" ng-model="signupForm.password">
-          </label>
+            <!-- Password -->
+            <label class="item item-input" style="background-color: rgba(255, 255, 255, 0.25); border-color: #60DA6B; padding: 0.5em 1em;">
+              <span class="input-label" style="color: #fff; font-weight: 600;">Password</span><input type="password" ng-model="signupForm.password">
+            </label>
 
-          <!-- Username -->
-          <label class="item item-input">
-            <span class="input-label">Username</span><input type="text" ng-model="signupForm.username">
-          </label>
-
+            <!-- Password -->
+            <label class="item item-input" style="background-color: rgba(255, 255, 255, 0.25); border-color: #60DA6B; padding: 0.5em 1em;">
+              <span class="input-label" style="color: #fff; font-weight: 600;">Username</span><input type="text" ng-model="signupForm.username">
+            </label>
 
           </div>
+
           <div class="padding">
-            <button class="button button-block button-balanced" ng-click="signup()">
-              Create an Account
+            <button class="button button-block button-outline" style="margin-bottom: 1.5em;" ng-click="signup()">
+              Sign up
             </button>
             <p class="text-center">
-              <a href="#/login">Or, Login</a>
+              <a href="#/login" class="text-decoration-none white" style="font-size:1.4em;">Login</a>
             </p>
           </div>
         </ion-content>
+
 </ion-view>
