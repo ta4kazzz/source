@@ -11,9 +11,8 @@
 
   <ion-content ng-init="getUser()" class="user">
 
-
+    <!-- Profile Banner -->
     <div class="profile--banner">
-
       <div class="profile-picture" style="
         margin-left: auto;
         margin-right: auto;
@@ -22,70 +21,37 @@
         }">
         <img style ="width: 5em; border-radius: 5em; margin-top: 2em;" src="{{gravatarURL}}">
       </div>
-
       <div class="username" style="text-align: center;">{{username}}</div>
       <p class="description" style="text-align: center;">{{description}}</p>
-
       <div class="row">
         <div class="col profile-column"><a href="#">
-                    <p class="profile--number">{{articleNumber}}</p>
-                    <p class="profile-label">Articles</p>
-                    <a>
+              <p class="profile--number">{{articleNumber}}</p>
+              <p class="profile-label">Articles</p>
+              <a>
         </div>
         <div class="col profile-column">
-                    <a href="#/tab/profile/followers">
-                    <p class="profile--number">{{followerNumber}}</p>
-                    <p class="profile-label">Followers<p>
-                    <a>
+              <a href="#/tab/profile/followers">
+              <p class="profile--number">{{followerNumber}}</p>
+              <p class="profile-label">Followers<p>
+              <a>
         </div>
         <div class="col profile-column">
-                    <a href="#/tab/profile/following">
-                    <p class="profile--number">{{followingNumber}}</p>
-                    <p class="profile-label">Following</p>
-                    </a>
+              <a href="#/tab/profile/following">
+              <p class="profile--number">{{followingNumber}}</p>
+              <p class="profile-label">Following</p>
+              </a>
         </div>
       </div>
-
     </div>
 
-  <!-- <div style="
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 1em;
-    max-width: 100px;
-    }">
-    <img src="{{gravatarURL}}" style="width: 100px; border-radius: 5em">
+
+    <!-- Article Feed -->
+    <div class="list" ng-init="getUserFeed()">
+      <a ng-repeat="articles in articles"  ui-sref="tabs.readerHome( { articleID: articles._id} )" class="item item-thumbnail-left">
+        <img src="{{articles.imageUrl}}">
+        <h2>{{ articles.title }}</h2>
+      </a>
     </div>
-
-    <h2 style="text-align: center;">{{username}}</h2>
-
-   <button class="button button-full" ng-show="relationship == 'notFollowing'" ng-click="followUser()">Follow</button>
-   <button class="button button-full" ng-show="relationship == 'following'"    ng-click="unfollowUser()">Unfollow</button>
-
-
-  <div class="row">
-    <div class="col"><a href="#"><p>Articles: <p>{{articleNumber}}</p></p><a></div>
-    <div class="col"><a href="#/tab/user/{{user_id}}/followers"><p>Followers: <p>{{followerNumber}}</p></p><a></div>
-    <div class="col"><a href="#/tab/user/{{user_id}}/following"><p>Following: <p>{{followingNumber}}</p></p></a></div>
-  </div> -->
-
-
-
-
-          <div class="list" ng-init="getUserFeed()">
-
-
-
-        <a
-          ng-repeat="articles in articles"
-          ui-sref="tabs.readerHome( { articleID: articles._id} )"
-          class="item item-thumbnail-left">
-
-          <img src="{{articles.imageUrl}}">
-          <h2>{{ articles.title }}</h2>
-        </a>
-
-      </div>
 
 
 
