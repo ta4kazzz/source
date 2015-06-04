@@ -1,25 +1,22 @@
 <ion-view view-title="Followers">
   <!-- Nav Bar -->
-  <ion-nav-bar class="bar-positive">
+  <ion-nav-bar class="bar">
   <ion-nav-back-button>
   </ion-nav-back-button>
   </ion-nav-bar>
 
 
-
-
   <ion-content class="has-header">
-	<ion-list ng-init="getFollowers()">
-      <ion-item ng-repeat="users in users">
+	   <ion-list ng-init="getFollowers()">
 
-	<a class="item item-thumbnail-left" href="#/tab/user/{{users._id}}">
-      <img src="{{users.gravatarURL}}">
-      <h2>{{users.username}}</h2>
-    </a>
+       <a href="#/tab/user/{{users._id}}" ng-repeat="users in users">
+         <div class="item item-avatar" >
+           <img src="{{users.gravatarURL}}">
+           <h2>{{users.username}}</h2>
+         </div>
+      </a>
 
 
-
-      </ion-item>
     </ion-list>
   </ion-content>
 

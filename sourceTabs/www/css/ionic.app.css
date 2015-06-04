@@ -7605,6 +7605,11 @@ a.button {
 h1, h2, h3, h4, h5, h6, body {
   font-family: 'Source Sans Pro', sans-serif !important; }
 
+.tabs-light > .tabs {
+  background: #FFFFFF;
+  box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.3);
+  padding-top: 0; }
+
 .login {
   background-image: linear-gradient(45deg, #4BCEB1 0%, #62EA70 100%); }
   .login input[type="text"], .login input[type="password"] {

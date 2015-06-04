@@ -1,6 +1,6 @@
 <ion-view view-title="Following">
   <!-- Nav Bar -->
-  <ion-nav-bar class="bar-positive">
+  <ion-nav-bar class="bar">
   <ion-nav-back-button>
   </ion-nav-back-button>
   </ion-nav-bar>
@@ -9,23 +9,16 @@
 
 
   <ion-content class="has-header">
-	<ion-list ng-init="getFollowing()">
-      <ion-item ng-repeat="users in users">
+	   <ion-list ng-init="getFollowing()">
 
-	<a class="item item-thumbnail-left"  ui-sref="tabs.userExplore( { userID: users._id} )">
-      <img src="{{users.gravatarURL}}">
-      <h2>{{users.username}}</h2>
-    </a>
+    	  <a ui-sref="tabs.userExplore( { userID: users._id} )" ng-repeat="users in users">
+          <div class="item item-avatar" >
+            <img src="{{users.gravatarURL}}">
+            <h2>{{users.username}}</h2>
+          </div>
+        </a>
 
 
-
-      </ion-item>
     </ion-list>
-
-
-
-
   </ion-content>
-
-
 </ion-view>
