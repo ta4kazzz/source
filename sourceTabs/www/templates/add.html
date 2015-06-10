@@ -1,4 +1,4 @@
-<ion-view view-title="Add">
+<ion-view view-title="Add New">
 
   <!-- Nav Bar -->
   <ion-nav-bar class="bar">
@@ -13,9 +13,16 @@
 
   <ion-content>
 
-
-
+    <!-- Show this to start -->
     <div class="list">
+      <div class="item preview-field">
+        <div class="preview">Preview</div>
+      </div>
+    </div>
+
+
+
+    <!-- <div class="list">
       <div>
         <a class="item item-thumbnail-left">
           <img src="{{article.imageUrl}}">
@@ -24,23 +31,29 @@
           <img src="{{article.gravatarURL}}" style="width: 20px; border-radius: 3em">
         </a>
       </div>
-    </div>
-
+    </div> -->
 
     <div class="list list-inset">
       <label class="item item-input">
-        <input type="text" ng-model="article.url" name="url" placeholder="url" required>
-      </label>
-      <label class="item item-input">
-        <input type="text" ng-model="article.summary" name="summary" placeholder="User Summary" required>
+        <span class="input-label">URL</span>
+        <input ng-model="article.url" type="text" placeholder="" required>
       </label>
     </div>
 
-    <button class="button button-block button-warning" ng-click="addArticle()" ng-show="!showPublish">
+
+      <div class="list list-inset">
+        <label class="item item-input">
+          <span class="input-label">SUMMARY</span>
+          <input ng-model="article.summary" type="text" placeholder="(if you must)" required>
+        </label>
+      </div>
+
+
+    <button class="button button-block publish-button source-green" ng-click="addArticle()" ng-show="!showPublish">
       Preview Article
     </button>
 
-    <button class="button button-block button-warning" ng-click="publishArticle()"ng-show="showPublish">
+    <button class="button button-block publish-button source-green" ng-click="publishArticle()"ng-show="showPublish">
       Post Article
     </button>
 

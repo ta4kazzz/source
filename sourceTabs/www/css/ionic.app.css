@@ -7739,6 +7739,25 @@ h1, h2, h3, h4, h5, h6, body {
   .settings .settings-bg {
     background-image: linear-gradient(45deg, #6D6D6D 0%, #4A4A4A 100%); }
 
+.preview-field {
+  background: #FFFFFF;
+  border-style: dotted;
+  margin: 15px 15px 0px 15px;
+  border-width: 2px; }
+  .preview-field .preview {
+    padding: 2em;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #A1a1a1; }
+
+.publish-button {
+  color: #fff;
+  border-width: 0; }
+  .publish-button:hover {
+    color: #fff;
+    opacity: 0.65; }
+
 .reader--container {
   margin: 0px 20px; }
 
