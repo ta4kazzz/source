@@ -11,14 +11,13 @@
 
 
 
-  <ion-content class="has-header" scroll-event-interval="5">
+  <ion-content class="has-header" scroll-event-interval="5" ng-init="getHomeFeed()">
 
     <!-- Refresher -->
     <ion-refresher
       pulling-text="Refreshing . . ."
       on-refresh="doRefresh()">
     </ion-refresher>
-    <ng-init="getHomeFeed()">
 
 
 

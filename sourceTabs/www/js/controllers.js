@@ -1097,6 +1097,7 @@ $scope.getFollows = function() {
     API.deleteSaved(savedArticle)
       .success(function (article, status, headers, config) {
           console.log("article delete")
+          $scope.getSaved();
         })
       .error(function (article, status, headers, config) {
           console.log("Something went wrong")
