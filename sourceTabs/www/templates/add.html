@@ -15,23 +15,21 @@
 
     <!-- Show this to start -->
     <div class="list">
-      <div class="item preview-field">
+      <div ng-show="!showPublish" class="item preview-field">
         <div class="preview">Preview</div>
       </div>
     </div>
 
 
 
-    <!-- <div class="list">
+    <div  ng-show="showPublish" class="list">
       <div>
         <a class="item item-thumbnail-left">
           <img src="{{article.imageUrl}}">
           <h2>{{ article.title }}</h2>
-          <h4>{{ article.username }}</h4>
-          <img src="{{article.gravatarURL}}" style="width: 20px; border-radius: 3em">
         </a>
       </div>
-    </div> -->
+    </div>
 
     <div class="list list-inset">
       <label class="item item-input">
@@ -53,7 +51,7 @@
       Preview Article
     </button>
 
-    <button class="button button-block publish-button source-green" ng-click="publishArticle()"ng-show="showPublish">
+    <button class="button button-block publish-button source-green" ng-click="publishArticle()" ng-show="showPublish">
       Post Article
     </button>
 

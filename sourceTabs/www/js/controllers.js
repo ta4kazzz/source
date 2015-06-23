@@ -969,7 +969,7 @@ $scope.getFollows = function() {
           $scope.getPreview()
           // $state.go('preview');
           $scope.showPublish = true;
-          $scope.publishArticle();
+          // $scope.publishArticle();
         })
         .error(function (article, status, headers, config) {
           console.log("Error when posting the article packet")
@@ -1024,6 +1024,8 @@ $scope.getFollows = function() {
         console.log("Article Successfully published")
         store.remove('ActiveArticle');
         $state.go('tabs.home');
+       $scope.article = null;
+       $scope.showPublish = false;
 
       })
       .error(function (article, status, headers, config) {

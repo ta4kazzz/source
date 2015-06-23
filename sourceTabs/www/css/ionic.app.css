@@ -7679,7 +7679,7 @@ h1, h2, h3, h4, h5, h6, body {
       line-height: 39px; }
     .profile--banner .profile-column .profile-label {
       opacity: 0.54;
-      font-family: SourceSansPro-Regular;
+      font-family: 'Source Sans Pro', sans-serif !important;
       font-size: 12px;
       color: #FFFFFF;
       letter-spacing: 1.35px;
