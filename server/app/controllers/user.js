@@ -146,7 +146,7 @@ exports.getUserArticles = function(req, res) {
 	User.findById(userID)
 		// If this doesnt work uncomment this part
 		// .populate('articles')
-		.populate({path: 'articles', options: { sort: { 'created_at': -1 } } })
+		.populate({path: 'articles', options: { sort: { 'created': -1 } } })
 		// Need to return this most recent first
 		// .sort({created: 'desc'})
 		.exec(function(err, user) {
