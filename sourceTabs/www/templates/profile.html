@@ -67,29 +67,12 @@
 
       <div ng-repeat="articles in articles" >
 
-        <a href="#/reader/{{articles._id}}" class="item item-thumbnail-left">
+        <a ui-sref="tabs.readerProfile( { articleID: articles._id} )" class="item item-thumbnail-left">
                <img src="{{articles.imageUrl}}">
                <h2 class="no-text-wrap">{{ articles.title }}</h2>
                <p>{{ articles.shortUrl }}</p>
         </a>
 
-
-
-
-
-      <!-- <ion-item ng-repeat="articles in articles">
-        <div class="card">
-          <div class="item item-divider">
-            <h2>{{articles.title}}</h2>
-            <p>{{articles.created}}</p>
-          </div>
-          <div class="item item-text-wrap">
-            <a href="#/reader/{{articles._id}}">
-              <img src="{{articles.imageUrl}}" style="width:100%">
-            </a>
-            <p>{{articles.summary}}</p>
-          </div>
-        </div> -->
       </ion-item>
 
 
