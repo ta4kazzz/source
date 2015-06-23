@@ -1,8 +1,8 @@
 // Load the Required packages
-var User 		 = require('../models/user');
-var Article		 = require('../models/article.js');
-var Notification = require('../models/notification.js');
-var mongoose 	 = require('mongoose');
+var User 		 			= require('../models/user');
+var Article		 		= require('../models/article.js');
+var Notification  = require('../models/notification.js');
+var mongoose 	 	  = require('mongoose');
 
 
 // ====================================================
@@ -20,6 +20,7 @@ exports.getHomeFeed = function(req, res) {
 
 					// Store user.follows in followIDlist
 					FollowIDs = [];
+
 		      for (var i = 0; i < user.follows.length; i++) {
 						FollowIDs.push(user.follows[i]);
 		      };
@@ -35,7 +36,6 @@ exports.getHomeFeed = function(req, res) {
 		});
 
 };
-
 
 
 // ====================================================
@@ -133,8 +133,6 @@ exports.getUser = function(req, res) {
 };
 
 
-
-
 // ====================================================
 //               /users/:userID/articles
 // ====================================================
@@ -144,12 +142,16 @@ exports.getUserArticles = function(req, res) {
 
 	var userID = mongoose.Types.ObjectId(req.params.id);
 
+
 	User.findById(userID)
-		.populate('articles')
+		// If this doesnt work uncomment this part
+		// .populate('articles')
+		.populate({path: 'articles', options: { sort: { 'created_at': -1 } } })
+		// Need to return this most recent first
+		// .sort({created: 'desc'})
 		.exec(function(err, user) {
     	res.send(user.articles)
 		});
-
 
 };
 

@@ -2,10 +2,6 @@
 //  CONTROLLERS
 //  ================================================================
 
-
-
-
-
 angular.module('starter.controllers', [
   'ionic',
   'ngCordova',
@@ -1118,15 +1114,13 @@ $scope.getFollows = function() {
 
 .controller('ProfileCtrl', function($rootScope, $scope, auth, API, $stateParams) {
 
-
-
     $scope.$on('$ionicView.beforeEnter', function(){
       $scope.getProfile();
       $scope.getProfileFeed();
     });
 
 
-$scope.auth = auth;
+    $scope.auth = auth;
 
 
   $scope.getProfile = function() {
@@ -1151,15 +1145,10 @@ $scope.auth = auth;
 
 
             $scope.getFollowers = function() {
-             // var id     = $stateParams.userID;
               $scope.users = API.getFollowers(id)
                 .success(function (data, status, headers, config) {
                   $scope.users = [];
                   $scope.profileFollowerNumber = data.length;
-
-                  // if our name is in the list, then turn that thing to true
-                  // turn that variable true/false
-
                 })
                 .error(function (users, status, headers, config) {
                   console.log("Something went wrong")
@@ -1173,9 +1162,6 @@ $scope.auth = auth;
                     $scope.users = [];
                     console.log(data.length);
                     $scope.profileFollowingNumber = data.length;
-
-
-
                   })
                   .error(function (users, status, headers, config) {
                     console.log("Something went wrong")
@@ -1196,7 +1182,7 @@ $scope.auth = auth;
       .success(function (data, status, headers, config) {
         $scope.articles = [];
 
-       $scope.profileArticleNumber = data.length;
+        $scope.profileArticleNumber = data.length;
 
 
         for (var i = 0; i < data.length; i++) {
