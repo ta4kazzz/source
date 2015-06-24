@@ -608,14 +608,10 @@ $scope.getFollows = function() {
     $scope.getHomeFeed();
   });
 
-
-
-   $rootScope.auth = auth;
+  // Not sure if I need this
+  $rootScope.auth = auth;
 
   $scope.doRefresh = function() {
-
-    console.log('Refreshing');
-
     $timeout(function() {
       $scope.$broadcast('scroll.refreshComplete');
       $scope.$broadcast('scroll.refreshComplete');
@@ -623,17 +619,41 @@ $scope.getFollows = function() {
   };
 
 
+  $scope.getHomeFeed = function() {
+    var userID      = window.localStorage.SourceID;
+    API.getHomeFeed(userID)
+      .success(function (data, user, status, headers, config) {
+         $scope.articles = [];
+          // this pushes the returned array to articles
+          for (var i = 0; i < data.length; i++) {
+              // push data to article
+              $scope.articles.push(data[i]);
+              var articleLikers = data[i].likes;
+              var results = articleLikers.indexOf(userID);
+              if (results >= 0) {
+                console.log("You like this article");
+                // push liked=true to specific object in articles array
+                console.log($scope.articles)
+              } else {
+                console.log("You do not like this article");
+              }
+          };
+      })
+      .error(function (data, status, headers, config) {
+        console.log("Error when getting home feed")
+      });
+  };
+
+
   $scope.saveForLater = function(articleID) {
 
     var userID      = window.localStorage.SourceID;
-    var articleID    = articleID;
+    var articleID   = articleID;
 
     var savedArticle = {
       articleID: articleID,
       userID: userID
     };
-
-    console.log(savedArticle);
 
     API.saveForLater(savedArticle)
       .success(function (article, user, status, headers, config) {
@@ -647,17 +667,12 @@ $scope.getFollows = function() {
   };
 
 
-
   $scope.likeArticle = function(article) {
-
-    // console.log("Like article triggered" + article);
 
     var userID               = window.localStorage.SourceID;
     var articleID            = article._id;
     var articleOwner         = article._userID;
     var articleImageUrl      = article.imageUrl;
-
-    // console.log("Article Owner Username is " + articleOwnerUsername);
 
     var likedArticle = {
       articleID: articleID,
@@ -667,25 +682,19 @@ $scope.getFollows = function() {
       articleOwner: articleOwner
     };
 
-    console.log(likedArticle);
-
     API.likeArticle(likedArticle)
       .success(function (article, user, status, headers, config) {
         // make button reflect the change
-        console.log("Article Successfully liked")
-        // $scope.alreadyLiked = true;
+        console.log("Article Successfully liked");
       })
       .error(function (article, status, headers, config) {
-        console.log("Error when liking the article")
+        console.log("Error when liking the article");
       });
-
 
   };
 
 
   $scope.unlikeArticle = function(articleID) {
-
-    console.log("Unlike Article Triggered");
 
     var userID      = window.localStorage.SourceID;
     var articleID   = articleID;
@@ -695,11 +704,8 @@ $scope.getFollows = function() {
       userID: userID
     };
 
-    console.log(unlikedArticle);
-
     API.putLikes(unlikedArticle)
       .success(function (article, user, status, headers, config) {
-        // make button reflect the change
         console.log("Article Successfully liked")
       })
       .error(function (article, status, headers, config) {
@@ -711,45 +717,6 @@ $scope.getFollows = function() {
 
 
 
-  $scope.getHomeFeed = function() {
-
-    var userID      = window.localStorage.SourceID;
-
-    API.getHomeFeed(userID)
-      .success(function (data, user, status, headers, config) {
-               $scope.articles = [];
-
-
-
-                // this pushes the returned array to articles
-                for (var i = 0; i < data.length; i++) {
-                    // push data to article
-                    $scope.articles.push(data[i]);
-
-                    var articleLikers = data[i].likes;
-                    var results = articleLikers.indexOf(userID);
-
-
-                    if (results >= 0) {
-                      console.log("You like this article");
-                      // push liked=true to specific object in articles array
-                      console.log($scope.articles)
-
-                    } else {
-                      console.log("You do not like this article");
-
-                    }
-
-                };
-
-
-      })
-      .error(function (data, status, headers, config) {
-        console.log("Error when getting home feed")
-      });
-
-
-  };
 
 
 
