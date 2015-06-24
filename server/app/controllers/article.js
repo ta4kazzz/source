@@ -1,4 +1,4 @@
-// Load Models ==================================================
+// Load Dependancies
 var Article		 	 = require('../models/article.js');
 var User         = require('../models/user.js');
 var Notification = require('../models/notification.js');
@@ -7,88 +7,153 @@ var cheerio      = require('cheerio');
 var request      = require('request');
 var mongoose     = require('mongoose');
 
+// 	  TABLE OF CONTENTS   ====================================================================
+//
+//		#postArticle
+//		#getArticle
+//		#deleteArticle
+//		#putArticle
+//
+//		#getArticles
+//		#getTopArticles
+//
+//		#likeArticle
+//		#getLikers
+//    #putLikes
+//
+// ===========================================================================================
 
 
-// ==================================
-//               /articles
-// ==================================
 
+// ==========================================
+//    #postArticle
+// ==========================================
 
-// POSTS
 exports.postArticles = function(req, res) {
-    // New Article object
+
+  // New Article object
 	var article = new Article();
 
-    article.url         = req.body.url;
-		article.shortUrl    = req.body.shortUrl;
-    article.summary     = req.body.summary;
-    article.created     = req.body.created;
-    article.gravatarURL = req.body.gravatarURL;
-    article.username    = req.body.username;
+  article.url         = req.body.url;
+	article.shortUrl    = req.body.shortUrl;
+  article.summary     = req.body.summary;
+  article.created     = req.body.created;
+  article.gravatarURL = req.body.gravatarURL;
+  article.username    = req.body.username;
+
+  // convert userID string to ObjectID
+  var userID = mongoose.Types.ObjectId(req.body.userID);
+  var articleID = article._id;
+
+  // Saves to article
+  article._userID = userID;
+
+  User.findByIdAndUpdate(
+      userID,
+      {$push: {"articles": articleID}},
+      {safe: true, upsert: true},
+      function(err, model) {
+          console.log(err);
+      }
+  );
+
+  // URL to html
+  var domain = article.url;
+
+  // Gets the raw html from the domain name and execites the parseMyhtml function
+  request(domain, function (error, response, body) {
+      if (!error) {
+          parseHtml(body);
+      } else {
+          console.log(error);
+      }
+  });
+
+  var parseHtml = function(html) {
+
+      data = unfluff.lazy(html, 'en');
+      var title = data.title();
+      var content = data.text();
+      var imageUrl = data.image();
+
+      article.title = title;
+      article.content  = content;
+      article.imageUrl = imageUrl;
+      article.public = false;
 
 
-    // convert userID string to ObjectID
-    var userID = mongoose.Types.ObjectId(req.body.userID);
-    var articleID = article._id;
+      // save the bear and check for errors
+      article.save(function(err) {
+          if (err)
+              res.send(err);
+          res.json(article);
+      });
+  };
 
-    // Saves to article
-    article._userID = userID;
+};
 
+// ==========================================
+// 		#getArticle
+// ==========================================
 
-    User.findByIdAndUpdate(
-        userID,
-        {$push: {"articles": articleID}},
-        {safe: true, upsert: true},
-        function(err, model) {
-            console.log(err);
-        }
-    );
+exports.getArticle = function(req, res) {
 
-    // URL to html
-    var domain = article.url;
-
-    // Gets the raw html from the domain name and execites the parseMyhtml function
-    request(domain, function (error, response, body) {
-        if (!error) {
-            parseHtml(body);
-        } else {
-            console.log(error);
-        }
+    Article.findById(req.params.id, function(err, article) {
+        if (err)
+            res.send(err);
+        res.json(article)
     });
 
-    var parseHtml = function(html) {
+};
 
-        data = unfluff.lazy(html, 'en');
-        var title = data.title();
-        var content = data.text();
-        var imageUrl = data.image();
+// ==========================================
+// 		#deleteArticle
+// ==========================================
 
-        article.title = title;
-        article.content  = content;
-        article.imageUrl = imageUrl;
-        article.public = false;
+exports.deleteArticle = function(req, res) {
+
+  Article.remove({ userId: req.userID, _id: req.params.article_id }, function(err) {
+    if (err)
+      res.send(err);
+    	res.json({ message: 'Article successfully removed' });
+  });
+
+};
 
 
-        // save the bear and check for errors
-        article.save(function(err) {
-            if (err)
-                res.send(err);
-            res.json(article);
-        });
-    };
+// ==========================================
+// 		#putArticle
+// ==========================================
+exports.putArticle = function(req, res) {
+
+  Article.findById(req.params.id, function(err, article) {
+    if (err)
+      res.send(err);
+    	article.public = true;
+    article.save(function(err) {
+      if (err)
+        res.send(err);
+      res.json(article);
+    });
+  });
 
 };
 
 
 
-// GET
-exports.getArticles = function(req, res) {
-    // Article.find(function(err, articles) {
-    //     if (err)
-    //         res.send(err);
-    //     res.json(articles);
-    // });
 
+
+
+
+
+
+
+
+// ==========================================
+//    #getArticles
+// ==========================================
+
+exports.getArticles = function(req, res) {
 		Article
 			.find()
 			.sort({created: 'desc'})
@@ -99,10 +164,9 @@ exports.getArticles = function(req, res) {
 
 
 // ==========================================
-//               /articles/top
+//    #getTopArticles
 // ==========================================
 
-// GET
 exports.getTopArticles = function(req, res) {
 
 		console.log("Getting Top Articles in Server");
@@ -114,94 +178,47 @@ exports.getTopArticles = function(req, res) {
 				res.send(articles)
 		});
 
-
 };
+
+
+
+
+
+
+
+
+
 
 
 // ==========================================
-//               /articles/:article_id
+// 		#likeArticle
 // ==========================================
-
-// GET
-exports.getArticle = function(req, res) {
-
-    Article.findById(req.params.id, function(err, article) {
-        if (err)
-            res.send(err);
-        res.json(article)
-    });
-};
-
-
-// PUT
-exports.putArticle = function(req, res) {
-
-  Article.findById(req.params.id, function(err, article) {
-    if (err)
-      res.send(err);
-
-    article.public = true;
-
-    article.save(function(err) {
-      if (err)
-        res.send(err);
-
-      res.json(article);
-    });
-  });
-
-};
-
-
-// DELETE
-// Create endpoint /api/article/:article_id for DELETE
-exports.deleteArticle = function(req, res) {
-  // Use the Beer model to find a specific beer and remove it
-  Article.remove({ userId: req.userID, _id: req.params.article_id }, function(err) {
-    if (err)
-      res.send(err);
-
-    res.json({ message: 'Article successfully removed' });
-  });
-};
-
-
-// ================================================
-//               /articles/:article_id/likes
-// ===============================================
-
-
-
-// POST LIKES
 
 exports.postLikes = function(req, res) {
-
-	console.log("Posting Likes Now");
 
 	var userID 								= mongoose.Types.ObjectId(req.body.userID);
 	var articleID 						= mongoose.Types.ObjectId(req.body.articleID);
 	var articleOwner 					= mongoose.Types.ObjectId(req.body.articleOwner);
 	var articleImageUrl 			= req.body.imageUrl;
 
-	// console.log("The articleOwner id is " + articleOwner);
-	// console.log("The article id is " + articleID);
 
 	Article.findByIdAndUpdate(
 			articleID,
 			{$push: {"likes": userID}},
 			{safe: true, upsert: true},
 			function(err, model) {
-					// console.log(err);
+					console.log(err);
 			}
 	);
-	console.log("The user id is " + userID);
+
+	console.log(userID + "liked an article ");
 
 
 	// Look up alice by ID and return
 	User.findById(userID, function(err, users) {
 		if (err)
 			res.send(err);
-		res.json(users);
+			res.json(users);
 		var doer_username = users.username;
 		console.log(doer_username);
 		// function to send notification
@@ -261,16 +278,13 @@ exports.postLikes = function(req, res) {
 				});
 
   }
-
-
-
-
-
 };
 
 
 
-// GET LIKES
+// ==========================================
+// 		#getLikes
+// ==========================================
 
 exports.getLikes = function(req, res) {
 
@@ -285,13 +299,11 @@ exports.getLikes = function(req, res) {
 		.exec(function(err, Article) {
 			res.send(Article.likes)
 	});
-
-
-
-
 };
 
-// PUT LIKES
+// ==========================================
+// 		#putLikes
+// ==========================================
 
 exports.putLikes = function(req, res) {
 
@@ -318,22 +330,3 @@ exports.putLikes = function(req, res) {
 
 
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// to keep space at the bottom

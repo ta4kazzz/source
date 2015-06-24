@@ -36,7 +36,7 @@
           <h2 class="article-title">{{articles.title}}</h2>
           <p>{{articles.shortUrl}}</p>
           <p class="article-summary">{{articles.summary}}</p>
-          <button class="button icon-left ion-ios-heart-outline button-clear padding-left-none">Like</button>
+          <button class="button icon-left ion-ios-heart-outline button-clear padding-left-none" ng-click="likeArticle(articles)">Like</button>
           <button class="button icon-left ion-ios-star-outline button-clear" ng-click="saveForLater(articles._id)" ng-click="likeArticle(articles); alreadyLiked==true">Save For Later</button>
       </div>
     </div>

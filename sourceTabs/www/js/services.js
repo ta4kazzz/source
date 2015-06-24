@@ -5,25 +5,6 @@ angular.module('starter.services', [])
     var base = "http://localhost:8080";
     // var base = "http://source-application.herokuapp.com";
 
-    // Somewher in here we need to define a $scope.loading
-
-    // $rootScope.setUsername = function (username) {
-    //     return $window.localStorage.username = username;
-    // };
-
-    // $rootScope.setPassword = function (password) {
-    //     return $window.localStorage.password = password;
-    // };
-
-    // $rootScope.getUsername = function () {
-    //     return $window.localStorage.username;
-    // };
-
-    // $rootScope.getPassword = function () {
-    //     return $window.localStorage.password;
-    // };
-
-
     $rootScope.logout = function() {
       auth.signout();
       store.remove('profile');
@@ -32,32 +13,12 @@ angular.module('starter.services', [])
       $window.location.href = '#/app/landing';
     }
 
-    // $rootScope.setToken = function (token) {
-    //     return $window.localStorage.token = token;
-    // }
-
-    // $rootScope.getToken = function () {
-    //     return $window.localStorage.token;
-    // }
-
-    // $rootScope.isSessionActive = function () {
-    //     return $window.localStorage.token ? true : false;
-    // }
-
 
     return {
 
         //  =====================================================
-        //   ARTICLES
+        //   ARTICLE
         //  =====================================================
-
-
-
-        getArticles: function () {
-            return $http.get(base+'/api/articles', {
-                method: 'GET',
-           });
-        },
 
         postArticle: function (article) {
             return $http.post(base+'/api/articles', article, {
@@ -83,6 +44,27 @@ angular.module('starter.services', [])
             });
         },
 
+        //  =====================================================
+        //   ARTICLES
+        //  =====================================================
+
+        getArticles: function () {
+            return $http.get(base+'/api/articles', {
+                method: 'GET',
+           });
+        },
+
+        getTopArticles: function () {
+            return $http.get(base+'/api/articles/top', {
+                method: 'GET',
+           });
+        },
+
+        //  =====================================================
+        //   ARTICLE LIKE SYSTEM
+        //  =====================================================
+
+
         likeArticle: function (likedArticle) {
             return $http.post(base+'/api/articles/' + likedArticle.userID + '/likes', likedArticle, {
                 method: 'POST',
@@ -99,12 +81,6 @@ angular.module('starter.services', [])
             return $http.put(base+'/api/articles/' + unlikedArticle.userID + '/likes', unlikedArticle, {
                 method: 'PUT',
             });
-        },
-
-        getTopArticles: function () {
-            return $http.get(base+'/api/articles/top', {
-                method: 'GET',
-           });
         },
 
 

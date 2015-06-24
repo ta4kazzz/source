@@ -644,29 +644,6 @@ $scope.getFollows = function() {
       });
   };
 
-
-  $scope.saveForLater = function(articleID) {
-
-    var userID      = window.localStorage.SourceID;
-    var articleID   = articleID;
-
-    var savedArticle = {
-      articleID: articleID,
-      userID: userID
-    };
-
-    API.saveForLater(savedArticle)
-      .success(function (article, user, status, headers, config) {
-        // make button reflect the change
-        console.log("Article successfully saved for later")
-      })
-      .error(function (article, status, headers, config) {
-        console.log("Error when saving the article for later")
-      });
-
-  };
-
-
   $scope.likeArticle = function(article) {
 
     var userID               = window.localStorage.SourceID;
@@ -693,6 +670,29 @@ $scope.getFollows = function() {
 
   };
 
+  $scope.saveForLater = function(articleID) {
+
+    var userID      = window.localStorage.SourceID;
+    var articleID   = articleID;
+
+    var savedArticle = {
+      articleID: articleID,
+      userID: userID
+    };
+
+    API.saveForLater(savedArticle)
+      .success(function (article, user, status, headers, config) {
+        // make button reflect the change
+        console.log("Article successfully saved for later")
+      })
+      .error(function (article, status, headers, config) {
+        console.log("Error when saving the article for later")
+      });
+
+  };
+
+
+
 
   $scope.unlikeArticle = function(articleID) {
 
@@ -713,13 +713,6 @@ $scope.getFollows = function() {
       });
 
   };
-
-
-
-
-
-
-
 
 })
 
