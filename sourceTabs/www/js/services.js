@@ -85,22 +85,14 @@ angular.module('starter.services', [])
 
 
         //  =====================================================
-        //   USERS
+        //   USER
         //  =====================================================
 
-
-        getHomeFeed: function (userID) {
-            return $http.get(base+'/api/users/' + userID +'/homefeed', {
-                method: 'GET',
-           });
-        },
-
-        getUsers: function (id) {
-            return $http.get(base+'/api/users', {
-                method: 'GET',
+        postUser: function (user) {
+            return $http.post(base+'/api/users', user, {
+                method: 'POST',
             });
         },
-
 
         getUser: function (id) {
             return $http.get(base+'/api/users/' + id, {
@@ -114,13 +106,25 @@ angular.module('starter.services', [])
             });
         },
 
+        getHomeFeed: function (userID) {
+            return $http.get(base+'/api/users/' + userID +'/homefeed', {
+                method: 'GET',
+           });
+        },
 
-        postUser: function (user) {
-            return $http.post(base+'/api/users', user, {
-                method: 'POST',
+        //  =====================================================
+        //   USERS
+        //  =====================================================
+
+        getUsers: function (id) {
+            return $http.get(base+'/api/users', {
+                method: 'GET',
             });
         },
 
+        //  =====================================================
+        //   AUTH
+        //  =====================================================
 
         getAuth: function (id) {
             return $http.get(base+'/api/users/auth/' + id, {

@@ -201,7 +201,7 @@ exports.postLikes = function(req, res) {
 	var articleOwner 					= mongoose.Types.ObjectId(req.body.articleOwner);
 	var articleImageUrl 			= req.body.imageUrl;
 
-
+	// Add liker to the article object
 	Article.findByIdAndUpdate(
 			articleID,
 			{$push: {"likes": userID}},
@@ -211,6 +211,14 @@ exports.postLikes = function(req, res) {
 			}
 	);
 
+	// Add Article to the liker object?
+
+
+
+
+
+	// An article was added  alices array
+	// A User was added to the article arrays liked
 	console.log(userID + "liked an article ");
 
 
@@ -228,14 +236,12 @@ exports.postLikes = function(req, res) {
 
 	// pass it the doer
 	function postNotification(doer_username) {
-
 			Article
 				.findById(articleID).exec(function(err, article) {
 
 					var user = article._userID;
 
-
-					// BUILD THE NOTIFICATION OBJECT
+					// 1) BUILD THE NOTIFICATION OBJECT
 					var notification = new Notification({
 							articleOwner: articleOwner,
 							created: Date.now(),
@@ -246,8 +252,7 @@ exports.postLikes = function(req, res) {
 							type: "liked your post"
 					});
 
-
-					// PUSH NOTIFICAITON TO THE USERS COLLECTION
+					// 2) PUSH NOTIFICAITON TO THE USERS COLLECTION
 					User
 					.findByIdAndUpdate(
 			        notification.articleOwner,
@@ -260,8 +265,7 @@ exports.postLikes = function(req, res) {
 			        }
 			    );
 
-
-					// SAVE NOTIFICATION OBJECT
+					// 3) SAVE NOTIFICATION OBJECT
 					notification.save(function(err) {
 						if (err)
 							res.send(err);
@@ -276,8 +280,9 @@ exports.postLikes = function(req, res) {
 					});
 
 				});
-
   }
+
+
 };
 
 

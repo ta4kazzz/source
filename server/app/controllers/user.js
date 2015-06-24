@@ -4,42 +4,20 @@ var Article		 		= require('../models/article.js');
 var Notification  = require('../models/notification.js');
 var mongoose 	 	  = require('mongoose');
 
-
-// ====================================================
-//               /users/:id/homefeed
-// ====================================================
-
-// GET
-exports.getHomeFeed = function(req, res) {
-
-	var userID = mongoose.Types.ObjectId(req.params.id);
-
-
-	User
-		.findById(userID).exec(function(err, user) {
-
-					// Store user.follows in followIDlist
-					FollowIDs = [];
-
-		      for (var i = 0; i < user.follows.length; i++) {
-						FollowIDs.push(user.follows[i]);
-		      };
-
-					Article
-						.where('_userID').in(FollowIDs)
-						.sort({created: 'desc'})
-						.exec(function(err, articles) {
-								res.send(articles)
-
-						});
-
-		});
-
-};
+// 	  TABLE OF CONTENTS   ====================================================================
+//
+//		#postUser
+//		#getUser
+//		#putUser
+//		#getHomeFeed
+//
+//		#getUsers
+//
+// ===========================================================================================
 
 
 // ====================================================
-//               /users
+//               #postUser
 // ====================================================
 
 // POST
@@ -73,19 +51,27 @@ exports.postUsers = function(req, res) {
 };
 
 
+// ====================================================
+//               #getUser
+// ====================================================
 
+exports.getUser = function(req, res) {
+	var id = req.params.id;
 
-// GET
-exports.getUsers = function(req, res) {
-	User.find(function(err, users) {
-			if (err)
-				res.send(err);
+	User.findById(id, function(err, users) {
+		if (err)
+			res.send(err);
 		res.json(users);
+		console.log(users);
 	});
+
 };
 
 
-// PUT
+// ====================================================
+//               #putUser
+// ====================================================
+
 exports.putUser = function(req, res) {
 
 	var userID = req.body.userID;
@@ -110,27 +96,65 @@ exports.putUser = function(req, res) {
     });
   });
 
-
-
-
-
 };
 
 // ====================================================
-//               /users/:userID
+//               #getHomeFeed
 // ====================================================
 
-exports.getUser = function(req, res) {
-	var id = req.params.id;
+// GET
+exports.getHomeFeed = function(req, res) {
 
-	User.findById(id, function(err, users) {
-		if (err)
-			res.send(err);
+	var userID = mongoose.Types.ObjectId(req.params.id);
+
+
+	User
+		.findById(userID).exec(function(err, user) {
+
+					// Store user.follows in followIDlist
+					FollowIDs = [];
+
+		      for (var i = 0; i < user.follows.length; i++) {
+						FollowIDs.push(user.follows[i]);
+		      };
+
+					Article
+						.where('_userID').in(FollowIDs)
+						.sort({created: 'desc'})
+						.exec(function(err, articles) {
+								res.send(articles)
+
+						});
+
+		});
+
+};
+
+
+
+
+
+
+// ====================================================
+//               #getUsers
+// ====================================================
+
+exports.getUsers = function(req, res) {
+	User.find(function(err, users) {
+			if (err)
+				res.send(err);
 		res.json(users);
-		console.log(users);
 	});
-
 };
+
+
+
+
+
+
+
+
+// Need to work on this
 
 
 // ====================================================

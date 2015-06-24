@@ -1112,7 +1112,6 @@ $scope.getFollows = function() {
               };
 
 
-
   };
 
 
