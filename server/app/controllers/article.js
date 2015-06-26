@@ -313,13 +313,14 @@ exports.getLikes = function(req, res) {
 exports.putLikes = function(req, res) {
 
 	console.log("Putting Likes Now");
+	// console.log(mongoose.Types.ObjectId(req.params.articleID));
 
 
-	var userID 		= mongoose.Types.ObjectId(req.body.userID);
-	var articleID = mongoose.Types.ObjectId(req.body.articleID);
+	var userID 				= mongoose.Types.ObjectId(req.body.userID);
+	var articleID 		= mongoose.Types.ObjectId(req.body.articleID);
 
-	console.log("The user id is " + userID);
-	console.log("The article id is " + articleID);
+	// console.log("The user id is " + userID);
+	// console.log("The article id is " + articleID);
 
 
 	Article.findByIdAndUpdate(

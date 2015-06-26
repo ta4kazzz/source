@@ -617,7 +617,7 @@ $scope.getFollows = function() {
               var results         = articleLikers.indexOf(userID); // this is etheir -1 or 0
 
               var specificArticle = data[i];
-              console.log(specificArticle);
+              // console.log(specificArticle);
 
               // console.log(data[i]);
               // console.log("results = " + results);
@@ -653,6 +653,8 @@ $scope.getFollows = function() {
       articleOwner: articleOwner
     };
 
+    console.log(likedArticle);
+
     API.likeArticle(likedArticle)
       .success(function (article, user, status, headers, config) {
         // make button reflect the change
@@ -674,6 +676,8 @@ $scope.getFollows = function() {
       userID: userID
     };
 
+
+
     API.saveForLater(savedArticle)
       .success(function (article, user, status, headers, config) {
         // make button reflect the change
@@ -688,19 +692,22 @@ $scope.getFollows = function() {
 
 
 
-  $scope.unlikeArticle = function(articleID) {
+  $scope.unlikeArticle = function(article) {
 
     var userID      = window.localStorage.SourceID;
-    var articleID   = articleID;
+    var articleID            = article._id;
 
     var unlikedArticle = {
       articleID: articleID,
       userID: userID
     };
 
+    console.log(unlikedArticle)
+
+
     API.putLikes(unlikedArticle)
       .success(function (article, user, status, headers, config) {
-        console.log("Article Successfully liked")
+        console.log("Article Successfully unliked")
       })
       .error(function (article, status, headers, config) {
         console.log("Error when liking the article")
