@@ -107,13 +107,13 @@ exports.getHomeFeed = function(req, res) {
 
 	var userID = mongoose.Types.ObjectId(req.params.id);
 
-
 	User
 		.findById(userID).exec(function(err, user) {
 
 					// Store user.follows in followIDlist
 					FollowIDs = [];
 
+					// Fill FollowsID array with followers
 		      for (var i = 0; i < user.follows.length; i++) {
 						FollowIDs.push(user.follows[i]);
 		      };
@@ -123,7 +123,6 @@ exports.getHomeFeed = function(req, res) {
 						.sort({created: 'desc'})
 						.exec(function(err, articles) {
 								res.send(articles)
-
 						});
 
 		});
