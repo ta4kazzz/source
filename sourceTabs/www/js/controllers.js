@@ -605,20 +605,30 @@ $scope.getFollows = function() {
     var userID      = window.localStorage.SourceID;
     API.getHomeFeed(userID)
       .success(function (data, user, status, headers, config) {
-         console.log(data);
 
          $scope.articles = [];
+
           // this pushes the returned array to articles
           for (var i = 0; i < data.length; i++) {
               // push data to article
               $scope.articles.push(data[i]);
-              var articleLikers = data[i].likes;
-              var results = articleLikers.indexOf(userID);
+
+              var articleLikers   = data[i].likes; // this is an array of users who like the article
+              var results         = articleLikers.indexOf(userID); // this is etheir -1 or 0
+
+              var specificArticle = data[i];
+              console.log(specificArticle);
+
+              // console.log(data[i]);
+              // console.log("results = " + results);
+
               if (results >= 0) {
-                // console.log("You like this article");
-                // push liked=true to specific object in articles array
+                console.log("You like this article");
+                specificArticle["isLikedByUser"] = true;
+                // push liked=true to specific object(data[i])
                 // console.log($scope.articles)
               } else {
+                specificArticle["isLikedByUser"] = false;
                 console.log("You do not like this article");
               }
           };
