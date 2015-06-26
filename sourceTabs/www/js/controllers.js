@@ -662,6 +662,7 @@ $scope.getFollows = function() {
       .success(function (article, user, status, headers, config) {
         // make button reflect the change
         console.log("Article Successfully liked");
+        $scope.getHomeFeed();
       })
       .error(function (article, status, headers, config) {
         console.log("Error when liking the article");
@@ -711,6 +712,7 @@ $scope.getFollows = function() {
     API.putLikes(unlikedArticle)
       .success(function (article, user, status, headers, config) {
         console.log("Article Successfully unliked")
+        $scope.getHomeFeed();
       })
       .error(function (article, status, headers, config) {
         console.log("Error when liking the article")
