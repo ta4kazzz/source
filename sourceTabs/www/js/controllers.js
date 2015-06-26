@@ -585,6 +585,9 @@ $scope.getFollows = function() {
 .controller('homeController', function($rootScope, $scope, auth, API, $timeout, $stateParams) {
 
 
+  $scope.isLiked = true;
+
+
   // On before you ender the pag run this function
   $scope.$on('$ionicView.beforeEnter', function(){
     $scope.getHomeFeed();
@@ -617,7 +620,7 @@ $scope.getFollows = function() {
               var results         = articleLikers.indexOf(userID); // this is etheir -1 or 0
 
               var specificArticle = data[i];
-              // console.log(specificArticle);
+              console.log(specificArticle);
 
               // console.log(data[i]);
               // console.log("results = " + results);
@@ -724,11 +727,6 @@ $scope.getFollows = function() {
 
 
 .controller('readerController', function($scope, $rootScope, API, $stateParams, $cordovaInAppBrowser, $ionicPopover) {
-
-
-
-
-
 
 
     $scope.$on('$ionicView.beforeEnter', function(){
