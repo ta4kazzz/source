@@ -639,20 +639,17 @@ $scope.getFollows = function() {
 
 
   $scope.getHomeFeed = function() {
-    var userID      = window.localStorage.SourceID;
+    var userID              = window.localStorage.SourceID;
+    var usersSavedArticles  = window.localStorage.savedArticleList;
 
+    // Stores a list of your saved articles in local storage
     $scope.storeSavedArticles();
-
 
 
     API.getHomeFeed(userID)
       .success(function (data, user, status, headers, config) {
 
          $scope.articles = [];
-
-
-        //  console.log(x);
-
 
           // this pushes the returned array to articles
           for (var i = 0; i < data.length; i++) {
@@ -674,10 +671,16 @@ $scope.getFollows = function() {
                 // console.log("You do not like this article");
               }
 
+              // console.log(data[i]._id);
+              var specificArticleID = data[i]._id;
 
 
-
-
+              var savedArticleResults = usersSavedArticles.indexOf(specificArticleID);
+              if (results >= 0) {
+                specificArticle["isSavedByUser"] = true;
+              } else {
+                specificArticle["isSavedByUser"] = false;
+              }
 
           };
       })
