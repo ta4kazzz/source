@@ -582,7 +582,7 @@ $scope.getFollows = function() {
 //                                     #HOME CONTROLLER
 // ===========================================================================================
 
-.controller('homeController', function($rootScope, $scope, auth, API, $timeout, $stateParams) {
+.controller('homeController', function($rootScope, $scope, auth, API, $timeout, $stateParams, store) {
 
 
   $scope.isLiked = true;
@@ -604,42 +604,99 @@ $scope.getFollows = function() {
   };
 
 
+  $scope.storeSavedArticles = function() {
+
+    var id   = window.localStorage.SourceID;
+
+     API.getSaved(id)
+       .success(function (data, status, headers, config) {
+
+         $scope.savedArticlesIds = [];
+
+         for (var i = 0; i < data.length; i++) {
+          //  console.log(data[i]);
+           $scope.savedArticlesIds.push(data[i]._id);
+         };
+
+        // console.log($scope.savedArticles);
+        // var saveResults = $scope.savedArticles;
+        var savedArticleListIds = $scope.savedArticlesIds
+        // console.log($scope.savedArticlesIds);
+
+        store.set('savedArticleList', savedArticleListIds);
+
+       })
+       .error(function (users, status, headers, config) {
+         console.log("Something went when getting list of saved articles")
+       });
+
+
+  };
+
+
+
+
+
+
   $scope.getHomeFeed = function() {
     var userID      = window.localStorage.SourceID;
+
+    $scope.storeSavedArticles();
+
+
+
     API.getHomeFeed(userID)
       .success(function (data, user, status, headers, config) {
 
          $scope.articles = [];
+
+
+        //  console.log(x);
+
 
           // this pushes the returned array to articles
           for (var i = 0; i < data.length; i++) {
               // push data to article
               $scope.articles.push(data[i]);
 
+              // like calculations
               var articleLikers   = data[i].likes; // this is an array of users who like the article
               var results         = articleLikers.indexOf(userID); // this is etheir -1 or 0
 
               var specificArticle = data[i];
-              console.log(specificArticle);
-
-              // console.log(data[i]);
-              // console.log("results = " + results);
+              // console.log(specificArticle);
 
               if (results >= 0) {
-                console.log("You like this article");
+                // console.log("You like this article");
                 specificArticle["isLikedByUser"] = true;
-                // push liked=true to specific object(data[i])
-                // console.log($scope.articles)
               } else {
                 specificArticle["isLikedByUser"] = false;
-                console.log("You do not like this article");
+                // console.log("You do not like this article");
               }
+
+
+
+
+
+
           };
       })
       .error(function (data, status, headers, config) {
         console.log("Error when getting home feed")
       });
   };
+
+
+
+
+
+
+
+
+
+
+
+
 
   $scope.likeArticle = function(article) {
 
@@ -841,6 +898,7 @@ $scope.getFollows = function() {
 
   $scope.openWebView = function(url) {
     console.log("test");
+
     $cordovaInAppBrowser
        .open(url, '_system')
        .then(function(event) {
