@@ -649,7 +649,7 @@ $scope.getFollows = function() {
     API.getHomeFeed(userID)
       .success(function (data, user, status, headers, config) {
 
-         $scope.articles = [];
+          $scope.articles = [];
 
           // this pushes the returned array to articles
           for (var i = 0; i < data.length; i++) {
@@ -661,28 +661,32 @@ $scope.getFollows = function() {
               var results         = articleLikers.indexOf(userID); // this is etheir -1 or 0
 
               var specificArticle = data[i];
-              // console.log(specificArticle);
-
               if (results >= 0) {
-                // console.log("You like this article");
                 specificArticle["isLikedByUser"] = true;
               } else {
                 specificArticle["isLikedByUser"] = false;
-                // console.log("You do not like this article");
               }
 
-              // console.log(data[i]._id);
-              var specificArticleID = data[i]._id;
 
 
+
+
+              var specificArticleID = data[i]._id; // the id of the article in question
               var savedArticleResults = usersSavedArticles.indexOf(specificArticleID);
-              if (results >= 0) {
-                specificArticle["isSavedByUser"] = true;
-              } else {
+
+              console.log("Specific Article " + specificArticleID);
+              console.log("List of saved " + usersSavedArticles);
+              console.log("index of article in saved " + savedArticleResults)
+
+              if (results <= 1) {
                 specificArticle["isSavedByUser"] = false;
+              } else {
+                specificArticle["isSavedByUser"] = true;
               }
 
           };
+
+          // console.log($scope.articles);
       })
       .error(function (data, status, headers, config) {
         console.log("Error when getting home feed")
@@ -690,11 +694,56 @@ $scope.getFollows = function() {
   };
 
 
+  $scope.deleteSaved = function(articleID) {
+
+
+    var userID      = window.localStorage.SourceID;
+    var articleID    = articleID;
+
+    var savedArticle = {
+      articleID: articleID,
+      userID: userID
+    };
+
+    console.log(savedArticle);
+
+
+    API.deleteSaved(savedArticle)
+      .success(function (article, status, headers, config) {
+          console.log("article delete")
+          // $scope.getSaved();
+        })
+      .error(function (article, status, headers, config) {
+          console.log("Something went wrong")
+        });
+
+  };
 
 
 
 
+  $scope.saveForLater = function(articleID) {
 
+    var userID      = window.localStorage.SourceID;
+    var articleID   = articleID;
+
+    var savedArticle = {
+      articleID: articleID,
+      userID: userID
+    };
+
+
+
+    API.saveForLater(savedArticle)
+      .success(function (article, user, status, headers, config) {
+        // make button reflect the change
+        console.log("Article successfully saved for later")
+      })
+      .error(function (article, status, headers, config) {
+        console.log("Error when saving the article for later")
+      });
+
+  };
 
 
 
@@ -730,28 +779,6 @@ $scope.getFollows = function() {
 
   };
 
-  $scope.saveForLater = function(articleID) {
-
-    var userID      = window.localStorage.SourceID;
-    var articleID   = articleID;
-
-    var savedArticle = {
-      articleID: articleID,
-      userID: userID
-    };
-
-
-
-    API.saveForLater(savedArticle)
-      .success(function (article, user, status, headers, config) {
-        // make button reflect the change
-        console.log("Article successfully saved for later")
-      })
-      .error(function (article, status, headers, config) {
-        console.log("Error when saving the article for later")
-      });
-
-  };
 
 
 
