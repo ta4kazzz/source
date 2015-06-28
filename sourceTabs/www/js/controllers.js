@@ -608,7 +608,7 @@ $scope.getFollows = function() {
 
     var id   = window.localStorage.SourceID;
 
-     API.getSaved(id)
+     API.getSaved(userID)
        .success(function (data, status, headers, config) {
 
          $scope.savedArticlesIds = [];
@@ -640,10 +640,29 @@ $scope.getFollows = function() {
 
   $scope.getHomeFeed = function() {
     var userID              = window.localStorage.SourceID;
-    var usersSavedArticles  = window.localStorage.savedArticleList;
+    // var usersSavedArticles  = window.localStorage.savedArticleList;
+
+
+    API.getSaved(userID)
+      .success(function (data, status, headers, config) {
+        $scope.savedArticlesIds = [];
+        for (var i = 0; i < data.length; i++) {
+          $scope.savedArticlesIds.push(data[i]._id);
+        };
+      //  var savedArticleListIds = $scope.savedArticlesIds
+      //  console.log(savedArticleListIds);
+      })
+      .error(function (users, status, headers, config) {
+        console.log("Something went when getting list of saved articles")
+      });
+
+
+
+
+
 
     // Stores a list of your saved articles in local storage
-    $scope.storeSavedArticles();
+    // $scope.storeSavedArticles();
 
 
     API.getHomeFeed(userID)
@@ -657,8 +676,13 @@ $scope.getFollows = function() {
               $scope.articles.push(data[i]);
 
               // like calculations
-              var articleLikers   = data[i].likes; // this is an array of users who like the article
+              var articleLikers   = data[i].likes; // this is an object of users who like the article
               var results         = articleLikers.indexOf(userID); // this is etheir -1 or 0
+
+              // console.log("INFORMATION ABOUT LIKERS ============================================");
+              // console.log("Specific User " + userID + " and it is a " + typeof userID);
+              // console.log("List of people who liked article " + articleLikers + " and it is a " + typeof articleLikers);
+              // console.log("index of users in likers " + results +  " and it is a " + typeof results)
 
               var specificArticle = data[i];
               if (results >= 0) {
@@ -669,24 +693,28 @@ $scope.getFollows = function() {
 
 
 
-
+              var savedArticleListIds = $scope.savedArticlesIds
 
               var specificArticleID = data[i]._id; // the id of the article in question
-              var savedArticleResults = usersSavedArticles.indexOf(specificArticleID);
+              var savedArticleResults = savedArticleListIds.indexOf(specificArticleID); // need to do a better check here
 
-              console.log("Specific Article " + specificArticleID);
-              console.log("List of saved " + usersSavedArticles);
-              console.log("index of article in saved " + savedArticleResults)
 
-              if (results <= 1) {
-                specificArticle["isSavedByUser"] = false;
-              } else {
+
+
+              // console.log("INFORMATION ABOUT SAVED for  ============================================ ");
+              // console.log("Specific Article " + specificArticleID + " and it is a " + typeof specificArticleID);
+              // console.log("List of saved " + savedArticleListIds + " and it is a " + typeof usersSavedArticles);
+              console.log("index of article in saved " + savedArticleResults + " and it is a " + typeof savedArticleResults)
+
+              if (savedArticleResults >= 0) {
                 specificArticle["isSavedByUser"] = true;
+              } else {
+                specificArticle["isSavedByUser"] = false;
               }
 
           };
 
-          // console.log($scope.articles);
+          console.log($scope.articles);
       })
       .error(function (data, status, headers, config) {
         console.log("Error when getting home feed")
