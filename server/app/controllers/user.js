@@ -190,16 +190,17 @@ exports.saveForLater = function(req, res) {
 	var userID 		= mongoose.Types.ObjectId(req.body.userID);
 	var articleID = mongoose.Types.ObjectId(req.body.articleID);
 
-
 	console.log("The user id is " + userID);
 	console.log("The article id is " + articleID);
 
+	// Note to Self:for some reason this is returning null
 	User.findByIdAndUpdate(
 			userID,
 			{$push: {"saved": articleID}},
 			{safe: true, upsert: true},
 			function(err, model) {
-					console.log(err);
+					// console.log(err);
+					res.send(err)
 			}
 	);
 

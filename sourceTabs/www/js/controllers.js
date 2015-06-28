@@ -604,38 +604,6 @@ $scope.getFollows = function() {
   };
 
 
-  $scope.storeSavedArticles = function() {
-
-    var id   = window.localStorage.SourceID;
-
-     API.getSaved(userID)
-       .success(function (data, status, headers, config) {
-
-         $scope.savedArticlesIds = [];
-
-         for (var i = 0; i < data.length; i++) {
-          //  console.log(data[i]);
-           $scope.savedArticlesIds.push(data[i]._id);
-         };
-
-        // console.log($scope.savedArticles);
-        // var saveResults = $scope.savedArticles;
-        var savedArticleListIds = $scope.savedArticlesIds
-        // console.log($scope.savedArticlesIds);
-
-        store.set('savedArticleList', savedArticleListIds);
-
-       })
-       .error(function (users, status, headers, config) {
-         console.log("Something went when getting list of saved articles")
-       });
-
-
-  };
-
-
-
-
 
 
   $scope.getHomeFeed = function() {
@@ -739,7 +707,7 @@ $scope.getFollows = function() {
     API.deleteSaved(savedArticle)
       .success(function (article, status, headers, config) {
           console.log("article delete")
-          // $scope.getSaved();
+          $scope.getHomeFeed();
         })
       .error(function (article, status, headers, config) {
           console.log("Something went wrong")
@@ -751,6 +719,7 @@ $scope.getFollows = function() {
 
 
   $scope.saveForLater = function(articleID) {
+    console.log("trigger");
 
     var userID      = window.localStorage.SourceID;
     var articleID   = articleID;
@@ -760,12 +729,10 @@ $scope.getFollows = function() {
       userID: userID
     };
 
-
-
     API.saveForLater(savedArticle)
       .success(function (article, user, status, headers, config) {
-        // make button reflect the change
-        console.log("Article successfully saved for later")
+        console.log("article bhjdfg")
+              $scope.getHomeFeed();
       })
       .error(function (article, status, headers, config) {
         console.log("Error when saving the article for later")
