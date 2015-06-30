@@ -8,54 +8,60 @@
   </ion-nav-back-button>
   </ion-nav-bar>
 
-    <ion-content ng-init="getUser()" class="user">
+  <ion-content ng-init="getUser()" class="user">
 
-      <!-- Profile Banner -->
-      <div class="profile--banner">
-        <div class="profile-picture" style="
-          margin-left: auto;
-          margin-right: auto;
-          max-width: 100px;
-          text-align: center;
-          }">
-          <img style ="width: 5em; border-radius: 5em; margin-top: 2em;" src="{{gravatarURL}}">
+    <!-- Profile Banner -->
+    <div class="profile--banner">
+      <div class="profile-picture" style="
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 100px;
+        text-align: center;
+        }">
+        <img style ="width: 5em; border-radius: 5em; margin-top: 2em;" src="{{gravatarURL}}">
+      </div>
+      <div class="username" style="text-align: center;">{{username}}</div>
+      <p class="description" style="text-align: center;">{{description}}</p>
+      <div class="row">
+        <div class="col profile-column"><a href="#">
+              <p class="profile--number">{{articleNumber}}</p>
+              <p class="profile-label">Articles</p>
+              <a>
         </div>
-        <div class="username" style="text-align: center;">{{username}}</div>
-        <p class="description" style="text-align: center;">{{description}}</p>
-        <div class="row">
-          <div class="col profile-column"><a href="#">
-                <p class="profile--number">{{articleNumber}}</p>
-                <p class="profile-label">Articles</p>
-                <a>
-          </div>
-          <div class="col profile-column">
-                <a ui-sref="tabs.userFollowersNotificaitons( { userID: user_id} )">
-                <p class="profile--number">{{followerNumber}}</p>
-                <p class="profile-label">Followers<p>
-                <a>
-          </div>
-          <div class="col profile-column">
-                <a ui-sref="tabs.userFollowingNotificaitons( { userID: user_id} )">
-                <p class="profile--number">{{followingNumber}}</p>
-                <p class="profile-label">Following</p>
-                </a>
-          </div>
+        <div class="col profile-column">
+              <a ui-sref="tabs.userFollowersNotificaitons( { userID: user_id} )">
+              <p class="profile--number">{{followerNumber}}</p>
+              <p class="profile-label">Followers<p>
+              <a>
+        </div>
+        <div class="col profile-column">
+              <a ui-sref="tabs.userFollowingNotificaitons( { userID: user_id} )">
+              <p class="profile--number">{{followingNumber}}</p>
+              <p class="profile-label">Following</p>
+              </a>
         </div>
       </div>
+      <button ng-click="followUser()" ng-if="relationship == 'notFollowing'" class="button button-block button-balanced">
+        Follow
+      </button>
+      <button ng-click="unfollowUser()" ng-if="relationship == 'following'" class="button button-block button-assertive">
+        Unfollow
+      </button>
+    </div>
 
 
-      <!-- Article Feed -->
-      <div class="list" ng-init="getUserFeed()">
-        <a ng-repeat="articles in articles"  ui-sref="tabs.readerHome( { articleID: articles._id} )" class="item item-thumbnail-left">
-          <img src="{{articles.imageUrl}}">
-          <h2>{{ articles.title }}</h2>
-        </a>
-      </div>
+    <!-- Article Feed -->
+    <div class="list" ng-init="getUserFeed()">
+      <a ng-repeat="articles in articles"  ui-sref="tabs.readerHome( { articleID: articles._id} )" class="item item-thumbnail-left">
+        <img src="{{articles.imageUrl}}">
+        <h2>{{ articles.title }}</h2>
+      </a>
+    </div>
 
 
 
 
-    </ion-content>
+  </ion-content>
 
 
 

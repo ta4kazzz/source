@@ -8,7 +8,6 @@
   </ion-nav-back-button>
   </ion-nav-bar>
 
-
   <ion-content ng-init="getUser()" class="user">
 
     <!-- Profile Banner -->
@@ -30,22 +29,22 @@
               <a>
         </div>
         <div class="col profile-column">
-              <a href="#/tab/profile/followers">
+              <a ui-sref="tabs.userFollowers( { userID: user_id} )">
               <p class="profile--number">{{followerNumber}}</p>
               <p class="profile-label">Followers<p>
               <a>
         </div>
         <div class="col profile-column">
-              <a href="#/tab/profile/following">
+              <a ui-sref="tabs.userFollowing( { userID: user_id} )">
               <p class="profile--number">{{followingNumber}}</p>
               <p class="profile-label">Following</p>
               </a>
         </div>
       </div>
-      <button ng-click="followUser()" class="button button-block button-balanced">
+      <button ng-click="followUser()" ng-if="relationship == 'notFollowing'" class="button button-block button-balanced">
         Follow
       </button>
-      <button ng-click="unfollowUser()" class="button button-block button-assertive">
+      <button ng-click="unfollowUser()" ng-if="relationship == 'following'" class="button button-block button-assertive">
         Unfollow
       </button>
     </div>
