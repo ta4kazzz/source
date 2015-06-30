@@ -614,6 +614,7 @@ $scope.getFollows = function() {
     API.getSaved(userID)
       .success(function (data, status, headers, config) {
         $scope.savedArticlesIds = [];
+        // This is where you put the conditional for zero states
         for (var i = 0; i < data.length; i++) {
           $scope.savedArticlesIds.push(data[i]._id);
         };
@@ -1331,7 +1332,8 @@ $scope.getFollows = function() {
     // Creates a User in Auth0 Database
     $http({
       method: 'POST',
-      url: 'http://source-application.herokuapp.com/signup',
+      url: 'http://localhost:8080/signup',
+      // url: 'http://source-application.herokuapp.com/signup',
       data: {
         email:      newUser.email,
         username:   newUser.username,
@@ -1359,8 +1361,8 @@ $scope.getFollows = function() {
     console.log("Successfully logged in with your new credentials!");
     store.set('profile', profile);
     store.set('token', token);
-    setCurrentUser(profile);
-    $state.go('tabs.home');
+
+
     createUser(profile);
   }
 
@@ -1390,6 +1392,7 @@ $scope.getFollows = function() {
     API.postUser(user)
       .success(function (article, status, headers, config) {
         console.log("user created sucessfully")
+        setCurrentUser(profile);
       })
       .error(function (article, status, headers, config) {
         console.log("Something went wrong when posting user to database")

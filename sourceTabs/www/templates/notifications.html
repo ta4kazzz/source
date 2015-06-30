@@ -1,7 +1,7 @@
 <ion-view view-title="Notifications" class="notifications">
 
   <!-- Nav Bar -->
-  <ion-nav-bar class="bar ">
+  <ion-nav-bar class="bar top-shadow">
     <ion-nav-back-button>
     </ion-nav-back-button>
   </ion-nav-bar>
@@ -11,7 +11,7 @@
 
 
     <ion-list ng-init="getNotifications()">
-        <ion-item ng-repeat="notifications in notifications">
+        <ion-item style="top: -1px;" ng-repeat="notifications in notifications">
 
             <!-- display this if its a liked post -->
             <div ng-show="{{notifications.type=='liked your post'}}">

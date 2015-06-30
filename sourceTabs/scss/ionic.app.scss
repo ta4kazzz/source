@@ -108,7 +108,7 @@ background-image: linear-gradient(45deg, #4BCEB1 0%, #62EA70 100%);
 }
 
 .top-shadow {
-  box-shadow: 0px 0px 11px 0px rgba(0,0,0,0.20);
+  box-shadow: 0px 0px 11px 0px rgba(0,0,0,0.06);
 }
 
 .opacity-95 {
@@ -216,6 +216,7 @@ background-image: linear-gradient(45deg, #4BCEB1 0%, #62EA70 100%);
 // =================================================================
 //  # Tab Bar
 //  ================================================================
+
 .tab-item .icon {
   margin: 6px auto;
 }
@@ -344,6 +345,16 @@ background-image: linear-gradient(45deg, #4BCEB1 0%, #62EA70 100%);
 
 
 
+// =================================================================
+//  # Home
+//  ================================================================
+
+.home {
+  .nav {
+      box-shadow: 0px 0px 11px 0px rgba(0,0,0,0.20)!important;
+  }
+}
+
 
 
 // Transparent scroll bar
@@ -374,7 +385,6 @@ background-image: linear-gradient(45deg, #4BCEB1 0%, #62EA70 100%);
     font-size: 1em;
   }
 }
-
 
 .article-title {
   font-size: 26px;
