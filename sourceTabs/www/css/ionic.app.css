@@ -7782,13 +7782,21 @@ h1, h2, h3, h4, h5, h6, body {
   font-weight: 800; }
 
 .item-thumbnail-left > img:first-child {
-  max-width: 126px; }
+  top: 0px;
+  left: 0px;
+  max-width: 125px;
+  max-height: 80px;
+  width: 100%;
+  height: 100%; }
 
 .item-thumbnail-left {
-  padding-left: 154px; }
+  padding-left: 139px;
+  min-height: 82px;
+  max-height: 82px; }
 
 .item h2 {
-  white-space: normal; }
+  white-space: normal;
+  font-size: 13px; }
 
 .sticky-header {
   background-color: rgba(255, 255, 255, 0.66) !important;
