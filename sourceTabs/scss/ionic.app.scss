@@ -130,6 +130,9 @@ background-image: linear-gradient(45deg, #4BCEB1 0%, #62EA70 100%);
   max-width: 200px;
   margin: 0 auto;
   color: #ffffff;
+  &:hover {
+    color: #fff;
+  }
 }
 
 .follow-button {

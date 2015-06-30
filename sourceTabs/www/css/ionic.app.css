@@ -7663,6 +7663,8 @@ h1, h2, h3, h4, h5, h6, body {
   max-width: 200px;
   margin: 0 auto;
   color: #ffffff; }
+  .follow-button-base:hover, .follow-button:hover, .unfollow-button:hover {
+    color: #fff; }
 
 .follow-button {
   background-image: linear-gradient(45deg, #4BCEB1 0%, #62EA70 100%);
