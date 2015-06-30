@@ -286,7 +286,6 @@ $scope.getFollows = function() {
 
 .controller('userController', function($scope, $rootScope, API, $stateParams) {
 
-
   $scope.$on('$ionicView.beforeEnter', function(){
     $scope.getUser();
     $scope.getUserFeed();
@@ -310,11 +309,11 @@ $scope.getFollows = function() {
           // turn the button to unfolow
           console.log("sent")
           console.log(user);
+          $scope.getUser();
         })
       .error(function (user, status, headers, config) {
           console.log("Something went wrong")
         });
-
   };
 
 
@@ -334,6 +333,7 @@ $scope.getFollows = function() {
           // turn the button to unfolow
           console.log("sent")
           console.log(user);
+          $scope.getUser();
         })
       .error(function (user, status, headers, config) {
           console.log("Something went wrong")

@@ -42,6 +42,12 @@
               </a>
         </div>
       </div>
+      <button ng-click="followUser()" ng-if="relationship == 'notFollowing'" class="button button-block button-balanced">
+        Follow
+      </button>
+      <button ng-click="unfollowUser()" ng-if="relationship == 'following'" class="button button-block button-assertive">
+        Unfollow
+      </button>
     </div>
 
 
