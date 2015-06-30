@@ -62,7 +62,7 @@ exports.getUser = function(req, res) {
 		if (err)
 			res.send(err);
 		res.json(users);
-		console.log(users);
+		// console.log(users);
 	});
 
 };

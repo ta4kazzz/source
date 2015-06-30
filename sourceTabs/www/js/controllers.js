@@ -1332,8 +1332,8 @@ $scope.getFollows = function() {
     // Creates a User in Auth0 Database
     $http({
       method: 'POST',
-      url: 'http://localhost:8080/signup',
-      // url: 'http://source-application.herokuapp.com/signup',
+      // url: 'http://localhost:8080/signup',
+      url: 'http://source-application.herokuapp.com/signup',
       data: {
         email:      newUser.email,
         username:   newUser.username,
