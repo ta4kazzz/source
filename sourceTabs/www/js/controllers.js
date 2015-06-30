@@ -1281,7 +1281,7 @@ $scope.getFollows = function() {
     store.set('profile', profile);
     store.set('token', token);
     setCurrentUser(profile);
-    $state.go('tabs.home');
+
   }
 
   function onLoginFailed() {
@@ -1301,6 +1301,7 @@ $scope.getFollows = function() {
         // need to store it here without strings
         window.localStorage['SourceID'] = user._id;
         // store.set('SourceID', user._id);
+        $state.go('tabs.home');
       })
       .error(function (user, status, headers, config) {
         console.log("woops")

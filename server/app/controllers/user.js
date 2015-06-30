@@ -211,6 +211,7 @@ exports.saveForLater = function(req, res) {
 exports.getSaved = function(req, res) {
 
 	var userID = mongoose.Types.ObjectId(req.params.id);
+	console.log("The user id that is in question is " + userID);
 
 	User.findById(userID).populate('saved').exec(function(err, user) {
     	res.send(user.saved)
@@ -470,7 +471,7 @@ exports.getAuth = function(req, res) {
 		if (err)
 			res.send(err);
 			console.log("There was an error finding a user with that auth id")
-		res.json(users);
+			res.json(users);
 	});
 
 };
