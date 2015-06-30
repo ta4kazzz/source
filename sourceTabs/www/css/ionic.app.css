@@ -7652,6 +7652,26 @@ h1, h2, h3, h4, h5, h6, body {
 .opacity-95 {
   opacity: 0.95; }
 
+.follow-button-base, .follow-button, .unfollow-button {
+  border-radius: 40px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 500;
+  max-width: 200px;
+  margin: 0 auto;
+  color: #ffffff; }
+
+.follow-button {
+  background-image: linear-gradient(45deg, #4BCEB1 0%, #62EA70 100%);
+  border: none; }
+
+.unfollow-button {
+  background: none;
+  border-color: #62EA70; }
+
 .liked-post {
   color: #fff; }
 

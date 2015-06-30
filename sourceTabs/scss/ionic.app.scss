@@ -115,6 +115,35 @@ background-image: linear-gradient(45deg, #4BCEB1 0%, #62EA70 100%);
   opacity: 0.95;
 }
 
+// =================================================================
+//  # Buttons
+//  ================================================================
+
+.follow-button-base {
+  border-radius: 40px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 500;
+  max-width: 200px;
+  margin: 0 auto;
+  color: #ffffff;
+}
+
+.follow-button {
+  @extend .follow-button-base;
+  background-image: linear-gradient(45deg, #4BCEB1 0%, #62EA70 100%);
+  border: none;
+}
+
+
+.unfollow-button {
+  @extend .follow-button-base;
+  background: none;
+  border-color: #62EA70;
+}
 
 
 // =================================================================
@@ -134,6 +163,8 @@ background-image: linear-gradient(45deg, #4BCEB1 0%, #62EA70 100%);
 // =================================================================
 //  # Profile
 //  ================================================================
+
+
 
 .profile--banner {
   background-color: #4B4B4B;

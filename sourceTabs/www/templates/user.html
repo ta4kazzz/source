@@ -22,6 +22,12 @@
       </div>
       <div class="username" style="text-align: center;">{{username}}</div>
       <p class="description" style="text-align: center;">{{description}}</p>
+      <button ng-click="followUser()" ng-if="relationship == 'notFollowing'" class="button button-block button follow-button">
+        Follow
+      </button>
+      <button ng-click="unfollowUser()" ng-if="relationship == 'following'" class="button button-block button unfollow-button">
+        Unfollow
+      </button>
       <div class="row">
         <div class="col profile-column"><a href="#">
               <p class="profile--number">{{articleNumber}}</p>
@@ -41,12 +47,6 @@
               </a>
         </div>
       </div>
-      <button ng-click="followUser()" ng-if="relationship == 'notFollowing'" class="button button-block button-balanced">
-        Follow
-      </button>
-      <button ng-click="unfollowUser()" ng-if="relationship == 'following'" class="button button-block button-assertive">
-        Unfollow
-      </button>
     </div>
 
 
