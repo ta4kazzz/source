@@ -106,6 +106,8 @@ exports.putUser = function(req, res) {
 exports.getHomeFeed = function(req, res) {
 
 	var userID = mongoose.Types.ObjectId(req.params.id);
+	console.log("the userID is " + userID);
+
 
 	User
 		.findById(userID).exec(function(err, user) {

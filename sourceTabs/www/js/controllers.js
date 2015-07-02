@@ -644,15 +644,12 @@ $scope.getFollows = function() {
               // push data to article
               $scope.articles.push(data[i]);
 
+
+
+
               // like calculations
               var articleLikers   = data[i].likes; // this is an object of users who like the article
               var results         = articleLikers.indexOf(userID); // this is etheir -1 or 0
-
-              // console.log("INFORMATION ABOUT LIKERS ============================================");
-              // console.log("Specific User " + userID + " and it is a " + typeof userID);
-              // console.log("List of people who liked article " + articleLikers + " and it is a " + typeof articleLikers);
-              // console.log("index of users in likers " + results +  " and it is a " + typeof results)
-
               var specificArticle = data[i];
               if (results >= 0) {
                 specificArticle["isLikedByUser"] = true;
@@ -661,20 +658,10 @@ $scope.getFollows = function() {
               }
 
 
-
+              // saved for later
               var savedArticleListIds = $scope.savedArticlesIds
-
               var specificArticleID = data[i]._id; // the id of the article in question
               var savedArticleResults = savedArticleListIds.indexOf(specificArticleID); // need to do a better check here
-
-
-
-
-              // console.log("INFORMATION ABOUT SAVED for  ============================================ ");
-              // console.log("Specific Article " + specificArticleID + " and it is a " + typeof specificArticleID);
-              // console.log("List of saved " + savedArticleListIds + " and it is a " + typeof usersSavedArticles);
-              console.log("index of article in saved " + savedArticleResults + " and it is a " + typeof savedArticleResults)
-
               if (savedArticleResults >= 0) {
                 specificArticle["isSavedByUser"] = true;
               } else {
@@ -1332,8 +1319,8 @@ $scope.getFollows = function() {
     // Creates a User in Auth0 Database
     $http({
       method: 'POST',
-      // url: 'http://localhost:8080/signup',
-      url: 'http://source-application.herokuapp.com/signup',
+      url: 'http://localhost:8080/signup',
+      // url: 'http://source-application.herokuapp.com/signup',
       data: {
         email:      newUser.email,
         username:   newUser.username,

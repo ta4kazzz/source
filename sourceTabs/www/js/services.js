@@ -2,8 +2,8 @@ angular.module('starter.services', [])
 
 .factory('API', function ($rootScope, $http, $window, $ionicLoading, auth, store) {
 
-    // var base = "http://localhost:8080";
-    var base = "http://source-application.herokuapp.com";
+    var base = "http://localhost:8080";
+    // var base = "http://source-application.herokuapp.com";
 
     $rootScope.logout = function() {
       auth.signout();
