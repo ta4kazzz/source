@@ -1,4 +1,4 @@
-<ion-view view-title="Following">
+<ion-view view-title="Following" >
   <!-- Nav Bar -->
   <ion-nav-bar class="bar">
   <ion-nav-back-button>
@@ -6,8 +6,8 @@
   </ion-nav-bar>
 
 
-  <ion-content class="has-header" ng-init="getFollowing()">
-     <div class="list">
+  <ion-content class="has-header" ng-init="getFollowing()" >
+     <div class="list" class="followers-following">
 
        <a href="#/tab/user/{{users._id}}" ng-repeat="users in users">
          <div class="item item-avatar" >

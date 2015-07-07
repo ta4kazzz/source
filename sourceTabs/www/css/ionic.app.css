@@ -7812,6 +7812,9 @@ h1, h2, h3, h4, h5, h6, body {
   margin-bottom: 20px;
   font-weight: 800; }
 
+.followers-following {
+  line-height: 3 !important; }
+
 .item-thumbnail-left > img:first-child {
   top: 0px;
   left: 0px;
