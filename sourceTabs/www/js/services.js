@@ -108,8 +108,8 @@ angular.module('starter.services', [])
         },
 
         getHomeFeed: function (homeFeedPacket) {
-            return $http.get(base+'/api/users/' + homeFeedPacket.userID +'/homefeed', homeFeedPacket, {
-                method: 'GET',
+            return $http.post(base+'/api/users/' + homeFeedPacket.userID +'/homefeed', homeFeedPacket, {
+                method: 'POST',
            });
         },
 

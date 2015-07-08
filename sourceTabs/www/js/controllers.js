@@ -600,7 +600,7 @@ $scope.getFollows = function() {
 
   $scope.getHomeFeed = function() {
     var userID              = window.localStorage.SourceID;
-    var count               = 9;
+    var count               = 10;
     // var minID               = date object of latest article;
 
     var homeFeedPacket = {

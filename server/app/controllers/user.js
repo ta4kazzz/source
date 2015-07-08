@@ -126,7 +126,7 @@ exports.getHomeFeed = function(req, res) {
 					Article
 						.where('_userID').in(FollowIDs)
 						.sort({created: 'desc'})
-						.limit(2)
+						.limit(feedCount)
 						.exec(function(err, articles) {
 								res.send(articles)
 						});

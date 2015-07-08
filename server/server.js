@@ -105,7 +105,7 @@ router.route('/articles/:id')
 
 // Endpoints for /users/:username/followed-by
 router.route('/users/:id/homefeed')
-  .get(userController.getHomeFeed);
+  .post(userController.getHomeFeed);
 
 // Endpoints for /users
 router.route('/users')
