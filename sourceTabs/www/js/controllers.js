@@ -643,7 +643,6 @@ $scope.getFollows = function() {
 
 
 
-
               // like calculations
               var articleLikers   = data[i].likes; // this is an object of users who like the article
               var results         = articleLikers.indexOf(userID); // this is etheir -1 or 0
@@ -665,7 +664,19 @@ $scope.getFollows = function() {
                 specificArticle["isSavedByUser"] = false;
               }
 
+
+
           };
+
+          // store last articles date in scope object
+          // THIS IS NOT IT THIS IS WHAT NEEDS TO BE DONE
+          var last_element = $scope.articles[$scope.articles.length - 1];
+
+
+          // $scope.latestDate = 1436318004568;
+          $scope.latestDate =           last_element.created;
+          console.log("The latest date is " +  $scope.latestDate);
+
 
           console.log($scope.articles);
       })
@@ -676,17 +687,20 @@ $scope.getFollows = function() {
 
 
 
-  $scope.getMoreHomeFeed = function() {
-    console.log("lalalalal");
+  $scope.getMoreHomeFeed = function(minID) {
+    $scope.noMoreItemsAvailable = false;
+
 
     var userID              = window.localStorage.SourceID;
     var count               = 10;
-    // var minID               = date object of latest article;
+    var minDate             = $scope.latestDate;
+
+    console.log(minID);
 
     var homeFeedPacket = {
       userID: userID,
       count: count,
-      minID: 1436318004568,
+      minID: minDate,
     }
 
 
