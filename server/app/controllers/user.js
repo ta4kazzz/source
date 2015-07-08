@@ -108,6 +108,8 @@ exports.getHomeFeed = function(req, res) {
 
 	var userID = mongoose.Types.ObjectId(req.params.id);
 	var feedCount = req.body.count;
+	var minDate   = 1436318004568;
+
 
 	console.log("the userID is " + userID);
 	console.log("the COUNT is " + feedCount);
@@ -125,8 +127,9 @@ exports.getHomeFeed = function(req, res) {
 
 					Article
 						.where('_userID').in(FollowIDs)
-						.sort({created: 'desc'})
+						.find({ "created": {$lt: minDate}})
 						.limit(feedCount)
+						.sort({created: 'desc'})
 						.exec(function(err, articles) {
 								res.send(articles)
 						});
