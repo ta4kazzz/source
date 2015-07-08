@@ -108,8 +108,8 @@ exports.getHomeFeed = function(req, res) {
 
 	var userID = mongoose.Types.ObjectId(req.params.id);
 	var feedCount = req.body.count;
-	var minDate   = 1436318004568;
-
+	var minDate   = req.body.minID;
+	// var minDate   = 1436318004568;
 
 	console.log("the userID is " + userID);
 	console.log("the COUNT is " + feedCount);

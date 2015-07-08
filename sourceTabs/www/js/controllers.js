@@ -590,7 +590,7 @@ $scope.getFollows = function() {
 
   // On before you ender the pag run this function
   $scope.$on('$ionicView.beforeEnter', function(){
-    $scope.getHomeFeed();
+    $scope.getInitialHomeFeed();
   });
 
   // Not sure if I need this
@@ -598,14 +598,15 @@ $scope.getFollows = function() {
 
 
 
-  $scope.getHomeFeed = function() {
+  $scope.getInitialHomeFeed = function() {
     var userID              = window.localStorage.SourceID;
     var count               = 10;
     // var minID               = date object of latest article;
 
     var homeFeedPacket = {
       userID: userID,
-      count: count
+      count: count,
+      minID:  Date.now(),
     }
 
 
@@ -666,6 +667,64 @@ $scope.getFollows = function() {
 
           };
 
+          console.log($scope.articles);
+      })
+      .error(function (data, status, headers, config) {
+        console.log("Error when getting home feed")
+      });
+  };
+
+
+
+  $scope.getMoreHomeFeed = function() {
+    console.log("lalalalal");
+
+    var userID              = window.localStorage.SourceID;
+    var count               = 10;
+    // var minID               = date object of latest article;
+
+    var homeFeedPacket = {
+      userID: userID,
+      count: count,
+      minID: 1436318004568,
+    }
+
+
+    API.getHomeFeed(homeFeedPacket)
+      .success(function (data, user, status, headers, config) {
+
+          // $scope.articles = [];
+
+          // this pushes the returned array to articles
+          for (var i = 0; i < data.length; i++) {
+              // push data to article
+              $scope.articles.push(data[i]);
+
+
+              // like calculations
+              var articleLikers   = data[i].likes; // this is an object of users who like the article
+              var results         = articleLikers.indexOf(userID); // this is etheir -1 or 0
+              var specificArticle = data[i];
+              if (results >= 0) {
+                specificArticle["isLikedByUser"] = true;
+              } else {
+                specificArticle["isLikedByUser"] = false;
+              }
+
+
+              // saved for later
+              var savedArticleListIds = $scope.savedArticlesIds
+              var specificArticleID = data[i]._id; // the id of the article in question
+              var savedArticleResults = savedArticleListIds.indexOf(specificArticleID); // need to do a better check here
+              if (savedArticleResults >= 0) {
+                specificArticle["isSavedByUser"] = true;
+              } else {
+                specificArticle["isSavedByUser"] = false;
+              }
+
+          };
+
+          $scope.$broadcast('scroll.infiniteScrollComplete');
           console.log($scope.articles);
       })
       .error(function (data, status, headers, config) {
