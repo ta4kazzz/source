@@ -196,6 +196,8 @@ exports.getTopArticles = function(req, res) {
 
 exports.postLikes = function(req, res) {
 
+	console.log("REQ.body is " + req.body);
+
 	var userID 								= mongoose.Types.ObjectId(req.body.userID);
 	var articleID 						= mongoose.Types.ObjectId(req.body.articleID);
 	var articleOwner 					= mongoose.Types.ObjectId(req.body.articleOwner);

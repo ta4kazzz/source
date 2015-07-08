@@ -104,10 +104,13 @@ exports.putUser = function(req, res) {
 
 // GET
 exports.getHomeFeed = function(req, res) {
+	console.log(req.body);
 
 	var userID = mongoose.Types.ObjectId(req.params.id);
-	console.log("the userID is " + userID);
+	var feedCount = req.body.count;
 
+	console.log("the userID is " + userID);
+	console.log("the COUNT is " + feedCount);
 
 	User
 		.findById(userID).exec(function(err, user) {
@@ -123,6 +126,7 @@ exports.getHomeFeed = function(req, res) {
 					Article
 						.where('_userID').in(FollowIDs)
 						.sort({created: 'desc'})
+						.limit(2)
 						.exec(function(err, articles) {
 								res.send(articles)
 						});

@@ -596,19 +596,17 @@ $scope.getFollows = function() {
   // Not sure if I need this
   $rootScope.auth = auth;
 
-  $scope.doRefresh = function() {
-    $timeout(function() {
-      $scope.$broadcast('scroll.refreshComplete');
-      $scope.$broadcast('scroll.refreshComplete');
-    }, 1250);
-  };
-
-
 
 
   $scope.getHomeFeed = function() {
     var userID              = window.localStorage.SourceID;
-    // var usersSavedArticles  = window.localStorage.savedArticleList;
+    var count               = 9;
+    // var minID               = date object of latest article;
+
+    var homeFeedPacket = {
+      userID: userID,
+      count: count
+    }
 
 
     API.getSaved(userID)
@@ -623,10 +621,8 @@ $scope.getFollows = function() {
       })
       .error(function (users, status, headers, config) {
         console.log("Something went when getting list of saved articles")
+
       });
-
-
-
 
 
 
@@ -634,7 +630,7 @@ $scope.getFollows = function() {
     // $scope.storeSavedArticles();
 
 
-    API.getHomeFeed(userID)
+    API.getHomeFeed(homeFeedPacket)
       .success(function (data, user, status, headers, config) {
 
           $scope.articles = [];
@@ -932,7 +928,7 @@ $scope.getFollows = function() {
 //                                     #ADD CONTROLLER
 // ===========================================================================================
 
-.controller('addController', function($scope, $rootScope, $window, API, store, $state, auth) {
+.controller('addController', function($scope, $rootScope, $window, API, store, $state, auth, $timeout) {
 
 
 // Allows us to post gravatar in preview
@@ -943,6 +939,15 @@ $scope.getFollows = function() {
     url: "",
     summary: ""
   };
+
+
+  $scope.doRefresh = function() {
+    $timeout(function() {
+      $scope.$broadcast('scroll.refreshComplete');
+      $scope.$broadcast('scroll.refreshComplete');
+    }, 1250);
+  };
+
 
   // Add Article ==============================================
   // This function takes the form data, posts an article and then retreives the full article content
