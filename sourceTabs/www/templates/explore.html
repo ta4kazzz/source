@@ -56,7 +56,6 @@
       <!-- USERS -->
       <div ng-show="isSet(2)">
         <div class="list" style="margin-top: 48px;" ng-init="getAllUsers()">
-          <a ng-repeat="users in users"  ui-sref="tabs.userExplore( { userID: users._id} )">
               <div class="item item-avatar" >
                 <img src="{{users.gravatarURL}}">
                   <div class="float-left username" style="margin: 7px 0px;">{{users.username}}</div>
