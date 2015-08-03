@@ -537,7 +537,7 @@ $scope.getFollows = function() {
      $scope.data = API.getUsers()
         .success(function (data, status, headers, config) {
          $scope.users = [];
-
+         console.log("Successfully getting all the users");
               for (var i = 0; i < data.length; i++) {
                   $scope.users.push(data[i]);
               };
