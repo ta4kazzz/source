@@ -7652,6 +7652,9 @@ h1, h2, h3, h4, h5, h6, body {
 .opacity-95 {
   opacity: 0.95; }
 
+.heart-pink {
+  color: #F78383; }
+
 .follow-button-base, .follow-button, .unfollow-button {
   border-radius: 40px;
   font-weight: 500;

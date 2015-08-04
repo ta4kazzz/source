@@ -38,7 +38,7 @@
               <p>{{articles.shortUrl}}</p>
               <p class="article-summary">{{articles.summary}}</p>
               <button class="button icon-left ion-ios-heart-outline button-clear padding-left-none" ng-click="likeArticle(articles)" ng-show="articles.isLikedByUser == false">Like</button>
-              <button class="button icon-left ion-ios-heart button-clear padding-left-none" ng-click="unlikeArticle(articles)" ng-show="articles.isLikedByUser == true">Unlike</button>
+              <button r class="button icon-left ion-ios-heart button-clear padding-left-none" ng-click="unlikeArticle(articles)" ng-show="articles.isLikedByUser == true">Unlike</button>
 
               <button class="button icon-left ion-ios-star-outline button-clear" ng-click="saveForLater(articles._id)" ng-if="articles.isSavedByUser == false">Save For Later</button>
               <button class="button icon-left ion-ios-star button-clear" ng-click="deleteSaved(articles._id)" ng-if="articles.isSavedByUser == true">Remove</button>
