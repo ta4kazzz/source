@@ -764,7 +764,7 @@ $scope.getFollows = function() {
     API.deleteSaved(savedArticle)
       .success(function (article, status, headers, config) {
           console.log("article delete")
-          $scope.getHomeFeed();
+          $scope.getInitialHomeFeed();
         })
       .error(function (article, status, headers, config) {
           console.log("Something went wrong")
@@ -789,7 +789,7 @@ $scope.getFollows = function() {
     API.saveForLater(savedArticle)
       .success(function (article, user, status, headers, config) {
         console.log("article bhjdfg")
-              $scope.getHomeFeed();
+              $scope.getInitialHomeFeed();
       })
       .error(function (article, status, headers, config) {
         console.log("Error when saving the article for later")
@@ -823,7 +823,7 @@ $scope.getFollows = function() {
       .success(function (article, user, status, headers, config) {
         // make button reflect the change
         console.log("Article Successfully liked");
-        $scope.getHomeFeed();
+        $scope.getInitialHomeFeed();
       })
       .error(function (article, status, headers, config) {
         console.log("Error when liking the article");
@@ -851,7 +851,7 @@ $scope.getFollows = function() {
     API.putLikes(unlikedArticle)
       .success(function (article, user, status, headers, config) {
         console.log("Article Successfully unliked")
-        $scope.getHomeFeed();
+        $scope.getInitialHomeFeed();
       })
       .error(function (article, status, headers, config) {
         console.log("Error when liking the article")
@@ -1367,6 +1367,9 @@ $scope.getFollows = function() {
         // need to store it here without strings
         window.localStorage['SourceID'] = user._id;
         // store.set('SourceID', user._id);
+        
+
+
         $state.go('tabs.home');
       })
       .error(function (user, status, headers, config) {

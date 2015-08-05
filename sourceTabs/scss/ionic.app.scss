@@ -115,8 +115,17 @@ background-image: linear-gradient(45deg, #4BCEB1 0%, #62EA70 100%);
   opacity: 0.95;
 }
 
-.heart-pink {
-   color: #F78383!important;
+
+.like-button {
+  .button.icon-left:before {
+      color: #F78383;
+  }
+}
+
+.save-for-later-button {
+  .button.icon-left:before {
+      color: #439FEC;
+  }
 }
 
 // =================================================================

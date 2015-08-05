@@ -7652,8 +7652,11 @@ h1, h2, h3, h4, h5, h6, body {
 .opacity-95 {
   opacity: 0.95; }
 
-.heart-pink {
+.like-button .button.icon-left:before {
   color: #F78383; }
+
+.save-for-later-button .button.icon-left:before {
+  color: #439FEC; }
 
 .follow-button-base, .follow-button, .unfollow-button {
   border-radius: 40px;
