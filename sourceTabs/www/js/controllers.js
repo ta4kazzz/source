@@ -1367,9 +1367,9 @@ $scope.getFollows = function() {
         // need to store it here without strings
         window.localStorage['SourceID'] = user._id;
         // store.set('SourceID', user._id);
-        
 
-
+        $scope.followAndrew();
+        $scope.followYourself();
         $state.go('tabs.home');
       })
       .error(function (user, status, headers, config) {
@@ -1379,6 +1379,46 @@ $scope.getFollows = function() {
   };
 
 
+
+  $scope.followYourself = function() {
+    // the ID is the person who is logged in and doing the adding action
+    var id = window.localStorage.SourceID;
+    // The user is who we want to "follow" - or add to alices's list
+    var user = {
+      _id: window.localStorage.SourceID
+    };
+
+    API.followUser(id, user)
+      .success(function (user, status, headers, config) {
+          // turn the button to unfolow
+          console.log("sent")
+          console.log(user);
+          $scope.getUser();
+        })
+      .error(function (user, status, headers, config) {
+          console.log("Something went wrong")
+        });
+  };
+
+  $scope.followAndrew = function() {
+    // the ID is the person who is logged in and doing the adding action
+    var id = window.localStorage.SourceID;
+    // The user is who we want to "follow" - or add to alices's list
+    var user = {
+      _id: "551716f34296b60300e8f91b"
+    };
+
+    API.followUser(id, user)
+      .success(function (user, status, headers, config) {
+          // turn the button to unfolow
+          console.log("sent")
+          console.log(user);
+          $scope.getUser();
+        })
+      .error(function (user, status, headers, config) {
+          console.log("Something went wrong")
+        });
+  };
 
 
 
@@ -1400,8 +1440,8 @@ $scope.getFollows = function() {
     // Creates a User in Auth0 Database
     $http({
       method: 'POST',
-      url: 'http://localhost:8080/signup',
-      // url: 'http://source-application.herokuapp.com/signup',
+      // url: 'http://localhost:8080/signup',
+      url: 'http://source-application.herokuapp.com/signup',
       data: {
         email:      newUser.email,
         username:   newUser.username,
