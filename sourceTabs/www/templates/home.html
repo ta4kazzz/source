@@ -21,7 +21,7 @@
     <ion-list>
         <div class="list article-card" ng-repeat="articles in articles" >
           <a href="#/tab/user/{{articles._userID}}">
-              <div class="item item-avatar" >
+              <div class="item item-avatar" style="border-bottom:none">
                 <img src="{{articles.gravatarURL}}">
                   <div class="float-left username">{{articles.username}}</div>
                   <p class="float-right date">{{ articles.created | date : 'short' : timezone}}</p>

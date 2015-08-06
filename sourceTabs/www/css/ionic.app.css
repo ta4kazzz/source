@@ -7608,7 +7608,7 @@ h1, h2, h3, h4, h5, h6, body {
   font-family: 'Source Sans Pro', sans-serif !important; }
 
 .tabs-light > .tabs {
-  background: #FFFFFF;
+  background: #4B4B4B;
   box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.3);
   padding-top: 0; }
 
@@ -7656,7 +7656,7 @@ h1, h2, h3, h4, h5, h6, body {
   color: #F78383; }
 
 .save-for-later-button .button.icon-left:before {
-  color: #439FEC; }
+  color: #4BCEB1; }
 
 .follow-button-base, .follow-button, .unfollow-button {
   border-radius: 40px;
@@ -7756,13 +7756,13 @@ h1, h2, h3, h4, h5, h6, body {
   background-color: #000; }
 
 .active-tab {
-  background-color: #f2f2f2; }
+  background-color: #303030; }
 
 .tab-item .icon {
   margin: 0px auto;
   padding: 7px 0;
   height: 100%;
-  color: #898989; }
+  color: #57D263; }
 
 .tabs-top > .tabs {
   left: 0px; }
