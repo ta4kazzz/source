@@ -1,0 +1,35 @@
+<ion-view view-title="Login" class="login">
+
+
+  <ion-content>
+
+    <div class="list">
+
+      <h3 class="headline">SOURCE</h3>
+
+      <!-- Email -->
+      <label class="item item-input" style="background-color: rgba(255, 255, 255, 0.25); border-color: #60DA6B; padding: 0.5em 1em;">
+        <span class="input-label" style="color: #fff; font-weight: 600;">Email</span><input type="text" ng-model="loginForm.email">
+      </label>
+
+      <!-- Password -->
+      <label class="item item-input" style="background-color: rgba(255, 255, 255, 0.25); border-color: #60DA6B; padding: 0.5em 1em;">
+        <span class="input-label" style="color: #fff; font-weight: 600;">Password</span><input type="password" ng-model="loginForm.password">
+      </label>
+
+    </div>
+
+
+
+    <div class="padding">
+      <button class="button button-block button-outline" style="margin-bottom: 1.5em;" ng-click="login()">
+        Login
+      </button>
+      <p class="text-center">
+        <a href="#/signup" class="text-decoration-none white" style="font-size:1.4em;">Sign Up</a>
+      </p>
+    </div>
+
+
+    </ion-content>
+</ion-view>
