@@ -3,7 +3,7 @@
 var mongoose = require('mongoose');
 var bcrypt   = require('bcrypt-nodejs');
 var Schema   = mongoose.Schema;
-var deepPopulate = require('mongoose-deep-populate');
+//var deepPopulate = require('mongoose-deep-populate');
 
 
 var UserSchema = new Schema({
@@ -59,5 +59,5 @@ UserSchema.methods.verifyPassword = function(password, cb) {
 };
 
 // create the model for users and expose it to our app
-UserSchema.plugin(deepPopulate);
+//UserSchema.plugin(deepPopulate);
 module.exports = mongoose.model('User', UserSchema);

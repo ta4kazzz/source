@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <title></title>
@@ -10,13 +10,11 @@
     <link href="css/ionic.app.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Source+Serif+Pro:400,600,700' rel='stylesheet' type='text/css'>
 
-
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
 
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
-
 
     <!-- Authentication -->
     <!--<script src="lib/auth0-lock/build/auth0-lock.js"></script>-->
@@ -28,35 +26,50 @@
 
     <!-- <script src="/lib/ion-affix/ion-affix.js"></script>
     <script src="/lib/ionic-ion-header-shrink/ionic.headerShrink.js"></script> -->
-
     <!-- ngCordova -->
     <script src="lib/ngCordova/dist/ng-cordova.js"></script>
     <script src="cordova.js"></script>
-
+    
+    <!-- your app's js -->
+    <script src="js/app.js"></script>
 
     <!-- Controllers -->
     <script src="js/controllers.js"></script>
-
-
-    <!-- your app's js -->
-    <script src="js/app.js"></script>
+    <script src="js/Controllers/addController.js"></script>
+    <script src="js/Controllers/dashCtrl.js"></script>
+    <script src="js/Controllers/exploreController.js"></script>
+    <script src="js/Controllers/homeController.js"></script>
+    <script src="js/Controllers/likersController.js"></script>
+    <script src="js/Controllers/loginCtrl.js"></script>
+    <script src="js/Controllers/notificationsController.js"></script>
+    <script src="js/Controllers/profileCtrl.js"></script>
+    <script src="js/Controllers/profileFollowersController.js"></script>
+    <script src="js/Controllers/profileFollowingController.js"></script>
+    <script src="js/Controllers/readerController.js"></script>
+    <script src="js/Controllers/savedController.js"></script>
+    <script src="js/Controllers/settingsController.js"></script>
+    <script src="js/Controllers/userController.js"></script>
+    <script src="js/Controllers/userFollowersController.js"></script>
+    <script src="js/Controllers/userFollowingController.js"></script>
+    
+    <!-- Services --> 
     <script src="js/services.js"></script>
 
 
-  </head>
-  <body ng-app="starter">
+</head>
+<body ng-app="starter">
     <!--
       The nav bar that will be updated as we navigate between views.
     -->
-<!--     <ion-nav-bar class="bar-positive">
-      <ion-nav-back-button>
-      </ion-nav-back-button>
-    </ion-nav-bar> -->
+    <!--     <ion-nav-bar class="bar-positive">
+          <ion-nav-back-button>
+          </ion-nav-back-button>
+        </ion-nav-bar> -->
     <!--
       The views will be rendered in the <ion-nav-view> directive below
       Templates are in the /templates folder (but you could also
       have templates inline in this html file if you'd like).
     -->
     <ion-nav-view></ion-nav-view>
-  </body>
+</body>
 </html>

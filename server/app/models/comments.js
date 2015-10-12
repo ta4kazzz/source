@@ -1,8 +1,6 @@
 var mongoose 	 = require('mongoose');
 var Schema       = mongoose.Schema;
-var deepPopulate = require('mongoose-deep-populate');
-
-
+//var deepPopulate = require('mongoose-deep-populate');
 
 var commentSchema = new Schema({
   user: { type: Schema.Types.ObjectId, ref: 'User' },
@@ -11,7 +9,6 @@ var commentSchema = new Schema({
   article : { type: Schema.Types.ObjectId, ref: 'Article' },
 });
 
-
-commentSchema.plugin(deepPopulate);
+//commentSchema.plugin(deepPopulate);
 // create the model for users and expose it to our app
 module.exports = mongoose.model('Comment', commentSchema);

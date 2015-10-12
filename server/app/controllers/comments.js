@@ -3,7 +3,7 @@ var User 		 = require('../models/user');
 var Article		 = require('../models/article.js');
 var Comment		 = require('../models/comments.js');
 var mongoose 	 = require('mongoose');
-var deepPopulate = require('mongoose-deep-populate');
+//var deepPopulate = require('mongoose-deep-populate');
 
 
 

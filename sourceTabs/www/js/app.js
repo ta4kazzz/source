@@ -14,386 +14,341 @@ angular.module('starter', [
   'angular-jwt'
 ])
 
-.run(function($ionicPlatform) {
-  $ionicPlatform.ready(function() {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
-    if (window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-    }
-    if (window.StatusBar) {
-      // org.apache.cordova.statusbar required
-      StatusBar.styleDefault();
-    }
-  });
+.run(function ($ionicPlatform) {
+    $ionicPlatform.ready(function () {
+        // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+        // for form inputs)
+        if (window.cordova && window.cordova.plugins.Keyboard) {
+            cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+        }
+        if (window.StatusBar) {
+            // org.apache.cordova.statusbar required
+            StatusBar.styleDefault();
+        }
+    });
 })
 
-.config(function($stateProvider, $urlRouterProvider, authProvider, jwtInterceptorProvider, $httpProvider, $sceProvider) {
+.config(function ($stateProvider, $urlRouterProvider, authProvider, jwtInterceptorProvider, $httpProvider, $sceProvider) {
 
-  // Ionic uses AngularUI Router which uses the concept of states
-  // Learn more here: https://github.com/angular-ui/ui-router
-  // Set up the various states which the app can be in.
-  // Each state's controller can be found in controllers.js
-  $stateProvider
-
-  // Set up an abstract state for the login directive
-  .state('landing', {
-      url: '/landing',
-      templateUrl: 'templates/landing.html',
-      controller: 'loginCtrl'
-  })
-  .state('login', {
-      url: '/login',
-      templateUrl: 'templates/login.html',
-       controller: 'loginCtrl'
-  })
-  .state('signup', {
-      url: '/signup',
-      templateUrl: 'templates/signup.html',
-      controller: 'loginCtrl'
-  })
-
-
-  // setup an abstract state for the tabs directive
-  .state('tabs', {
-    url: "/tab",
-    abstract: true,
-    templateUrl: "templates/tabs.html",
-    data: {
-      requiresLogin: true
-    }
-  })
-
-  // ============================================
-  // #HOME TABS
-  // ============================================
-
-  .state('tabs.home', {
-    url: '/home',
-    views: {
-      'home-tab': {
-        templateUrl: 'templates/home.html',
-        controller: 'homeController'
-      }
-    }
-  })
+    // Ionic uses AngularUI Router which uses the concept of states
+    // Learn more here: https://github.com/angular-ui/ui-router
+    // Set up the various states which the app can be in.
+    // Each state's controller can be found in controllers.js
+    $stateProvider
+        // Set up an abstract state for the login directive
+        .state('landing', {
+            url: '/landing',
+            templateUrl: 'templates/landing.html',
+            controller: 'LoginCtrl'
+        })
+        .state('login', {
+            url: '/login',
+            templateUrl: 'templates/login.html',
+            controller: 'LoginCtrl'
+        })
+        .state('signup', {
+            url: '/signup',
+            templateUrl: 'templates/signup.html',
+            controller: 'LoginCtrl'
+        })
 
 
-  .state('tabs.likers', {
-      url: '/articles/:articleID/likers',
-      views: {
-        'home-tab' : {
-          templateUrl: 'templates/likers.html',
-          controller: 'likers-controller'
+        // setup an abstract state for the tabs directive
+        .state('tabs', {
+            url: "/tab",
+            abstract: true,
+            templateUrl: "templates/tabs.html",
+            data: {
+                requiresLogin: true
+            }
+        })
+
+        // ============================================
+        // #HOME TABS
+        // ============================================
+        .state('tabs.home', {
+            url: '/home',
+            views: {
+                'home-tab': {
+                    templateUrl: 'templates/home.html',
+                    controller: 'HomeController'
+                }
+            }
+        })
+        .state('tabs.likers', {
+            url: '/articles/:articleID/likers',
+            views: {
+                'home-tab': {
+                    templateUrl: 'templates/likers.html',
+                    controller: 'LikersController'
+                }
+            }
+        })
+        .state('tabs.user', {
+            url: '/user/:userID',
+            views: {
+                'home-tab': {
+                    templateUrl: 'templates/user.html',
+                    controller: 'UserController'
+                }
+            }
+        })
+        .state('tabs.userFollowers', {
+            url: "/user/:userID/followers",
+            views: {
+                'home-tab': {
+                    templateUrl: 'templates/user-followers.html',
+                    controller: 'UserFollowersController'
+                }
+            }
+        })
+        .state('tabs.userFollowing', {
+            url: "/user/:userID/following",
+            views: {
+                'home-tab': {
+                    templateUrl: 'templates/user-following.html',
+                    controller: 'UserFollowingController'
+                }
+            }
+        })
+        .state('tabs.readerHome', {
+            url: '/reader/:articleID',
+            views: {
+                'home-tab': {
+                    templateUrl: 'templates/reader.html',
+                    controller: 'ReaderController'
+                }
+            }
+        })
+
+
+        // ============================================
+        // #Explore TABS
+        // ============================================
+        .state('tabs.explore', {
+            url: '/explore',
+            views: {
+                'explore-tab': {
+                    templateUrl: 'templates/explore.html',
+                    controller: 'ExploreController'
+                }
+            }
+        })
+        .state('tabs.userExplore', {
+            url: '/user/:userID',
+            views: {
+                'explore-tab': {
+                    templateUrl: 'templates/explore-user.html',
+                    controller: 'UserController'
+                }
+            }
+        })
+        .state('tabs.userFollowersExplore', {
+            url: "/user/:userID/followers",
+            views: {
+                'explore-tab': {
+                    templateUrl: 'templates/explore-user-followers.html',
+                    controller: 'UserFollowersController'
+                }
+            }
+        })
+        .state('tabs.userFollowingExplore', {
+            url: "/user/:userID/following",
+            views: {
+                'explore-tab': {
+                    templateUrl: 'templates/explore-user-following.html',
+                    controller: 'UserFollowingController'
+                }
+            }
+        })
+        .state('tabs.readerExplore', {
+            url: '/reader/:articleID',
+            views: {
+                'explore-tab': {
+                    templateUrl: 'templates/reader.html',
+                    controller: 'ReaderController'
+                }
+            }
+        })
+
+        // ============================================
+        // #PROFILE TABS
+        // ============================================
+        .state('tabs.readerProfile', {
+            url: '/reader/:articleID',
+            views: {
+                'profile-tab': {
+                    templateUrl: 'templates/reader.html',
+                    controller: 'ReaderController'
+                }
+            }
+        })
+        .state('tabs.profile', {
+            url: '/profile',
+            views: {
+                'profile-tab': {
+                    templateUrl: 'templates/profile.html',
+                    controller: 'ProfileCtrl'
+                }
+            }
+        })
+        .state('tabs.profileFollowers', {
+            url: "/profile/followers",
+            views: {
+                'profile-tab': {
+                    templateUrl: 'templates/profile-followers.html',
+                    controller: 'ProfileFollowersController'
+                }
+            }
+        })
+        .state('tabs.profileFollowing', {
+            url: "/profile/following",
+            views: {
+                'profile-tab': {
+                    templateUrl: 'templates/profile-following.html',
+                    controller: 'ProfileFollowingController'
+                }
+            }
+        })
+        .state('tabs.settings', {
+            url: '/profile/settings',
+            views: {
+                'profile-tab': {
+                    templateUrl: 'templates/settings.html',
+                    controller: 'SettingsController'
+                }
+            }
+        })
+        .state('tabs.edit-settings', {
+            url: '/profile/edit-settings',
+            views: {
+                'profile-tab': {
+                    templateUrl: 'templates/edit-settings.html',
+                    controller: 'SettingsController'
+                }
+            }
+        })
+
+
+        // ============================================
+        // #Notifications TABS
+        // ============================================
+        .state('tabs.notifications', {
+            url: '/notifications',
+            views: {
+                'notifications-tab': {
+                    templateUrl: 'templates/notifications.html',
+                    controller: 'NotificationsController'
+                }
+            }
+        })
+        .state('tabs.userNotificaitons', {
+            url: '/user/:userID',
+            views: {
+                'notifications-tab': {
+                    templateUrl: 'templates/notifications-user.html',
+                    controller: 'UserController'
+                }
+            }
+        })
+        .state('tabs.userFollowersNotificaitons', {
+            url: "/user/:userID/followers",
+            views: {
+                'notifications-tab': {
+                    templateUrl: 'templates/notifications-user-followers.html',
+                    controller: 'UserFollowersController'
+                }
+            }
+        })
+        .state('tabs.userFollowingNotificaitons', {
+            url: "/user/:userID/following",
+            views: {
+                'notifications-tab': {
+                    templateUrl: 'templates/notifications-user-following.html',
+                    controller: 'UserFollowingController'
+                }
+            }
+        })
+        .state('tabs.readerNotificaitons', {
+            url: '/reader/:articleID',
+            views: {
+                'notifications-tab': {
+                    templateUrl: 'templates/reader.html',
+                    controller: 'ReaderController'
+                }
+            }
+        })
+
+
+        // ============================================
+        // #Modals TABS
+        // ============================================
+        .state('add', {
+            url: '/add',
+            templateUrl: 'templates/add.html',
+            controller: 'AddController'
+        })
+        .state('likers', {
+            url: '/articles/:articleID/likers',
+            templateUrl: 'templates/likers.html',
+            controller: 'LikersController'
+        })
+        .state('saved', {
+            url: '/saved',
+            templateUrl: 'templates/saved.html',
+            controller: 'SavedController'
+        })
+        .state('reader', {
+            url: '/reader/:articleID',
+            templateUrl: 'templates/reader.html',
+            controller: 'ReaderController'
+        })
+        .state('preview', {
+            url: '/preview/:articleID',
+            templateUrl: 'templates/preview.html',
+            controller: 'AddController'
+        });
+
+
+
+
+    // if none of the above states are matched, use this as the fallback
+    $urlRouterProvider.otherwise('/login');
+
+    // Configure Auth0
+    authProvider.init({
+        domain: AUTH0_DOMAIN,
+        clientID: AUTH0_CLIENT_ID,
+        loginState: 'login'
+    });
+
+
+    jwtInterceptorProvider.tokenGetter = function(store, jwtHelper, auth) {
+        var idToken = store.get('token');
+        var refreshToken = store.get('refreshToken');
+        if (!idToken || !refreshToken) {
+            return null;
         }
-      }
-  })
-
-
-  .state('tabs.user', {
-    url: '/user/:userID',
-    views: {
-      'home-tab': {
-        templateUrl: 'templates/user.html',
-        controller: 'userController'
-      }
-    }
-  })
-
-  .state('tabs.userFollowers', {
-    url: "/user/:userID/followers",
-    views: {
-      'home-tab' :{
-        templateUrl: 'templates/user-followers.html',
-        controller: 'user-followers-controller'
-      }
-    }
-  })
-
-  .state('tabs.userFollowing', {
-    url: "/user/:userID/following",
-    views: {
-      'home-tab' :{
-        templateUrl: 'templates/user-following.html',
-        controller: 'user-following-controller'
-      }
-    }
-  })
-
-  .state('tabs.readerHome', {
-      url: '/reader/:articleID',
-      views: {
-        'home-tab' : {
-          templateUrl: 'templates/reader.html',
-          controller: 'readerController'
+        if (jwtHelper.isTokenExpired(idToken)) {
+            return auth.refreshIdToken(refreshToken).then(function(idToken) {
+                store.set('token', idToken);
+                return idToken;
+            });
+        } else {
+            return idToken;
         }
-      }
-  })
+    };
 
+    $httpProvider.interceptors.push('jwtInterceptor');
 
-  // ============================================
-  // #Explore TABS
-  // ============================================
-
-
-  .state('tabs.explore', {
-    url: '/explore',
-    views: {
-      'explore-tab': {
-        templateUrl: 'templates/explore.html',
-        controller: 'exploreController'
-      }
-    }
-  })
-
-  .state('tabs.userExplore', {
-    url: '/user/:userID',
-    views: {
-      'explore-tab': {
-        templateUrl: 'templates/explore-user.html',
-        controller: 'userController'
-      }
-    }
-  })
-
-  .state('tabs.userFollowersExplore', {
-    url: "/user/:userID/followers",
-    views: {
-      'explore-tab' :{
-        templateUrl: 'templates/explore-user-followers.html',
-        controller: 'user-followers-controller'
-      }
-    }
-  })
-
-  .state('tabs.userFollowingExplore', {
-    url: "/user/:userID/following",
-    views: {
-      'explore-tab' :{
-        templateUrl: 'templates/explore-user-following.html',
-        controller: 'user-following-controller'
-      }
-    }
-  })
-
-  .state('tabs.readerExplore', {
-      url: '/reader/:articleID',
-      views: {
-        'explore-tab' : {
-          templateUrl: 'templates/reader.html',
-          controller: 'readerController'
+})
+.run(function ($rootScope, auth, store) {
+    $rootScope.$on('$locationChangeStart', function () {
+        if (!auth.isAuthenticated) {
+            var token = store.get('token');
+            if (token) {
+                auth.authenticate(store.get('profile'), token);
+            }
         }
-      }
-  })
-
-  // ============================================
-  // #PROFILE TABS
-  // ============================================
-
-
-
-  .state('tabs.readerProfile', {
-      url: '/reader/:articleID',
-      views: {
-        'profile-tab' : {
-          templateUrl: 'templates/reader.html',
-          controller: 'readerController'
-        }
-      }
-  })
-
-
-  .state('tabs.profile', {
-    url: '/profile',
-    views: {
-      'profile-tab': {
-        templateUrl: 'templates/profile.html',
-        controller: 'ProfileCtrl'
-      }
-    }
-  })
-
-  .state('tabs.profileFollowers', {
-    url: "/profile/followers",
-    views: {
-      'profile-tab' :{
-        templateUrl: 'templates/profile-followers.html',
-        controller: 'profile-followers-controller'
-      }
-    }
-  })
-
-  .state('tabs.profileFollowing', {
-    url: "/profile/following",
-    views: {
-      'profile-tab' :{
-        templateUrl: 'templates/profile-following.html',
-        controller: 'profile-following-controller'
-      }
-    }
-  })
-
-  .state('tabs.settings', {
-    url: '/profile/settings',
-    views: {
-      'profile-tab': {
-        templateUrl: 'templates/settings.html',
-        controller: 'settings-controller'
-      }
-    }
-  })
-
-  .state('tabs.edit-settings', {
-    url: '/profile/edit-settings',
-    views: {
-      'profile-tab': {
-        templateUrl: 'templates/edit-settings.html',
-        controller: 'settings-controller'
-      }
-    }
-  })
-
-
-
-
-  // ============================================
-  // #Notifications TABS
-  // ============================================
-
-
-  .state('tabs.notifications', {
-    url: '/notifications',
-    views: {
-      'notifications-tab': {
-        templateUrl: 'templates/notifications.html',
-        controller: 'notifications-controller'
-      }
-    }
-  })
-
-
-  .state('tabs.userNotificaitons', {
-    url: '/user/:userID',
-    views: {
-      'notifications-tab': {
-        templateUrl: 'templates/notifications-user.html',
-        controller: 'userController'
-      }
-    }
-  })
-
-  .state('tabs.userFollowersNotificaitons', {
-    url: "/user/:userID/followers",
-    views: {
-      'notifications-tab' :{
-        templateUrl: 'templates/notifications-user-followers.html',
-        controller: 'user-followers-controller'
-      }
-    }
-  })
-
-  .state('tabs.userFollowingNotificaitons', {
-    url: "/user/:userID/following",
-    views: {
-      'notifications-tab' :{
-        templateUrl: 'templates/notifications-user-following.html',
-        controller: 'user-following-controller'
-      }
-    }
-  })
-
-  .state('tabs.readerNotificaitons', {
-      url: '/reader/:articleID',
-      views: {
-        'notifications-tab' : {
-          templateUrl: 'templates/reader.html',
-          controller: 'readerController'
-        }
-      }
-  })
-
-
-
-
-  // ============================================
-  // #Modals TABS
-  // ============================================
-
-  .state('add', {
-      url: '/add',
-      templateUrl: 'templates/add.html',
-      controller: 'addController'
-  })
-
-  .state('likers', {
-    url: '/articles/:articleID/likers',
-    templateUrl: 'templates/likers.html',
-    controller: 'likers-controller'
-  })
-
-
-  .state('saved', {
-      url: '/saved',
-      templateUrl: 'templates/saved.html',
-      controller: 'savedController'
-  })
-
-
-
-    .state('reader', {
-      url: '/reader/:articleID',
-      templateUrl: 'templates/reader.html',
-      controller: 'readerController'
-  })
-
-  .state('preview', {
-      url: '/preview/:articleID',
-      templateUrl: 'templates/preview.html',
-      controller: 'addController'
-  })
-
-
-
-
-  // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/login');
-
-  // Configure Auth0
-  authProvider.init({
-    domain: AUTH0_DOMAIN,
-    clientID: AUTH0_CLIENT_ID,
-    loginState: 'login'
-  });
-
-
-
-
-  jwtInterceptorProvider.tokenGetter = function(store, jwtHelper, auth) {
-    var idToken = store.get('token');
-    var refreshToken = store.get('refreshToken');
-    if (!idToken || !refreshToken) {
-      return null;
-    }
-    if (jwtHelper.isTokenExpired(idToken)) {
-      return auth.refreshIdToken(refreshToken).then(function(idToken) {
-        store.set('token', idToken);
-        return idToken;
-      });
-    } else {
-      return idToken;
-    }
-  }
-
-  $httpProvider.interceptors.push('jwtInterceptor');
-
-}).run(function($rootScope, auth, store) {
-  $rootScope.$on('$locationChangeStart', function() {
-    if (!auth.isAuthenticated) {
-      var token = store.get('token');
-      if (token) {
-        auth.authenticate(store.get('profile'), token);
-      }
-    }
-
-  });
+    });
 });

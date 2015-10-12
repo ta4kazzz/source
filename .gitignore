@@ -16,3 +16,18 @@ plugins/
 #ignore compiled assets
 www/templates.js
 www/app.css
+
+#vs solution files
+/*.csproj
+/*.sln
+/Properties
+/bin
+/obj
+/server/obj/Debug
+/server/objt/Debug
+/sourceTabs/www/*.sln
+/server/*.njsproj
+/server/*.sln
+/sourceTabs/www/Properties
+/sourceTabs/www/*.csproj
+/sourceTabs/www/obj/Debug
