@@ -83,8 +83,8 @@ var router = express.Router();     // Get instance of express Router
 // ============== ARTICLES ========================
 
 router.route('/articles')
-  .get(articleController.getArticles)
-  .post(articleController.postArticles)
+    .get(articleController.getArticles)
+    .post(articleController.postArticle);
 
 router.route('/articles/top')
   .get(articleController.getTopArticles);

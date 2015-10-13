@@ -73,7 +73,8 @@ angular.module('starter', [
                     templateUrl: 'templates/home.html',
                     controller: 'HomeController'
                 }
-            }
+            },
+            cache: false
         })
         .state('tabs.likers', {
             url: '/articles/:articleID/likers',
