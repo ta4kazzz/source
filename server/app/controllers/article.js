@@ -25,81 +25,78 @@ var mongoose = require('mongoose');
 
 
 
-// ==========================================
-//    #postArticle
-// ==========================================
+//// ==========================================
+////    #postArticle
+//// ==========================================
 
-exports.postArticles = function (req, res) {
+//exports.postArticles = function (req, res) {
     
-    // New Article object
-    var article = new Article();
+//    // New Article object
+//    var article = new Article();
     
-    article.url = req.body.url;
-    article.shortUrl = req.body.shortUrl;
-    article.summary = req.body.summary;
-    article.created = req.body.created;
-    article.gravatarURL = req.body.gravatarURL;
-    article.username = req.body.username;
+//    article.url = req.body.url;
+//    article.shortUrl = req.body.shortUrl;
+//    article.summary = req.body.summary;
+//    article.created = req.body.created;
+//    article.gravatarURL = req.body.gravatarURL;
+//    article.username = req.body.username;
     
-    // convert userID string to ObjectID
-    var userID = mongoose.Types.ObjectId(req.body.userID);
-    var articleID = article._id;
+//    // convert userID string to ObjectID
+//    var userID = mongoose.Types.ObjectId(req.body.userID);
+//    var articleID = article._id;
     
-    // Saves to article
-    article._userID = userID;
+//    // Saves to article
+//    article._userID = userID;
     
-    User.findByIdAndUpdate(
-      userID,
-      { $push: { "articles": articleID } },
-      { safe: true, upsert: true },
-      function (err, model) {
-        console.log(err);
-    }
-);
+//    User.findByIdAndUpdate(
+//      userID,
+//      { $push: { "articles": articleID } },
+//      { safe: true, upsert: true },
+//      function (err, model) {
+//        console.log(err);
+//    }
+//);
     
-    // URL to html
-    var domain = article.url;
+//    // URL to html
+//    var domain = article.url;
     
-    // Gets the raw html from the domain name and execites the parseMyhtml function
-    request(domain, function (error, response, body) {
-        if (!error) {
-            parseHtml(body);
-        } else {
-            console.log(error);
-        }
-    });
+//    // Gets the raw html from the domain name and execites the parseMyhtml function
+//    request(domain, function (error, response, body) {
+//        if (!error) {
+//            parseHtml(body);
+//        } else {
+//            console.log(error);
+//        }
+//    });
     
-    var parseHtml = function (html) {
+//    var parseHtml = function (html) {
         
-        data = unfluff.lazy(html, 'en');
-        var title = data.title();
-        var content = data.text();
-        var imageUrl = data.image();
+//        data = unfluff.lazy(html, 'en');
+//        var title = data.title();
+//        var content = data.text();
+//        var imageUrl = data.image();
         
-        article.title = title;
-        article.content = content;
-        article.imageUrl = imageUrl;
-        article.public = false;
+//        article.title = title;
+//        article.content = content;
+//        article.imageUrl = imageUrl;
+//        article.public = false;
         
         
-        // save the bear and check for errors
-        article.save(function (err) {
-            if (err)
-                res.send(err);
-            res.json(article);
-        });
-    };
+//        // save the bear and check for errors
+//        article.save(function (err) {
+//            if (err)
+//                res.send(err);
+//            res.json(article);
+//        });
+//    };
 
-};
+//};
 
 // ==========================================
-//    #postArticle new implementation with user
+//    #postArticle new implementation with user 
 // ==========================================
 
 exports.postArticle = function (req, res) {
-    //var id = req.params.userID;
-    //console.log(id);
-
     User.findById(req.body.userID, function (err, user) {
         if (err) {
             return res.send(err);
@@ -158,9 +155,6 @@ exports.postArticle = function (req, res) {
             };
         }
     });
-
-  
-
 };
 // ==========================================
 // 		#getArticle
@@ -210,15 +204,6 @@ exports.putArticle = function (req, res) {
 };
 
 
-
-
-
-
-
-
-
-
-
 // ==========================================
 //    #getArticles
 // ==========================================
@@ -249,15 +234,6 @@ exports.getTopArticles = function (req, res) {
     });
 
 };
-
-
-
-
-
-
-
-
-
 
 
 // ==========================================

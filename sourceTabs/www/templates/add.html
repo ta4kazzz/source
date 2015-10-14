@@ -6,42 +6,47 @@
             <i ui-sref="tabs.home" ng-click="article.url = null; article.summary = null" class="icon ion-ios-close-empty menu-icon-left"></i>
         </ion-nav-buttons>
     </ion-nav-bar>
-    <ion-content>
-        <!-- Show this to start -->
-        <div class="list">
-            <div ng-show="!showPublish" class="item preview-field">
-                <div class="preview">Preview</div>
+    <ng-form name="addNewForm">
+        <ion-content>
+            <!-- Show this to start -->
+            <div class="list">
+                <div ng-show="!showPublish" class="item preview-field">
+                    <div class="preview">Preview</div>
+                </div>
             </div>
-        </div>
-
-        <div ng-show="showPublish" class="list">
-            <div>
-                <a class="item item-thumbnail-left">
-                    <img src="{{article.imageUrl}}">
-                    <h2>{{ article.title }}</h2>
-                </a>
+            <div ng-show="showPublish" class="list">
+                <div>
+                    <a class="item item-thumbnail-left">
+                        <img src="{{article.imageUrl}}">
+                        <h2>{{ article.title }}</h2>
+                    </a>
+                </div>
             </div>
-        </div>
+            <div class="list list-inset">
+                <label class="item item-input">
+                    <span class="input-label">URL</span>
+                    <input name="Url" id="Url" ng-model="article.url" type="url" placeholder="" required>
+                </label>
+                <label class="item item-input custom-item-background no-background " ng-show="addNewForm.Url.$dirty && addNewForm.Url.$invalid">
+                    <span class="error" >Must provide a valid URL</span>
+                </label>
+            </div>
+            <div class="list list-inset">
+                <label class="item item-input">
+                    <span class="input-label">SUMMARY</span>
+                    <input ng-maxlength="120" name="Summary" id="Summary" ng-model="article.summary" type="text" placeholder="(optional)">
+                </label>
+                <label class="item item-input custom-item-background no-background " ng-show="addNewForm.Summary.$dirty && addNewForm.Summary.$invalid">
+                    <span class="error" >Summary Max Character is 120</span>
+                </label>
+            </div>
 
-        <div class="list list-inset">
-            <label class="item item-input">
-                <span class="input-label">URL</span>
-                <input ng-model="article.url" type="text" placeholder="" required>
-            </label>
-        </div>
-        <div class="list list-inset">
-            <label class="item item-input">
-                <span class="input-label">SUMMARY</span>
-                <input ng-model="article.summary" type="text" placeholder="(optional)" required>
-            </label>
-        </div>
-
-
-        <button class="button button-block publish-button source-green" ng-click="postArticle()" ng-show="!showPublish">
-            Preview Article
-        </button>
-        <button class="button button-block publish-button source-green" ng-click="publishArticle()" ng-show="showPublish">
-            Post Article
-        </button>
-    </ion-content>
+            <button class="button button-block publish-button source-green" ng-click="postArticleForm()" ng-show="!showPublish">
+                Preview Article
+            </button>
+            <button class="button button-block publish-button source-green" ng-click="publishArticle()" ng-show="showPublish">
+                Post Article
+            </button>
+        </ion-content>
+    </ng-form>
 </ion-view>

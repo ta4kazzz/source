@@ -287,7 +287,8 @@ angular.module('starter', [
         .state('add', {
             url: '/add',
             templateUrl: 'templates/add.html',
-            controller: 'AddController'
+            controller: 'AddController',
+            cache: false
         })
         .state('likers', {
             url: '/articles/:articleID/likers',

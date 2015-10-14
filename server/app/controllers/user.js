@@ -160,7 +160,9 @@ exports.getHomeFeedPaging = function (req, res) {
             FollowIDs.push(user.follows[i]);
         }
         
-        Article.where('_userID').in(FollowIDs)
+        Article
+          .where('_userID').in(FollowIDs)
+          .where('public',true)
 			   //.find({ "created": { $lt: minDate } })
                .skip(itemsPerPage * (pageNumber-1))
                .limit(itemsPerPage)
