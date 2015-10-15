@@ -50,14 +50,13 @@ angular.module('starter.controllers')
         window.localStorage['SourceID'] = user._id;
         // store.set('SourceID', user._id);
 
-        $scope.followAndrew();
+        //$scope.followAndrew();
         $scope.followYourself();
         $state.go('tabs.home');
       })
       .error(function (user, status, headers, config) {
-        console.log("woops")
-      });
-
+        console.log("woops");
+    });
   };
 
 
@@ -75,7 +74,7 @@ angular.module('starter.controllers')
           // turn the button to unfolow
           console.log("sent")
           console.log(user);
-          $scope.getUser();
+       //   $scope.getUser();
         })
       .error(function (user, status, headers, config) {
           console.log("Something went wrong")
@@ -95,7 +94,7 @@ angular.module('starter.controllers')
           // turn the button to unfolow
           console.log("sent")
           console.log(user);
-          $scope.getUser();
+       //   $scope.getUser();
         })
       .error(function (user, status, headers, config) {
           console.log("Something went wrong")

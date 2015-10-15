@@ -13,7 +13,6 @@ angular.module('starter', [
   'angular-storage',
   'angular-jwt'
 ])
-
 .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -27,7 +26,6 @@ angular.module('starter', [
         }
     });
 })
-
 .config(function ($stateProvider, $urlRouterProvider, authProvider, jwtInterceptorProvider, $httpProvider, $sceProvider) {
 
     // Ionic uses AngularUI Router which uses the concept of states
