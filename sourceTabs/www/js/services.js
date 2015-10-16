@@ -1,45 +1,40 @@
 angular.module('starter.services', [])
 
-.factory('API', function ($rootScope, $http, $window, $ionicLoading, auth, store) {
+.factory('API', function ($rootScope, $http, $window, $ionicLoading, auth, store,base) {
 
-     var base = "http://localhost:8080";
-    //var base = "http://source-application.herokuapp.com";
-
-    $rootScope.logout = function() {
-      auth.signout();
-      store.remove('profile');
-      store.remove('token');
-      store.remove('SourceID');
-      $window.location.href = '#/app/landing';
-    }
-
+    $rootScope.logout = function () {
+        auth.signout();
+        store.remove('profile');
+        store.remove('token');
+        store.remove('SourceID');
+        $window.location.href = '#/app/landing';
+    };
 
     return {
 
         //  =====================================================
         //   ARTICLE
         //  =====================================================
-
-        postArticle: function (article) {
-            return $http.post(base+'/api/articles', article, {
+        postArticle: function(article) {
+            return $http.post(base + '/api/articles', article, {
                 method: 'POST',
             });
         },
 
-        getArticle: function (id) {
-            return $http.get(base+'/api/articles/' + id, {
+        getArticle: function(id) {
+            return $http.get(base + '/api/articles/' + id, {
                 method: 'GET',
             });
         },
 
-        deleteArticle: function (id) {
-            return $http.delete(base+'/api/articles', + id, {
+        deleteArticle: function(id) {
+            return $http.delete(base + '/api/articles', + id, {
                 method: 'DELETE',
             });
         },
 
-        publishArticle: function (id) {
-            return $http.put(base+'/api/articles/' + id, {
+        publishArticle: function(id) {
+            return $http.put(base + '/api/articles/' + id, {
                 method: 'PUT',
             });
         },
@@ -48,16 +43,16 @@ angular.module('starter.services', [])
         //   ARTICLES
         //  =====================================================
 
-        getArticles: function () {
-            return $http.get(base+'/api/articles', {
+        getArticles: function() {
+            return $http.get(base + '/api/articles', {
                 method: 'GET',
-           });
+            });
         },
 
-        getTopArticles: function () {
-            return $http.get(base+'/api/articles/top', {
+        getTopArticles: function() {
+            return $http.get(base + '/api/articles/top', {
                 method: 'GET',
-           });
+            });
         },
 
         //  =====================================================
@@ -65,57 +60,70 @@ angular.module('starter.services', [])
         //  =====================================================
 
 
-        likeArticle: function (likedArticle) {
-            return $http.post(base+'/api/articles/' + likedArticle.userID + '/likes', likedArticle, {
+        likeArticle: function(likedArticle) {
+            return $http.post(base + '/api/articles/' + likedArticle.userID + '/likes', likedArticle, {
                 method: 'POST',
             });
         },
 
-        putLikes: function (unlikedArticle) {
-            return $http.put(base+'/api/articles/' + unlikedArticle.userID + '/likes', unlikedArticle, {
+        putLikes: function(unlikedArticle) {
+            return $http.put(base + '/api/articles/' + unlikedArticle.userID + '/likes', unlikedArticle, {
                 method: 'PUT',
             });
         },
 
-        getLikers: function (id) {
-            return $http.get(base+'/api/articles/' + id + '/likes', {
+        getLikers: function(id) {
+            return $http.get(base + '/api/articles/' + id + '/likes', {
                 method: 'GET',
             });
         },
-
 
 
         //  =====================================================
         //   USER
         //  =====================================================
 
-        postUser: function (user) {
-            return $http.post(base+'/api/users', user, {
+        postUser: function(user) {
+            return $http.post(base + '/api/users', user, {
                 method: 'POST',
             });
         },
 
-        getUser: function (id) {
-            return $http.get(base+'/api/users/' + id, {
+        getUser: function(id) {
+            return $http.get(base + '/api/users/' + id, {
                 method: 'GET',
             });
         },
 
-        putUser: function (user) {
-            return $http.put(base+'/api/users/' + user.userID, user, {
+        putUser: function(user) {
+            return $http.put(base + '/api/users/' + user.userID, user, {
                 method: 'PUT',
             });
         },
 
-        getHomeFeed: function (homeFeedPacket) {
-            return $http.post(base+'/api/users/' + homeFeedPacket.userID +'/homefeed', homeFeedPacket, {
+        getHomeFeed: function(homeFeedPacket) {
+            return $http.post(base + '/api/users/' + homeFeedPacket.userID + '/homefeed', homeFeedPacket, {
                 method: 'POST',
-           });
+            });
         },
 
-        getHomeFeedPaging: function (homeFeedPacket) {
+        getHomeFeedPaging: function(homeFeedPacket) {
             return $http.post(base + '/api/users/homefeedpaging/' + homeFeedPacket.userID, homeFeedPacket, {
                 method: 'POST',
+            });
+        },
+
+        createUserAuth: function(newUser) {
+            // Creates a User in Auth0 Database
+          return  $http({method: 'POST',
+                url: base+'/signup',
+                //'http://localhost:8080/signup',
+                //url: 'http://source-application.herokuapp.com/signup',
+                data: {
+                    email: newUser.email,
+                    username: newUser.username,
+                    password: newUser.password
+                }
             });
         },
 
@@ -123,8 +131,8 @@ angular.module('starter.services', [])
         //   USERS
         //  =====================================================
 
-        getUsers: function (id) {
-            return $http.get(base+'/api/users', {
+        getUsers: function(id) {
+            return $http.get(base + '/api/users', {
                 method: 'GET',
             });
         },
@@ -133,57 +141,57 @@ angular.module('starter.services', [])
         //   AUTH
         //  =====================================================
 
-        getAuth: function (id) {
-            return $http.get(base+'/api/users/auth/' + id, {
+        getAuth: function(id) {
+            return $http.get(base + '/api/users/auth/' + id, {
                 method: 'GET',
             });
         },
 
 
-        getUsersArticles: function (userID) {
-            return $http.get(base+'/api/users/' + userID +'/articles', {
+        getUsersArticles: function(userID) {
+            return $http.get(base + '/api/users/' + userID + '/articles', {
                 method: 'GET',
             });
         },
 
-        getFollows: function (id) {
-            return $http.get(base+'/api/users/' + id +'/follows', {
+        getFollows: function(id) {
+            return $http.get(base + '/api/users/' + id + '/follows', {
                 method: 'GET',
             });
         },
 
-        followUser: function (id, user) {
-            return $http.post(base+'/api/users/' + id + '/follows', user, {
+        followUser: function(id, user) {
+            return $http.post(base + '/api/users/' + id + '/follows', user, {
                 method: 'POST',
             });
         },
 
-        unfollowUser: function (id, user) {
-            return $http.put(base+'/api/users/' + id + '/follows', user, {
+        unfollowUser: function(id, user) {
+            return $http.put(base + '/api/users/' + id + '/follows', user, {
                 method: 'PUT',
             });
         },
 
-        getFollowers: function (id) {
-            return $http.get(base+'/api/users/' + id +'/followers', {
+        getFollowers: function(id) {
+            return $http.get(base + '/api/users/' + id + '/followers', {
                 method: 'GET',
             });
         },
 
-        saveForLater: function (savedArticle) {
-            return $http.post(base+'/api/users/' + savedArticle.userID + '/saved', savedArticle, {
+        saveForLater: function(savedArticle) {
+            return $http.post(base + '/api/users/' + savedArticle.userID + '/saved', savedArticle, {
                 method: 'POST',
             });
         },
 
-        getSaved: function (id) {
-            return $http.get(base+'/api/users/' + id +'/saved', {
+        getSaved: function(id) {
+            return $http.get(base + '/api/users/' + id + '/saved', {
                 method: 'GET',
             });
         },
 
-        deleteSaved: function (savedArticle) {
-            return $http.put(base+'/api/users/' + savedArticle.userID + '/saved', savedArticle, {
+        deleteSaved: function(savedArticle) {
+            return $http.put(base + '/api/users/' + savedArticle.userID + '/saved', savedArticle, {
                 method: 'PUT',
             });
         },
@@ -192,16 +200,10 @@ angular.module('starter.services', [])
         //   NOTIFICATIONS
         //  =====================================================
 
-        getNotifications: function (userID) {
-            return $http.get(base+'/api/users/' + userID +'/notifications', {
+        getNotifications: function(userID) {
+            return $http.get(base + '/api/users/' + userID + '/notifications', {
                 method: 'GET',
             });
         },
-
-
-
-
-    }
-
-
+    };
 });

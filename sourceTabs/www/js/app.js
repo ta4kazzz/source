@@ -1,18 +1,10 @@
-// Ionic Starter App
+//for dev
+var base = "http://localhost:8080";
+//for production
+//var base = "http://source-application.herokuapp.com";
 
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-// 'starter.services' is found in services.js
-// 'starter.controllers' is found in controllers.js
-angular.module('starter', [
-  'ionic',
-  'starter.controllers',
-  'starter.services',
-  'auth0',
-  'angular-storage',
-  'angular-jwt'
-])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'auth0', 'angular-storage', 'angular-jwt'])
+.constant("base", base)
 .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -27,11 +19,6 @@ angular.module('starter', [
     });
 })
 .config(function ($stateProvider, $urlRouterProvider, authProvider, jwtInterceptorProvider, $httpProvider, $sceProvider) {
-
-    // Ionic uses AngularUI Router which uses the concept of states
-    // Learn more here: https://github.com/angular-ui/ui-router
-    // Set up the various states which the app can be in.
-    // Each state's controller can be found in controllers.js
     $stateProvider
         // Set up an abstract state for the login directive
         .state('landing', {

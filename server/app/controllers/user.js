@@ -295,99 +295,102 @@ exports.postFollows = function (req, res) {
     var myID = mongoose.Types.ObjectId(req.params.id);
     var userID = mongoose.Types.ObjectId(req.body._id);
     var userIdToFollow = req.body._id;
+    var currentUserId = req.params.id;
 
     // add kai's userID to pat's followers
     console.log(myID);
     console.log(userID);
     
-    // FEATURE TO ADD
-    // IF the user already exists, do not push them to the database
     User.findById(myID, function (err, user) {
         if (err) {
             res.send(err);
         } else {
             for (var i = 0; i < user.follows.length; i++) {
-                var testId = mongoose.Types.ObjectId( user.follows[i]);
-                console.log(testId);
-                //console.log('useridtofollowe='+userIdToFollow);
-               if (testId == userID) {
-                   console.log('User already followed!');
-                   return res.send('User already followed!');
-               }
+              //  var currentUserId = mongoose.Types.ObjectId(user.follows[i]);
+                if (user.follows[i] == userIdToFollow) {
+                    // IF the user already exists in follows list do not push them to the database
+                    console.log('User already followed!');
+                    return res.send('User already followed!');
+                }
             }
-
-            // User is not added so we can add it.
-            addUserToFollow();
+            
+            // All good we can add the user
+            User.findByIdAndUpdate(myID, { $push: { "follows": userID } }, { safe: true, upsert: true }, function (err, user) {
+                if (err) {
+                    return res.send(err);
+                }
+            });
         }
     });
     
-    function addUserToFollow() {
-        
-        // ADDS user to my follows List
-        User.findByIdAndUpdate(myID, { $push: { "follows": userID } }, { safe: true, upsert: true }, function (err, user) {
-            if (err)
-                res.send(err);
-				// comment this out because in this case we want to return bob instead
-			// res.json(user);
+    // Find the other user
+    User.findById(userID, function (err, user) {
+        if (err) {
+            res.send(err);
+        } else {
+            for (var i = 0; i < user.followers.length; i++) {
+                if (user.followers[i] == currentUserId) {
+                    // IF the user already exists in followers list do not push them to the database
+                    console.log('User already in followers list!');
+                    return res.send('User already in followers list');
+                }
+            }
+            
+            // ADDS alices name to bobs followers array
+            User.findByIdAndUpdate(userID, { $push: { "followers": myID } }, { safe: true, upsert: true }, function (err, user) {
+                if (err) {
+                    return res.send(err);
+                }
+                 //   res.json(user);
+            });
         }
-        );
-        
-        // ADDS alices name to bobs followers array
-        User.findByIdAndUpdate(userID, { $push: { "followers": myID } }, { safe: true, upsert: true }, function (err, user) {
-            if (err)
-                res.send(err);
-            res.json(user);
-        }
-        );
-        
-        // Look up alice by ID and return her info
-        User.findById(myID, function (err, users) {
-            if (err)
-                res.send(err);
-            res.json(users);
-            var doer_username = users.username;
-            console.log(doer_username);
-            // function to send notification
-            postNotification(doer_username);
+    });
+    
+    // Look up alice by ID and return her info
+    User.findById(myID, function (err, users) {
+        if (err)
+            res.send(err);
+        res.json(users);
+        var doer_username = users.username;
+        console.log(doer_username);
+        // function to send notification
+        postNotification(doer_username);
+    });
+    
+    // send notification to bob that alice is following him
+    // build notificaiton object
+    // post notification object to bobs notification array
+    // NEEDS
+    // alice username
+    // alice id
+    function postNotification(doer_username) {
+        // BUILD THE NOTIFICATION OBJECT
+        var notification = new Notification({
+            doer_id: myID,
+            doer_username: doer_username,
+            articleOwner: userID,
+            type: "is now following you",
+            created: Date.now()
         });
         
-        // send notification to bob that alice is following him
-        // build notificaiton object
-        // post notification object to bobs notification array
-        // NEEDS
-        // alice username
-        // alice id
+        // PUSH NOTIFICATION TO USERS COLLECTION
+        User.findByIdAndUpdate(notification.articleOwner, { $push: { "notifications": notification } }, { safe: true, upsert: true }, function (err, user) {
+            if (err)
+                res.send(err);
+            res.json(notification);
+        });
         
-        function postNotification(doer_username) {
-            // BUILD THE NOTIFICATION OBJECT
-            var notification = new Notification({
-                doer_id: myID,
-                doer_username: doer_username,
-                articleOwner: userID,
-                type: "is now following you",
-                created: Date.now()
-            });
-            
-            // PUSH NOTIFICATION TO USERS COLLECTION
-            User.findByIdAndUpdate(notification.articleOwner, { $push: { "notifications": notification } }, { safe: true, upsert: true }, function (err, user) {
-                if (err)
-                    res.send(err);
-                res.json(notification);
-            });
-            
-            // SAVE NOTIFICATION OBJECT
-            notification.save(function (err) {
-                if (err)
-                    res.send(err);
-                res.json(
-                    {
-                        message: 'New Notication Has been added',
-                    }
-                );
-            });
-        }
-    };
-    
+        // SAVE NOTIFICATION OBJECT
+        notification.save(function (err) {
+            if (err)
+                res.send(err);
+            res.json(
+                {
+                    message: 'New Notication Has been added',
+                }
+            );
+        });
+    }
 };
 
 // GET
