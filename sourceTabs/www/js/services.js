@@ -140,6 +140,14 @@ angular.module('starter.services', [])
         //  =====================================================
         //   AUTH
         //  =====================================================
+        connect: function (username, password) {
+            var apiURL = base + 'connect?username='
+            + username + '&password='
+            + password;
+
+            // Return the promise to the controller
+            return $http({ withCredentials: true, method: 'POST', url: apiURL });
+        },
 
         getAuth: function(id) {
             return $http.get(base + '/api/users/auth/' + id, {

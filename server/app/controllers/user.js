@@ -3,7 +3,7 @@ var User = require('../models/user');
 var Article = require('../models/article.js');
 var Notification = require('../models/notification.js');
 var mongoose = require('mongoose');
-
+var passport = require('passport');
 // 	  TABLE OF CONTENTS   ====================================================================
 //
 //		#postUser
@@ -511,4 +511,35 @@ exports.getAuth = function (req, res) {
         res.json(users);
     });
 
+};
+
+
+//Main method where the user logs in and is authenticated by node passport
+exports.connect = function (req, res) {
+    passport.serializeUser(User.serializeUser());
+    passport.deserializeUser(User.deserializeUser());
+
+    User.find({ 'username': req.query.username }, function (err, user) {
+        if (err) {
+            console.log(err);
+        } else {
+            req.session.userId = res.req.user.id; // set the userId so we can protect the methods
+            res.send(user);
+        }
+    });
+};
+
+exports.signup = function (req, res) {
+    User.register(new User({username: req.query.username,email: req.query.email}),req.query.password, function (err, account) {
+        if (err) {
+            console.log(err);
+            res.send(err);
+        }
+        else {
+            passport.serializeUser(User.serializeUser());
+            req.session.userId = account.id; // set the userId so we can protect the methods
+            console.log(passport.deserializeUser(User.deserializeUser()));
+            res.send(account);
+        }
+    });
 };

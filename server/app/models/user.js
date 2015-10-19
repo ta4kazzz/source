@@ -2,7 +2,10 @@
 // load the things we need
 var mongoose = require('mongoose');
 var bcrypt   = require('bcrypt-nodejs');
-var Schema   = mongoose.Schema;
+var Schema = mongoose.Schema;
+var passportLocalMongoose = require('passport-local-mongoose');
+//var Config = require('../../config/database.js');
+//var db = mongoose.createConnection(Config.url);
 //var deepPopulate = require('mongoose-deep-populate');
 
 
@@ -25,11 +28,9 @@ var UserSchema = new Schema({
   notifications : [{ type: Schema.Types.ObjectId, ref: 'Notification' }]
 });
 
-
+UserSchema.plugin(passportLocalMongoose);
 
 // METHODS ======================
-
-
 
 // Execute before each user.save() call
 UserSchema.pre('save', function(callback) {
@@ -58,6 +59,10 @@ UserSchema.methods.verifyPassword = function(password, cb) {
   });
 };
 
+//db.on('connected', function (err) {
+//    if (err) console.trace(err);
+//    else console.log("account db up!");
+//});
 // create the model for users and expose it to our app
 //UserSchema.plugin(deepPopulate);
 module.exports = mongoose.model('User', UserSchema);
