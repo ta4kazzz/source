@@ -10,7 +10,6 @@ var passport = require('passport');
 //		#getUser
 //		#putUser
 //		#getHomeFeed
-//
 //		#getUsers
 //
 // ===========================================================================================
@@ -189,16 +188,7 @@ exports.getUsers = function (req, res) {
     });
 };
 
-
-
-
-
-
-
-
 // Need to work on this
-
-
 // ====================================================
 //               /users/:userID/articles
 // ====================================================
@@ -220,8 +210,6 @@ exports.getUserArticles = function (req, res) {
     });
 
 };
-
-
 
 // ====================================================
 //               /users/:userID/saved
@@ -296,7 +284,7 @@ exports.postFollows = function (req, res) {
     var userID = mongoose.Types.ObjectId(req.body._id);
     var userIdToFollow = req.body._id;
     var currentUserId = req.params.id;
-
+    
     // add kai's userID to pat's followers
     console.log(myID);
     console.log(userID);
@@ -306,7 +294,7 @@ exports.postFollows = function (req, res) {
             res.send(err);
         } else {
             for (var i = 0; i < user.follows.length; i++) {
-              //  var currentUserId = mongoose.Types.ObjectId(user.follows[i]);
+                //  var currentUserId = mongoose.Types.ObjectId(user.follows[i]);
                 if (user.follows[i] == userIdToFollow) {
                     // IF the user already exists in follows list do not push them to the database
                     console.log('User already followed!');
@@ -513,12 +501,11 @@ exports.getAuth = function (req, res) {
 
 };
 
-
 //Main method where the user logs in and is authenticated by node passport
 exports.connect = function (req, res) {
     passport.serializeUser(User.serializeUser());
     passport.deserializeUser(User.deserializeUser());
-
+    
     User.find({ 'username': req.query.username }, function (err, user) {
         if (err) {
             console.log(err);
@@ -530,7 +517,15 @@ exports.connect = function (req, res) {
 };
 
 exports.signup = function (req, res) {
-    User.register(new User({username: req.query.username,email: req.query.email}),req.query.password, function (err, account) {
+    var gravatarURL = '';
+    var description = '';
+
+    if (req.query.avatar) {
+        gravatarURL = req.query.gravatarURL;
+        description = req.query.description;
+    }
+
+    User.register(new User({ username: req.query.username, email: req.query.email, gravatarURL: gravatarURL, description:description }), req.query.password, function (err, account) {
         if (err) {
             console.log(err);
             res.send(err);
@@ -542,4 +537,11 @@ exports.signup = function (req, res) {
             res.send(account);
         }
     });
+};
+
+exports.logout = function (req, res) {
+    req.logout();
+    req.session.userId = null; // clear the user
+    
+    res.status(200).send('ok');
 };

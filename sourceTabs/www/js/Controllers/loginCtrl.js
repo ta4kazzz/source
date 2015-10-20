@@ -73,26 +73,53 @@ angular.module('starter.controllers')
         var password = $scope.signupForm.password;
         var username = $scope.signupForm.username;
 
-        var newUser = {
-            email: email,
-            password: password,
-            username: username
-        };
-        
-        // Creates a User in Auth0 Database
-        API.createUserAuth(newUser)
+        API.signupUser(username, email, password)
         .success(function (data, status, headers, config, profile) {
             if (status === 200) {
-                auth.signin({
-                    connection: 'Username-Password-Authentication',
-                    username: newUser.email,
-                    password: newUser.password
-                }, onSignupSuccess, onSignupFailed);
+                if (data.name === 'UserExistsError') {
+                    console.log(data.message);
+                    alert(data.message);
+                    return;
+                }
+                // gravatar needs to be implementd server side on sign up so the user can 
+                // get gravatar image if it exists.
+                console.log("Successfully logged in with your new credentials!");
+                store.set('profile', profile);
+
+                window.localStorage['SourceID'] = data._id;
+                // store.set('SourceID', user._id);
+                $scope.followYourself();
+                $state.go('tabs.home');
+
+              //  store.set('token', token);
             }
         })
-        .error(function (data, status, headers, config) {
+        .error(function (error, status, headers, config) {
+            console.log(error.status + ":" + error.data);
+            
+            $scope.errorMessage = error.data;
             alert('Error creating account for user');
         });
+        //var newUser = {
+        //    email: email,
+        //    password: password,
+        //    username: username
+        //};
+        
+        // Creates a User in Auth0 Database
+        //API.createUserAuth(newUser)
+        //.success(function (data, status, headers, config, profile) {
+        //    if (status === 200) {
+        //        auth.signin({
+        //            connection: 'Username-Password-Authentication',
+        //            username: newUser.email,
+        //            password: newUser.password
+        //        }, onSignupSuccess, onSignupFailed);
+        //    }
+        //})
+        //.error(function (data, status, headers, config) {
+        //    alert('Error creating account for user');
+        //});
     };
 
     function onSignupSuccess(profile, token, data) {
