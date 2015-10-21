@@ -1,5 +1,5 @@
 angular.module('starter.controllers')
-.controller('UserFollowersController', function ($scope, $rootScope, auth, API, $stateParams) {
+.controller('UserFollowersController', function ($scope, $rootScope, API, $stateParams) {
 
     // On before you ender the pag run this function
     $scope.$on('$ionicView.beforeEnter', function () {

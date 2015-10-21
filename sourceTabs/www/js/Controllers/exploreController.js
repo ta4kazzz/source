@@ -1,8 +1,5 @@
 angular.module('starter.controllers')
-.controller('ExploreController', function ($scope, API, auth, $rootScope) {
-    // Auth Init - Do I need this here?
-    $rootScope.auth = auth;
-
+.controller('ExploreController', function ($scope, API,  $rootScope) {
     // Tab Logic
     $scope.tab = 1;
 

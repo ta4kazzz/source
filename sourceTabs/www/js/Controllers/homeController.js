@@ -1,12 +1,10 @@
 angular.module('starter.controllers')
-.controller('HomeController', function ($rootScope, $scope, auth, API) {
+.controller('HomeController', function ($rootScope, $scope, API) {
     $scope.isLiked = true;
     $scope.pageNumber = 1;
     $scope.itemsPerPage = 10;
     $scope.noMoreItemsAvailable = false;
     $scope.articles = [];
-    // Not sure if I need this
-    $rootScope.auth = auth;
 
     $scope.getInitialHomeFeed = function () {
         var userID = window.localStorage.SourceID;

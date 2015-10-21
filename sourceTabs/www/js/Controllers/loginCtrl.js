@@ -1,5 +1,5 @@
 angular.module('starter.controllers')
-.controller('LoginCtrl', function ($scope, auth, $state, $location, $http, API, store) {
+.controller('LoginCtrl', function ($scope, $state, $location, $http, API, store) {
     // SETUP
     $scope.loginForm = {
         email: "",
@@ -12,41 +12,6 @@ angular.module('starter.controllers')
         password: ""
     };
 
-    // LOGIN ============================================
-    $scope.login = function () {
-        auth.signin({connection: 'Username-Password-Authentication',username: $scope.loginForm.email,password: $scope.loginForm.password}, onLoginSuccess, onLoginFailed);
-    };
-
-    function onLoginSuccess(profile, token) {
-        console.log("Login Success!");
-        store.set('profile', profile);
-        store.set('token', token);
-        setCurrentUser(profile);
-    }
-
-    function onLoginFailed() {
-        console.log("Your login attempt failed");
-        alert('Login failed');
-    }
-
-    // the goal of this function is to set the mongoID in the localstorage
-    // It takes profile as a parameter
-    function setCurrentUser(profile) {
-        var id = profile.user_id;
-
-        API.getAuth(id)
-          .success(function (user, status, headers, config) {
-              // need to store it here without strings
-              window.localStorage['SourceID'] = user._id;
-              // store.set('SourceID', user._id);
-              $scope.followYourself();
-              $state.go('tabs.home');
-          })
-          .error(function (user, status, headers, config) {
-              console.log("woops");
-          });
-    };
-
     $scope.followYourself = function () {
         // the ID is the person who is logged in and doing the adding action
         var id = window.localStorage.SourceID;
@@ -55,17 +20,55 @@ angular.module('starter.controllers')
             _id: window.localStorage.SourceID
         };
 
-        API.followUser(id, user)
-          .success(function (user, status, headers, config) {
-              // turn the button to unfolow
-              console.log("sent")
-              console.log(user);
-              //   $scope.getUser();
-          })
+        API.followUser(id, user).success(function (user, status, headers, config) {
+            // turn the button to unfolow
+            console.log("sent");
+            console.log(user);
+        })
           .error(function (user, status, headers, config) {
-              console.log("Something went wrong")
+              console.log("Something went wrong");
           });
     };
+
+    // LOGIN ============================================
+    $scope.login = function () {
+        API.connect($scope.loginForm.email, $scope.loginForm.password)
+         .success(function (data, status, headers, config, profile) {
+             if (status === 200) {
+                 console.log("Login Success!");
+                 store.set('profile', profile);
+                 // need to store it here without strings
+                 window.localStorage['SourceID'] = data[0]._id;
+                 $state.go('tabs.home');
+             }
+         })
+        .error(function (error, status, headers, config) {
+            console.log(error.status + ":" + error.data);
+            $scope.errorMessage = error.data;
+            alert('Error connecting user');
+        });
+        // auth.signin({connection: 'Username-Password-Authentication',username: $scope.loginForm.email,password: $scope.loginForm.password}, onLoginSuccess, onLoginFailed);
+    };
+
+    // the goal of this function is to set the mongoID in the localstorage
+    // It takes profile as a parameter
+    //function setCurrentUser(profile) {
+    //    var id = profile.user_id;
+
+    //    API.getAuth(id)
+    //      .success(function (user, status, headers, config) {
+    //          // need to store it here without strings
+    //          window.localStorage['SourceID'] = user._id;
+    //          // store.set('SourceID', user._id);
+    //          $scope.followYourself();
+    //          $state.go('tabs.home');
+    //      })
+    //      .error(function (user, status, headers, config) {
+    //          console.log("woops");
+    //      });
+    //};
+
+
 
     // SIGNUP ==========================================
     $scope.signup = function () {
@@ -91,78 +94,58 @@ angular.module('starter.controllers')
                 $scope.followYourself();
                 $state.go('tabs.home');
 
-              //  store.set('token', token);
+                //  store.set('token', token);
             }
         })
         .error(function (error, status, headers, config) {
             console.log(error.status + ":" + error.data);
-            
+
             $scope.errorMessage = error.data;
             alert('Error creating account for user');
         });
-        //var newUser = {
-        //    email: email,
-        //    password: password,
-        //    username: username
-        //};
-        
-        // Creates a User in Auth0 Database
-        //API.createUserAuth(newUser)
-        //.success(function (data, status, headers, config, profile) {
-        //    if (status === 200) {
-        //        auth.signin({
-        //            connection: 'Username-Password-Authentication',
-        //            username: newUser.email,
-        //            password: newUser.password
-        //        }, onSignupSuccess, onSignupFailed);
-        //    }
-        //})
-        //.error(function (data, status, headers, config) {
-        //    alert('Error creating account for user');
-        //});
     };
 
-    function onSignupSuccess(profile, token, data) {
-        console.log("Successfully logged in with your new credentials!");
-        store.set('profile', profile);
-        store.set('token', token);
+    //function onSignupSuccess(profile, token, data) {
+    //    console.log("Successfully logged in with your new credentials!");
+    //    store.set('profile', profile);
+    //    store.set('token', token);
 
 
-        createUser(profile);
-    }
+    //    createUser(profile);
+    //}
 
-    function onSignupFailed() {
-        console.log("your signup failed bro");
-        alert('Login failed');
-    }
+    //function onSignupFailed() {
+    //    console.log("your signup failed bro");
+    //    alert('Login failed');
+    //}
 
     // This adds a user to the database
-    function createUser(profile) {
-        var email = $scope.signupForm.email
-        var username = $scope.signupForm.username
-        var authID = profile.user_id;
-        var gravatarURL = profile.picture;
-        console.log(gravatarURL);
+    //function createUser(profile) {
+    //    var email = $scope.signupForm.email
+    //    var username = $scope.signupForm.username
+    //    var authID = profile.user_id;
+    //    var gravatarURL = profile.picture;
+    //    console.log(gravatarURL);
 
-        var user = {
-            email: email,
-            username: username,
-            authID: authID,
-            gravatarURL: gravatarURL
-        };
+    //    var user = {
+    //        email: email,
+    //        username: username,
+    //        authID: authID,
+    //        gravatarURL: gravatarURL
+    //    };
 
-        // We know this works
-        console.log(user);
+    //    // We know this works
+    //    console.log(user);
 
-        API.postUser(user)
-          .success(function (article, status, headers, config) {
-              console.log("user created sucessfully")
-              setCurrentUser(profile);
-          })
-          .error(function (article, status, headers, config) {
-              console.log("Something went wrong when posting user to database")
-          });
-    };
+    //    API.postUser(user)
+    //      .success(function (article, status, headers, config) {
+    //          console.log("user created sucessfully")
+    //          setCurrentUser(profile);
+    //      })
+    //      .error(function (article, status, headers, config) {
+    //          console.log("Something went wrong when posting user to database")
+    //      });
+    //};
 
     // function doAuth() {
 

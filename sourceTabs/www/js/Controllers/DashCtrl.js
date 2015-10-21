@@ -1,7 +1,6 @@
 angular.module('starter.controllers')
-.controller('DashCtrl', function ($scope, auth, store, $state) {
+.controller('DashCtrl', function ($scope, store, $state) {
     $scope.logout = function () {
-        auth.signout();
         store.remove('token');
         store.remove('profile');
         store.remove('refreshToken');

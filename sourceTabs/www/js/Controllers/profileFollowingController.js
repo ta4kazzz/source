@@ -1,5 +1,5 @@
 angular.module('starter.controllers')
-.controller('ProfileFollowingController', function ($scope, $rootScope, auth, API) {
+.controller('ProfileFollowingController', function ($scope, $rootScope,  API) {
 
         $scope.$on('$ionicView.beforeEnter', function () {
             $scope.getFollows();

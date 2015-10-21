@@ -1,5 +1,5 @@
 angular.module('starter.controllers')
-.controller('NotificationsController', function ($scope, auth, store, $state, API) {
+.controller('NotificationsController', function ($scope, store, $state, API) {
     // On before you ender the pag run this function
     $scope.$on('$ionicView.beforeEnter', function () {
         $scope.getNotifications();

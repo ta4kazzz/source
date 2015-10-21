@@ -365,18 +365,14 @@ exports.postFollows = function (req, res) {
         User.findByIdAndUpdate(notification.articleOwner, { $push: { "notifications": notification } }, { safe: true, upsert: true }, function (err, user) {
             if (err)
                 res.send(err);
-            res.json(notification);
+            //res.send(notification);
         });
         
         // SAVE NOTIFICATION OBJECT
         notification.save(function (err) {
             if (err)
                 res.send(err);
-            res.json(
-                {
-                    message: 'New Notication Has been added',
-                }
-            );
+            //res.json({message: 'New Notication Has been added'});
         });
     }
 };
@@ -422,7 +418,7 @@ exports.deleteFollows = function (req, res) {
         function (err, user) {
             if (err)
                 res.send(err);
-            res.json(user);
+         //   res.send(user);
         }
     );
 
@@ -519,13 +515,13 @@ exports.connect = function (req, res) {
 exports.signup = function (req, res) {
     var gravatarURL = '';
     var description = '';
-
+    
     if (req.query.avatar) {
         gravatarURL = req.query.gravatarURL;
         description = req.query.description;
     }
-
-    User.register(new User({ username: req.query.username, email: req.query.email, gravatarURL: gravatarURL, description:description }), req.query.password, function (err, account) {
+    
+    User.register(new User({ username: req.query.username, email: req.query.email, gravatarURL: gravatarURL, description: description }), req.query.password, function (err, account) {
         if (err) {
             console.log(err);
             res.send(err);

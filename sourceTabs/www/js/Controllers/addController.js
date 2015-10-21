@@ -1,7 +1,7 @@
 angular.module('starter.controllers')
-.controller('AddController', function ($scope, $rootScope, $window, API, store, $state, auth) {
+.controller('AddController', function ($scope, $rootScope, $window, API, store, $state) {
     // Allows us to post gravatar in preview
-    $rootScope.auth = auth;
+    
     $scope.article = {
         url: "",
         summary: ""

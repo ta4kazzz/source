@@ -3,9 +3,9 @@ var base = "http://localhost:8080";
 //for production
 //var base = "http://source-application.herokuapp.com";
 
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'auth0', 'angular-storage'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'angular-storage'])
     .constant("base", base)
-    .run(function ($ionicPlatform) {
+    .run(function ($ionicPlatform, $rootScope, $state) {
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
@@ -17,8 +17,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
                 StatusBar.styleDefault();
             }
         });
+        $rootScope.goToRoute = function (routeName) {
+            $state.go(routeName);
+        };
     })
-    .config(function ($stateProvider, $urlRouterProvider, authProvider, $httpProvider, $sceProvider) {
+    .config(function ($stateProvider, $urlRouterProvider) {
         $stateProvider
             // Set up an abstract state for the login directive
             .state('landing', {
@@ -300,14 +303,29 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/login');
 
+    })
+    .config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
+        $httpProvider.interceptors.push(function ($q, $rootScope, $injector) {
+            return {
+                request: function (request) {
+                    return request || $q.when(request);
+                },
+                response: function (response) {
+                    return response || $q.when(response);
+                },
+                responseError: function (response) {
+                    if (response.status === 401) { //unothirized go to login!
+                        $rootScope.goToRoute('login');
+                    } else if (response.status === 0) { //server not found!
+                        alert('server not found');
+                       // $rootScope.goToRoute('login');
+                    }
+
+                    return $q.reject(response);
+                }
+
+            };
+        });
+
+
     });
-//.run(function ($rootScope, auth, store) {
-//    $rootScope.$on('$locationChangeStart', function () {
-//        if (!auth.isAuthenticated) {
-//            var token = store.get('token');
-//            if (token) {
-//                auth.authenticate(store.get('profile'), token);
-//            }
-//        }
-//    });
-//});

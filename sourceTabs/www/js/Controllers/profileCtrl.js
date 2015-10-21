@@ -1,14 +1,10 @@
 angular.module('starter.controllers')
-.controller('ProfileCtrl', function ($rootScope, $scope, auth, API, $stateParams) {
+.controller('ProfileCtrl', function ($rootScope, $scope,  API, $stateParams) {
 
     $scope.$on('$ionicView.beforeEnter', function () {
         $scope.getProfile();
         $scope.getProfileFeed();
     });
-
-
-    $scope.auth = auth;
-
 
     $scope.getProfile = function () {
 

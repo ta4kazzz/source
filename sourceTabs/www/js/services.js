@@ -1,14 +1,14 @@
 angular.module('starter.services', [])
 
-.factory('API', function ($rootScope, $http, $window, $ionicLoading, auth, store,base) {
+.factory('API', function ($rootScope, $http, $window, $ionicLoading, store,base) {
 
-    $rootScope.logout = function () {
-        auth.signout();
-        store.remove('profile');
-        store.remove('token');
-        store.remove('SourceID');
-        $window.location.href = '#/app/landing';
-    };
+    //$rootScope.logout = function () {
+    //    auth.signout();
+    //    store.remove('profile');
+    //    store.remove('token');
+    //    store.remove('SourceID');
+    //    $window.location.href = '#/app/landing';
+    //};
 
     return {
 
