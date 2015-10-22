@@ -1,5 +1,5 @@
 //for dev
-var base = "http://localhost:8080";
+var base = "http://192.168.2.10:8080";
 //for production
 //var base = "http://source-application.herokuapp.com";
 
