@@ -43,6 +43,7 @@ angular.module('starter.controllers')
                 console.log("Article packet successfuly sent");
                 var id = article._id;
                 $scope.article = article;
+                
                 //$scope.getArticle(id);
                 window.localStorage['ActiveArticle'] = id;
                 //$scope.getPreview();

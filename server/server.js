@@ -13,6 +13,7 @@ var morgan = require('morgan');
 var User = require('./app/models/user');
 var helper = require('./app/controllers/helper');
 var cors = require('cors');
+var compress = require('compression');
 //var flash     	 = require('connect-flash');
 //var unfluff      = require('unfluff');
 
@@ -45,6 +46,7 @@ app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
     res.header('Access-Control-Expose-Headers', 'Content-Length');
     res.header('Access-Control-Allow-Headers', 'Accept, Authorization, Content-Type, X-Requested-With, Range');
+    
     if (req.method === 'OPTIONS') {
         return res.send(200);
     } else {
@@ -52,7 +54,7 @@ app.use(function (req, res, next) {
     }
 });
 
-
+app.use(compress());
 app.use(morgan('dev')); // log every request to the console
 app.use(passport.initialize());
 app.use(passport.session());
@@ -191,7 +193,8 @@ router.route('/articles/:id/comments')
 // ============== Authentication ========================
 router.post('/users/connect', passport.authenticate('local'), userController.connect);
 router.post('/users/signup', userController.signup);
-router.post('/users/logout', userController.logout );
+router.post('/users/logout', userController.logout);
+router.post('/users/fbsignup', userController.fbsignup);
 
 
 

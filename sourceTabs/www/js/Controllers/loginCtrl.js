@@ -105,73 +105,46 @@ angular.module('starter.controllers')
         });
     };
 
-    //function onSignupSuccess(profile, token, data) {
-    //    console.log("Successfully logged in with your new credentials!");
-    //    store.set('profile', profile);
-    //    store.set('token', token);
+    $scope.clickLoginWithFacebook = function () {
+        if (typeof facebookConnectPlugin != "undefined") {
+            facebookConnectPlugin.login(["public_profile,email"],
+                function (userData) {
+                    //console.log("UserInfo: " + JSON.stringify(userData));
+                    $scope.getBasicFacebookData(userData.authResponse.accessToken);
+                },
+                function (error) {
+                    console.log(error);
+                    // alert("" + error);
+                });
+        }
+    };
 
+    $scope.getBasicFacebookData = function (fb_access_token) {
+        facebookConnectPlugin.api("/me/?fields=email,picture,id,name,first_name,last_name", ["public_profile"],
+            function (result) {
+                //alert("Result: " + JSON.stringify(result) + " = " + fb_access_token);
+                API.registerFacebookUser(result.email, fb_access_token, result.id, result.name, result.picture.data.url)
+                    .success(function (data, status, headers, config, profile) {
+                        if (status === 200) {
+                            console.log("Successfully logged in with your new credentials!");
+                            store.set('profile', data);
+                            window.localStorage['picture_url'] = data.picture_url; // fb picture
 
-    //    createUser(profile);
-    //}
+                            window.localStorage['SourceID'] = data._id;
+                            $scope.followYourself();
+                            $state.go('tabs.home');
+                        }
+                    }).error(function (error, status, headers, config) {
+                        console.log(error.status + ":" + error.data);
 
-    //function onSignupFailed() {
-    //    console.log("your signup failed bro");
-    //    alert('Login failed');
-    //}
+                        $scope.errorMessage = error.data;
+                        alert('Error creating fb for user');
+                    });
 
-    // This adds a user to the database
-    //function createUser(profile) {
-    //    var email = $scope.signupForm.email
-    //    var username = $scope.signupForm.username
-    //    var authID = profile.user_id;
-    //    var gravatarURL = profile.picture;
-    //    console.log(gravatarURL);
-
-    //    var user = {
-    //        email: email,
-    //        username: username,
-    //        authID: authID,
-    //        gravatarURL: gravatarURL
-    //    };
-
-    //    // We know this works
-    //    console.log(user);
-
-    //    API.postUser(user)
-    //      .success(function (article, status, headers, config) {
-    //          console.log("user created sucessfully")
-    //          setCurrentUser(profile);
-    //      })
-    //      .error(function (article, status, headers, config) {
-    //          console.log("Something went wrong when posting user to database")
-    //      });
-    //};
-
-    // function doAuth() {
-
-    //   auth.signin({
-    //     closable: false,
-    //     // This asks for the refresh token
-    //     // So that the user never has to log in again
-    //     authParams: {
-    //       scope: 'openid offline_access'
-    //     }
-    //   }, function(profile, idToken, accessToken, state, refreshToken) {
-    //     store.set('profile', profile);
-    //     store.set('token', idToken);
-    //     store.set('refreshToken', refreshToken);
-    //     $state.go('tab.home');
-    //   }, function(error) {
-    //     console.log("There was an error logging in", error);
-    //   });
-    // }
-
-    // $scope.$on('$ionic.reconnectScope', function() {
-    //   doAuth();
-    // });
-
-    // doAuth();
-
-
+            },
+            function (error) {
+                alert("Failed: " + error);
+            });
+    };
 
 });

@@ -12,9 +12,10 @@ angular.module('starter.controllers')
 
         API.getUser(id)
             .success(function (user, status, headers, config) {
-                console.log("Your profile successfully retreived")
+                console.log("Your profile successfully retreived");
                 $scope.username = user.username;
                 $scope.description = user.description;
+                $scope.gravatarURL = user.gravatarURL;
                 // $scope.followsNum = user.counts.follows;
                 // $scope.followersNum = user.counts.followed_by;
                 $scope.getFollowers();

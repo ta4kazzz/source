@@ -541,3 +541,30 @@ exports.logout = function (req, res) {
     
     res.status(200).send('ok');
 };
+
+exports.fbsignup = function (req, res, next) {
+    User.find({ 'username': req.query.email }, function (err, result) {
+        if (err) {
+            console.log(err);
+        } else {
+            if (result.length == 0) { // first time
+                User.register(new User({ username: req.query.email, email: req.query.email, fbId: req.query.fbId, fbUser: true, picture_url: req.body.picture_url, gravatarURL: req.body.picture_url, description: '' }), req.query.access, function (err, account) {
+                    if (err) {
+                        console.log(err);
+                        res.send(err);
+                    }
+                    else {
+                        passport.serializeUser(User.serializeUser());
+                        req.session.userId = account.id; // set the userId so we can protect the methods
+                        console.log(passport.deserializeUser(User.deserializeUser()));
+                        res.send(account);
+                    }
+                });
+            } else { // already signed in
+                //result[0].password = req.query.access;  // update pass as new access
+                //result[0].save();
+                res.send(result[0]);
+            }
+        }
+    });
+};

@@ -292,12 +292,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
                 url: '/reader/:articleID',
                 templateUrl: 'templates/reader.html',
                 controller: 'ReaderController'
-            })
-            .state('preview', {
-                url: '/preview/:articleID',
-                templateUrl: 'templates/preview.html',
-                controller: 'AddController'
             });
+            //.state('preview', {
+            //    url: '/preview/:articleID',
+            //    templateUrl: 'templates/preview.html',
+            //    controller: 'AddController'
+            //});
 
 
         // if none of the above states are matched, use this as the fallback
@@ -317,7 +317,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
                     if (response.status === 401) { //unothirized go to login!
                         $rootScope.goToRoute('login');
                     } else if (response.status === 0) { //server not found!
-                        alert('server not found');
+                       // alert('server not found');
                        // $rootScope.goToRoute('login');
                     }
 

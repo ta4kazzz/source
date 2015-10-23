@@ -11,7 +11,8 @@ var passportLocalMongoose = require('passport-local-mongoose');
 
 var UserSchema = new Schema({
   username: { type: String, required: true, unique: true },
-  // password: { type: String, required: true },
+    // password: { type: String, required: true },
+
   email: String,
   gravatarURL: String,
   description: String,
@@ -25,7 +26,10 @@ var UserSchema = new Schema({
   saved : [{ type: Schema.Types.ObjectId, ref: 'Article' }],
   follows: [{ type: Schema.Types.ObjectId, ref: 'User'  }],
   followers: [{ type: Schema.Types.ObjectId, ref: 'User' }],
-  notifications : [{ type: Schema.Types.ObjectId, ref: 'Notification' }]
+  notifications : [{ type: Schema.Types.ObjectId, ref: 'Notification' }],
+  fbUser: { type: Boolean },
+  fbId: { type: String },
+  picture_url: { type: String }
 });
 
 UserSchema.plugin(passportLocalMongoose);
