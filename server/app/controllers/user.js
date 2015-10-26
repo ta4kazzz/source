@@ -502,11 +502,11 @@ exports.connect = function (req, res) {
     passport.serializeUser(User.serializeUser());
     passport.deserializeUser(User.deserializeUser());
     
-    User.find({ 'username': req.query.username }, function (err, user) {
+    User.findOne({ 'username': req.body.username }, function (err, user) {
         if (err) {
             console.log(err);
         } else {
-            req.session.userId = res.req.user.id; // set the userId so we can protect the methods
+            req.session.userId = user.id; // set the userId so we can protect the methods
             res.send(user);
         }
     });
@@ -516,17 +516,16 @@ exports.signup = function (req, res) {
     var gravatarURL = '';
     var description = '';
     
-    if (req.query.avatar) {
-        gravatarURL = req.query.gravatarURL;
-        description = req.query.description;
+    if (req.body.avatar) {
+        gravatarURL = req.body.gravatarURL;
+        description = req.body.description;
     }
     
-    User.register(new User({ username: req.query.username, email: req.query.email, gravatarURL: gravatarURL, description: description }), req.query.password, function (err, account) {
+    User.register(new User({ username: req.body.username, email: req.body.email, gravatarURL: gravatarURL, description: description }), req.body.password, function (err, account) {
         if (err) {
             console.log(err);
             res.send(err);
-        }
-        else {
+        } else {
             passport.serializeUser(User.serializeUser());
             req.session.userId = account.id; // set the userId so we can protect the methods
             console.log(passport.deserializeUser(User.deserializeUser()));

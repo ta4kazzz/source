@@ -38,37 +38,16 @@ angular.module('starter.controllers')
                  console.log("Login Success!");
                  store.set('profile', profile);
                  // need to store it here without strings
-                 window.localStorage['SourceID'] = data[0]._id;
+                 window.localStorage['SourceID'] = data._id;
                  $state.go('tabs.home');
              }
          })
         .error(function (error, status, headers, config) {
-            console.log(error.status + ":" + error.data);
-            $scope.errorMessage = error.data;
+            console.log(error + ":" + status);
             alert('Error connecting user');
         });
         // auth.signin({connection: 'Username-Password-Authentication',username: $scope.loginForm.email,password: $scope.loginForm.password}, onLoginSuccess, onLoginFailed);
     };
-
-    // the goal of this function is to set the mongoID in the localstorage
-    // It takes profile as a parameter
-    //function setCurrentUser(profile) {
-    //    var id = profile.user_id;
-
-    //    API.getAuth(id)
-    //      .success(function (user, status, headers, config) {
-    //          // need to store it here without strings
-    //          window.localStorage['SourceID'] = user._id;
-    //          // store.set('SourceID', user._id);
-    //          $scope.followYourself();
-    //          $state.go('tabs.home');
-    //      })
-    //      .error(function (user, status, headers, config) {
-    //          console.log("woops");
-    //      });
-    //};
-
-
 
     // SIGNUP ==========================================
     $scope.signup = function () {
@@ -97,10 +76,8 @@ angular.module('starter.controllers')
                 //  store.set('token', token);
             }
         })
-        .error(function (error, status, headers, config) {
-            console.log(error.status + ":" + error.data);
-
-            $scope.errorMessage = error.data;
+        .error(function (error, status, headers, config, t) {
+            console.log(config);
             alert('Error creating account for user');
         });
     };

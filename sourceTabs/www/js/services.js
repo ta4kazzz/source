@@ -37,7 +37,7 @@ angular.module('starter.services', [])
         },
 
         publishArticle: function (id) {
-            return $http.put(base + '/api/articles/' + id, {
+            return $http.put(base + '/api/articles/' + id, {}, {
                 method: 'PUT',
                 withCredentials: true
             });
@@ -92,12 +92,12 @@ angular.module('starter.services', [])
         //   USER
         //  =====================================================
 
-        postUser: function (user) {
-            return $http.post(base + '/api/users', user, {
-                method: 'POST',
-                withCredentials: true
-            });
-        },
+        //postUser: function (user) {
+        //    return $http.post(base + '/api/users', user, {
+        //        method: 'POST',
+        //        withCredentials: true
+        //    });
+        //},
 
         getUser: function (id) {
             return $http.get(base + '/api/users/' + id, {
@@ -158,21 +158,29 @@ angular.module('starter.services', [])
         //   AUTH
         //  =====================================================
         connect: function (username, password) {
-            var url = base + '/api/users/connect?username='
-            + username + '&password='
-            + password;
 
+            var url = base + '/api/users/connect';
+
+            var data = {
+                username: username,
+                password: password
+            };
             // Return the promise to the controller
-            return $http({ withCredentials: true, method: 'POST', url: url });
+            return $http({ withCredentials: true, method: 'POST', url: url, data:data });
         },
 
         signupUser: function (username, email, password) {
-            var url = base + '/api/users/signup?' +
-                '&username=' + username +
-                '&email=' + email +
-                '&password=' + password;
+            var url = base + '/api/users/signup';
+                //'&username=' + username +
+                //'&email=' + email +
+                //'&password=' + password;
             // Return the promise to the controller
-            return $http({ withCredentials: true, method: 'POST', url: url });
+            var data = {
+                username: username,
+                email:email,
+                password: password
+            };
+            return $http({ withCredentials: true, method: 'POST', url: url, data: data });
         },
 
         registerFacebookUser: function (email, access_token, fb_id, name, picture_url) {
