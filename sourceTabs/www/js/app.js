@@ -1,6 +1,6 @@
 //for dev
-//var base = "http://192.168.2.10:8080";
-var base = "http://localhost:8080";
+var base = "http://192.168.2.10:8080";
+//var base = "http://localhost:8080";
 //for production
 //var base = "http://source-application.herokuapp.com";
 
@@ -305,7 +305,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         $urlRouterProvider.otherwise('/login');
 
     })
-    .config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
+    .config(function ($stateProvider, $urlRouterProvider, $httpProvider, $ionicConfigProvider) {
         $httpProvider.interceptors.push(function ($q, $rootScope, $injector) {
             return {
                 request: function (request) {
@@ -328,5 +328,5 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
             };
         });
 
-
+        $ionicConfigProvider.tabs.position('bottom'); // other values: top
     });

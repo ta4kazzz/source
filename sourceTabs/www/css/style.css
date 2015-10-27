@@ -17,3 +17,12 @@ user-select: text;
 .error {
     color:#e74c3c;
 }
+
+
+.tabs-striped.tabs-dark .tab-item.tab-item-active, .tabs-striped.tabs-dark .tab-item.active, .tabs-striped.tabs-dark .tab-item.activated {
+  margin-top: 0 !important;
+  color: #fff;
+  border-style: solid;
+  border-width: 0 0 0 0 !important;
+  border-color: #fff;
+}

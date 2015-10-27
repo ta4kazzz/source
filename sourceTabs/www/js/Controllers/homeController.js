@@ -193,6 +193,10 @@ angular.module('starter.controllers')
         $scope.loadMore();
     };
 
+    $scope.$on('$ionicView.beforeEnter', function () {
+        $scope.articles = [];
+    });
+
     $scope.$on('$ionicView.afterEnter', function () {
         init();
     });

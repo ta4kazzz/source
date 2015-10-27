@@ -43,7 +43,7 @@ angular.module('starter.controllers')
              }
          })
         .error(function (error, status, headers, config) {
-            console.log(error + ":" + status);
+            console.log(error );
             alert('Error connecting user');
         });
         // auth.signin({connection: 'Username-Password-Authentication',username: $scope.loginForm.email,password: $scope.loginForm.password}, onLoginSuccess, onLoginFailed);
@@ -108,13 +108,11 @@ angular.module('starter.controllers')
                             window.localStorage['picture_url'] = data.picture_url; // fb picture
 
                             window.localStorage['SourceID'] = data._id;
-                            $scope.followYourself();
+                           
                             $state.go('tabs.home');
                         }
                     }).error(function (error, status, headers, config) {
-                        console.log(error.status + ":" + error.data);
-
-                        $scope.errorMessage = error.data;
+                        console.log(error);
                         alert('Error creating fb for user');
                     });
 

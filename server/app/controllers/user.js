@@ -308,42 +308,47 @@ exports.postFollows = function (req, res) {
                     return res.send(err);
                 }
             });
+
+            checkOtherUser();
         }
     });
     
-    // Find the other user
-    User.findById(userID, function (err, user) {
-        if (err) {
-            res.send(err);
-        } else {
-            for (var i = 0; i < user.followers.length; i++) {
-                if (user.followers[i] == currentUserId) {
-                    // IF the user already exists in followers list do not push them to the database
-                    console.log('User already in followers list!');
-                    return res.send('User already in followers list');
+    function checkOtherUser() {
+        // Find the other user
+        User.findById(userID, function (err, user) {
+            if (err) {
+                res.send(err);
+            } else {
+                for (var i = 0; i < user.followers.length; i++) {
+                    if (user.followers[i] == currentUserId) {
+                        // IF the user already exists in followers list do not push them to the database
+                        console.log('User already in followers list!');
+                        return res.send('User already in followers list');
+                    }
                 }
-            }
-            
-            // ADDS alices name to bobs followers array
-            User.findByIdAndUpdate(userID, { $push: { "followers": myID } }, { safe: true, upsert: true }, function (err, user) {
-                if (err) {
-                    return res.send(err);
-                }
+                
+                // ADDS alices name to bobs followers array
+                User.findByIdAndUpdate(userID, { $push: { "followers": myID } }, { safe: true, upsert: true }, function (err, user) {
+                    if (err) {
+                        return res.send(err);
+                    }
                  //   res.json(user);
-            });
-        }
-    });
-    
-    // Look up alice by ID and return her info
-    User.findById(myID, function (err, users) {
-        if (err)
-            res.send(err);
-        res.json(users);
-        var doer_username = users.username;
-        console.log(doer_username);
-        // function to send notification
-        postNotification(doer_username);
-    });
+                });
+            }
+        });
+        
+        // Look up alice by ID and return her info
+        User.findById(myID, function (err, users) {
+            if (err)
+                res.send(err);
+            res.json(users);
+            var doer_username = users.username;
+            console.log(doer_username);
+            // function to send notification
+            postNotification(doer_username);
+        });
+    };
+
     
     // send notification to bob that alice is following him
     // build notificaiton object
@@ -428,6 +433,7 @@ exports.deleteFollows = function (req, res) {
 // ====================================================
 //               /users/:userID/followers
 // ====================================================
+
 
 
 
@@ -542,11 +548,11 @@ exports.logout = function (req, res) {
 };
 
 exports.fbsignup = function (req, res, next) {
-    User.find({ 'username': req.query.email }, function (err, result) {
+    User.findOne({ 'username': req.query.email }, function (err, result) {
         if (err) {
             console.log(err);
         } else {
-            if (result.length == 0) { // first time
+            if (!result) { // first time
                 User.register(new User({ username: req.query.email, email: req.query.email, fbId: req.query.fbId, fbUser: true, picture_url: req.body.picture_url, gravatarURL: req.body.picture_url, description: '' }), req.query.access, function (err, account) {
                     if (err) {
                         console.log(err);
@@ -562,8 +568,10 @@ exports.fbsignup = function (req, res, next) {
             } else { // already signed in
                 //result[0].password = req.query.access;  // update pass as new access
                 //result[0].save();
-                res.send(result[0]);
+                req.session.userId = result.id; // set the userId so we can protect the methods
+                res.send(result);
             }
+
         }
     });
 };
