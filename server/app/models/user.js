@@ -11,8 +11,7 @@ var passportLocalMongoose = require('passport-local-mongoose');
 
 var UserSchema = new Schema({
   username: { type: String, required: true, unique: true },
-    // password: { type: String, required: true },
-
+  password: { type: String, required: true },
   email: String,
   gravatarURL: String,
   description: String,
@@ -32,7 +31,6 @@ var UserSchema = new Schema({
   picture_url: { type: String }
 });
 
-UserSchema.plugin(passportLocalMongoose);
 
 // METHODS ======================
 
@@ -57,12 +55,10 @@ UserSchema.pre('save', function(callback) {
 
 // Verify Password
 UserSchema.methods.verifyPassword = function(password, cb) {
-  bcrypt.compare(password, this.password, function(err, isMatch) {
-    if (err) return cb(err);
-    cb(null, isMatch);
-  });
+  bcrypt.compare(password, this.password, cb);
 };
 
+UserSchema.plugin(passportLocalMongoose);
 //db.on('connected', function (err) {
 //    if (err) console.trace(err);
 //    else console.log("account db up!");

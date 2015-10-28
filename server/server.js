@@ -5,7 +5,7 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var expressSession = require('express-session');
 var server = require('http').createServer(app);
-var mongoose  	 = require('mongoose');
+var mongoose = require('mongoose');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var MongoStore = require('connect-mongo')(expressSession);
@@ -19,11 +19,11 @@ var compress = require('compression');
 
 // Node Environemtn Variables
 //==============================================================
-var port      	 = process.env.PORT || 8080;
+var port = process.env.PORT || 8080;
 
 // Database configuration
 //==============================================================
-var configDB 		 = require('./config/database.js');
+var configDB = require('./config/database.js');
 mongoose.connect(configDB.url);
 
 //var jwtCheck = jwt({
@@ -34,8 +34,8 @@ mongoose.connect(configDB.url);
 // Controllers
 //==============================================================
 var articleController = require('./app/controllers/article');
-var userController    = require('./app/controllers/user');
-var authController    = require('./app/controllers/auth');
+var userController = require('./app/controllers/user');
+var authController = require('./app/controllers/auth');
 var commentController = require('./app/controllers/comments');
 var notificationController = require('./app/controllers/notification');
 
@@ -102,7 +102,58 @@ app.set('view engine', 'ejs'); // set up ejs for templating
 //});
 
 /// Authentication ===========================================================
-passport.use(new LocalStrategy(User.authenticate()));
+//passport.use(new LocalStrategy(User.authenticate()));
+
+passport.use(new LocalStrategy(function (username, password, done) {
+    // search your database, or whatever, for the e-mail address
+    // and check the password...
+
+    User.findOne({ $or: [{ 'username': username }, { 'email': username }] }, function(err, user) {
+        if (err) {
+            return done(err);
+        }
+        if (!user) {
+            return done(null, false);
+        }
+        user.verifyPassword(password, function(err, result) {
+            if (err) {
+                return done(err, false);
+            }
+            return done(null, user);
+        });
+    });
+    //if (username.indexOf('@') === -1) {
+    //    User.findOne({ username: username }, function (err, user) {
+    //        if (err) {
+    //             return done(err);
+    //        }
+    //        if (!user) {
+    //             return done(null, false);
+    //        }
+    //        user.verifyPassword(password, function(err, result) {
+    //            if (err) {
+    //                return done(err, false);
+    //            }
+    //            return done(null, user);
+    //        });
+    //    });
+    //} else {
+    //    User.findOne({ email: username }, function (err, user) {
+    //        if (err) {
+    //            return done(err);
+    //        }
+    //        if (!user) {
+    //            return done(null, false);
+    //        }
+    //        user.verifyPassword(password, function (err, result) {
+    //            if (err) {
+    //                return done(err, false);
+    //            }
+    //            return done(null, user);
+    //        });
+    //    });
+    //}
+}));
 // use static serialize and deserialize of model for passport session support
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
@@ -115,79 +166,79 @@ var router = express.Router();     // Get instance of express Router
 
 router.route('/articles')
     .get([helper.isLoggedIn, articleController.getArticles])
-    .post([helper.isLoggedIn,articleController.postArticle]);
+    .post([helper.isLoggedIn, articleController.postArticle]);
 
 router.route('/articles/top')
-  .get([helper.isLoggedIn,articleController.getTopArticles]);
+  .get([helper.isLoggedIn, articleController.getTopArticles]);
 
 router.route('/articles/:id')
-  .get([helper.isLoggedIn,articleController.getArticle])
-  .put([helper.isLoggedIn,articleController.putArticle])
+  .get([helper.isLoggedIn, articleController.getArticle])
+  .put([helper.isLoggedIn, articleController.putArticle])
   .delete([helper.isLoggedIn, articleController.deleteArticle]);
 
-  router.route('/articles/:id/likes')
-  .post([helper.isLoggedIn,articleController.postLikes])
-  .get([helper.isLoggedIn,articleController.getLikes])
-  .put([helper.isLoggedIn,articleController.putLikes]);
+router.route('/articles/:id/likes')
+  .post([helper.isLoggedIn, articleController.postLikes])
+  .get([helper.isLoggedIn, articleController.getLikes])
+  .put([helper.isLoggedIn, articleController.putLikes]);
 
 // ============== USERS ========================
 
 // Endpoints for /users/:username/followed-by
 router.route('/users/:id/homefeed')
-    .post([helper.isLoggedIn,userController.getHomeFeed]);
-  
+    .post([helper.isLoggedIn, userController.getHomeFeed]);
+
 router.route('/users/homefeedpaging/:id')
     .post([helper.isLoggedIn, userController.getHomeFeedPaging]);
 
 // Endpoints for /users
 router.route('/users')
-	.post([helper.isLoggedIn,userController.postUsers])
-	.get([helper.isLoggedIn,userController.getUsers]);
+	.post([helper.isLoggedIn, userController.postUsers])
+	.get([helper.isLoggedIn, userController.getUsers]);
 
 // Endpoints for /users/:id
 router.route('/users/:id')
-  .get([helper.isLoggedIn,userController.getUser])
-  .put([helper.isLoggedIn,userController.putUser]);
+  .get([helper.isLoggedIn, userController.getUser])
+  .put([helper.isLoggedIn, userController.putUser]);
 
 // Endpoints for /users/:id/feed
 router.route('/users/:id/feed')
-  .get([helper.isLoggedIn,userController.getUserFeed]);
+  .get([helper.isLoggedIn, userController.getUserFeed]);
 
 router.route('/users/auth/:id')
-  .get([helper.isLoggedIn,userController.getAuth]);
+  .get([helper.isLoggedIn, userController.getAuth]);
 
 // Endpoints for /users/:username/articles
 router.route('/users/:id/articles')
-  .get([helper.isLoggedIn,userController.getUserArticles]);
+  .get([helper.isLoggedIn, userController.getUserArticles]);
 
 // Endpoints for /users/:id/saved
 router.route('/users/:id/saved')
-  .post([helper.isLoggedIn,userController.saveForLater])
-  .get([helper.isLoggedIn,userController.getSaved])
-  .put([helper.isLoggedIn,userController.deleteSaved]);
+  .post([helper.isLoggedIn, userController.saveForLater])
+  .get([helper.isLoggedIn, userController.getSaved])
+  .put([helper.isLoggedIn, userController.deleteSaved]);
 
 // Endpoints for /users/:username/follows
 router.route('/users/:id/follows')
-    .post([helper.isLoggedIn,userController.postFollows])
-    .get([helper.isLoggedIn,userController.getFollows])
-    .put([helper.isLoggedIn,userController.deleteFollows]);
+    .post([helper.isLoggedIn, userController.postFollows])
+    .get([helper.isLoggedIn, userController.getFollows])
+    .put([helper.isLoggedIn, userController.deleteFollows]);
 
 // Endpoints for /users/:username/followers
 router.route('/users/:id/followers')
-  	.get([helper.isLoggedIn,userController.getFollowers]);
+  	.get([helper.isLoggedIn, userController.getFollowers]);
 
 
 // ============== NOTIFICATIONS ========================
 router.route('/users/:id/notifications')
-  	.get([helper.isLoggedIn,notificationController.getNotifications]);
+  	.get([helper.isLoggedIn, notificationController.getNotifications]);
 
 
 
 // ============== COMMENTS ========================
 
 router.route('/articles/:id/comments')
-  .post([helper.isLoggedIn,commentController.postComment])
-  .get([helper.isLoggedIn,commentController.getComments]);
+  .post([helper.isLoggedIn, commentController.postComment])
+  .get([helper.isLoggedIn, commentController.getComments]);
 
 
 // ============== Authentication ========================

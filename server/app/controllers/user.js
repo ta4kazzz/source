@@ -308,7 +308,7 @@ exports.postFollows = function (req, res) {
                     return res.send(err);
                 }
             });
-
+            
             checkOtherUser();
         }
     });
@@ -348,7 +348,7 @@ exports.postFollows = function (req, res) {
             postNotification(doer_username);
         });
     };
-
+    
     
     // send notification to bob that alice is following him
     // build notificaiton object
@@ -508,7 +508,7 @@ exports.connect = function (req, res) {
     passport.serializeUser(User.serializeUser());
     passport.deserializeUser(User.deserializeUser());
     
-    User.findOne({ 'username': req.body.username }, function (err, user) {
+    User.findOne({ $or: [{ 'username': req.body.username }, { 'email': req.body.username }] }, function(err, user) {
         if (err) {
             console.log(err);
         } else {
@@ -527,7 +527,7 @@ exports.signup = function (req, res) {
         description = req.body.description;
     }
     
-    User.register(new User({ username: req.body.username, email: req.body.email, gravatarURL: gravatarURL, description: description }), req.body.password, function (err, account) {
+    User.register(new User({ username: req.body.username, password: req.body.password, email: req.body.email, gravatarURL: gravatarURL, description: description }), req.body.password, function (err, account) {
         if (err) {
             console.log(err);
             res.send(err);

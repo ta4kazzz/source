@@ -190,10 +190,10 @@ angular.module('starter.controllers')
 
         $scope.pageNumber = 1;
         $scope.itemsPerPage = 10;
-        $scope.loadMore();
+       // $scope.loadMore();
     };
 
-    $scope.$on('$ionicView.beforeEnter', function () {
+    $scope.$on('$ionicView.beforeLeave', function () {
         $scope.articles = [];
     });
 
