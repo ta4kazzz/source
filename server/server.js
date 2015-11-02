@@ -102,12 +102,7 @@ app.set('view engine', 'ejs'); // set up ejs for templating
 //});
 
 /// Authentication ===========================================================
-//passport.use(new LocalStrategy(User.authenticate()));
-
 passport.use(new LocalStrategy(function (username, password, done) {
-    // search your database, or whatever, for the e-mail address
-    // and check the password...
-
     User.findOne({ $or: [{ 'username': username }, { 'email': username }] }, function(err, user) {
         if (err) {
             return done(err);
@@ -122,37 +117,6 @@ passport.use(new LocalStrategy(function (username, password, done) {
             return done(null, user);
         });
     });
-    //if (username.indexOf('@') === -1) {
-    //    User.findOne({ username: username }, function (err, user) {
-    //        if (err) {
-    //             return done(err);
-    //        }
-    //        if (!user) {
-    //             return done(null, false);
-    //        }
-    //        user.verifyPassword(password, function(err, result) {
-    //            if (err) {
-    //                return done(err, false);
-    //            }
-    //            return done(null, user);
-    //        });
-    //    });
-    //} else {
-    //    User.findOne({ email: username }, function (err, user) {
-    //        if (err) {
-    //            return done(err);
-    //        }
-    //        if (!user) {
-    //            return done(null, false);
-    //        }
-    //        user.verifyPassword(password, function (err, result) {
-    //            if (err) {
-    //                return done(err, false);
-    //            }
-    //            return done(null, user);
-    //        });
-    //    });
-    //}
 }));
 // use static serialize and deserialize of model for passport session support
 passport.serializeUser(User.serializeUser());
@@ -246,6 +210,7 @@ router.post('/users/connect', passport.authenticate('local'), userController.con
 router.post('/users/signup', userController.signup);
 router.post('/users/logout', userController.logout);
 router.post('/users/fbsignup', userController.fbsignup);
+router.post('/users/twittersignup', userController.twittersignup);
 
 
 

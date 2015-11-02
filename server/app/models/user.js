@@ -28,7 +28,10 @@ var UserSchema = new Schema({
   notifications : [{ type: Schema.Types.ObjectId, ref: 'Notification' }],
   fbUser: { type: Boolean },
   fbId: { type: String },
-  picture_url: { type: String }
+  picture_url: { type: String },
+  twiterrId: { type: String },
+  twiterrToken: { type: String },
+  twitterUser: { type: Boolean }
 });
 
 

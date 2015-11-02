@@ -158,7 +158,9 @@ angular.module('starter.controllers')
                                 specificArticle["isSavedByUser"] = false;
                             }
                         };
-                    } else {
+                    }
+
+                    if (data.length <=0 || data.length != $scope.itemsPerPage ) {
                         $scope.noMoreItemsAvailable = true;
                     }
 
@@ -193,9 +195,9 @@ angular.module('starter.controllers')
        // $scope.loadMore();
     };
 
-    $scope.$on('$ionicView.beforeLeave', function () {
-        $scope.articles = [];
-    });
+    //$scope.$on('$ionicView.beforeLeave', function () {
+    //    $scope.articles = [];
+    //});
 
     $scope.$on('$ionicView.afterEnter', function () {
         init();

@@ -43,7 +43,7 @@ angular.module('starter.controllers')
              }
          })
         .error(function (error, status, headers, config) {
-            console.log(error );
+            console.log(error);
             alert('Error connecting user');
         });
         // auth.signin({connection: 'Username-Password-Authentication',username: $scope.loginForm.email,password: $scope.loginForm.password}, onLoginSuccess, onLoginFailed);
@@ -108,7 +108,7 @@ angular.module('starter.controllers')
                             window.localStorage['picture_url'] = data.picture_url; // fb picture
 
                             window.localStorage['SourceID'] = data._id;
-                           
+
                             $state.go('tabs.home');
                         }
                     }).error(function (error, status, headers, config) {
@@ -122,4 +122,31 @@ angular.module('starter.controllers')
             });
     };
 
+    $scope.twitterLogin = function () {
+        TwitterConnect.login(function (result) {
+            var pictureUrl = 'https://twitter.com/' + result.userName + '/profile_image?size=normal';
+
+            API.registerTwitterUser(result.userName, result.userId, result.secret, result.token, pictureUrl)
+   .success(function (data, status, headers, config, profile) {
+       if (status === 200) {
+           console.log("Successfully logged in with your new credentials!");
+           store.set('profile', data);
+           window.localStorage['picture_url'] = data.gravatarURL; // fb picture
+
+           window.localStorage['SourceID'] = data._id;
+
+           $state.go('tabs.home');
+       }
+   }).error(function (error, status, headers, config) {
+       console.log(error);
+       alert('Error creating fb for user');
+   });
+
+            console.log('Successful login!');
+            console.log(result);
+        }, function (error) {
+            console.log('Error logging in');
+            console.log(error);
+        });
+    };
 });

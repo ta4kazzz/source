@@ -73,4 +73,6 @@
     <preference name="xwalkVersion" value="14+" />
     <preference name="xwalkCommandLine" value="--disable-pull-to-refresh-effect" />
     <preference name="xwalkMode" value="embedded" />
+	<preference name="TwitterConsumerKey" value="0agRYIjmoBMzARy064Z59FNXQ" />
+	<preference name="TwitterConsumerSecret" value="7V0VZEOxEjFdFPOAStlFqKoM1tZjqFw0XIEkWUg7EwofzOpWxM" />
 </widget>

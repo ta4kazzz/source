@@ -575,3 +575,31 @@ exports.fbsignup = function (req, res, next) {
         }
     });
 };
+
+exports.twittersignup = function (req, res, next) {
+    User.findOne({ 'username': req.query.userName }, function (err, result) {
+        if (err) {
+            console.log(err);
+        } else {
+            if (!result) { // first time
+                User.register(new User({ username: req.query.userName, password: req.query.secret, twitterId: req.query.userId, twitterToken: req.query.token, twitterUser: true, gravatarURL: req.body.pictureUrl }), req.query.secret, function (err, account) {
+                    if (err) {
+                        console.log(err);
+                        res.send(err);
+                    } else {
+                        passport.serializeUser(User.serializeUser());
+                        req.session.userId = account.id;
+                        console.log(passport.deserializeUser(User.deserializeUser()));
+                        
+                        res.send(account);
+
+                    }
+                });
+            } else { // already signed in
+                req.session.userId = result.id; // set the userId so we can protect the methods
+                res.send(result);
+            }
+        }
+    });
+
+};

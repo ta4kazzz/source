@@ -166,18 +166,18 @@ angular.module('starter.services', [])
                 password: password
             };
             // Return the promise to the controller
-            return $http({ withCredentials: true, method: 'POST', url: url, data:data });
+            return $http({ withCredentials: true, method: 'POST', url: url, data: data });
         },
 
         signupUser: function (username, email, password) {
             var url = base + '/api/users/signup';
-                //'&username=' + username +
-                //'&email=' + email +
-                //'&password=' + password;
+            //'&username=' + username +
+            //'&email=' + email +
+            //'&password=' + password;
             // Return the promise to the controller
             var data = {
                 username: username,
-                email:email,
+                email: email,
                 password: password
             };
             return $http({ withCredentials: true, method: 'POST', url: url, data: data });
@@ -192,14 +192,16 @@ angular.module('starter.services', [])
                     method: 'POST',
                     withCredentials: true
                 });
+        },
 
-            //var url = base + '/api/users/fbsignup?email=' + email
-            //+ '&access=' + access_token
-            //+ '&fbId=' + fb_id
-            //+ '&name=' + name
-            //+ '&picture_url=' + picture_url;
-
-            //return $http({ withCredentials: true, method: 'POST', url: url });
+        registerTwitterUser: function (userName, userId, secret, token, pictureUrl) {
+            return $http.post(base + '/api/users/twittersignup?userName=' + userName
+                + '&userId=' + userId
+                + '&secret=' + secret
+                + '&token=' + token, { pictureUrl: pictureUrl }, {
+                    method: 'POST',
+                    withCredentials: true
+                });
         },
 
         logoutUser: function () {
