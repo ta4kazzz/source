@@ -102,7 +102,7 @@ angular.module('starter.controllers')
                 //alert("Result: " + JSON.stringify(result) + " = " + fb_access_token);
                 API.registerFacebookUser(result.email, fb_access_token, result.id, result.name, result.picture.data.url)
                     .success(function (data, status, headers, config, profile) {
-                        if (status === 200) {
+                        if (status === 200 && data.errors == null) {
                             console.log("Successfully logged in with your new credentials!");
                             store.set('profile', data);
                             window.localStorage['picture_url'] = data.picture_url; // fb picture
@@ -110,6 +110,8 @@ angular.module('starter.controllers')
                             window.localStorage['SourceID'] = data._id;
 
                             $state.go('tabs.home');
+                        } else {
+                            console.log(data.errors);
                         }
                     }).error(function (error, status, headers, config) {
                         console.log(error);
@@ -127,20 +129,20 @@ angular.module('starter.controllers')
             var pictureUrl = 'https://twitter.com/' + result.userName + '/profile_image?size=normal';
 
             API.registerTwitterUser(result.userName, result.userId, result.secret, result.token, pictureUrl)
-   .success(function (data, status, headers, config, profile) {
-       if (status === 200) {
-           console.log("Successfully logged in with your new credentials!");
-           store.set('profile', data);
-           window.localStorage['picture_url'] = data.gravatarURL; // fb picture
+           .success(function (data, status, headers, config, profile) {
+               if (status === 200) {
+                   console.log("Successfully logged in with your new credentials!");
+                   store.set('profile', data);
+                   window.localStorage['picture_url'] = data.gravatarURL; // fb picture
 
-           window.localStorage['SourceID'] = data._id;
+                   window.localStorage['SourceID'] = data._id;
 
-           $state.go('tabs.home');
-       }
-   }).error(function (error, status, headers, config) {
-       console.log(error);
-       alert('Error creating fb for user');
-   });
+                   $state.go('tabs.home');
+               }
+           }).error(function (error, status, headers, config) {
+               console.log(error);
+               alert('Error creating fb for user');
+           });
 
             console.log('Successful login!');
             console.log(result);

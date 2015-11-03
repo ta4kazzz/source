@@ -1,76 +1,51 @@
 <ion-view>
-
-
-  <!-- Nav Bar -->
-  <!-- <ion-nav-bar class="bar-positive">
-      <ion-nav-buttons side="left">
-      <button class="button" ui-sref="tabs.home">Close</button>
-      </ion-nav-buttons>
-  </ion-nav-bar> -->
-
-  <ion-nav-bar class="bar top-shadow opacity-95">
-    <ion-nav-back-button>
-    </ion-nav-back-button>
-
-    <ion-nav-buttons side="right">
-
-      <div class="buttons">
-        <i ng-click="popover.show($event)" class="icon ion-ios-more-outline menu-icon-right"></i>
-      </div>
-
-      <!-- <button class="button" ng-click="saveForLater(articles._id)">Saved for Later</button>
-      <button class="button" ng-click="likeArticle(article)">Like</button>
-      <button class="button" ng-click="openWebView(article.url)">Web View</button> -->
-    </ion-nav-buttons>
-  </ion-nav-bar>
-
-
-  <ion-content class="has-header" ng-init="getContent()">
-
-      <img class="reader--thumb full-image" src="{{articleImageUrl}}">
-
-      <div class="reader--container">
-
-        <h2 class="reader--title">{{articleTitle}}</h2>
-        <p>{{article.shortUrl}}</p>
-        <p>{{articleDate | date : 'short' : timezone}}</p>
-        <p>{{username}}</p>
-
-
-
-        <div class="reader--content">
-          <p style="white-space: pre-wrap;">{{articleContent}}</p>
+    <ion-nav-bar class="bar top-shadow opacity-95">
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+        <ion-nav-buttons side="right">
+            <div class="buttons">
+                <i ng-click="popover.show($event)" class="icon ion-ios-more-outline menu-icon-right"></i>
+            </div>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content class="has-header" ng-init="getContent()">
+        <img class="reader--thumb full-image" src="{{articleImageUrl}}">
+        <div class="reader--container">
+            <h2 class="reader--title">{{articleTitle}}</h2>
+            <p>{{article.shortUrl}}</p>
+            <p>{{articleDate | date : 'short' : timezone}}</p>
+            <p>{{username}}</p>
+            <div class="reader--content">
+                <p style="white-space: pre-wrap;">{{articleContent}}</p>
+            </div>
         </div>
+    </ion-content>
 
-      </div>
-
-
-  </ion-content>
-
-
-
-
-
-
-
-
-  <script id="templates/popover.html" type="text/ng-template" >
-  <style>.popover { height:20px; width: 165px; }</style>
-    <ion-popover-view>
-      <ion-content>
-        <div class="list">
-          <a class="item" ng-click="saveForLater(articles._id)" target="_blank">
-            Save For Later
-          </a>
-          <a class="item" ng-click="likeArticle(article)" target="_blank">
-            Like
-          </a>
-          <a class="item" ng-click="openWebView(article.url)" target="_blank">
-            Web View
-          </a>
-        </div>
-      </ion-content>
-    </ion-popover-view>
-  </script>
+    <script id="templates/popover.html" type="text/ng-template">
+        <style>
+            .popover {
+                height: 20px;
+                width: 165px;
+            }
+        </style>
+        <ion-popover-view>
+            <ion-content>
+                <div class="list">
+                    <a class="item" ng-click="saveForLater(article._id)" target="_blank">
+                        Save For Later
+                    </a>
+                    <a class="item" ng-click="likeArticle(article)" target="_blank">
+                        Like
+                    </a>
+                    <a class="item" ng-click="openWebView(article.url)" target="_blank">
+                        Web View
+                    </a>
+                    <a class="item" ng-click="delete(article._id)" target="_blank">
+                        Delete
+                    </a>
+                </div>
+            </ion-content>
+        </ion-popover-view>
+    </script>
 
 </ion-view>

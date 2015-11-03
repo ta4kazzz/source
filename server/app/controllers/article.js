@@ -30,24 +30,24 @@ var mongoose = require('mongoose');
 //// ==========================================
 
 //exports.postArticles = function (req, res) {
-    
+
 //    // New Article object
 //    var article = new Article();
-    
+
 //    article.url = req.body.url;
 //    article.shortUrl = req.body.shortUrl;
 //    article.summary = req.body.summary;
 //    article.created = req.body.created;
 //    article.gravatarURL = req.body.gravatarURL;
 //    article.username = req.body.username;
-    
+
 //    // convert userID string to ObjectID
 //    var userID = mongoose.Types.ObjectId(req.body.userID);
 //    var articleID = article._id;
-    
+
 //    // Saves to article
 //    article._userID = userID;
-    
+
 //    User.findByIdAndUpdate(
 //      userID,
 //      { $push: { "articles": articleID } },
@@ -56,10 +56,10 @@ var mongoose = require('mongoose');
 //        console.log(err);
 //    }
 //);
-    
+
 //    // URL to html
 //    var domain = article.url;
-    
+
 //    // Gets the raw html from the domain name and execites the parseMyhtml function
 //    request(domain, function (error, response, body) {
 //        if (!error) {
@@ -68,20 +68,20 @@ var mongoose = require('mongoose');
 //            console.log(error);
 //        }
 //    });
-    
+
 //    var parseHtml = function (html) {
-        
+
 //        data = unfluff.lazy(html, 'en');
 //        var title = data.title();
 //        var content = data.text();
 //        var imageUrl = data.image();
-        
+
 //        article.title = title;
 //        article.content = content;
 //        article.imageUrl = imageUrl;
 //        article.public = false;
-        
-        
+
+
 //        // save the bear and check for errors
 //        article.save(function (err) {
 //            if (err)
@@ -118,7 +118,7 @@ exports.postArticle = function (req, res) {
             // Saves to article
             article._userID = userID;
             
-            User.findByIdAndUpdate(userID,{ $push: { "articles": articleID } },{ safe: true, upsert: true },function (err, model) {
+            User.findByIdAndUpdate(userID, { $push: { "articles": articleID } }, { safe: true, upsert: true }, function (err, model) {
                 console.log(err);
             });
             
@@ -175,8 +175,16 @@ exports.getArticle = function (req, res) {
 // ==========================================
 
 exports.deleteArticle = function (req, res) {
+    var currentUserId = req.session.userId;
     
-    Article.remove({ userId: req.userID, _id: req.params.article_id }, function (err) {
+    // delete the article only from the user that posted it.
+    Article.findOne({ $and: [{ '_userID': currentUserId }, { '_id': req.params.id }] }, function (err) {
+        if (err) {
+            res.send(err);
+        }
+        console.log('In here1');
+       })
+       .remove(function (err) {
         if (err)
             res.send(err);
         res.json({ message: 'Article successfully removed' });
@@ -250,14 +258,13 @@ exports.postLikes = function (req, res) {
     var articleImageUrl = req.body.imageUrl;
     
     // Add liker to the article object
-    Article.findByIdAndUpdate(
-			articleID,
+    Article.findByIdAndUpdate(articleID,
 			{ $push: { "likes": userID } },
 			{ safe: true, upsert: true },
 			function (err, model) {
         console.log(err);
     }
-);
+    );
     
     // Add Article to the liker object?
     
@@ -271,21 +278,22 @@ exports.postLikes = function (req, res) {
     
     
     // Look up alice by ID and return
-    User.findById(userID, function (err, users) {
-        if (err)
+    User.findById(userID, function (err, user) {
+        if (err) {
             res.send(err);
-        res.json(users);
-        var doer_username = users.username;
+        }
+        
+        var doer_username = user.username;
         console.log(doer_username);
         // function to send notification
-        postNotification(doer_username);
+        postNotification(doer_username, user);
+        res.json(user);
     });
     
     
     // pass it the doer
     function postNotification(doer_username) {
-        Article
-				.findById(articleID).exec(function (err, article) {
+        Article.findById(articleID).exec(function (err, article) {
             
             var user = article._userID;
             
@@ -301,30 +309,22 @@ exports.postLikes = function (req, res) {
             });
             
             // 2) PUSH NOTIFICAITON TO THE USERS COLLECTION
-            User
-					.findByIdAndUpdate(
-			        notification.articleOwner,
-			        { $push: { "notifications": notification } },
-			        { safe: true, upsert: true },
-			        function (err, user) {
+            User.findByIdAndUpdate(notification.articleOwner, { $push: { "notifications": notification } }, { safe: true, upsert: true }, function (err, user) {
                 if (err)
                     res.send(err);
-                res.json(notification);
-            }
-);
+               // res.json(notification);
+            });
             
             // 3) SAVE NOTIFICATION OBJECT
             notification.save(function (err) {
                 if (err)
                     res.send(err);
-                res.json(
-							{
-                    message: 'New Notication Has been added',
-								// email: user.email,
-								// username: user.username,
-								// gravatarURL: user.gravatarURL
-                }
-);
+        //        res.json({
+        //            message: 'New Notication Has been added',
+								//// email: user.email,
+								//// username: user.username,
+								//// gravatarURL: user.gravatarURL
+        //        });
             });
 
         });
@@ -372,15 +372,15 @@ exports.putLikes = function (req, res) {
     
     
     Article.findByIdAndUpdate(
-			articleID,
+        articleID,
 			{ $pull: { "likes": userID } },
 			{ safe: true, upsert: true },
 			function (err, user) {
-        if (err)
-            res.send(err);
-        res.json(user);
-    }
-);
+            if (err)
+                res.send(err);
+            res.json(user);
+        }
+    );
 
 
 };

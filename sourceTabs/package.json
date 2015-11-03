@@ -19,13 +19,11 @@
   },
   "cordovaPlugins": [
     "org.apache.cordova.inappbrowser",
+    "cordova-plugin-crosswalk-webview",
     {
       "id": "phonegap-facebook-plugin",
       "locator": "../phonegap-facebook-plugin"
     },
-    "cordova-plugin-crosswalk-webview",
-    "cordova-plugin-whitelist",
-    "cordova-plugin-splashscreen",
     "twitter-connect-plugin"
   ],
   "cordovaPlatforms": [

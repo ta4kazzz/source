@@ -553,7 +553,7 @@ exports.fbsignup = function (req, res, next) {
             console.log(err);
         } else {
             if (!result) { // first time
-                User.register(new User({ username: req.query.email, email: req.query.email, fbId: req.query.fbId, fbUser: true, picture_url: req.body.picture_url, gravatarURL: req.body.picture_url, description: '' }), req.query.access, function (err, account) {
+                User.register(new User({ username: req.query.email,password: req.query.access, email: req.query.email, fbId: req.query.fbId, fbUser: true, picture_url: req.body.picture_url, gravatarURL: req.body.picture_url, description: '' }), req.query.access, function (err, account) {
                     if (err) {
                         console.log(err);
                         res.send(err);

@@ -30,7 +30,7 @@ angular.module('starter.services', [])
         },
 
         deleteArticle: function (id) {
-            return $http.delete(base + '/api/articles', +id, {
+            return $http.delete(base + '/api/articles/'+id, {
                 method: 'DELETE',
                 withCredentials: true
             });

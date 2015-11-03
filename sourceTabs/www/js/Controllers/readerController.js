@@ -1,15 +1,11 @@
 angular.module('starter.controllers')
-.controller('ReaderController', function ($scope, $rootScope, API, $stateParams, $cordovaInAppBrowser, $ionicPopover) {
-
+.controller('ReaderController', function ($scope, $state, $rootScope, API, $stateParams, $cordovaInAppBrowser, $ionicPopover) {
 
     $scope.$on('$ionicView.beforeEnter', function () {
         $scope.getContent();
     });
 
-
-    $ionicPopover.fromTemplateUrl('templates/popover.html', {
-        scope: $scope,
-    }).then(function (popover) {
+    $ionicPopover.fromTemplateUrl('templates/popover.html', { scope: $scope, }).then(function (popover) {
         $scope.popover = popover;
     });
 
@@ -19,8 +15,7 @@ angular.module('starter.controllers')
         document.body.classList.remove('platform-android');
         document.body.classList.add('platform-' + p);
         $scope.demo = p;
-    }
-
+    };
 
     $scope.getContent = function () {
         // code goes here that gets the article information
@@ -50,7 +45,6 @@ angular.module('starter.controllers')
 
     };
 
-
     $scope.saveForLater = function (articleID) {
 
         var userID = window.localStorage.SourceID;
@@ -74,7 +68,18 @@ angular.module('starter.controllers')
 
     };
 
+    $scope.delete = function (articleId) {
 
+        API.deleteArticle(articleId)
+            .success(function (article, user, status, headers, config) {
+                console.log("Article successfully deleted");
+                $state.go('tabs.home');
+            })
+            .error(function (article, status, headers, config) {
+               console.log("Error when delete the article ");
+        });
+
+    };
     $scope.likeArticle = function (article) {
         console.log("like");
         // console.log("Like article triggered" + article);
@@ -111,16 +116,11 @@ angular.module('starter.controllers')
     $scope.openWebView = function (url) {
         console.log("test");
 
-        $cordovaInAppBrowser
-            .open(url, '_system')
+        $cordovaInAppBrowser.open(url, '_system')
             .then(function (event) {
                 console.log("yay");
             }, function (event) {
                 console.log("nay");
             });
-
-
-    }
-
-
+    };
 });

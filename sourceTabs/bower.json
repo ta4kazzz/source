@@ -7,6 +7,7 @@
     "ionic": "driftyco/ionic-bower#v1.1.0"
   },
   "devDependencies": {
-    "ionic-platform-web-client": "~0.2.0"
+    "ionic-platform-web-client": "~0.2.0",
+    "phonegap-facebook-plugin": "../phonegap-facebook-plugin#~0.12.0"
   }
 }
