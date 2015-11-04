@@ -14,15 +14,14 @@ angular.module('starter.controllers')
                     $scope.users = [];
 
                     for (var i = 0; i < data.length; i++) {
-                        $scope.users.push(data[i]);
+                        if (id !== data[i]._id) {
+                            $scope.users.push(data[i]);
+                        }
                     };
-
-
                 })
                 .error(function (users, status, headers, config) {
-                    console.log("Something went wrong")
+                    console.log("Something went wrong");
                 });
-
         };
 
     });

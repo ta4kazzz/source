@@ -29,6 +29,7 @@
     "connect-mongo": "*",
     "multer": "~1.0.6",
     "jade": "~1.11.0",
-    "compression": "~1.6.0"
+    "compression": "~1.6.0",
+    "gravatar": "~1.3.1"
   }
 }

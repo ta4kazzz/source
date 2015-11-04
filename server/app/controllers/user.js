@@ -4,6 +4,8 @@ var Article = require('../models/article.js');
 var Notification = require('../models/notification.js');
 var mongoose = require('mongoose');
 var passport = require('passport');
+var gravatar = require('gravatar');
+var request = require('request');
 // 	  TABLE OF CONTENTS   ====================================================================
 //
 //		#postUser
@@ -508,7 +510,7 @@ exports.connect = function (req, res) {
     passport.serializeUser(User.serializeUser());
     passport.deserializeUser(User.deserializeUser());
     
-    User.findOne({ $or: [{ 'username': req.body.username }, { 'email': req.body.username }] }, function(err, user) {
+    User.findOne({ $or: [{ 'username': req.body.username }, { 'email': req.body.username }] }, function (err, user) {
         if (err) {
             console.log(err);
         } else {
@@ -522,22 +524,51 @@ exports.signup = function (req, res) {
     var gravatarURL = '';
     var description = '';
     
-    if (req.body.avatar) {
-        gravatarURL = req.body.gravatarURL;
+    if (req.body.description) {
         description = req.body.description;
     }
     
-    User.register(new User({ username: req.body.username, password: req.body.password, email: req.body.email, gravatarURL: gravatarURL, description: description }), req.body.password, function (err, account) {
-        if (err) {
-            console.log(err);
-            res.send(err);
-        } else {
-            passport.serializeUser(User.serializeUser());
-            req.session.userId = account.id; // set the userId so we can protect the methods
-            console.log(passport.deserializeUser(User.deserializeUser()));
-            res.send(account);
-        }
-    });
+    if (req.body.gravatarURL) {
+        gravatarURL = req.body.gravatarURL;
+    } else {
+        //get gravatar image
+        gravatarURL = gravatar.url(req.body.email, { s: '200', r: 'pg', d: '404' }, false);
+        request(gravatarURL, function (error, response, body) {
+            if (!error) {
+                if (response.statusCode === 404) {
+                    // get new image from first letters
+                    var monkeyPlace = req.body.email.indexOf('@');
+                    var twoLetters = '';
+                    if (monkeyPlace === 1) {
+                        var firstLetter = req.body.email.substr(0, monkeyPlace).toLowerCase();
+                        twoLetters = firstLetter + firstLetter;
+                    } else {
+                        twoLetters = req.body.email.substr(0, 2).toLowerCase();
+                    }
+                    gravatarURL = 'https://i1.wp.com/cdn.auth0.com/avatars/' + twoLetters + '.png?ssl=1';
+                }
+            } else {
+                console.log(error);
+            }
+            
+            registerUser();
+        });
+    }
+    
+    function registerUser() {
+        User.register(new User({ username: req.body.username, password: req.body.password, email: req.body.email, gravatarURL: gravatarURL, description: description }), req.body.password, function (err, account) {
+            if (err) {
+                console.log(err);
+                res.send(err);
+            } else {
+                passport.serializeUser(User.serializeUser());
+                req.session.userId = account.id; // set the userId so we can protect the methods
+                console.log(passport.deserializeUser(User.deserializeUser()));
+                res.send(account);
+            }
+        });
+    }
+
 };
 
 exports.logout = function (req, res) {
@@ -553,7 +584,7 @@ exports.fbsignup = function (req, res, next) {
             console.log(err);
         } else {
             if (!result) { // first time
-                User.register(new User({ username: req.query.email,password: req.query.access, email: req.query.email, fbId: req.query.fbId, fbUser: true, picture_url: req.body.picture_url, gravatarURL: req.body.picture_url, description: '' }), req.query.access, function (err, account) {
+                User.register(new User({ username: req.query.email, password: req.query.access, email: req.query.email, fbId: req.query.fbId, fbUser: true, picture_url: req.body.picture_url, gravatarURL: req.body.picture_url, description: '' }), req.query.access, function (err, account) {
                     if (err) {
                         console.log(err);
                         res.send(err);

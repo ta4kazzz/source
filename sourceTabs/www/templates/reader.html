@@ -30,7 +30,7 @@
         </style>
         <ion-popover-view>
             <ion-content>
-                <div class="list">
+                <div class="list" ng-click="popover.hide()">
                     <a class="item" ng-click="saveForLater(article._id)" target="_blank">
                         Save For Later
                     </a>
@@ -40,7 +40,7 @@
                     <a class="item" ng-click="openWebView(article.url)" target="_blank">
                         Web View
                     </a>
-                    <a class="item" ng-click="delete(article._id)" target="_blank">
+                    <a class="item" ng-click="delete(article._id)" target="_blank" ng-if="article._userID===currentUserId">
                         Delete
                     </a>
                 </div>

@@ -1,11 +1,14 @@
 angular.module('starter.controllers')
-.controller('ReaderController', function ($scope, $state, $rootScope, API, $stateParams, $cordovaInAppBrowser, $ionicPopover) {
+.controller('ReaderController', function ($scope, $state, $rootScope,$ionicHistory, API, $stateParams, $cordovaInAppBrowser, $ionicPopover) {
+    $scope.currentUserId = window.localStorage['SourceID'];
 
     $scope.$on('$ionicView.beforeEnter', function () {
         $scope.getContent();
     });
 
-    $ionicPopover.fromTemplateUrl('templates/popover.html', { scope: $scope, }).then(function (popover) {
+    $ionicPopover.fromTemplateUrl('templates/popover.html',
+        { scope: $scope, })
+        .then(function (popover) {
         $scope.popover = popover;
     });
 
@@ -73,7 +76,8 @@ angular.module('starter.controllers')
         API.deleteArticle(articleId)
             .success(function (article, user, status, headers, config) {
                 console.log("Article successfully deleted");
-                $state.go('tabs.home');
+                $ionicHistory.goBack();
+                //$state.go('tabs.home');
             })
             .error(function (article, status, headers, config) {
                console.log("Error when delete the article ");

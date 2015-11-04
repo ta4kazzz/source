@@ -7,7 +7,6 @@ angular.module('starter.controllers')
     });
 
     $scope.getProfile = function () {
-
         var id = window.localStorage.SourceID;
 
         API.getUser(id)
@@ -23,39 +22,32 @@ angular.module('starter.controllers')
 
             })
             .error(function (user, status, headers, config) {
-                console.log("Your profile was not retreived")
-
+                console.log("Your profile was not retreived");
             });
-
 
         $scope.getFollowers = function () {
             $scope.users = API.getFollowers(id)
                 .success(function (data, status, headers, config) {
                     $scope.users = [];
-                    $scope.profileFollowerNumber = data.length;
+                    $scope.profileFollowerNumber = data.length - 1;
                 })
                 .error(function (users, status, headers, config) {
-                    console.log("Something went wrong")
-                });
+                console.log("Something went wrong");
+            });
         };
-
 
         $scope.getFollows = function () {
             $scope.users = API.getFollows(id)
                 .success(function (data, status, headers, config) {
                     $scope.users = [];
                     console.log(data.length);
-                    $scope.profileFollowingNumber = data.length;
+                    $scope.profileFollowingNumber = data.length -1 ;
                 })
                 .error(function (users, status, headers, config) {
                     console.log("Something went wrong")
                 });
-
         };
-
-
     };
-
 
     $scope.getProfileFeed = function () {
 
@@ -66,7 +58,6 @@ angular.module('starter.controllers')
                 $scope.articles = [];
 
                 $scope.profileArticleNumber = data.length;
-
 
                 for (var i = 0; i < data.length; i++) {
                     if (data[i].public == true) {
