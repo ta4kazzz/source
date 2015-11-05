@@ -200,6 +200,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
                     }
                 }
             })
+              .state('tabs.profileBoards', {
+                  url: "/profile/boards",
+                  views: {
+                      'profile-tab': {
+                          templateUrl: 'templates/profile-boards.html',
+                          controller: 'ProfileBoardsController'
+                      }
+                  }
+              })
             .state('tabs.settings', {
                 url: '/profile/settings',
                 views: {
@@ -279,6 +288,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
                 controller: 'AddController',
                 cache: false
             })
+             .state('addBoard', {
+                 url: '/addboard',
+                 templateUrl: 'templates/addBoard.html',
+                 controller: 'AddBoardController',
+                 cache: false
+             })
             .state('likers', {
                 url: '/articles/:articleID/likers',
                 templateUrl: 'templates/likers.html',

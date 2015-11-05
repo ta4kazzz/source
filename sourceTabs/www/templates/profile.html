@@ -1,85 +1,56 @@
 <ion-view view-title="Profile">
-  <!-- Nav Bar -->
-  <ion-nav-bar class="bar top-shadow">
-      <ion-nav-buttons side="right">
-      <div class="buttons">
-        <i ui-sref="tabs.settings" class="icon ion-ios-cog-outline menu-icon-right"></i>
-      </div>
-      </ion-nav-buttons>
-
-  </ion-nav-bar>
-
-
-
-
-
-  <ion-content ng-init="getProfile()">
-
-
-
-    <div class="profile--banner">
-
-      <div class="profile-picture" style="
-        margin-left: auto;
-        margin-right: auto;
-        max-width: 100px;
-        text-align: center;
-        }">
-        <img style ="width: 5em; border-radius: 5em; margin-top: 2em;" src="{{gravatarURL}}">
-      </div>
-
-      <div class="username" style="text-align: center;">{{username}}</div>
-      <p class="description" style="text-align: center;">{{description}}</p>
-
-      <div class="row">
-        <div class="col profile-column"><a href="#">
-                    <p class="profile--number">{{profileArticleNumber}}</p>
-                    <p class="profile-label">Articles</p>
-                    <a>
-        </div>
-        <div class="col profile-column">
-                    <a href="#/tab/profile/followers">
-                    <p class="profile--number">{{profileFollowerNumber}}</p>
-                    <p class="profile-label">Followers<p>
-                    <a>
-        </div>
-        <div class="col profile-column">
-                    <a href="#/tab/profile/following">
-                    <p class="profile--number">{{profileFollowingNumber}}</p>
-                    <p class="profile-label">Following</p>
+    <!-- Nav Bar -->
+    <ion-nav-bar class="bar top-shadow">
+        <ion-nav-buttons side="right">
+            <div class="buttons">
+                <i ui-sref="tabs.settings" class="icon ion-ios-cog-outline menu-icon-right"></i>
+            </div>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content >
+        <div class="profile--banner">
+            <div class="profile-picture" style="margin-left: auto;margin-right: auto;max-width: 100px;text-align: center;">
+                <img style="width: 5em; border-radius: 5em; margin-top: 2em;" src="{{gravatarURL}}">
+            </div>
+            <div class="username" style="text-align: center;">{{username}}</div>
+            <p class="description" style="text-align: center;">{{description}}</p>
+            <div class="row">
+                <div class="col profile-column">
+                    <a href="#">
+                        <p class="profile--number">{{profileArticleNumber}}</p>
+                        <p class="profile-label">Articles</p>
                     </a>
+                </div>
+                <div class="col profile-column">
+                    <a href="#/tab/profile/boards">
+                        <p class="profile--number">{{profileBoardNumber}}</p>
+                        <p class="profile-label">Boards</p>
+                    </a>
+                </div>
+                <div class="col profile-column">
+                    <a href="#/tab/profile/followers">
+                        <p class="profile--number">{{profileFollowerNumber}}</p>
+                        <p class="profile-label">Followers<p>
+                    </a>
+                </div>
+                <div class="col profile-column">
+                    <a href="#/tab/profile/following">
+                        <p class="profile--number">{{profileFollowingNumber}}</p>
+                        <p class="profile-label">Following</p>
+                    </a>
+                </div>
+            </div>
         </div>
-      </div>
-
-    </div>
-
-
-
-
-
-
-
-
-
-    <!-- Profile Feed -->
-    <ion-list ng-init="getProfileFeed()">
-
-
-      <div ng-repeat="articles in articles" >
-
-        <a ui-sref="tabs.readerProfile( { articleID: articles._id} )" class="item item-thumbnail-left">
-               <img src="{{articles.imageUrl}}">
-               <div><h2 class="no-text-wrap">{{ articles.title }}</h2></div>
-               <p>{{ articles.shortUrl }}</p>
-        </a>
-
-      </ion-item>
-
-
-
-
-
-  </ion-content>
-
+        <!-- Profile Feed -->
+        <ion-list ng-init="getProfileFeed()">
+            <div ng-repeat="articles in articles">
+                <a ui-sref="tabs.readerProfile( { articleID: articles._id} )" class="item item-thumbnail-left">
+                    <img src="{{articles.imageUrl}}">
+                    <div><h2 class="no-text-wrap">{{ articles.title }}</h2></div>
+                    <p>{{ articles.shortUrl }}</p>
+                </a>
+            </div>
+        </ion-list>
+    </ion-content>
 
 </ion-view>

@@ -38,6 +38,7 @@ var userController = require('./app/controllers/user');
 var authController = require('./app/controllers/auth');
 var commentController = require('./app/controllers/comments');
 var notificationController = require('./app/controllers/notification');
+var boardController = require('./app/controllers/board');
 
 // Express Config ==============================================================
 app.use(function (req, res, next) {
@@ -103,14 +104,14 @@ app.set('view engine', 'ejs'); // set up ejs for templating
 
 /// Authentication ===========================================================
 passport.use(new LocalStrategy(function (username, password, done) {
-    User.findOne({ $or: [{ 'username': username }, { 'email': username }] }, function(err, user) {
+    User.findOne({ $or: [{ 'username': username }, { 'email': username }] }, function (err, user) {
         if (err) {
             return done(err);
         }
         if (!user) {
             return done(null, false);
         }
-        user.verifyPassword(password, function(err, result) {
+        user.verifyPassword(password, function (err, result) {
             if (err) {
                 return done(err, false);
             }
@@ -212,7 +213,20 @@ router.post('/users/logout', userController.logout);
 router.post('/users/fbsignup', userController.fbsignup);
 router.post('/users/twittersignup', userController.twittersignup);
 
+// ============== Boards ========================
 
+router.route('/boards')
+  .get([helper.isLoggedIn, boardController.getBoards]);
+
+
+router.route('/boards/:id')
+  .get([helper.isLoggedIn, boardController.getBoard])
+  .post([helper.isLoggedIn, boardController.postBoard])
+  .delete([helper.isLoggedIn, boardController.deleteBoard]);
+
+router.route('/boards/:id/article')
+    .post([helper.isLoggedIn, boardController.postArticle])
+    .post([helper.isLoggedIn, boardController.removeArticle]);
 
 app.use('/api', router);
 

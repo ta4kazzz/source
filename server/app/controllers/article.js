@@ -182,16 +182,12 @@ exports.deleteArticle = function (req, res) {
         if (err) {
             res.send(err);
         }
-        console.log('In here1');
-       })
-       .remove(function (err) {
+       }).remove(function (err) {
         if (err)
             res.send(err);
         res.json({ message: 'Article successfully removed' });
     });
-
 };
-
 
 // ==========================================
 // 		#putArticle

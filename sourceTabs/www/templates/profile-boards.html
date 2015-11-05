@@ -1,0 +1,22 @@
+<ion-view>
+    <ion-header-bar>
+        <div class="buttons">
+            <button class="button back-button button-clear" ng-click="$ionicGoBack()">
+                <i class="ion-arrow-left-c"></i> Back
+            </button>
+        </div>
+        <h1 class="title">Boards</h1>
+
+        <div class="buttons">
+            <button class="button button-clear button-positive" ui-sref="addBoard" >New</button>
+        </div>
+
+    </ion-header-bar>
+
+    <ion-content class="has-header">
+        <a class="item" ui-sref="tabs.boardProfile( { boardID: board._id} )" ng-repeat="board in boards">
+            <div class="left">my board</div>
+            <div class="right">5 articles</div>
+        </a>
+    </ion-content>
+</ion-view>

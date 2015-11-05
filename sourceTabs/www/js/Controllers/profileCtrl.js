@@ -1,6 +1,5 @@
 angular.module('starter.controllers')
-.controller('ProfileCtrl', function ($rootScope, $scope,  API, $stateParams) {
-
+.controller('ProfileCtrl', function ($rootScope, $scope, API, $stateParams) {
     $scope.$on('$ionicView.beforeEnter', function () {
         $scope.getProfile();
         $scope.getProfileFeed();
@@ -19,7 +18,7 @@ angular.module('starter.controllers')
                 // $scope.followersNum = user.counts.followed_by;
                 $scope.getFollowers();
                 $scope.getFollows();
-
+                $scope.getBoards();
             })
             .error(function (user, status, headers, config) {
                 console.log("Your profile was not retreived");
@@ -32,8 +31,8 @@ angular.module('starter.controllers')
                     $scope.profileFollowerNumber = data.length - 1;
                 })
                 .error(function (users, status, headers, config) {
-                console.log("Something went wrong");
-            });
+                    console.log("Something went wrong");
+                });
         };
 
         $scope.getFollows = function () {
@@ -41,10 +40,22 @@ angular.module('starter.controllers')
                 .success(function (data, status, headers, config) {
                     $scope.users = [];
                     console.log(data.length);
-                    $scope.profileFollowingNumber = data.length -1 ;
+                    $scope.profileFollowingNumber = data.length - 1;
                 })
                 .error(function (users, status, headers, config) {
                     console.log("Something went wrong")
+                });
+        };
+
+        $scope.getBoards = function () {
+            $scope.boards = API.getBoards(id)
+                .success(function (data, status, headers, config) {
+                    $scope.boards = [];
+                    console.log(data.length);
+                    $scope.profileBoardNumber = data.length;
+                })
+                .error(function (users, status, headers, config) {
+                    console.log("Something went wrong");
                 });
         };
     };

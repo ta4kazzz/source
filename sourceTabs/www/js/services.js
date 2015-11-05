@@ -232,6 +232,20 @@ angular.module('starter.services', [])
             });
         },
 
+        getBoards: function (id) {
+            return $http.get(base + '/api/boards/' + id, {
+                method: 'GET',
+                withCredentials: true
+            });
+        },
+
+        postBoard: function (board) {
+            return $http.post(base + '/api/boards', board, {
+                method: 'POST',
+                withCredentials: true
+            });
+        },
+
         followUser: function (id, user) {
             return $http.post(base + '/api/users/' + id + '/follows', user, {
                 method: 'POST',

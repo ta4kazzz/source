@@ -26,3 +26,11 @@ user-select: text;
   border-width: 0 0 0 0 !important;
   border-color: #fff;
 }
+
+.left {
+    float: left;
+}
+
+.left {
+    float: right;
+}
