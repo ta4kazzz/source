@@ -6,6 +6,7 @@ var unfluff = require('unfluff');
 var cheerio = require('cheerio');
 var request = require('request');
 var mongoose = require('mongoose');
+var Board = require('../models/board.js');
 
 // 	  TABLE OF CONTENTS   ====================================================================
 //
@@ -113,15 +114,19 @@ exports.postArticle = function (req, res) {
             
             // convert userID string to ObjectID
             var userID = mongoose.Types.ObjectId(req.body.userID);
+           
             var articleID = article._id;
             
             // Saves to article
             article._userID = userID;
-            
+            //article._boardID = boardID;
+
             User.findByIdAndUpdate(userID, { $push: { "articles": articleID } }, { safe: true, upsert: true }, function (err, model) {
                 console.log(err);
             });
             
+          
+
             // URL to html
             var domain = article.url;
             
@@ -194,13 +199,24 @@ exports.deleteArticle = function (req, res) {
 // ==========================================
 exports.putArticle = function (req, res) {
     
+    var boardID = mongoose.Types.ObjectId(req.body.boardID);
+
     Article.findById(req.params.id, function (err, article) {
         if (err)
             res.send(err);
         article.public = true;
-        article.save(function (err) {
+        article._boardID = boardID;
+
+        article.save(function (err, art) {
             if (err)
                 res.send(err);
+
+            if (req.body.boardID) { // add it to the board
+                Board.findByIdAndUpdate(boardID, { $push: { "articles": art._id } }, { safe: true, upsert: false }, function(err, model) {
+                    console.log(err);
+                });
+            }
+
             res.json(article);
         });
     });
@@ -221,6 +237,23 @@ exports.getArticles = function (req, res) {
     });
 };
 
+// ==========================================
+//    #getArticlesPaging
+// ==========================================
+
+exports.getArticlesPaging = function (req, res) {
+    var itemsPerPage = req.body.itemsPerPage;
+    var pageNumber = req.body.pageNumber;
+
+    Article
+			.find()
+            .skip(itemsPerPage * (pageNumber - 1))
+            .limit(itemsPerPage)
+			.sort({ created: 'desc' })
+			.exec(function (err, articles) {
+                res.send(articles);
+            });
+};
 
 // ==========================================
 //    #getTopArticles

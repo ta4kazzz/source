@@ -28,7 +28,17 @@
                     <input name="Url" id="Url" ng-model="article.url" type="url" placeholder="" required>
                 </label>
                 <label class="item item-input custom-item-background no-background " ng-show="addNewForm.Url.$dirty && addNewForm.Url.$invalid">
-                    <span class="error" >Must provide a valid URL</span>
+                    <span class="error">Must provide a valid URL</span>
+                </label>
+            </div>
+            <div class="list list-inset">
+                <label class="item item-input item-select">
+                    <div class="input-label">
+                        BOARD
+                    </div>
+                    <select ng-model="model.boardID" id="Board" name="Board">
+                        <option ng-repeat="b in boards" value={{b._id}}>{{b.name}}</option>
+                    </select>
                 </label>
             </div>
             <div class="list list-inset">
@@ -37,7 +47,7 @@
                     <input ng-maxlength="120" name="Summary" id="Summary" ng-model="article.summary" type="text" placeholder="(optional)">
                 </label>
                 <label class="item item-input custom-item-background no-background " ng-show="addNewForm.Summary.$dirty && addNewForm.Summary.$invalid">
-                    <span class="error" >Summary Max Character is 120</span>
+                    <span class="error">Summary Max Character is 120</span>
                 </label>
             </div>
 

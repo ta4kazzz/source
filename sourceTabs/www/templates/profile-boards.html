@@ -14,9 +14,9 @@
     </ion-header-bar>
 
     <ion-content class="has-header">
-        <a class="item" ui-sref="tabs.boardProfile( { boardID: board._id} )" ng-repeat="board in boards">
-            <div class="left">my board</div>
-            <div class="right">5 articles</div>
+        <a class="item" ui-sref="tabs.profileBoardsDetail( { id: board._id} )" ng-repeat="board in boards">
+            <div class="left">{{board.name}}</div>
+            <div class="right">{{board.articles.length}} articles</div>
         </a>
     </ion-content>
 </ion-view>

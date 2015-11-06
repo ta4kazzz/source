@@ -1,5 +1,6 @@
 angular.module('starter.controllers')
 .controller('AddController', function ($scope, $rootScope, $window, API, store, $state) {
+    $scope.model = {};
     // Allows us to post gravatar in preview
     
     $scope.article = {
@@ -37,13 +38,14 @@ angular.module('starter.controllers')
             shortUrl: $scope.shortUrl
         };
 
+    
+
         // API that posts the articles
         API.postArticle(article)
             .success(function (article, status, headers, config) {
                 console.log("Article packet successfuly sent");
                 var id = article._id;
                 $scope.article = article;
-                
                 //$scope.getArticle(id);
                 window.localStorage['ActiveArticle'] = id;
                 //$scope.getPreview();
@@ -54,33 +56,11 @@ angular.module('starter.controllers')
             });
     };
 
-    //$scope.getPreview = function () {
-    //    var id = window.localStorage.ActiveArticle;
-    //    $scope.getArticle(id);
-    //};
-
-    //$scope.getArticle = function (id) {
-    //    // API that gets the full Article
-    //    API.getArticle(id)
-    //        .success(function (article, status, headers, config) {
-    //            $scope.article = article;
-    //            $scope.article.title = article.title;
-    //            $scope.article.time = article.created;
-    //            $scope.article.imageUrl = article.imageUrl;
-    //            $scope.article.summary = article.summary;
-    //            $scope.article._id = article._id;
-    //            console.log("success!");
-    //        })
-    //        .error(function (article, status, headers, config) {
-    //           console.log("Error when retreiving full article");
-    //    });
-    //};
-
     // Publish Article
     $scope.publishArticle = function () {
         var id = $scope.article._id;
-
-        API.publishArticle(id)
+        
+        API.publishArticle(id, $scope.model.boardID)
             .success(function (article, status, headers, config) {
                 console.log("Article Successfully published");
                 store.remove('ActiveArticle');
@@ -102,6 +82,9 @@ angular.module('starter.controllers')
 
     //constructor
     var init = function () {
+         API.getBoards(userID).then(function(response) {
+             $scope.boards = response.data;
+         });
     };
 
     $scope.$on('$ionicView.afterEnter', function () {

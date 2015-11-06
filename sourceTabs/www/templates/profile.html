@@ -7,7 +7,7 @@
             </div>
         </ion-nav-buttons>
     </ion-nav-bar>
-    <ion-content >
+    <ion-content>
         <div class="profile--banner">
             <div class="profile-picture" style="margin-left: auto;margin-right: auto;max-width: 100px;text-align: center;">
                 <img style="width: 5em; border-radius: 5em; margin-top: 2em;" src="{{gravatarURL}}">
@@ -16,7 +16,7 @@
             <p class="description" style="text-align: center;">{{description}}</p>
             <div class="row">
                 <div class="col profile-column">
-                    <a href="#">
+                    <a>
                         <p class="profile--number">{{profileArticleNumber}}</p>
                         <p class="profile-label">Articles</p>
                     </a>
@@ -43,14 +43,14 @@
         </div>
         <!-- Profile Feed -->
         <ion-list ng-init="getProfileFeed()">
-            <div ng-repeat="articles in articles">
-                <a ui-sref="tabs.readerProfile( { articleID: articles._id} )" class="item item-thumbnail-left">
-                    <img src="{{articles.imageUrl}}">
-                    <div><h2 class="no-text-wrap">{{ articles.title }}</h2></div>
-                    <p>{{ articles.shortUrl }}</p>
+            <div ng-repeat="article in articles">
+                <a ui-sref="tabs.readerProfile( { articleID: article._id} )" class="item item-thumbnail-left">
+                    <img src="{{article.imageUrl}}">
+                    <div><h2 class="no-text-wrap">{{ article.title }}</h2></div>
+                    <p>{{ article.shortUrl }}</p>
+                    <div class="right">{{article._boardID.name}}</div>
                 </a>
             </div>
         </ion-list>
     </ion-content>
-
 </ion-view>

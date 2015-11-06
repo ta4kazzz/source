@@ -1,17 +1,29 @@
 // Load Dependancies
 var Board = require('../models/board.js');
 var mongoose = require('mongoose');
+var Article = require('../models/article.js');
 
 // ==========================================
-//    #getBoards
+//    #getDetailBoard
 // ==========================================
-
-exports.getBoards = function (req, res) {
-    Board.find()
-		 .sort({ created: 'desc' })
-		 .exec(function (err, boards) {
+exports.getDetailBoard = function (req, res) {
+    Board.findById(req.params.id)
+           .sort('-created')
+           .populate({ path: 'articles' })
+           .exec(function (err, boards) {
+        if (err) {
+            res.send(err);
+        } else {
             res.send(boards);
-         });
+        }
+    });
+
+    //Board.findById(req.params.id, function (err, board) {
+    //    if (err) {
+    //        res.send(err);
+    //    }
+    //    res.json(board);
+    //});
 };
 
 exports.postBoard = function (req, res) {
@@ -27,15 +39,17 @@ exports.postBoard = function (req, res) {
         return res.send(board);
     });
 };
+
 // ==========================================
-// 		#getBoard
+// 		#getBoards
 // ==========================================
 
-exports.getBoard = function (req, res) {
-    Board.findById(req.params.id, function (err, board) {
+exports.getBoards = function (req, res) {
+    var userID = mongoose.Types.ObjectId(req.params.id);
+    Board.find({ '_userID': userID }, function (err, boards) {
         if (err)
             res.send(err);
-        res.send(board);
+        res.send(boards);
     });
 };
 

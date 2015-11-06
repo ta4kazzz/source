@@ -199,18 +199,27 @@ exports.getUsers = function (req, res) {
 exports.getUserArticles = function (req, res) {
     
     var userID = mongoose.Types.ObjectId(req.params.id);
-    
-    
-    User.findById(userID)
-		// If this doesnt work uncomment this part
-		// .populate('articles')
-		.populate({ path: 'articles', options: { sort: { 'created': -1 } } })
-		// Need to return this most recent first
-		// .sort({created: 'desc'})
-		.exec(function (err, user) {
-        res.send(user.articles)
-    });
 
+    Article.find({ '_userID': userID })
+           .sort('-created')
+           .populate({ path: '_boardID' } )
+           .exec(function (err, articles) {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.send(articles);
+                }
+            });
+    
+  //  User.findById(userID)
+		//// If this doesnt work uncomment this part
+		//// .populate('articles')
+		//.populate({ path: 'articles', options: { sort: { 'created': -1 } } })
+		//// Need to return this most recent first
+		//// .sort({created: 'desc'})
+		//.exec(function (err, user) {
+  //          res.send(user.articles);
+  //      });
 };
 
 // ====================================================

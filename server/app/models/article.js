@@ -6,6 +6,7 @@ var Schema       = mongoose.Schema;
 
 var articleSchema = new Schema({
   _userID: { type: Schema.Types.ObjectId, ref: 'User' },
+  _boardID: { type: Schema.Types.ObjectId, ref: 'Board' },
   username: String,
   gravatarURL: String,
   url: String,

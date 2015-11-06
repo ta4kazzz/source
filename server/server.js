@@ -133,6 +133,9 @@ router.route('/articles')
     .get([helper.isLoggedIn, articleController.getArticles])
     .post([helper.isLoggedIn, articleController.postArticle]);
 
+router.route('/articlespaging')
+    .post([helper.isLoggedIn, articleController.getArticlesPaging]);
+
 router.route('/articles/top')
   .get([helper.isLoggedIn, articleController.getTopArticles]);
 
@@ -214,19 +217,13 @@ router.post('/users/fbsignup', userController.fbsignup);
 router.post('/users/twittersignup', userController.twittersignup);
 
 // ============== Boards ========================
-
-router.route('/boards')
-  .get([helper.isLoggedIn, boardController.getBoards]);
-
+router.route('/detailBoard/:id')
+    .get([helper.isLoggedIn, boardController.getDetailBoard]);
 
 router.route('/boards/:id')
-  .get([helper.isLoggedIn, boardController.getBoard])
+  .get([helper.isLoggedIn, boardController.getBoards])
   .post([helper.isLoggedIn, boardController.postBoard])
   .delete([helper.isLoggedIn, boardController.deleteBoard]);
-
-router.route('/boards/:id/article')
-    .post([helper.isLoggedIn, boardController.postArticle])
-    .post([helper.isLoggedIn, boardController.removeArticle]);
 
 app.use('/api', router);
 

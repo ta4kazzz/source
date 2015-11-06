@@ -1,62 +1,64 @@
 <ion-view view-title="Explore">
-  <!-- Nav Bar -->
+    <!-- Nav Bar -->
     <ion-nav-bar class="bar">
-      <div class="tabs-striped tabs-top tabs-background">
-          <div class="tabs top-shadow">
-            <a class="tab-item active" ng-class="{ active: isSet(1) }" ng-click="setTab(1)">
-              Recent
-            </a>
-              <a class="tab-item" ng-class="{ active: isSet(2) }" ng-click="setTab(2)">
-                  Users
-              </a>
-              <a class="tab-item"  ng-class="{ active: isSet(3) }" ng-click="setTab(3)">
-                  Top
-              </a>
-          </div>
+        <div class="tabs-striped tabs-top tabs-background">
+            <div class="tabs top-shadow">
+                <a class="tab-item active" ng-class="{ active: isSet(1) }" ng-click="setTab(1)">
+                    Recent
+                </a>
+                <a class="tab-item" ng-class="{ active: isSet(2) }" ng-click="setTab(2)">
+                    Users
+                </a>
+                <a class="tab-item" ng-class="{ active: isSet(3) }" ng-click="setTab(3)">
+                    Top
+                </a>
+            </div>
         </div>
     </ion-nav-bar>
-  <ion-content>
-      <!-- ALL -->
-      <div ng-show="isSet(1)">
-        <div class="list" style="margin-top: 48px;" ng-init="getAllArticles()" >
-          <a ng-repeat="articles in articles"
-            ui-sref="tabs.readerExplore( { articleID: articles._id} )"
-             class="item item-thumbnail-left">
-            <img src="{{articles.imageUrl}}">
-            <h2 class="no-text-wrap">{{ articles.title }}</h2>
-            <p>{{ articles.shortUrl }}</p>
-          </a>
-        </div>
-      </div>
+    <ion-content>
+        <!-- ALL -->
+        <div ng-show="isSet(1)">
+            <!-- Refresher -->
+            <ion-refresher pulling-text="Refreshing . . ." on-refresh="doRefresh()"> </ion-refresher>
 
-      <!-- USERS -->
-      <div ng-show="isSet(2)">
-        <div class="list" style="margin-top: 48px;" ng-init="getAllUsers()">
-            <a ng-repeat="user in users"
-               ui-sref="tabs.userExplore( { userID: user._id} )">
-                <div class="item item-avatar">
-                    <img src="{{user.gravatarURL}}">
-                    <div class="float-left username" style="margin: 7px 0px;">{{user.username}}</div>
-                </div>
-            </a>
-        </div>
-      </div>
-
-      <!-- TOP -->
-      <div ng-show="isSet(3)">
-        <div class="list"  style="margin-top: 48px;" ng-init="getTopLiked()" >
-          <a ng-repeat="topArticles in topArticles"
-            ui-sref="tabs.readerExplore( { articleID: topArticles._id} )"
-             class="item item-thumbnail-left">
-            <img src="{{topArticles.imageUrl}}">
-            <h2>{{ topArticles.title }}</h2>
-            <h2>{{ topArticles.shortURL }}</h2>
-            <div class="float-right">
-              <i ui-sref="saved" class="icon ion-ios-heart-outline inline-block"></i>
-              <h4 class="inline-block">{{ topArticles.likes.length }}</h4>
+            <div class="list" style="margin-top: 48px;" >
+                <a ng-repeat="article in articles" ui-sref="tabs.readerExplore( { articleID: article._id} )" class="item item-thumbnail-left">
+                    <img src="{{article.imageUrl}}">
+                    <h2 class="no-text-wrap">{{ article.title }}</h2>
+                    <p>{{ article.shortUrl }}</p>
+                </a>
             </div>
-          </a>
+            <ion-infinite-scroll ng-if="!noMoreItemsAvailable" on-infinite="loadMore()" distance="10%"></ion-infinite-scroll>
         </div>
-      </div>
-  </ion-content>
+
+        <!-- USERS -->
+        <div ng-show="isSet(2)">
+            <div class="list" style="margin-top: 48px;" ng-init="getAllUsers()">
+                <a ng-repeat="user in users"
+                   ui-sref="tabs.userExplore( { userID: user._id} )">
+                    <div class="item item-avatar">
+                        <img src="{{user.gravatarURL}}">
+                        <div class="float-left username" style="margin: 7px 0px;">{{user.username}}</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- TOP -->
+        <div ng-show="isSet(3)">
+            <div class="list" style="margin-top: 48px;" ng-init="getTopLiked()">
+                <a ng-repeat="topArticles in topArticles"
+                   ui-sref="tabs.readerExplore( { articleID: topArticles._id} )"
+                   class="item item-thumbnail-left">
+                    <img src="{{topArticles.imageUrl}}">
+                    <h2>{{ topArticles.title }}</h2>
+                    <h2>{{ topArticles.shortURL }}</h2>
+                    <div class="float-right">
+                        <i ui-sref="saved" class="icon ion-ios-heart-outline inline-block"></i>
+                        <h4 class="inline-block">{{ topArticles.likes.length }}</h4>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </ion-content>
 </ion-view>

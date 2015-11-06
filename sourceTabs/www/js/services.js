@@ -36,8 +36,8 @@ angular.module('starter.services', [])
             });
         },
 
-        publishArticle: function (id) {
-            return $http.put(base + '/api/articles/' + id, {}, {
+        publishArticle: function (id, boardID) {
+            return $http.put(base + '/api/articles/' + id, {boardID:boardID}, {
                 method: 'PUT',
                 withCredentials: true
             });
@@ -51,6 +51,13 @@ angular.module('starter.services', [])
             return $http.get(base + '/api/articles', {
                 method: 'GET',
                 withCredentials: true
+            });
+        },
+
+        getArticlesPaging: function (packageToSend) {
+            return $http.post(base + '/api/articlespaging', packageToSend, {
+                    method: 'POST',
+                    withCredentials: true
             });
         },
 
@@ -231,6 +238,12 @@ angular.module('starter.services', [])
                 withCredentials: true
             });
         },
+        getDetailBoard: function (id) {
+            return $http.get(base + '/api/detailBoard/' + id, {
+                method: 'GET',
+                withCredentials: true
+            });
+        },
 
         getBoards: function (id) {
             return $http.get(base + '/api/boards/' + id, {
@@ -239,8 +252,8 @@ angular.module('starter.services', [])
             });
         },
 
-        postBoard: function (board) {
-            return $http.post(base + '/api/boards', board, {
+        postBoard: function (id, board) {
+            return $http.post(base + '/api/boards/' + id, board, {
                 method: 'POST',
                 withCredentials: true
             });

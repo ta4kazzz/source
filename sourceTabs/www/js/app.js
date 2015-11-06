@@ -209,6 +209,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
                       }
                   }
               })
+            .state('tabs.profileBoardsDetail', {
+                url: "/profile/boards/detail/:id",
+                views: {
+                    'profile-tab': {
+                        templateUrl: 'templates/profile-boards-detail.html',
+                        controller: 'ProfileBoardsDetailsController'
+                    }
+                }
+            })
             .state('tabs.settings', {
                 url: '/profile/settings',
                 views: {

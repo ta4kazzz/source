@@ -1,0 +1,24 @@
+<ion-view>
+    <ion-header-bar>
+        <div class="buttons">
+            <button class="button back-button button-clear" ng-click="$ionicGoBack()">
+                <i class="ion-arrow-left-c"></i> Back
+            </button>
+        </div>
+        <h1 class="title">Board Detail</h1>
+
+       
+
+    </ion-header-bar>
+
+    <ion-content class="has-header">
+        <div ng-repeat="article in board.articles">
+            <a ui-sref="tabs.readerProfile( { articleID: article._id} )" class="item item-thumbnail-left">
+                <img src="{{article.imageUrl}}">
+                <div><h2 class="no-text-wrap">{{ article.title }}</h2></div>
+                <p>{{ article.shortUrl }}</p>
+                <div class="right">{{article._boardID.name}}</div>
+            </a>
+        </div>
+    </ion-content>
+</ion-view>

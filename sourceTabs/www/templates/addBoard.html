@@ -2,7 +2,7 @@
     <!-- Nav Bar -->
     <ion-nav-bar class="bar">
         <ion-nav-buttons side="left">
-            <i ui-sref="tabs.home" ng-click="article.url = null; article.summary = null" class="icon ion-ios-close-empty menu-icon-left"></i>
+            <i ui-sref="tabs.profileBoards" class="icon ion-ios-close-empty menu-icon-left"></i>
         </ion-nav-buttons>
     </ion-nav-bar>
     <ng-form name="addNewForm">
@@ -10,10 +10,10 @@
             <div class="list list-inset">
                 <label class="item item-input">
                     <span class="input-label">Name</span>
-                    <input name="Name" id="Name" ng-model="board.name" type="url" placeholder="" required>
+                    <input name="Name" id="Name" ng-model="board.name" type="text" placeholder="" required>
                 </label>
-                <label class="item item-input custom-item-background no-background " ng-show="addNewForm.Url.$dirty && addNewForm.Url.$invalid">
-                    <span class="error" >Must provide board name</span>
+                <label class="item item-input custom-item-background no-background " ng-show="addNewForm.Name.$dirty && addNewForm.Name.$invalid">
+                    <span class="error">Must provide board name</span>
                 </label>
             </div>
 
