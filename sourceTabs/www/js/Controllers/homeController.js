@@ -37,11 +37,15 @@ angular.module('starter.controllers')
         API.deleteSaved(savedArticle)
             .success(function (article, status, headers, config) {
                 console.log("article delete");
-                $scope.loadMore();
+                angular.forEach($scope.articles, function (art) {
+                    if (art._id == articleID) {
+                        art.isSavedByUser = false;
+                    }
+                });
             })
             .error(function (article, status, headers, config) {
-                console.log("Something went wrong")
-            });
+            console.log("Something went wrong");
+        });
 
     };
 
@@ -56,14 +60,15 @@ angular.module('starter.controllers')
         };
 
         API.saveForLater(savedArticle)
-            .success(function (article, user, status, headers, config) {
-                console.log("article save for later");
-                $scope.loadMore();
-            })
-            .error(function (article, status, headers, config) {
-                console.log("Error when saving the article for later")
+            .then(function (data) {
+            angular.forEach($scope.articles, function(art) {
+                if (art._id == articleID) {
+                    art.isSavedByUser = true;
+                }
             });
-
+        }, function (error) {
+                console.log(error);
+            });
     };
 
     $scope.likeArticle = function (article) {
@@ -87,7 +92,12 @@ angular.module('starter.controllers')
             .success(function (article, user, status, headers, config) {
                 // make button reflect the change
                 console.log("Article Successfully liked");
-                $scope.loadMore();
+                angular.forEach($scope.articles, function (art) {
+                    if (art._id == articleID) {
+                        art.isLikedByUser = true;
+                    }
+                });
+
             })
             .error(function (article, status, headers, config) {
                 console.log("Error when liking the article");
@@ -111,14 +121,18 @@ angular.module('starter.controllers')
         API.putLikes(unlikedArticle)
             .success(function (article, user, status, headers, config) {
                 console.log("Article Successfully unliked")
-                $scope.loadMore();
+                angular.forEach($scope.articles, function (art) {
+                    if (art._id == articleID) {
+                        art.isLikedByUser = false;
+                    }
+                });
             })
             .error(function (article, status, headers, config) {
                 console.log("Error when liking the article")
             });
 
     };
-    
+
     $scope.loadMore = function () {
         var userID = window.localStorage.SourceID;
         var minDate = $scope.latestDate;
@@ -160,7 +174,7 @@ angular.module('starter.controllers')
                         };
                     }
 
-                    if (data.length <=0 || data.length != $scope.itemsPerPage ) {
+                    if (data.length <= 0 || data.length != $scope.itemsPerPage) {
                         $scope.noMoreItemsAvailable = true;
                     }
 
@@ -177,14 +191,12 @@ angular.module('starter.controllers')
         $scope.pageNumber++;
     };
 
-    $scope.doRefresh = function() {
+    $scope.doRefresh = function () {
         $scope.articles = [];
         $scope.pageNumber = 1;
         $scope.itemsPerPage = 10;
         $scope.loadMore();
     };
-
-  
 
     //constructor
     var init = function () {
@@ -192,7 +204,7 @@ angular.module('starter.controllers')
 
         $scope.pageNumber = 1;
         $scope.itemsPerPage = 10;
-       // $scope.loadMore();
+        // $scope.loadMore();
     };
 
     //$scope.$on('$ionicView.beforeLeave', function () {

@@ -6,7 +6,7 @@
             <i ui-sref="saved" class="icon ion-bookmark menu-icon-right"></i>
         </div>
     </ion-header-bar>
-    <ion-content class="has-header" scroll-event-interval="5" ng-init="getInitialHomeFeed()">
+    <ion-content class="has-header" scroll-event-interval="5" >
         <!-- Refresher -->
         <ion-refresher pulling-text="Refreshing . . ." on-refresh="doRefresh()">
         </ion-refresher>
@@ -39,9 +39,5 @@
         </div>
         
         <ion-infinite-scroll ng-if="!noMoreItemsAvailable" on-infinite="loadMore()" distance="10%"></ion-infinite-scroll>
-
-        <!--<ion-infinite-scroll on-infinite="getMoreHomeFeed()"
-                             distance="50%">
-        </ion-infinite-scroll>-->
     </ion-content>
 </ion-view>

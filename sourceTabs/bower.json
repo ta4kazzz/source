@@ -1,9 +1,7 @@
 {
   "name": "source",
   "dependencies": {
-    "auth0-angular": "3.*",
     "a0-angular-storage": ">= 0.0.6",
-    "angular-jwt": ">= 0.0.4",
     "ionic": "driftyco/ionic-bower#v1.1.0"
   },
   "devDependencies": {
